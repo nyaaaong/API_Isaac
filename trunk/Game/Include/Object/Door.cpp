@@ -60,7 +60,8 @@ CDoor::CDoor()	:
 }
 
 CDoor::CDoor(const CDoor& obj)	:
-	CObj(obj)
+	CObj(obj),
+	m_pNextRoom(nullptr)
 {
 }
 

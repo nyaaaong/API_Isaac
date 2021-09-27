@@ -77,7 +77,7 @@ void CUIImage::Update(float fTime)
 		{
 			m_fAnimTime -= fFrameTime;
 
-			m_iFrameIndex = (m_iFrameIndex + 1) % m_vecFrameData.size();
+			m_iFrameIndex = (m_iFrameIndex + 1) % (int)m_vecFrameData.size();
 		}
 	}
 }

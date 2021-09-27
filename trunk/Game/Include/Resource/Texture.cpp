@@ -54,7 +54,7 @@ bool CTexture::LoadTexture(const std::string& strName, const std::vector<std::ws
 
 	for (size_t i = 0; i < iSize; ++i)
 	{
-		cFullPath[MAX_PATH] = {};
+		memset(cFullPath, 0, sizeof(TCHAR) * MAX_PATH);
 
 		if (pInfo)
 			lstrcpy(cFullPath, pInfo->cPath);

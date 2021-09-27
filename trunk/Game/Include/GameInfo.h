@@ -1,7 +1,9 @@
 
 #pragma once
-#pragma warning(disable: 26812)	//enum class 경고 무시
-#pragma warning(disable: 6031)	//rand 경고 무시
+#pragma warning(disable: 26812)	//'enum'(Enum.3) 대신 'enum class'를 사용하세요. 경고 무시
+#pragma warning(disable: 6031)	//반환 값이 무시되었습니다. 'rand'. 경고 무시
+#pragma warning(disable: 6011)		//NULL 포인터 'm_pArrWidget[i]'을(를) 역참조하고 있습니다. 경고 무시
+
 
 #include <Windows.h>
 #include <list>

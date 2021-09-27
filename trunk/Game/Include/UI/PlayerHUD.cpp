@@ -1,7 +1,7 @@
 
 #include "PlayerHUD.h"
 #include "../GameManager.h"
-#include "../Scene/Stage1.h"
+#include "../Scene/Stage.h"
 #include "../Scene/SceneManager.h"
 #include "../Object/Player.h"
 #include "../Object/BossMonstro.h"
