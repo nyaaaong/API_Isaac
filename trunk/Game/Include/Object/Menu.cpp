@@ -10,6 +10,11 @@ void CMenu::GameStart(float fTime)
 	CSceneManager::GetInst()->CreateScene<CStage>();
 }
 
+void CMenu::GameEditor(float fTime)
+{
+	//CSceneManager::GetInst()->CreateScene<CEditor>();
+}
+
 void CMenu::GameExit(float fTime)
 {
 	CGameManager::GetInst()->Exit();
@@ -33,7 +38,10 @@ void CMenu::Start()
 {
 	CObj::Start();
 
-	CInput::GetInst()->SetCallback<CMenu>("GameStart", KS_PUSH, this, &CMenu::GameStart);
+	CInput::GetInst()->SetCallback<CMenu>("GameStart1", KS_PUSH, this, &CMenu::GameStart);
+	CInput::GetInst()->SetCallback<CMenu>("GameStart2", KS_PUSH, this, &CMenu::GameStart);
+	CInput::GetInst()->SetCallback<CMenu>("GameStart3", KS_PUSH, this, &CMenu::GameStart);
+	CInput::GetInst()->SetCallback<CMenu>("GameEditor", KS_PUSH, this, &CMenu::GameEditor);
 	CInput::GetInst()->SetCallback<CMenu>("GameExit", KS_PUSH, this, &CMenu::GameExit);
 }
 

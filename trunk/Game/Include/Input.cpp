@@ -8,7 +8,9 @@ bool CInput::Init(HWND hWnd)
 
 	// ----------- MainMenu ----------- 
 
-	CreateKey("GameStart", VK_RETURN);
+	CreateKey("GameStart1", VK_RETURN);
+	CreateKey("GameStart2", VK_SPACE);
+	CreateKey("GameStart3", VK_LBUTTON);
 	CreateKey("GameEditor", 'E');
 	SetCtrlKey("GameEditor", true);
 	CreateKey("GameExit", VK_ESCAPE);

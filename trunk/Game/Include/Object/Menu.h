@@ -9,6 +9,7 @@ class CMenu :
 
 public:
 	void GameStart(float fTime);
+	void GameEditor(float fTime);
 	void GameExit(float fTime);
 
 public:
