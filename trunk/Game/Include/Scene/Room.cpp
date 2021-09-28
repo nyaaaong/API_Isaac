@@ -23,7 +23,7 @@ void CRoom::CreateDoor()
 
 		if (!pDoor->Init())
 		{
-			SAFE_RELEASE(pDoor);
+			SAFE_DELETE(pDoor);
 			return;
 		}
 

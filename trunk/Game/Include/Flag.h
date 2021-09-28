@@ -67,7 +67,7 @@ enum class EObjectType
 	Character,
 	Tear,
 	Effect,
-	BackGround
+	Map
 };
 
 enum class EDoorDir

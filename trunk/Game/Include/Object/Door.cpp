@@ -1,16 +1,6 @@
 
 #include "Door.h"
 
-void CDoor::Move(const Vector2& tDir, bool bUseActivity)
-{
-	CObj::Move(tDir, bUseActivity);
-}
-
-void CDoor::Move(const Vector2& tDir, float fSpeed, bool bUseActivity)
-{
-	CObj::Move(tDir, fSpeed, bUseActivity);
-}
-
 void CDoor::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 {
 	CObj::CollisionBegin(pSrc, pDest, fTime);

@@ -1,7 +1,7 @@
 
 #include "Stage.h"
 #include "../GameManager.h"
-#include "../Object/BackGround.h"
+#include "../Map/Map.h"
 #include "../Object/Player.h"
 #include "../Object/PlayerBody.h"
 #include "../UI/PlayerHUD.h"
@@ -10,10 +10,10 @@ void CStage::CreateObjects()
 {
 	Resolution	tRS = CGameManager::GetInst()->GetResolution();
 
-	m_tActivityPos = Vector2(140.f, 120.f);	// 활동 구역의 시작 위치
-	m_tActivitySize = Vector2(tRS.iW - m_tActivityPos.x, tRS.iH - m_tActivityPos.y);	// 활동 구역의 크기
+	SetActivityPos(Vector2(140.f, 120.f));	// 활동 구역의 시작 위치
+	SetActivitySize(Vector2(tRS.iW - 140.f, tRS.iH - 120.f));	// 활동 구역의 크기
 
-	CBackGround* pBackGround = CreateObject<CBackGround>("BackGround");
+	//CMap* pBackGround = CreateObject<CMap>("Map");
 
 	Vector2	tPlayerPos = Vector2(tRS.iW / 5.f, tRS.iH / 2.f);
 

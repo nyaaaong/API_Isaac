@@ -19,7 +19,7 @@ bool CSceneManager::ChangeScene()
 		return true;
 	}
 
-    return false;
+	return false;
 }
 
 bool CSceneManager::Init()
@@ -28,7 +28,7 @@ bool CSceneManager::Init()
 
 	m_pScene->Init();
 
-    return true;
+	return true;
 }
 
 bool CSceneManager::Update(float fTime)

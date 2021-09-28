@@ -25,16 +25,6 @@ void CCharacter::SetFireStart()
 {
 }
 
-void CCharacter::Move(const Vector2& tDir, bool bUseActivity)
-{
-	CObj::Move(tDir, bUseActivity);
-}
-
-void CCharacter::Move(const Vector2& tDir, float fSpeed, bool bUseActivity)
-{
-	CObj::Move(tDir, fSpeed, bUseActivity);
-}
-
 float CCharacter::SetDamage(float fDamage)
 {
 	fDamage = CObj::SetDamage(fDamage);

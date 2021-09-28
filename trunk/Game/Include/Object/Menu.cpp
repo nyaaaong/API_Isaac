@@ -2,6 +2,7 @@
 #include "Menu.h"
 #include "../Input.h"
 #include "../Scene/Stage.h"
+#include "../Scene/EditorScene.h"
 #include "../Scene/SceneManager.h"
 #include "../GameManager.h"
 
@@ -12,26 +13,12 @@ void CMenu::GameStart(float fTime)
 
 void CMenu::GameEditor(float fTime)
 {
-	//CSceneManager::GetInst()->CreateScene<CEditor>();
+	CSceneManager::GetInst()->CreateScene<CEditorScene>();
 }
 
 void CMenu::GameExit(float fTime)
 {
 	CGameManager::GetInst()->Exit();
-}
-
-void CMenu::Move(const Vector2& tDir, bool bUseActivity)
-{
-	CObj::Move(tDir, bUseActivity);
-}
-
-void CMenu::Move(const Vector2& tDir, float fSpeed, bool bUseActivity)
-{
-	CObj::Move(tDir, fSpeed, bUseActivity);
-}
-
-void CMenu::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
-{
 }
 
 void CMenu::Start()
@@ -40,7 +27,6 @@ void CMenu::Start()
 
 	CInput::GetInst()->SetCallback<CMenu>("GameStart1", KS_PUSH, this, &CMenu::GameStart);
 	CInput::GetInst()->SetCallback<CMenu>("GameStart2", KS_PUSH, this, &CMenu::GameStart);
-	CInput::GetInst()->SetCallback<CMenu>("GameStart3", KS_PUSH, this, &CMenu::GameStart);
 	CInput::GetInst()->SetCallback<CMenu>("GameEditor", KS_PUSH, this, &CMenu::GameEditor);
 	CInput::GetInst()->SetCallback<CMenu>("GameExit", KS_PUSH, this, &CMenu::GameExit);
 }
@@ -83,7 +69,7 @@ CMenu* CMenu::Clone()
 
 CMenu::CMenu()
 {
-	m_eObjectType = EObjectType::BackGround;
+	m_eObjectType = EObjectType::Map;
 }
 
 CMenu::CMenu(const CMenu& obj)	:

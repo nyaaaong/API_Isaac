@@ -116,13 +116,6 @@ void CBossMonstro::Move(const Vector2& tDir, float fSpeed, bool bUseActivity)
 	}
 }
 
-float CBossMonstro::SetDamage(float fDamage)
-{
-	fDamage = CMonsterBase::SetDamage(fDamage);
-
-	return fDamage;
-}
-
 void CBossMonstro::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 {
 	if (pDest->GetProfile()->strName == "PlayerHead" ||

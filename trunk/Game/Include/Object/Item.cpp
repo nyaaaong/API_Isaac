@@ -1,15 +1,5 @@
 #include "Item.h"
 
-void CItem::Move(const Vector2& tDir, bool bUseActivity)
-{
-	CObj::Move(tDir, bUseActivity);
-}
-
-void CItem::Move(const Vector2& tDir, float fSpeed, bool bUseActivity)
-{
-	CObj::Move(tDir, fSpeed, bUseActivity);
-}
-
 void CItem::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 {
 	CObj::CollisionBegin(pSrc, pDest, fTime);

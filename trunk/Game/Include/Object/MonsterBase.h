@@ -34,12 +34,6 @@ public:
 	virtual void Render(HDC hDC);
 	virtual CMonsterBase* Clone();
 
-public:
-	virtual void Move(const Vector2& tDir, bool bUseActivity);
-	virtual void Move(const Vector2& tDir, float fSpeed, bool bUseActivity);
-	virtual float SetDamage(float fDamage);
-	virtual void CollisionBegin(class CCollider* pSrc, class CCollider* pDest, float fTime);
-
 protected:
 	CMonsterBase();
 	CMonsterBase(const CMonsterBase& obj);

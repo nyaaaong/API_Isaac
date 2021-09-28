@@ -30,20 +30,6 @@ void CPlayerTearEffect::AnimationFinish()
 	Destroy();
 }
 
-void CPlayerTearEffect::Move(const Vector2& tDir, bool bUseActivity)
-{
-	CObj::Move(tDir, bUseActivity);
-}
-
-void CPlayerTearEffect::Move(const Vector2& tDir, float fSpeed, bool bUseActivity)
-{
-	CObj::Move(tDir, fSpeed, bUseActivity);
-}
-
-void CPlayerTearEffect::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
-{
-}
-
 void CPlayerTearEffect::Update(float fTime)
 {
 	CObj::Update(fTime);

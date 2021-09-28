@@ -10,10 +10,13 @@ bool CInput::Init(HWND hWnd)
 
 	CreateKey("GameStart1", VK_RETURN);
 	CreateKey("GameStart2", VK_SPACE);
-	CreateKey("GameStart3", VK_LBUTTON);
 	CreateKey("GameEditor", 'E');
 	SetCtrlKey("GameEditor", true);
 	CreateKey("GameExit", VK_ESCAPE);
+
+	// ----------- Editor ----------- 
+
+	CreateKey("GameMenu", VK_ESCAPE);
 
 	// ----------- Player ----------- 
 
@@ -30,6 +33,13 @@ bool CInput::Init(HWND hWnd)
 	CreateKey("Bomb", 'E');
 
 	return true;
+}
+
+void CInput::Update(float fTime)
+{
+	UpdateKeyState();
+	UpdateMouse(fTime);
+	UpdateKeyInfo(fTime);
 }
 
 void CInput::ClearCallback()
@@ -125,13 +135,44 @@ KeyInfo* CInput::FindKeyInfo(const std::string& strName)
 	return iter->second;
 }
 
-void CInput::Update(float fTime)
+void CInput::UpdateMouse(float fTime)
 {
-	UpdatEKeyState();
-	UpdateKeyInfo(fTime);
+	POINT	tMouse;
+
+	GetCursorPos(&tMouse);
+	ScreenToClient(m_hWnd, &tMouse);
+
+	Vector2	tPos;
+	tPos.x = static_cast<float>(tMouse.x);
+	tPos.y = static_cast<float>(tMouse.y);
+
+	m_tMouseMove = tPos - m_tMousePos;
+	m_tMousePos = tPos;
+
+	if (GetAsyncKeyState(VK_LBUTTON) & 0x8000)
+	{
+		if (!m_bMouseDown && !m_bMousePush)
+		{
+			m_bMouseDown = true;
+			m_bMousePush = true;
+		}
+
+		else
+			m_bMouseDown = false;
+	}
+
+	else if (m_bMousePush)
+	{
+		m_bMouseDown = false;
+		m_bMousePush = false;
+		m_bMouseUp = true;
+	}
+
+	else if (m_bMouseUp)
+		m_bMouseUp = false;
 }
 
-void CInput::UpdatEKeyState()
+void CInput::UpdateKeyState()
 {
 	size_t iSize = m_vecAddKey.size();
 
@@ -226,7 +267,10 @@ CInput::CInput()	:
 	m_bCtrl(false),
 	m_bAlt(false),
 	m_bShift(false),
-	m_hWnd(0)
+	m_hWnd(0),
+	m_bMouseDown(false),
+	m_bMousePush(false),
+	m_bMouseUp(false)
 {
 	m_vecKeyState.resize(KEY_COUNT_MAX);
 

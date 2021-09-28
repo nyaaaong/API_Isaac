@@ -14,6 +14,7 @@
 #include <functional>
 #include <assert.h>
 
+#include "resource.h"
 #include "Math.h"
 #include "Flag.h"
 #include "SharedPtr.h"

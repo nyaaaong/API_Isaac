@@ -97,16 +97,6 @@ void CTear::TearDestroy()
 	m_pScene->GetSceneResource()->SoundPlay("TearDrop");
 }
 
-void CTear::Move(const Vector2& tDir, bool bUseActivity)
-{
-	CObj::Move(tDir, bUseActivity);
-}
-
-void CTear::Move(const Vector2& tDir, float fSpeed, bool bUseActivity)
-{
-	CObj::Move(tDir, fSpeed, bUseActivity);
-}
-
 void CTear::Update(float fTime)
 {
 	CObj::Update(fTime);

@@ -8,7 +8,7 @@ class CScene
 {
 	friend class CSceneManager;
 
-protected:
+private:
 	std::list<CSharedPtr<CObj>>	m_ObjList;
 	std::unordered_map<std::string, CSharedPtr<CObj>>	m_mapPrototype;
 	class CSceneResource* m_pResource;
@@ -23,6 +23,18 @@ protected:
 	int		m_iUICapacity;
 	Vector2	m_tActivityPos;	// 벽을 제외한 나머지 구역
 	Vector2	m_tActivitySize;
+	std::list<class CMap*>	m_MapList;
+
+public:
+	void SetActivityPos(const Vector2& tPos)
+	{
+		m_tActivityPos = tPos;
+	}
+
+	void SetActivitySize(const Vector2& tSize)
+	{
+		m_tActivitySize = tSize;
+	}
 
 public:
 	CObj* GetPlayer()	const
@@ -173,6 +185,27 @@ public:
 		}
 
 		return nullptr;
+	}
+
+	template <typename T>
+	T* CreateMap(const std::string& strName, const Vector2& tPos = Vector2(0.f, 0.f), const Vector2& tSize = Vector2(1280.f, 720.f))
+	{
+		T* pMap = new T;
+
+		pMap->SetScene(this);
+		pMap->SetPos(tPos);
+		pMap->SetSize(tSize);
+		pMap->SetName(strName);
+
+		if (!pMap->Init())
+		{
+			SAFE_DELETE(pMap);
+			return nullptr;
+		}
+
+		m_MapList.push_back(pMap);
+
+		return pMap;
 	}
 };
 

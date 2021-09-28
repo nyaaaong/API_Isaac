@@ -1,5 +1,8 @@
 
 #include "SceneCollision.h"
+#include "Scene.h"
+#include "Camera.h"
+#include "../Input.h"
 #include "../Collision/Collider.h"
 #include "../UI/UIWindow.h"
 #include "../UI/UIWidget.h"
@@ -12,6 +15,10 @@ void CSceneCollision::AddCollider(CCollider* pCollider)
 void CSceneCollision::AddUIWindow(CUIWindow* pWindow)
 {
 	m_vecUIWindow.push_back(pWindow);
+}
+
+void CSceneCollision::CollisionMouse(float fTime)
+{
 }
 
 void CSceneCollision::Collision(float fTime)
@@ -87,7 +94,8 @@ int CSceneCollision::SortY(const void* pSrc, const void* pDest)
 
 CSceneCollision::CSceneCollision()	:
 	m_pScene(nullptr),
-	m_pSelectWidget(nullptr)
+	m_pSelectWidget(nullptr),
+	m_pMouseCollision(nullptr)
 {
 	m_vecCollider.reserve(500);
 	m_vecUIWindow.reserve(10);

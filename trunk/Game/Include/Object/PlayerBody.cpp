@@ -26,11 +26,6 @@ bool CPlayerBody::Init()
 	return true;
 }
 
-void CPlayerBody::Move(const Vector2& tDir, bool bUseActivity)
-{
-	CObj::Move(tDir, bUseActivity);
-}
-
 void CPlayerBody::Move(const Vector2& tDir, float fSpeed, bool bUseActivity)
 {
 	Vector2	tCurMove = tDir * fSpeed * CGameManager::GetInst()->GetDeltaTime() * m_fTimeScale;
@@ -73,10 +68,6 @@ void CPlayerBody::Move(const Vector2& tDir, float fSpeed, bool bUseActivity)
 			m_pPlayer->m_tPos.y = m_tPos.y;
 		}
 	}
-}
-
-void CPlayerBody::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
-{
 }
 
 void CPlayerBody::Start()

@@ -110,27 +110,6 @@ CMonsterBase* CMonsterBase::Clone()
 	return new CMonsterBase(*this);
 }
 
-void CMonsterBase::Move(const Vector2& tDir, bool bUseActivity)
-{
-	CCharacter::Move(tDir, bUseActivity);
-}
-
-void CMonsterBase::Move(const Vector2& tDir, float fSpeed, bool bUseActivity)
-{
-	CCharacter::Move(tDir, fSpeed, bUseActivity);
-}
-
-float CMonsterBase::SetDamage(float fDamage)
-{
-	fDamage = CCharacter::SetDamage(fDamage);
-
-	return fDamage;
-}
-
-void CMonsterBase::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
-{
-}
-
 CMonsterBase::CMonsterBase() :
 	m_fFireTime(0.f),
 	m_fFireTimeMax(1.f),

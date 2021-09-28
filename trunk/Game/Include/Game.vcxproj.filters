@@ -90,9 +90,6 @@
     <Filter Include="02. Object\00. Character\01. Monster">
       <UniqueIdentifier>{16dcc16e-2d1d-4310-bf69-ecc768a9e1cb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. Object\04. BackGround">
-      <UniqueIdentifier>{1a1e6aba-12d7-43e1-92b7-9eb364288211}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00. GameManager\06. SaveLoad">
       <UniqueIdentifier>{4a3539f5-326d-4f95-aca1-0550f62540b3}</UniqueIdentifier>
     </Filter>
@@ -141,24 +138,6 @@
     <Filter Include="02. Object\00. Character\00. Player\02. Func">
       <UniqueIdentifier>{5862a8c0-7422-4bbf-a8fd-4f5a14e707d4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. Object\05. Door">
-      <UniqueIdentifier>{49d22f14-6ee4-4609-8beb-c5fb22df059f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Object\05. Door\00. Top">
-      <UniqueIdentifier>{4f6ff2e2-236b-4f24-a7dc-eac5ab92fa08}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Object\05. Door\01. Bottom">
-      <UniqueIdentifier>{dde3a319-ec74-432a-bb42-9ca41ef031eb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Object\05. Door\02. Left">
-      <UniqueIdentifier>{4aed06be-6c0a-4ecf-b8f6-116d7bf38792}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Object\05. Door\03. Right">
-      <UniqueIdentifier>{0a08506f-5322-4977-8f7b-643bdf610249}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Object\06. Item">
-      <UniqueIdentifier>{e01bd6ac-9a63-4d1c-ae3b-59589bbca4ec}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01. Scene\00. Scene\01. Stage">
       <UniqueIdentifier>{f14a5e3d-f805-456c-b71a-e2aa78d3d476}</UniqueIdentifier>
     </Filter>
@@ -173,6 +152,33 @@
     </Filter>
     <Filter Include="01. Scene\00. Scene\01. Stage\02. Sound">
       <UniqueIdentifier>{409f04fc-4a0f-40e7-9a14-bfd5520c20c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{cb2c8cdd-75f6-49d6-be89-5632129fa71b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene\00. Scene\02. Editor">
+      <UniqueIdentifier>{c0445ab4-c9b7-4e6c-a235-768305c2e1d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\04. Door">
+      <UniqueIdentifier>{49d22f14-6ee4-4609-8beb-c5fb22df059f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\04. Door\00. Top">
+      <UniqueIdentifier>{4f6ff2e2-236b-4f24-a7dc-eac5ab92fa08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\04. Door\01. Bottom">
+      <UniqueIdentifier>{dde3a319-ec74-432a-bb42-9ca41ef031eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\04. Door\02. Left">
+      <UniqueIdentifier>{4aed06be-6c0a-4ecf-b8f6-116d7bf38792}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\04. Door\03. Right">
+      <UniqueIdentifier>{0a08506f-5322-4977-8f7b-643bdf610249}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\05 Item">
+      <UniqueIdentifier>{e01bd6ac-9a63-4d1c-ae3b-59589bbca4ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Map">
+      <UniqueIdentifier>{5e072f7b-d5a3-41af-b191-c1d219117e74}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -269,9 +275,6 @@
     <ClCompile Include="Scene\MainMenu.cpp">
       <Filter>01. Scene\00. Scene\00. MainMenu</Filter>
     </ClCompile>
-    <ClCompile Include="Object\BackGround.cpp">
-      <Filter>02. Object\04. BackGround</Filter>
-    </ClCompile>
     <ClCompile Include="Object\Tear.cpp">
       <Filter>02. Object\01. Tear</Filter>
     </ClCompile>
@@ -321,10 +324,10 @@
       <Filter>02. Object\00. Character\00. Player\02. Func</Filter>
     </ClCompile>
     <ClCompile Include="Object\Door.cpp">
-      <Filter>02. Object\05. Door</Filter>
+      <Filter>02. Object\04. Door</Filter>
     </ClCompile>
     <ClCompile Include="Object\Item.cpp">
-      <Filter>02. Object\06. Item</Filter>
+      <Filter>02. Object\05 Item</Filter>
     </ClCompile>
     <ClCompile Include="Scene\Stage.cpp">
       <Filter>01. Scene\00. Scene\01. Stage</Filter>
@@ -343,6 +346,21 @@
     </ClCompile>
     <ClCompile Include="Scene\Stage_Prototype.cpp">
       <Filter>01. Scene\00. Scene\01. Stage\03. Init</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\EditorScene.cpp">
+      <Filter>01. Scene\00. Scene\02. Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\EditorDlg.cpp">
+      <Filter>01. Scene\00. Scene\02. Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Map.cpp">
+      <Filter>07. Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\ObjTileMap.cpp">
+      <Filter>07. Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\ObjTile.cpp">
+      <Filter>07. Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -448,9 +466,6 @@
     <ClInclude Include="Scene\MainMenu.h">
       <Filter>01. Scene\00. Scene\00. MainMenu</Filter>
     </ClInclude>
-    <ClInclude Include="Object\BackGround.h">
-      <Filter>02. Object\04. BackGround</Filter>
-    </ClInclude>
     <ClInclude Include="Object\Tear.h">
       <Filter>02. Object\01. Tear</Filter>
     </ClInclude>
@@ -500,16 +515,34 @@
       <Filter>02. Object\00. Character\01. Monster\00. Boss\00. Monstro</Filter>
     </ClInclude>
     <ClInclude Include="Object\Door.h">
-      <Filter>02. Object\05. Door</Filter>
+      <Filter>02. Object\04. Door</Filter>
     </ClInclude>
     <ClInclude Include="Object\Item.h">
-      <Filter>02. Object\06. Item</Filter>
+      <Filter>02. Object\05 Item</Filter>
     </ClInclude>
     <ClInclude Include="Scene\Stage.h">
       <Filter>01. Scene\00. Scene\01. Stage</Filter>
     </ClInclude>
     <ClInclude Include="Scene\Room.h">
       <Filter>01. Scene\00. Scene\01. Stage\00. Room</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\EditorScene.h">
+      <Filter>01. Scene\00. Scene\02. Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>리소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\EditorDlg.h">
+      <Filter>01. Scene\00. Scene\02. Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Map.h">
+      <Filter>07. Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\ObjTileMap.h">
+      <Filter>07. Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\ObjTile.h">
+      <Filter>07. Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -522,5 +555,10 @@
     <None Include="fmod.cs">
       <Filter>03. Resource\02. Sound\00. FMOD</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Game.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

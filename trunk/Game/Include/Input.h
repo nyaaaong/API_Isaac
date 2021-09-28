@@ -38,7 +38,38 @@ private:
 	bool	m_bCtrl;
 	bool	m_bAlt;
 	bool	m_bShift;
+	Vector2	m_tMousePos;
+	Vector2	m_tMouseMove;
 	HWND	m_hWnd;
+	bool	m_bMouseDown;
+	bool	m_bMousePush;
+	bool	m_bMouseUp;
+
+public:
+	bool GetMouseDown()	const
+	{
+		return m_bMouseDown;
+	}
+
+	bool GetMousePush()	const
+	{
+		return m_bMousePush;
+	}
+
+	bool GetMouseUp()	const
+	{
+		return m_bMouseUp;
+	}
+
+	const Vector2& GetMousePos()	const
+	{
+		return m_tMousePos;
+	}
+
+	const Vector2& GetMouseMove()	const
+	{
+		return m_tMouseMove;
+	}
 
 public:
 	void ClearCallback();
@@ -57,7 +88,8 @@ public:
 	void Update(float fTime);
 
 private:
-	void UpdatEKeyState();
+	void UpdateMouse(float fTime);
+	void UpdateKeyState();
 	void UpdateKeyInfo(float fTime);
 
 private:
