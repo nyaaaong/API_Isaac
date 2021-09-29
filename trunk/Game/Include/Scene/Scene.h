@@ -52,6 +52,9 @@ public:
 		return m_tActivitySize;
 	}
 
+public:
+	void SetMap(const std::string& strName, int iRoomNum);
+
 private:
 	CObj* FindPrototype(const std::string& strName);
 
@@ -188,11 +191,12 @@ public:
 	}
 
 	template <typename T>
-	T* CreateMap(const std::string& strName, const Vector2& tPos = Vector2(0.f, 0.f), const Vector2& tSize = Vector2(1280.f, 720.f))
+	T* CreateMap(const std::string& strName, int iRoomNum, const Vector2& tPos = Vector2(0.f, 0.f), const Vector2& tSize = Vector2(1280.f, 720.f))
 	{
 		T* pMap = new T;
 
 		pMap->SetScene(this);
+		pMap->SetRoomNumber(iRoomNum);
 		pMap->SetPos(tPos);
 		pMap->SetSize(tSize);
 		pMap->SetName(strName);

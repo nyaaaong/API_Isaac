@@ -174,11 +174,14 @@
     <Filter Include="02. Object\04. Door\03. Right">
       <UniqueIdentifier>{0a08506f-5322-4977-8f7b-643bdf610249}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. Object\05 Item">
-      <UniqueIdentifier>{e01bd6ac-9a63-4d1c-ae3b-59589bbca4ec}</UniqueIdentifier>
-    </Filter>
     <Filter Include="07. Map">
-      <UniqueIdentifier>{5e072f7b-d5a3-41af-b191-c1d219117e74}</UniqueIdentifier>
+      <UniqueIdentifier>{dd9b6879-a39c-4681-bc73-7f2926713f2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\06. BackGround">
+      <UniqueIdentifier>{842b1997-074e-4937-9361-f28c4b0c548e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\05. Item">
+      <UniqueIdentifier>{e01bd6ac-9a63-4d1c-ae3b-59589bbca4ec}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -327,7 +330,7 @@
       <Filter>02. Object\04. Door</Filter>
     </ClCompile>
     <ClCompile Include="Object\Item.cpp">
-      <Filter>02. Object\05 Item</Filter>
+      <Filter>02. Object\05. Item</Filter>
     </ClCompile>
     <ClCompile Include="Scene\Stage.cpp">
       <Filter>01. Scene\00. Scene\01. Stage</Filter>
@@ -350,17 +353,14 @@
     <ClCompile Include="Scene\EditorScene.cpp">
       <Filter>01. Scene\00. Scene\02. Editor</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\EditorDlg.cpp">
-      <Filter>01. Scene\00. Scene\02. Editor</Filter>
+    <ClCompile Include="Map\MapObj.cpp">
+      <Filter>07. Map</Filter>
     </ClCompile>
     <ClCompile Include="Map\Map.cpp">
       <Filter>07. Map</Filter>
     </ClCompile>
-    <ClCompile Include="Map\ObjTileMap.cpp">
-      <Filter>07. Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Map\ObjTile.cpp">
-      <Filter>07. Map</Filter>
+    <ClCompile Include="Object\BackGround.cpp">
+      <Filter>02. Object\06. BackGround</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -518,7 +518,7 @@
       <Filter>02. Object\04. Door</Filter>
     </ClInclude>
     <ClInclude Include="Object\Item.h">
-      <Filter>02. Object\05 Item</Filter>
+      <Filter>02. Object\05. Item</Filter>
     </ClInclude>
     <ClInclude Include="Scene\Stage.h">
       <Filter>01. Scene\00. Scene\01. Stage</Filter>
@@ -529,20 +529,14 @@
     <ClInclude Include="Scene\EditorScene.h">
       <Filter>01. Scene\00. Scene\02. Editor</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>리소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\EditorDlg.h">
-      <Filter>01. Scene\00. Scene\02. Editor</Filter>
-    </ClInclude>
     <ClInclude Include="Map\Map.h">
       <Filter>07. Map</Filter>
     </ClInclude>
-    <ClInclude Include="Map\ObjTileMap.h">
+    <ClInclude Include="Map\MapObj.h">
       <Filter>07. Map</Filter>
     </ClInclude>
-    <ClInclude Include="Map\ObjTile.h">
-      <Filter>07. Map</Filter>
+    <ClInclude Include="Object\BackGround.h">
+      <Filter>02. Object\06. BackGround</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -555,10 +549,5 @@
     <None Include="fmod.cs">
       <Filter>03. Resource\02. Sound\00. FMOD</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Game.rc">
-      <Filter>리소스 파일</Filter>
-    </ResourceCompile>
   </ItemGroup>
 </Project>

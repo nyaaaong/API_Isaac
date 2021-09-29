@@ -3,6 +3,7 @@
 #include "SceneResource.h"
 #include "SceneCollision.h"
 #include "Camera.h"
+#include "../Map/Map.h"
 
 bool CScene::Init()
 {
@@ -10,6 +11,20 @@ bool CScene::Init()
 	GetSceneResource()->SetVolume("Effect", 30);
 
 	return true;
+}
+
+void CScene::SetMap(const std::string& strName, int iRoomNum)
+{
+	std::list<class CMap*>::iterator	iter = m_MapList.begin();
+	std::list<class CMap*>::iterator	iterEnd = m_MapList.end();
+
+	for (; iter != iterEnd; ++iter)
+	{
+		(*iter)->m_bEnable = false;
+
+		if ((*iter)->GetName() == strName && (*iter)->GetRoomNumber() == iRoomNum)
+			(*iter)->m_bEnable = true;
+	}
 }
 
 CObj* CScene::FindPrototype(const std::string& strName)
@@ -232,6 +247,54 @@ bool CScene::PostUpdate(float fTime)
 
 	m_pCamera->Update(fTime);
 
+	{
+		std::list<class CMap*>::iterator	iter = m_MapList.begin();
+		std::list<class CMap*>::iterator	iterEnd = m_MapList.end();
+
+		for (; iter != iterEnd;)
+		{
+			if (!(*iter)->IsActive())
+			{
+				iter = m_MapList.erase(iter);
+				iterEnd = m_MapList.end();
+				continue;
+			}
+
+			else if (!(*iter)->IsEnable())
+			{
+				++iter;
+				continue;
+			}
+
+			(*iter)->Update(fTime);
+			++iter;
+		}
+	}
+
+	{
+		std::list<class CMap*>::iterator	iter = m_MapList.begin();
+		std::list<class CMap*>::iterator	iterEnd = m_MapList.end();
+
+		for (; iter != iterEnd;)
+		{
+			if (!(*iter)->IsActive())
+			{
+				iter = m_MapList.erase(iter);
+				iterEnd = m_MapList.end();
+				continue;
+			}
+
+			else if (!(*iter)->IsEnable())
+			{
+				++iter;
+				continue;
+			}
+
+			(*iter)->PostUpdate(fTime);
+			++iter;
+		}
+	}
+
 	return true;
 }
 
@@ -295,6 +358,30 @@ bool CScene::Collision(float fTime)
 
 bool CScene::Render(HDC hDC)
 {
+	{
+		std::list<class CMap*>::iterator	iter = m_MapList.begin();
+		std::list<class CMap*>::iterator	iterEnd = m_MapList.end();
+
+		for (; iter != iterEnd;)
+		{
+			if (!(*iter)->IsActive())
+			{
+				iter = m_MapList.erase(iter);
+				iterEnd = m_MapList.end();
+				continue;
+			}
+
+			else if (!(*iter)->IsEnable())
+			{
+				++iter;
+				continue;
+			}
+
+			(*iter)->Render(hDC);
+			++iter;
+		}
+	}
+
 	if (m_pPlayer)
 		m_pPlayer->PrevRender();
 
@@ -428,6 +515,18 @@ CScene::~CScene()
 	for (int i = 0; i < m_iUICount; ++i)
 	{
 		SAFE_RELEASE(m_pArrUI[i]);
+	}
+
+	{
+		std::list<class CMap*>::iterator	iter = m_MapList.begin();
+		std::list<class CMap*>::iterator	iterEnd = m_MapList.end();
+
+		for (; iter != iterEnd; ++iter)
+		{
+			SAFE_DELETE((*iter));
+		}
+
+		m_MapList.clear();
 	}
 
 	SAFE_DELETE_ARRAY(m_pArrUI);

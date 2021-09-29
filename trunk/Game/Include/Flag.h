@@ -77,3 +77,20 @@ enum class EDoorDir
 	Right,
 	Bottom
 };
+
+enum EObject
+{
+	OBJ_NONE,
+	OBJ_ROCK,
+	OBJ_IRON,
+	OBJ_SPIKE,
+	OBJ_POOP,
+	OBJ_MAX
+};
+
+enum class EEditor_State
+{
+	Idle,
+	Saved,
+	Loaded
+};

@@ -3,6 +3,7 @@
 #pragma warning(disable: 26812)	//'enum'(Enum.3) 대신 'enum class'를 사용하세요. 경고 무시
 #pragma warning(disable: 6031)	//반환 값이 무시되었습니다. 'rand'. 경고 무시
 #pragma warning(disable: 6011)		//NULL 포인터 'm_pArrWidget[i]'을(를) 역참조하고 있습니다. 경고 무시
+#pragma warning(disable: 26451)		//산술 오버플로: 4 바이트 값의 '-' 연산자를 사용한 다음 결과를 8 바이트 값에 캐스트합니다. 오버플로를 방지하려면 '-' 연산자를 호출하기 전에 더 광범위한 형식에 값을 캐스트합니다(io.2). 경고 무시
 
 
 #include <Windows.h>
@@ -14,7 +15,6 @@
 #include <functional>
 #include <assert.h>
 
-#include "resource.h"
 #include "Math.h"
 #include "Flag.h"
 #include "SharedPtr.h"

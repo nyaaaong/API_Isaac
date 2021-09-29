@@ -164,9 +164,9 @@ void CGameManager::Render(float fTime)
 	//	FPS Ãâ·Â
 	char	cText[32] = {};
 
-	sprintf_s(cText, "FPS : %.5f", m_pTimer->GetFPS());
+	sprintf_s(cText, "FPS : %.f", m_pTimer->GetFPS());
 
-	TextOutA(m_hDC, 0, 0, cText, static_cast<int>(strlen(cText)));
+	TextOutA(m_hDC, m_tRS.iW - 70, 0, cText, static_cast<int>(strlen(cText)));
 #endif // _DEBUG
 
 }

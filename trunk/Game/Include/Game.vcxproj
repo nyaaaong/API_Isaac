@@ -167,9 +167,9 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map\Map.cpp" />
-    <ClCompile Include="Map\ObjTile.cpp" />
-    <ClCompile Include="Map\ObjTileMap.cpp" />
+    <ClCompile Include="Map\MapObj.cpp" />
     <ClCompile Include="Math.cpp" />
+    <ClCompile Include="Object\BackGround.cpp" />
     <ClCompile Include="Object\BossMonstro.cpp" />
     <ClCompile Include="Object\Character.cpp" />
     <ClCompile Include="Object\Door.cpp" />
@@ -202,7 +202,6 @@
     <ClCompile Include="Resource\Sound.cpp" />
     <ClCompile Include="Resource\Texture.cpp" />
     <ClCompile Include="Scene\Camera.cpp" />
-    <ClCompile Include="Scene\EditorDlg.cpp" />
     <ClCompile Include="Scene\EditorScene.cpp" />
     <ClCompile Include="Scene\MainMenu.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
@@ -244,9 +243,9 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Map\Map.h" />
-    <ClInclude Include="Map\ObjTile.h" />
-    <ClInclude Include="Map\ObjTileMap.h" />
+    <ClInclude Include="Map\MapObj.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="Object\BackGround.h" />
     <ClInclude Include="Object\BossMonstro.h" />
     <ClInclude Include="Object\Character.h" />
     <ClInclude Include="Object\Door.h" />
@@ -266,13 +265,11 @@
     <ClInclude Include="Object\Tear.h" />
     <ClInclude Include="PathManager.h" />
     <ClInclude Include="Ref.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="Resource\AnimationSequence.h" />
     <ClInclude Include="Resource\ResourceManager.h" />
     <ClInclude Include="Resource\Sound.h" />
     <ClInclude Include="Resource\Texture.h" />
     <ClInclude Include="Scene\Camera.h" />
-    <ClInclude Include="Scene\EditorDlg.h" />
     <ClInclude Include="Scene\EditorScene.h" />
     <ClInclude Include="Scene\MainMenu.h" />
     <ClInclude Include="Scene\Scene.h" />
@@ -294,9 +291,6 @@
     <None Include="fmod.cs" />
     <None Include="fmod_dsp.cs" />
     <None Include="fmod_errors.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Game.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

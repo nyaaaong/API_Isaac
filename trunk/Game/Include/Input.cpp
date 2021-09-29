@@ -18,6 +18,22 @@ bool CInput::Init(HWND hWnd)
 
 	CreateKey("GameMenu", VK_ESCAPE);
 
+	CreateKey("NextObject", 'E');
+	CreateKey("PrevObject", 'Q');
+	CreateKey("SelectObject1", '1'); 
+	CreateKey("SelectObject2", '2'); 
+	CreateKey("SelectObject3", '3'); 
+	CreateKey("SelectObject4", '4');
+
+	CreateKey("SaveRoom", 'S');
+	SetCtrlKey("SaveRoom", true);
+	CreateKey("LoadRoom", 'L');
+	SetCtrlKey("LoadRoom", true);
+	CreateKey("ClearRoom", 'N');
+	SetCtrlKey("ClearRoom", true);
+	CreateKey("NextRoom", 'D');
+	CreateKey("PrevRoom", 'A');
+
 	// ----------- Player ----------- 
 
 	CreateKey("MoveUp", 'W');
@@ -270,7 +286,8 @@ CInput::CInput()	:
 	m_hWnd(0),
 	m_bMouseDown(false),
 	m_bMousePush(false),
-	m_bMouseUp(false)
+	m_bMouseUp(false),
+	m_bShowCursor(true)
 {
 	m_vecKeyState.resize(KEY_COUNT_MAX);
 

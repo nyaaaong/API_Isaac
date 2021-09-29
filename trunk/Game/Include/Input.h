@@ -44,8 +44,14 @@ private:
 	bool	m_bMouseDown;
 	bool	m_bMousePush;
 	bool	m_bMouseUp;
+	bool	m_bShowCursor;
 
 public:
+	bool IsShowCursor()	const
+	{
+		return m_bShowCursor;
+	}
+
 	bool GetMouseDown()	const
 	{
 		return m_bMouseDown;
@@ -69,6 +75,22 @@ public:
 	const Vector2& GetMouseMove()	const
 	{
 		return m_tMouseMove;
+	}
+
+public:
+	void SetShowCursor(bool bCursor)
+	{
+		if (bCursor)
+		{
+			m_bShowCursor = true;
+			ShowCursor(TRUE);
+		}
+
+		else
+		{
+			m_bShowCursor = true;
+			ShowCursor(FALSE);
+		}
 	}
 
 public:

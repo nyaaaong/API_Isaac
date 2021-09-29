@@ -1,9 +1,10 @@
 #include "Map.h"
+#include "../Scene/Scene.h"
+#include "../Object/BackGround.h"
 
 bool CMap::Init()
 {
-	//SetTexture("Map", TEXT("Room/Room.bmp"));
-	//SetZOrder(EZOrder::BackGround);
+	m_pScene->CreateObject<CBackGround>("BackGround");
 
 	return true;
 }
@@ -29,9 +30,13 @@ void CMap::Render(HDC hDC)
 }
 
 CMap::CMap()	:
-	m_pScene(nullptr)
+	m_pScene(nullptr),
+	m_iZOrder(0),
+	m_bEnable(true),
+	m_bActive(true),
+	m_iRoomNum(1),
+	m_eObject(OBJ_ROCK)
 {
-	//m_eObjectType = EObjectType::Map;
 }
 
 CMap::~CMap()

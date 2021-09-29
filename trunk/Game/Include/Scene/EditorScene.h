@@ -13,7 +13,10 @@ private:
 
 private:
 	bool	m_bStart;
-	class CEditorDlg* m_pDlg;
+	int		m_iCurRoom;
+	int		m_iMaxRoom;
+	EObject	m_eCurObject;
+	EEditor_State	m_eState;
 
 public:
 	virtual bool Init();
@@ -21,11 +24,29 @@ public:
 	virtual bool PostUpdate(float fTime);
 
 private:
+	void NextRoom(float fTime);
+	void PrevRoom(float fTime);
+	void ClearRoom(float fTime);
+	void SaveRoom(float fTime);
+	void LoadRoom(float fTime);
+
+private:
+	void NextObject(float fTime);
+	void PrevObject(float fTime);
+	void SelectObject1(float fTime);
+	void SelectObject2(float fTime);
+	void SelectObject3(float fTime);
+	void SelectObject4(float fTime);
+	void SelectObject(EObject eSelect);
+
+private:
 	void LoadAnimationSequence();
 	void LoadSound();
+
+private:
 	void GameMenu(float fTime);
 
-public:
-	void OnEditor(float fTime);
+private:
+	void MouseWindowCheck();
 };
 
