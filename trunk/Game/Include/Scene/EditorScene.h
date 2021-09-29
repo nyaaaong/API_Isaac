@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Scene.h"
+#include "../UI/UIImage.h"
 
 class CEditorScene :
 	public CScene
@@ -17,6 +18,7 @@ private:
 	int		m_iMaxRoom;
 	EObject	m_eCurObject;
 	EEditor_State	m_eState;
+	std::vector<CSharedPtr<CUIImage>>	m_vecMouse;
 
 public:
 	virtual bool Init();
@@ -48,5 +50,7 @@ private:
 
 private:
 	void MouseWindowCheck();
+	void MouseObjectView();
+	void EditorTextOut();
 };
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameInfo.h"
+#include "UI/UIImage.h"
 
 struct KeyState
 {

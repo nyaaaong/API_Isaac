@@ -4,6 +4,7 @@
 #include "MainMenu.h"
 #include "../GameManager.h"
 #include "../Input.h"
+#include "../Resource/ResourceManager.h"
 #include "../Map/Map.h"
 
 CEditorScene::CEditorScene()	:
@@ -13,6 +14,7 @@ CEditorScene::CEditorScene()	:
 	m_eCurObject(OBJ_ROCK),
 	m_eState(EEditor_State::Idle)
 {
+	m_vecMouse.resize(OBJ_MAX - 1);
 }
 
 CEditorScene::~CEditorScene()
@@ -30,6 +32,27 @@ bool CEditorScene::Init()
 	}
 
 	SetMap("Room", 1);
+
+	for (int i = OBJ_ROCK; i < OBJ_MAX; ++i)
+	{
+		// 경로
+		TCHAR	cPath[MAX_PATH] = {};
+		wsprintf(cPath, TEXT("Mouse/%d.bmp"), i);
+
+		// 텍스쳐명
+		char	cTextureName[32] = "ObjMouseCursor";
+		char cNum[16] = {};
+		sprintf_s(cNum, "%d", i );
+		strcat_s(cTextureName, cNum);
+
+		CResourceManager::GetInst()->LoadTexture(cTextureName, cPath);
+		CTexture* pTexture = CResourceManager::GetInst()->FindTexture(cTextureName);
+		pTexture->SetColorKey(255, 0, 255);
+
+		m_vecMouse[i - 1] = new CUIImage;
+		m_vecMouse[i - 1]->SetSize(75.f, 75.f);
+		m_vecMouse[i - 1]->SetTexture(pTexture);
+	}
 
 	LoadSound();
 	LoadAnimationSequence();
@@ -63,30 +86,11 @@ bool CEditorScene::Update(float fTime)
 
 	MouseWindowCheck();
 
-	TCHAR	cText[32] = {};
+	MouseObjectView();	
 
-	wsprintf(cText, TEXT("Room : %d / %d"), m_iCurRoom, m_iMaxRoom);
+	EditorTextOut();
 
-	TextOut(CGameManager::GetInst()->GetWindowDC(), 0, 0, cText, lstrlen(cText));
-
-	memset(cText, 0, sizeof(TCHAR) * 32);
-
-	lstrcpy(cText, TEXT("상태 : "));
-
-	switch (m_eState)
-	{
-	case EEditor_State::Idle:
-		lstrcat(cText, TEXT("대기 중"));
-		break;
-	case EEditor_State::Saved:
-		lstrcat(cText, TEXT("저장 완료"));
-		break;
-	case EEditor_State::Loaded:
-		lstrcat(cText, TEXT("불러오기 완료"));
-		break;
-	}
-
-	TextOut(CGameManager::GetInst()->GetWindowDC(), 0, 20, cText, lstrlen(cText));
+	
 
 	return true;
 }
@@ -224,4 +228,47 @@ void CEditorScene::MouseWindowCheck()
 		if (!pInst->IsShowCursor())
 			pInst->SetShowCursor(true);
 	}
+}
+
+void CEditorScene::MouseObjectView()
+{
+	switch (m_eCurObject)
+	{
+	case OBJ_ROCK:
+		break;
+	case OBJ_IRON:
+		break;
+	case OBJ_SPIKE:
+		break;
+	case OBJ_POOP:
+		break;
+	}
+}
+
+void CEditorScene::EditorTextOut()
+{
+	TCHAR	cText[32] = {};
+
+	wsprintf(cText, TEXT("Room : %d / %d"), m_iCurRoom, m_iMaxRoom);
+
+	TextOut(CGameManager::GetInst()->GetWindowDC(), 0, 0, cText, lstrlen(cText));
+
+	memset(cText, 0, sizeof(TCHAR) * 32);
+
+	lstrcpy(cText, TEXT("상태 : "));
+
+	switch (m_eState)
+	{
+	case EEditor_State::Idle:
+		lstrcat(cText, TEXT("대기 중"));
+		break;
+	case EEditor_State::Saved:
+		lstrcat(cText, TEXT("저장 완료"));
+		break;
+	case EEditor_State::Loaded:
+		lstrcat(cText, TEXT("불러오기 완료"));
+		break;
+	}
+
+	TextOut(CGameManager::GetInst()->GetWindowDC(), 0, 20, cText, lstrlen(cText));
 }
