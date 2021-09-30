@@ -82,8 +82,8 @@ bool CEditorScene::Update(float fTime)
 		CInput::GetInst()->SetCallback<CEditorScene>("NextRoom", KS_DOWN, this, &CEditorScene::NextRoom);
 		CInput::GetInst()->SetCallback<CEditorScene>("PrevRoom", KS_DOWN, this, &CEditorScene::PrevRoom);
 
-		CInput::GetInst()->SetCallback<CEditorScene>("LeftClick", KS_DOWN, this, &CEditorScene::CreateObject);
-		CInput::GetInst()->SetCallback<CEditorScene>("RightClick", KS_DOWN, this, &CEditorScene::DeleteObject);
+		CInput::GetInst()->SetCallback<CEditorScene>("LeftClick", KS_PUSH, this, &CEditorScene::CreateObject);
+		CInput::GetInst()->SetCallback<CEditorScene>("RightClick", KS_PUSH, this, &CEditorScene::DeleteObject);
 	}
 
 	MouseWindowCheck();
