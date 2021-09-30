@@ -86,11 +86,12 @@ bool CEditorScene::Update(float fTime)
 
 	MouseWindowCheck();
 
-	MouseObjectView();	
+	MouseObjectView();
 
 	EditorTextOut();
 
-	
+	if (m_pCurMouse)
+		m_pCurMouse->Update(fTime);
 
 	return true;
 }
@@ -98,6 +99,16 @@ bool CEditorScene::Update(float fTime)
 bool CEditorScene::PostUpdate(float fTime)
 {
 	CScene::PostUpdate(fTime);
+
+	return true;
+}
+
+bool CEditorScene::Render(HDC hDC)
+{
+	CScene::Render(hDC);
+
+	if (m_pCurMouse)
+		m_pCurMouse->Render(CInput::GetInst()->GetMousePos(), hDC);
 
 	return true;
 }
@@ -232,17 +243,7 @@ void CEditorScene::MouseWindowCheck()
 
 void CEditorScene::MouseObjectView()
 {
-	switch (m_eCurObject)
-	{
-	case OBJ_ROCK:
-		break;
-	case OBJ_IRON:
-		break;
-	case OBJ_SPIKE:
-		break;
-	case OBJ_POOP:
-		break;
-	}
+	m_pCurMouse = m_vecMouse[m_eCurObject - 1];
 }
 
 void CEditorScene::EditorTextOut()

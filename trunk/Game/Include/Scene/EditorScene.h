@@ -19,11 +19,13 @@ private:
 	EObject	m_eCurObject;
 	EEditor_State	m_eState;
 	std::vector<CSharedPtr<CUIImage>>	m_vecMouse;
+	CSharedPtr<CUIImage>	m_pCurMouse;
 
 public:
 	virtual bool Init();
 	virtual bool Update(float fTime);
 	virtual bool PostUpdate(float fTime);
+	virtual bool Render(HDC hDC);
 
 private:
 	void NextRoom(float fTime);
