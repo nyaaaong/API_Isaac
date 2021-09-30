@@ -50,6 +50,7 @@ enum class EZOrder
 	Effect = -100,
 	Monster = -30,
 	Player = -20,
+	MapObject = -15,
 	PlayerBody = -10,
 	BackGround = 0
 };

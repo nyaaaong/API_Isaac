@@ -35,17 +35,16 @@ bool CEditorScene::Init()
 
 	for (int i = OBJ_ROCK; i < OBJ_MAX; ++i)
 	{
-		// 경로
-		TCHAR	cPath[MAX_PATH] = {};
-		wsprintf(cPath, TEXT("Mouse/%d.bmp"), i);
-
 		// 텍스쳐명
-		char	cTextureName[32] = "ObjMouseCursor";
+		char	cTextureName[32] = "Object";
+
+		// 번호를 문자로
 		char cNum[16] = {};
 		sprintf_s(cNum, "%d", i );
+
+		// 텍스쳐명 + 숫자
 		strcat_s(cTextureName, cNum);
 
-		CResourceManager::GetInst()->LoadTexture(cTextureName, cPath);
 		CTexture* pTexture = CResourceManager::GetInst()->FindTexture(cTextureName);
 		pTexture->SetColorKey(255, 0, 255);
 
@@ -82,6 +81,9 @@ bool CEditorScene::Update(float fTime)
 		CInput::GetInst()->SetCallback<CEditorScene>("ClearRoom", KS_DOWN, this, &CEditorScene::ClearRoom);
 		CInput::GetInst()->SetCallback<CEditorScene>("NextRoom", KS_DOWN, this, &CEditorScene::NextRoom);
 		CInput::GetInst()->SetCallback<CEditorScene>("PrevRoom", KS_DOWN, this, &CEditorScene::PrevRoom);
+
+		CInput::GetInst()->SetCallback<CEditorScene>("LeftClick", KS_DOWN, this, &CEditorScene::CreateObject);
+		CInput::GetInst()->SetCallback<CEditorScene>("RightClick", KS_DOWN, this, &CEditorScene::DeleteObject);
 	}
 
 	MouseWindowCheck();
@@ -135,6 +137,7 @@ void CEditorScene::PrevRoom(float fTime)
 
 void CEditorScene::ClearRoom(float fTime)
 {
+	GetCurrentMap()->Clear();
 }
 
 void CEditorScene::SaveRoom(float fTime)
@@ -167,39 +170,32 @@ void CEditorScene::PrevObject(float fTime)
 
 void CEditorScene::SelectObject1(float fTime)
 {
-	SelectObject(OBJ_ROCK);
+	m_eCurObject = OBJ_ROCK;
 }
 
 void CEditorScene::SelectObject2(float fTime)
 {
-	SelectObject(OBJ_IRON);
+	m_eCurObject = OBJ_IRON;
 }
 
 void CEditorScene::SelectObject3(float fTime)
 {
-	SelectObject(OBJ_SPIKE);
+	m_eCurObject = OBJ_SPIKE;
 }
 
 void CEditorScene::SelectObject4(float fTime)
 {
-	SelectObject(OBJ_POOP);
+	m_eCurObject = OBJ_POOP;
 }
 
-void CEditorScene::SelectObject(EObject eSelect)
+void CEditorScene::CreateObject(float fTime)
 {
-	m_eCurObject = eSelect;
+	GetCurrentMap()->Create(m_eCurObject, CInput::GetInst()->GetMousePos());
+}
 
-	switch (eSelect)
-	{
-	case OBJ_ROCK:
-		break;
-	case OBJ_IRON:
-		break;
-	case OBJ_SPIKE:
-		break;
-	case OBJ_POOP:
-		break;
-	}
+void CEditorScene::DeleteObject(float fTime)
+{
+	GetCurrentMap()->Delete(CInput::GetInst()->GetMousePos());
 }
 
 void CEditorScene::LoadAnimationSequence()

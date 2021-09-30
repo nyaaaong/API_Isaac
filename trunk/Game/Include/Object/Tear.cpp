@@ -107,8 +107,8 @@ void CTear::Update(float fTime)
 
 	m_fDistance -= GetMoveSpeedFrame();
 
-	Vector2	tActivityPos = m_pScene->GetActivityPos();
-	Vector2	tActivitySize = m_pScene->GetActivitySize();
+	Vector2	tActivityLT = m_pScene->GetActivityLT();
+	Vector2	tActivityRB = m_pScene->GetActivityRB();
 
 	if (m_fDistance <= 0.f)
 		TearDestroy();
@@ -119,16 +119,16 @@ void CTear::Update(float fTime)
 			m_bIsGround = false;
 	}
 
-	else if (m_tPos.x <= tActivityPos.x)
+	else if (m_tPos.x <= tActivityLT.x)
 		TearDestroy();
 
-	else if (m_tPos.y <= tActivityPos.y)
+	else if (m_tPos.y <= tActivityLT.y)
 		TearDestroy();
 
-	else if (m_tPos.x >= tActivitySize.x)
+	else if (m_tPos.x >= tActivityRB.x)
 		TearDestroy();
 
-	else if (m_tPos.y >= tActivitySize.y)
+	else if (m_tPos.y >= tActivityRB.y)
 		TearDestroy();
 }
 

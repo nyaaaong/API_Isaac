@@ -102,20 +102,20 @@ void CObj::Move(const Vector2& tDir, float fSpeed, bool bUseActivity)
 
 	if (bUseActivity)
 	{
-		Vector2	tActivityPos = m_pScene->GetActivityPos();
-		Vector2	tActivitySize = m_pScene->GetActivitySize();
+		Vector2	tActivityLT = m_pScene->GetActivityLT();
+		Vector2	tActivityRB = m_pScene->GetActivityRB();
 		
-		if (m_tPos.x - m_tSize.x * m_tPivot.x + m_tOffset.x < tActivityPos.x)
-			m_tPos.x = tActivityPos.x + m_tSize.x * m_tPivot.x - m_tOffset.x;
+		if (m_tPos.x - m_tSize.x * m_tPivot.x + m_tOffset.x < tActivityLT.x)
+			m_tPos.x = tActivityLT.x + m_tSize.x * m_tPivot.x - m_tOffset.x;
 
-		else if (m_tPos.y - m_tSize.y * m_tPivot.y + m_tOffset.y < tActivityPos.y)
-			m_tPos.y = tActivityPos.y + m_tSize.y * m_tPivot.y - m_tOffset.y;
+		else if (m_tPos.y - m_tSize.y * m_tPivot.y + m_tOffset.y < tActivityLT.y)
+			m_tPos.y = tActivityLT.y + m_tSize.y * m_tPivot.y - m_tOffset.y;
 
-		else if (m_tPos.x + m_tSize.x * m_tPivot.x + m_tOffset.x > tActivitySize.x)
-			m_tPos.x = tActivitySize.x - m_tSize.x * m_tPivot.x - m_tOffset.x;
+		else if (m_tPos.x + m_tSize.x * m_tPivot.x + m_tOffset.x > tActivityRB.x)
+			m_tPos.x = tActivityRB.x - m_tSize.x * m_tPivot.x - m_tOffset.x;
 
-		else if (m_tPos.y + m_tSize.y * m_tPivot.y + m_tOffset.y > tActivitySize.y)
-			m_tPos.y = tActivitySize.y - m_tSize.y * m_tPivot.y - m_tOffset.y;
+		else if (m_tPos.y + m_tSize.y * m_tPivot.y + m_tOffset.y > tActivityRB.y)
+			m_tPos.y = tActivityRB.y - m_tSize.y * m_tPivot.y - m_tOffset.y;
 	}
 }
 

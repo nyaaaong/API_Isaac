@@ -5,7 +5,7 @@ bool CBackGround::Init()
 	if (!CObj::Init())
 		return false;
 
-	SetTexture("BackGround", TEXT("Room/Room.bmp"));
+	SetTexture("BackGround");
 
 	return true;
 }

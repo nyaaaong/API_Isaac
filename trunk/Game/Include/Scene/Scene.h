@@ -21,35 +21,41 @@ private:
 	CUIWindow** m_pArrUI;
 	int		m_iUICount;
 	int		m_iUICapacity;
-	Vector2	m_tActivityPos;	// 벽을 제외한 나머지 구역
-	Vector2	m_tActivitySize;
+	Vector2	m_tActivityLT;	// 벽을 제외한 나머지 구역
+	Vector2	m_tActivityRB;
 	std::list<class CMap*>	m_MapList;
+	class CMap* m_pCurMap;
 
 public:
-	void SetActivityPos(const Vector2& tPos)
+	void SetActivityLT(const Vector2& tPos)
 	{
-		m_tActivityPos = tPos;
+		m_tActivityLT = tPos;
 	}
 
-	void SetActivitySize(const Vector2& tSize)
+	void SetActivityRB(const Vector2& tSize)
 	{
-		m_tActivitySize = tSize;
+		m_tActivityRB = tSize;
 	}
 
 public:
+	class CMap* GetCurrentMap()	const
+	{
+		return m_pCurMap;
+	}
+
 	CObj* GetPlayer()	const
 	{
 		return m_pPlayer;
 	}
 
-	const Vector2& GetActivityPos()	const
+	const Vector2& GetActivityLT()	const
 	{
-		return m_tActivityPos;
+		return m_tActivityLT;
 	}
 
-	const Vector2& GetActivitySize()	const
+	const Vector2& GetActivityRB()	const
 	{
-		return m_tActivitySize;
+		return m_tActivityRB;
 	}
 
 public:
@@ -72,6 +78,7 @@ public:
 	static int SortY(const void* pSrc, const void* pDest);
 	static int SortUIZOrder(const void* pSrc, const void* pDest);
 	static int SortObjZOrder(const void* pSrc, const void* pDest);
+	static int SortMapObjZOrder(const void* pSrc, const void* pDest);
 
 public:
 	virtual bool Init();
@@ -79,6 +86,9 @@ public:
 	virtual bool PostUpdate(float fTime);
 	virtual bool Collision(float fTime);
 	virtual bool Render(HDC hDC);
+
+private:
+	void CreateTextureObject();
 
 protected:
 	CScene();
@@ -206,6 +216,8 @@ public:
 			SAFE_DELETE(pMap);
 			return nullptr;
 		}
+
+		pMap->Start();
 
 		m_MapList.push_back(pMap);
 

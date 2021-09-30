@@ -3,12 +3,22 @@
 #include "SceneResource.h"
 #include "SceneCollision.h"
 #include "Camera.h"
+#include "../GameManager.h"
 #include "../Map/Map.h"
+#include "../Map/MapObj.h"
+#include "../Resource/ResourceManager.h"
 
 bool CScene::Init()
 {
 	GetSceneResource()->SetVolume("BGM", 10);
 	GetSceneResource()->SetVolume("Effect", 30);
+
+	Resolution	tRS = CGameManager::GetInst()->GetResolution();
+
+	SetActivityLT(Vector2(140.f, 120.f));	// 활동 구역의 시작 위치
+	SetActivityRB(Vector2(tRS.iW - 140.f, tRS.iH - 120.f));	// 활동 구역의 크기
+
+	CreateTextureObject();
 
 	return true;
 }
@@ -23,7 +33,10 @@ void CScene::SetMap(const std::string& strName, int iRoomNum)
 		(*iter)->m_bEnable = false;
 
 		if ((*iter)->GetName() == strName && (*iter)->GetRoomNumber() == iRoomNum)
+		{
 			(*iter)->m_bEnable = true;
+			m_pCurMap = (*iter);
+		}
 	}
 }
 
@@ -131,6 +144,23 @@ int CScene::SortObjZOrder(const void* pSrc, const void* pDest)
 {
 	CObj* pSrcObj = *(CObj**)pSrc;
 	CObj* pDestObj = *(CObj**)pDest;
+
+	int iSrcZ = pSrcObj->GetZOrder();
+	int iDestZ = pDestObj->GetZOrder();
+
+	if (iSrcZ > iDestZ)
+		return -1;
+
+	else if (iSrcZ < iDestZ)
+		return 1;
+
+	return 0;
+}
+
+int CScene::SortMapObjZOrder(const void* pSrc, const void* pDest)
+{
+	CMapObj* pSrcObj = *(CMapObj**)pSrc;
+	CMapObj* pDestObj = *(CMapObj**)pDest;
 
 	int iSrcZ = pSrcObj->GetZOrder();
 	int iDestZ = pDestObj->GetZOrder();
@@ -489,7 +519,32 @@ bool CScene::Render(HDC hDC)
 	return true;
 }
 
-CScene::CScene()
+void CScene::CreateTextureObject()
+{
+	for (int i = OBJ_ROCK; i < OBJ_MAX; ++i)
+	{
+		// 경로
+		TCHAR	cPath[MAX_PATH] = {};
+		wsprintf(cPath, TEXT("Room/Object/%d.bmp"), i);
+
+		// 텍스쳐명
+		char	cTextureName[32] = "Object";
+
+		// 번호를 문자로
+		char cNum[16] = {};
+		sprintf_s(cNum, "%d", i);
+
+		// 텍스쳐명 + 숫자
+		strcat_s(cTextureName, cNum);
+
+		CResourceManager::GetInst()->LoadTexture(cTextureName, cPath);
+	}
+
+	CResourceManager::GetInst()->LoadTexture("BackGround", TEXT("Room/Room.bmp"));
+}
+
+CScene::CScene()	:
+	m_pCurMap(nullptr)
 {
 	m_pResource = new CSceneResource;
 	m_pCollision = new CSceneCollision;

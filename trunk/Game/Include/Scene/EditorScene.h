@@ -41,7 +41,9 @@ private:
 	void SelectObject2(float fTime);
 	void SelectObject3(float fTime);
 	void SelectObject4(float fTime);
-	void SelectObject(EObject eSelect);
+
+	void CreateObject(float fTime);
+	void DeleteObject(float fTime);
 
 private:
 	void LoadAnimationSequence();

@@ -34,6 +34,9 @@ bool CInput::Init(HWND hWnd)
 	CreateKey("NextRoom", 'D');
 	CreateKey("PrevRoom", 'A');
 
+	CreateKey("LeftClick", VK_LBUTTON);
+	CreateKey("RightClick", VK_RBUTTON);
+
 	// ----------- Player ----------- 
 
 	CreateKey("MoveUp", 'W');

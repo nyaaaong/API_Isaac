@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../GameInfo.h"
+#include "../Resource/Texture.h"
 
 class CMap
 {
@@ -15,11 +16,13 @@ protected:
 	std::string	m_strName;
 	Vector2	m_tPos;
 	Vector2	m_tSize;
-	int		m_iZOrder;
+	Vector2	m_tObjSize;
 	bool	m_bEnable;
 	bool	m_bActive;
 	int		m_iRoomNum;
 	EObject	m_eObject;
+	CSharedPtr<CTexture>	m_pBackGround;
+	std::list<class CMapObj*>	m_ObjList;
 
 public:
 	int GetRoomNumber()	const
@@ -42,11 +45,6 @@ public:
 		return m_bEnable;
 	}
 
-	int GetZOrder()	const
-	{
-		return m_iZOrder;
-	}
-
 	const std::string& GetName()	const
 	{
 		return m_strName;
@@ -60,6 +58,11 @@ public:
 	const Vector2& GetSize()	const
 	{
 		return m_tSize;
+	}
+
+	const Vector2& GetObjSize()	const
+	{
+		return m_tObjSize;
 	}
 
 public:
@@ -76,11 +79,6 @@ public:
 	void SetEObject(int iObj)
 	{
 		m_eObject = static_cast<EObject>(iObj);
-	}
-
-	void SetZOrder(int iZOrder)
-	{
-		m_iZOrder = iZOrder;
 	}
 
 	void SetScene(class CScene* pScene)
@@ -113,12 +111,26 @@ public:
 		m_tSize = Vector2(x, y);
 	}
 
+	void SetObjSize(const Vector2& tObjSize)
+	{
+		m_tObjSize = tObjSize;
+	}
+
+	void SetObjSize(float x, float y)
+	{
+		m_tObjSize = Vector2(x, y);
+	}
+
 public:
 	virtual void Start();
 	virtual bool Init();
 	virtual void Update(float fTime);
 	virtual void PostUpdate(float fTime);
-	virtual void PrevRender();
 	virtual void Render(HDC hDC);
+
+public:
+	void Create(EObject eObj, const Vector2& tPos, const Vector2& tObjSize = Vector2(75.f, 75.f));
+	void Delete(const Vector2& tPos);
+	void Clear();
 };
 
