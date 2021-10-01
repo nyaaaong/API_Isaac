@@ -78,7 +78,6 @@ public:
 	static int SortY(const void* pSrc, const void* pDest);
 	static int SortUIZOrder(const void* pSrc, const void* pDest);
 	static int SortObjZOrder(const void* pSrc, const void* pDest);
-	static int SortMapObjZOrder(const void* pSrc, const void* pDest);
 
 public:
 	virtual bool Init();

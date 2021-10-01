@@ -25,8 +25,8 @@ bool CScene::Init()
 
 void CScene::SetMap(const std::string& strName, int iRoomNum)
 {
-	std::list<class CMap*>::iterator	iter = m_MapList.begin();
-	std::list<class CMap*>::iterator	iterEnd = m_MapList.end();
+	std::list<CMap*>::iterator	iter = m_MapList.begin();
+	std::list<CMap*>::iterator	iterEnd = m_MapList.end();
 
 	for (; iter != iterEnd; ++iter)
 	{
@@ -157,23 +157,6 @@ int CScene::SortObjZOrder(const void* pSrc, const void* pDest)
 	return 0;
 }
 
-int CScene::SortMapObjZOrder(const void* pSrc, const void* pDest)
-{
-	CMapObj* pSrcObj = *(CMapObj**)pSrc;
-	CMapObj* pDestObj = *(CMapObj**)pDest;
-
-	int iSrcZ = pSrcObj->GetZOrder();
-	int iDestZ = pDestObj->GetZOrder();
-
-	if (iSrcZ > iDestZ)
-		return -1;
-
-	else if (iSrcZ < iDestZ)
-		return 1;
-
-	return 0;
-}
-
 bool CScene::Update(float fTime)
 {
 	if (m_pPlayer)
@@ -278,8 +261,8 @@ bool CScene::PostUpdate(float fTime)
 	m_pCamera->Update(fTime);
 
 	{
-		std::list<class CMap*>::iterator	iter = m_MapList.begin();
-		std::list<class CMap*>::iterator	iterEnd = m_MapList.end();
+		std::list<CMap*>::iterator	iter = m_MapList.begin();
+		std::list<CMap*>::iterator	iterEnd = m_MapList.end();
 
 		for (; iter != iterEnd;)
 		{
@@ -302,8 +285,8 @@ bool CScene::PostUpdate(float fTime)
 	}
 
 	{
-		std::list<class CMap*>::iterator	iter = m_MapList.begin();
-		std::list<class CMap*>::iterator	iterEnd = m_MapList.end();
+		std::list<CMap*>::iterator	iter = m_MapList.begin();
+		std::list<CMap*>::iterator	iterEnd = m_MapList.end();
 
 		for (; iter != iterEnd;)
 		{
@@ -389,8 +372,8 @@ bool CScene::Collision(float fTime)
 bool CScene::Render(HDC hDC)
 {
 	{
-		std::list<class CMap*>::iterator	iter = m_MapList.begin();
-		std::list<class CMap*>::iterator	iterEnd = m_MapList.end();
+		std::list<CMap*>::iterator	iter = m_MapList.begin();
+		std::list<CMap*>::iterator	iterEnd = m_MapList.end();
 
 		for (; iter != iterEnd;)
 		{
@@ -555,7 +538,7 @@ void CScene::Save(const char* cFullPath)
 	int	iSize = static_cast<int>(m_MapList.size());
 	fwrite(&iSize, sizeof(int), 1, pFile);
 
-	std::list<class CMap*>::iterator	iter = m_MapList.begin();
+	std::list<CMap*>::iterator	iter = m_MapList.begin();
 
 	for (int i = 0; i < iSize; ++i)
 	{
@@ -576,8 +559,8 @@ void CScene::Load(const char* cFullPath)
 		return;
 
 	{
-		std::list<class CMap*>::iterator	iter = m_MapList.begin();
-		std::list<class CMap*>::iterator	iterEnd = m_MapList.end();
+		std::list<CMap*>::iterator	iter = m_MapList.begin();
+		std::list<CMap*>::iterator	iterEnd = m_MapList.end();
 
 		for (; iter != iterEnd; ++iter)
 		{
@@ -641,8 +624,8 @@ CScene::~CScene()
 	}
 
 	{
-		std::list<class CMap*>::iterator	iter = m_MapList.begin();
-		std::list<class CMap*>::iterator	iterEnd = m_MapList.end();
+		std::list<CMap*>::iterator	iter = m_MapList.begin();
+		std::list<CMap*>::iterator	iterEnd = m_MapList.end();
 
 		for (; iter != iterEnd; ++iter)
 		{

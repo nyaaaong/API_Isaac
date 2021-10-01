@@ -13,8 +13,8 @@ void CMap::Create(EObject eObj, const Vector2& tPos, const Vector2& tObjSize)
 		(tActLT.x <= tPos.x + tObjSize.x && tPos.x + tObjSize.x <= tActRB.x) &&
 		(tActLT.y <= tPos.y + tObjSize.y && tPos.y + tObjSize.y <= tActRB.y))
 	{
-		std::list<class CMapObj*>::iterator	iter = m_ObjList.begin();
-		std::list<class CMapObj*>::iterator	iterEnd = m_ObjList.end();
+		std::list<CMapObj*>::iterator	iter = m_ObjList.begin();
+		std::list<CMapObj*>::iterator	iterEnd = m_ObjList.end();
 
 		for (; iter != iterEnd; ++iter)
 		{
@@ -41,8 +41,8 @@ void CMap::Create(EObject eObj, const Vector2& tPos, const Vector2& tObjSize)
 
 void CMap::Delete(const Vector2& tPos)
 {
-	std::list<class CMapObj*>::iterator	iter = m_ObjList.begin();
-	std::list<class CMapObj*>::iterator	iterEnd = m_ObjList.end();
+	std::list<CMapObj*>::iterator	iter = m_ObjList.begin();
+	std::list<CMapObj*>::iterator	iterEnd = m_ObjList.end();
 
 	for (; iter != iterEnd; ++iter)
 	{
@@ -60,8 +60,8 @@ void CMap::Clear()
 	if (!m_pScene)
 		return;
 
-	std::list<class CMapObj*>::iterator	iter = m_ObjList.begin();
-	std::list<class CMapObj*>::iterator	iterEnd = m_ObjList.end();
+	std::list<CMapObj*>::iterator	iter = m_ObjList.begin();
+	std::list<CMapObj*>::iterator	iterEnd = m_ObjList.end();
 
 	for (; iter != iterEnd; ++iter)
 	{
@@ -69,4 +69,21 @@ void CMap::Clear()
 	}
 
 	m_ObjList.clear();
+}
+
+int CMap::SortMapObjZOrder(const void* pSrc, const void* pDest)
+{
+	CMapObj* pSrcObj = *(CMapObj**)pSrc;
+	CMapObj* pDestObj = *(CMapObj**)pDest;
+
+	int iSrcZ = pSrcObj->GetZOrder();
+	int iDestZ = pDestObj->GetZOrder();
+
+	if (iSrcZ > iDestZ)
+		return -1;
+
+	else if (iSrcZ < iDestZ)
+		return 1;
+
+	return 0;
 }

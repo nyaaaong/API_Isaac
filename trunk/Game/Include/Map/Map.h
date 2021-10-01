@@ -106,5 +106,8 @@ public:
 	void Load(FILE* pFile);
 	void Load(const char* cFileName, const std::string& strPath = MAP_PATH);
 	void LoadFullPath(const char* cFullPath);
+
+public:
+	static int SortMapObjZOrder(const void* pSrc, const void* pDest);
 };
 

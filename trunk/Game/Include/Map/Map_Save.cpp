@@ -20,8 +20,8 @@ void CMap::Save(FILE* pFile)
 	int	iSize = static_cast<int>(m_ObjList.size());
 	fwrite(&iSize, sizeof(int), 1, pFile);
 
-	std::list<class CMapObj*>::iterator	iter = m_ObjList.begin();
-	std::list<class CMapObj*>::iterator	iterEnd = m_ObjList.end();
+	std::list<CMapObj*>::iterator	iter = m_ObjList.begin();
+	std::list<CMapObj*>::iterator	iterEnd = m_ObjList.end();
 
 	for (int i = 0; i < iSize; ++i)
 	{
