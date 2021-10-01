@@ -25,6 +25,7 @@ private:
 	void LoadAnimationSequence();
 	void LoadSound();
 	void LoadBGM();
+	void LoadMap();
 	void CreateObjects();
 	void CreatePrototypes();
 

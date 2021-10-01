@@ -252,7 +252,7 @@ CTexture* CTexture::LoadStatic(FILE* pFile, CScene* pScene)
 		fread(&iNameLength, sizeof(int), 1, pFile);
 
 		TCHAR	cFileName[MAX_PATH] = {};
-		fread(&cFileName, sizeof(TCHAR), iNameLength, pFile);
+		fread(cFileName, sizeof(TCHAR), iNameLength, pFile);
 
 		pScene->GetSceneResource()->LoadTexture(cName, cFileName);
 
@@ -283,7 +283,7 @@ CTexture* CTexture::LoadStatic(FILE* pFile, CScene* pScene)
 			fread(&iNameLength, sizeof(int), 1, pFile);
 
 			TCHAR	cFileName[MAX_PATH] = {};
-			fread(&cFileName, sizeof(TCHAR), iNameLength, pFile);
+			fread(cFileName, sizeof(TCHAR), iNameLength, pFile);
 
 			vecFileName.push_back(cFileName);
 		}

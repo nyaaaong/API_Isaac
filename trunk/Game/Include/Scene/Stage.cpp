@@ -10,6 +10,7 @@ bool CStage::Init()
 	LoadAnimationSequence();
 	LoadSound();
 	LoadBGM();
+	LoadMap();
 
 	CreateObjects();
 	CreatePrototypes();

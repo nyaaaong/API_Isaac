@@ -192,6 +192,9 @@
     <Filter Include="01. Scene\00. Scene\02. Editor\00. Func">
       <UniqueIdentifier>{ff63160b-214a-48ab-88aa-eefc3f12f765}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Scene\00. Scene\01. Stage\04. Map">
+      <UniqueIdentifier>{a7fd2134-5dd1-471c-96be-f3f357d2ad7f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -397,6 +400,9 @@
     </ClCompile>
     <ClCompile Include="Scene\EditorScene_Init.cpp">
       <Filter>01. Scene\00. Scene\02. Editor\00. Func</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Stage_Map.cpp">
+      <Filter>01. Scene\00. Scene\01. Stage\04. Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
