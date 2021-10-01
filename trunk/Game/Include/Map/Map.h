@@ -16,11 +16,9 @@ protected:
 	std::string	m_strName;
 	Vector2	m_tPos;
 	Vector2	m_tSize;
-	Vector2	m_tObjSize;
 	bool	m_bEnable;
 	bool	m_bActive;
 	int		m_iRoomNum;
-	EObject	m_eObject;
 	CSharedPtr<CTexture>	m_pBackGround;
 	std::list<class CMapObj*>	m_ObjList;
 
@@ -28,11 +26,6 @@ public:
 	int GetRoomNumber()	const
 	{
 		return m_iRoomNum;
-	}
-
-	EObject GetEObject()	const
-	{
-		return m_eObject;
 	}
 
 	bool IsActive()	const
@@ -60,25 +53,10 @@ public:
 		return m_tSize;
 	}
 
-	const Vector2& GetObjSize()	const
-	{
-		return m_tObjSize;
-	}
-
 public:
 	void SetRoomNumber(int iNum)
 	{
 		m_iRoomNum = iNum;
-	}
-
-	void SetEObject(EObject eObj)
-	{
-		m_eObject = eObj;
-	}
-
-	void SetEObject(int iObj)
-	{
-		m_eObject = static_cast<EObject>(iObj);
 	}
 
 	void SetScene(class CScene* pScene)
@@ -111,16 +89,6 @@ public:
 		m_tSize = Vector2(x, y);
 	}
 
-	void SetObjSize(const Vector2& tObjSize)
-	{
-		m_tObjSize = tObjSize;
-	}
-
-	void SetObjSize(float x, float y)
-	{
-		m_tObjSize = Vector2(x, y);
-	}
-
 public:
 	virtual void Start();
 	virtual bool Init();
@@ -132,5 +100,11 @@ public:
 	void Create(EObject eObj, const Vector2& tPos, const Vector2& tObjSize = Vector2(75.f, 75.f));
 	void Delete(const Vector2& tPos);
 	void Clear();
+	void Save(FILE* pFile);
+	void Save(const char* cFileName, const std::string& strPath = MAP_PATH);
+	void SaveFullPath(const char* cFullPath);
+	void Load(FILE* pFile);
+	void Load(const char* cFileName, const std::string& strPath = MAP_PATH);
+	void LoadFullPath(const char* cFullPath);
 };
 

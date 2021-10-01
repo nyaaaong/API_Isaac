@@ -65,5 +65,9 @@ public:
 public:
 	bool IsObj(const Vector2& tPos);
 	bool IsObj(const Vector2& tPos, const Vector2& tSize);
+
+public:
+	void Save(FILE* pFile);
+	void Load(FILE* pFile);
 };
 

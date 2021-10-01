@@ -153,9 +153,6 @@
     <Filter Include="01. Scene\00. Scene\01. Stage\02. Sound">
       <UniqueIdentifier>{409f04fc-4a0f-40e7-9a14-bfd5520c20c5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{cb2c8cdd-75f6-49d6-be89-5632129fa71b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01. Scene\00. Scene\02. Editor">
       <UniqueIdentifier>{c0445ab4-c9b7-4e6c-a235-768305c2e1d9}</UniqueIdentifier>
     </Filter>

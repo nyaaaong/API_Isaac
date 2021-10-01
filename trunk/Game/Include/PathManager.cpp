@@ -43,6 +43,7 @@ bool CPathManager::Init()
 
 	AddPath(TEXTURE_PATH, TEXT("Texture\\"));
 	AddPath(SOUND_PATH, TEXT("Sound\\"));
+	AddPath(MAP_PATH, TEXT("Map\\"));
 
 	return true;
 }

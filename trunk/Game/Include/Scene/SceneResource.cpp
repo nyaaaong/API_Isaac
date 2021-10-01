@@ -52,6 +52,11 @@ void CSceneResource::SetTextureColorKey(const std::string& strName, const unsign
 	CResourceManager::GetInst()->SetTextureColorKey(strName, r, g, b, iIdx);
 }
 
+void CSceneResource::SetTextureColorKey(const std::string& strName, unsigned int iColorKey, int iIdx)
+{
+	CResourceManager::GetInst()->SetTextureColorKey(strName, iColorKey, iIdx);
+}
+
 CTexture* CSceneResource::FindTexture(const std::string& strName)
 {
 	std::unordered_map<std::string, CSharedPtr<CTexture>>::iterator	iter = m_mapTexture.find(strName);

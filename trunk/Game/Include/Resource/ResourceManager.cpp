@@ -212,6 +212,16 @@ void CResourceManager::SetTextureColorKey(const std::string& strName, const unsi
 	pTexture->SetColorKey(r, g, b, iIdx);
 }
 
+void CResourceManager::SetTextureColorKey(const std::string& strName, unsigned int iColorKey, int iIdx)
+{
+	CTexture* pTexture = FindTexture(strName);
+
+	if (!pTexture)
+		return;
+
+	pTexture->SetColorKey(iColorKey, iIdx);
+}
+
 void CResourceManager::ReleaseTexture(const std::string& strName)
 {
 	std::unordered_map<std::string, CSharedPtr<CTexture>>::iterator	iter = m_mapTexture.find(strName);

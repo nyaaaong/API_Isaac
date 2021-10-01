@@ -24,7 +24,9 @@ CGameManager::CGameManager()	:
 	m_hGreenBrush(0),
 	m_hRedBrush(0),
 	m_hGreenPen(0),
-	m_hRedPen(0)
+	m_hRedPen(0),
+	m_bIsActiveGame(true),
+	m_cTextFPS{}
 {
 }
 
@@ -119,6 +121,9 @@ void CGameManager::Exit()
 
 void CGameManager::Logic()
 {
+	if (!m_bIsActiveGame)
+		return;
+
 	float fTime = m_pTimer->Update() * m_fTimeScale;
 
 	CResourceManager::GetInst()->Update();
@@ -139,6 +144,11 @@ void CGameManager::Logic()
 
 bool CGameManager::Update(float fTime)
 {
+	//	타이틀바에 FPS 출력
+	memset(m_cTextFPS, 0, sizeof(char) * 64);
+	sprintf_s(m_cTextFPS, "The Binding of Isaac - FPS : %.f", m_pTimer->GetFPS());
+	SetWindowTextA(m_hWnd, m_cTextFPS);
+
 	return CSceneManager::GetInst()->Update(fTime);
 }
 
@@ -159,16 +169,6 @@ void CGameManager::Render(float fTime)
 	CSceneManager::GetInst()->Render(m_hBackDC);
 
 	BitBlt(m_hDC, 0, 0, m_tRS.iW, m_tRS.iH, m_hBackDC, 0, 0, SRCCOPY);
-
-#ifdef _DEBUG
-	//	FPS 출력
-	char	cText[32] = {};
-
-	sprintf_s(cText, "FPS : %.f", m_pTimer->GetFPS());
-
-	TextOutA(m_hDC, m_tRS.iW - 70, 0, cText, static_cast<int>(strlen(cText)));
-#endif // _DEBUG
-
 }
 
 ATOM CGameManager::Register()
@@ -184,7 +184,7 @@ ATOM CGameManager::Register()
 	wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
 	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 	wcex.lpszMenuName = nullptr;
-	wcex.lpszClassName = TEXT("Game");
+	wcex.lpszClassName = TEXT("The Binding of Isaac");
 	wcex.hIconSm = NULL;
 
 	return RegisterClassExW(&wcex);
@@ -192,7 +192,7 @@ ATOM CGameManager::Register()
 
 BOOL CGameManager::Create()
 {
-	m_hWnd = CreateWindowW(TEXT("Game"), TEXT("Game"), WS_OVERLAPPEDWINDOW, 400, 250, m_tRS.iW, m_tRS.iH, nullptr, nullptr, m_hInst, nullptr);
+	m_hWnd = CreateWindowW(TEXT("The Binding of Isaac"), 0, WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU, 400, 250, m_tRS.iW, m_tRS.iH, nullptr, nullptr, m_hInst, nullptr);
 
 	if (!m_hWnd)
 		return FALSE;
@@ -212,6 +212,14 @@ LRESULT CGameManager::WndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam
 {
 	switch (iMsg)
 	{
+	case WM_ACTIVATE:
+		if (LOWORD(wParam) == WA_INACTIVE)
+			CGameManager::GetInst()->SetActiveGame(false);
+
+		else
+			CGameManager::GetInst()->SetActiveGame(true);
+
+		break;
 	case WM_PAINT:
 	{
 		PAINTSTRUCT ps;

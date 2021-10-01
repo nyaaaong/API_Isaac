@@ -10,6 +10,7 @@ struct TextureInfo
 	BITMAP	tBmpInfo;
 	bool	bColorKeyEnable;
 	unsigned int iColorKey;
+	TCHAR	cFileName[MAX_PATH];
 
 	TextureInfo() :
 		hDC(0),
@@ -17,7 +18,8 @@ struct TextureInfo
 		hPrevBmp(0),
 		tBmpInfo{},
 		bColorKeyEnable(false),
-		iColorKey(0)
+		iColorKey(RGB(255, 0, 255)),
+		cFileName{}
 	{}
 
 	~TextureInfo()
@@ -57,11 +59,24 @@ public:
 		m_vecTextureInfo[iIdx]->iColorKey = RGB(r, g, b);
 	}
 
+	void SetColorKey(unsigned int iColorKey, int iIdx = 0)
+	{
+		m_vecTextureInfo[iIdx]->bColorKeyEnable = true;
+		m_vecTextureInfo[iIdx]->iColorKey = iColorKey;
+	}
+
 public:
 	bool LoadTexture(const std::string& strName, const TCHAR* cFileName, const std::string& strPathName = TEXTURE_PATH);
 	bool LoadTexture(const std::string& strName, const std::vector<std::wstring>& vecFileName, const std::string& strPathName = TEXTURE_PATH);
 	bool LoadTextureFullPath(const std::string& strName, const TCHAR* cFullPath);
 	void Render(HDC hDC, const Vector2& tWindowPos, const Vector2& tImgPos, const Vector2& tSize, int iIdx = 0);
+
+public:
+	void Save(FILE* pFile);
+	void Load(FILE* pFile);
+	
+public:
+	static CTexture* LoadStatic(FILE* pFile, class CScene* pScene);
 
 public:
 	CTexture();

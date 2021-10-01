@@ -56,5 +56,7 @@ private:
 	void MouseWindowCheck();
 	void MouseObjectView();
 	void EditorTextOut();
+	virtual void Save(const char* cFullPath);
+	virtual void Load(const char* cFullPath);
 };
 

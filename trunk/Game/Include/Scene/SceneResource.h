@@ -35,6 +35,7 @@ public:
 	bool LoadTexture(const std::string& strName, const std::vector<std::wstring>& vecFileName, const std::string& strPathName = TEXTURE_PATH);
 	bool LoadTextureFullPath(const std::string& strName, const TCHAR* cFullPath);
 	void SetTextureColorKey(const std::string& strName, const unsigned char r = 255, const unsigned char g = 0, const unsigned char b = 255, int iIdx = 0);
+	void SetTextureColorKey(const std::string& strName, unsigned int iColorKey, int iIdx = 0);
 	CTexture* FindTexture(const std::string& strName);
 
 public:

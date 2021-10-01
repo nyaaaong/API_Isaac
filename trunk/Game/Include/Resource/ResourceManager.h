@@ -38,6 +38,7 @@ public:
 	bool LoadTexture(const std::string& strName, const std::vector<std::wstring>& vecFileName, const std::string& strPathName = TEXTURE_PATH);
 	bool LoadTextureFullPath(const std::string& strName, const TCHAR* cFullPath);
 	void SetTextureColorKey(const std::string& strName, const unsigned char r, const unsigned char g, const unsigned char b, int iIdx = 0);
+	void SetTextureColorKey(const std::string& strName, unsigned int iColorKey, int iIdx = 0);
 	void ReleaseTexture(const std::string& strName);
 	CTexture* FindTexture(const std::string& strName);
 

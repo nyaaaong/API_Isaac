@@ -20,8 +20,15 @@ private:
 	HBRUSH		m_hRedBrush;
 	HPEN		m_hGreenPen;
 	HPEN		m_hRedPen;
+	bool		m_bIsActiveGame;
+	char		m_cTextFPS[64];
 
 public:
+	bool IsActiveGame()	const
+	{
+		return m_bIsActiveGame;
+	}
+
 	const Resolution& GetResolution()	const
 	{
 		return m_tRS;
@@ -48,6 +55,11 @@ public:
 	}
 
 public:
+	void SetActiveGame(bool bIsActiveGame)
+	{
+		m_bIsActiveGame = bIsActiveGame;
+	}
+
 	HDC GetWindowDC()	const
 	{
 		return m_hDC;

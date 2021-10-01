@@ -16,7 +16,8 @@ bool CInput::Init(HWND hWnd)
 
 	// ----------- Editor ----------- 
 
-	CreateKey("GameMenu", VK_ESCAPE);
+	CreateKey("GameMenu", VK_BACK);
+	SetCtrlKey("GameMenu", true);
 
 	CreateKey("NextObject", 'E');
 	CreateKey("PrevObject", 'Q');

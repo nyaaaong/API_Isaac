@@ -91,6 +91,10 @@ private:
 	void CreateTextureObject();
 
 protected:
+	virtual void Save(const char* cFullPath);
+	virtual void Load(const char* cFullPath);
+
+protected:
 	CScene();
 	virtual ~CScene();
 

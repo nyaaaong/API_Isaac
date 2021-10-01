@@ -89,7 +89,7 @@ public:
 
 		else
 		{
-			m_bShowCursor = true;
+			m_bShowCursor = false;
 			ShowCursor(FALSE);
 		}
 	}

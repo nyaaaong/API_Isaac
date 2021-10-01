@@ -66,3 +66,43 @@ bool CMapObj::IsObj(const Vector2& tPos, const Vector2& tSize)
 
 	return false;
 }
+
+void CMapObj::Save(FILE* pFile)
+{
+	fwrite(&m_tPos, sizeof(Vector2), 1, pFile);
+	fwrite(&m_tSize, sizeof(Vector2), 1, pFile);
+
+	fwrite(&m_eObject, sizeof(EObject), 1, pFile);
+
+	fwrite(&m_iZOrder, sizeof(int), 1, pFile);
+
+	if (m_pTexture)
+	{
+		bool	bTexture = true;
+		fwrite(&bTexture, sizeof(bool), 1, pFile);
+
+		m_pTexture->Save(pFile);
+	}
+
+	else
+	{
+		bool	bTexture = false;
+		fwrite(&bTexture, sizeof(bool), 1, pFile);
+	}
+}
+
+void CMapObj::Load(FILE* pFile)
+{
+	fread(&m_tPos, sizeof(Vector2), 1, pFile);
+	fread(&m_tSize, sizeof(Vector2), 1, pFile);
+
+	fread(&m_eObject, sizeof(EObject), 1, pFile);
+
+	fread(&m_iZOrder, sizeof(int), 1, pFile);
+
+	bool	bTexture = true;
+	fread(&bTexture, sizeof(bool), 1, pFile);
+
+	if (bTexture)
+		m_pTexture = CTexture::LoadStatic(pFile, m_pScene);
+}

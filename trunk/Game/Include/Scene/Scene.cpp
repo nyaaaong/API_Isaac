@@ -543,6 +543,74 @@ void CScene::CreateTextureObject()
 	CResourceManager::GetInst()->LoadTexture("BackGround", TEXT("Room/Room.bmp"));
 }
 
+void CScene::Save(const char* cFullPath)
+{
+	FILE* pFile = nullptr;
+
+	fopen_s(&pFile, cFullPath, "wb");
+
+	if (!pFile)
+		return;
+
+	int	iSize = static_cast<int>(m_MapList.size());
+	fwrite(&iSize, sizeof(int), 1, pFile);
+
+	std::list<class CMap*>::iterator	iter = m_MapList.begin();
+
+	for (int i = 0; i < iSize; ++i)
+	{
+		(*iter)->Save(pFile);
+		++iter;
+	}
+
+	fclose(pFile);
+}
+
+void CScene::Load(const char* cFullPath)
+{
+	FILE* pFile = nullptr;
+
+	fopen_s(&pFile, cFullPath, "rb");
+
+	if (!pFile)
+		return;
+
+	{
+		std::list<class CMap*>::iterator	iter = m_MapList.begin();
+		std::list<class CMap*>::iterator	iterEnd = m_MapList.end();
+
+		for (; iter != iterEnd; ++iter)
+		{
+			SAFE_DELETE((*iter));
+		}
+
+		m_MapList.clear();
+	}
+
+	int	iSize = 0;
+	fread(&iSize, sizeof(int), 1, pFile);
+
+	for (int i = 0; i < iSize; ++i)
+	{
+		CMap* pMap = new CMap;
+
+		pMap->SetScene(this);
+		pMap->Load(pFile);
+
+		if (!pMap->Init())
+		{
+			SAFE_DELETE(pMap);
+			return;
+		}
+
+		pMap->Start();
+
+		m_MapList.push_back(pMap);
+	}
+
+	fclose(pFile);
+}
+
 CScene::CScene()	:
 	m_pCurMap(nullptr)
 {
