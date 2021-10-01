@@ -31,6 +31,10 @@ public:
 	virtual bool Render(HDC hDC);
 
 private:
+	void CreateMouseCursor();
+	void Start();
+
+private:
 	void NextRoom(float fTime);
 	void PrevRoom(float fTime);
 	void ClearRoom(float fTime);

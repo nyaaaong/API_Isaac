@@ -180,6 +180,18 @@
     <Filter Include="02. Object\05. Item">
       <UniqueIdentifier>{e01bd6ac-9a63-4d1c-ae3b-59589bbca4ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="07. Map\00. Object">
+      <UniqueIdentifier>{882722b5-d11b-4879-97c6-692beae76487}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Map\01. Func">
+      <UniqueIdentifier>{1eb91a69-88ec-46aa-bc13-23640fd30e0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Map\00. Object\00. Func">
+      <UniqueIdentifier>{697612df-09cb-4283-bec3-1fa977d97d9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene\00. Scene\02. Editor\00. Func">
+      <UniqueIdentifier>{ff63160b-214a-48ab-88aa-eefc3f12f765}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -350,14 +362,41 @@
     <ClCompile Include="Scene\EditorScene.cpp">
       <Filter>01. Scene\00. Scene\02. Editor</Filter>
     </ClCompile>
-    <ClCompile Include="Map\MapObj.cpp">
-      <Filter>07. Map</Filter>
-    </ClCompile>
     <ClCompile Include="Map\Map.cpp">
       <Filter>07. Map</Filter>
     </ClCompile>
     <ClCompile Include="Object\BackGround.cpp">
       <Filter>02. Object\06. BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\MapObj.cpp">
+      <Filter>07. Map\00. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Map_Save.cpp">
+      <Filter>07. Map\01. Func</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Map_Load.cpp">
+      <Filter>07. Map\01. Func</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Map_ObjMgr.cpp">
+      <Filter>07. Map\01. Func</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\MapObj_Save.cpp">
+      <Filter>07. Map\00. Object\00. Func</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\MapObj_Load.cpp">
+      <Filter>07. Map\00. Object\00. Func</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\EditorScene_Obj.cpp">
+      <Filter>01. Scene\00. Scene\02. Editor\00. Func</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\EditorScene_Room.cpp">
+      <Filter>01. Scene\00. Scene\02. Editor\00. Func</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\EditorScene_Func.cpp">
+      <Filter>01. Scene\00. Scene\02. Editor\00. Func</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\EditorScene_Init.cpp">
+      <Filter>01. Scene\00. Scene\02. Editor\00. Func</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -529,11 +568,11 @@
     <ClInclude Include="Map\Map.h">
       <Filter>07. Map</Filter>
     </ClInclude>
-    <ClInclude Include="Map\MapObj.h">
-      <Filter>07. Map</Filter>
-    </ClInclude>
     <ClInclude Include="Object\BackGround.h">
       <Filter>02. Object\06. BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\MapObj.h">
+      <Filter>07. Map\00. Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

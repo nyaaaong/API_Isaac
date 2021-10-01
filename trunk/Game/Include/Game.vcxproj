@@ -168,6 +168,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map\Map.cpp" />
     <ClCompile Include="Map\MapObj.cpp" />
+    <ClCompile Include="Map\MapObj_Load.cpp" />
+    <ClCompile Include="Map\MapObj_Save.cpp" />
+    <ClCompile Include="Map\Map_Load.cpp" />
+    <ClCompile Include="Map\Map_ObjMgr.cpp" />
+    <ClCompile Include="Map\Map_Save.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Object\BackGround.cpp" />
     <ClCompile Include="Object\BossMonstro.cpp" />
@@ -203,6 +208,10 @@
     <ClCompile Include="Resource\Texture.cpp" />
     <ClCompile Include="Scene\Camera.cpp" />
     <ClCompile Include="Scene\EditorScene.cpp" />
+    <ClCompile Include="Scene\EditorScene_Func.cpp" />
+    <ClCompile Include="Scene\EditorScene_Init.cpp" />
+    <ClCompile Include="Scene\EditorScene_Obj.cpp" />
+    <ClCompile Include="Scene\EditorScene_Room.cpp" />
     <ClCompile Include="Scene\MainMenu.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\Stage.cpp" />

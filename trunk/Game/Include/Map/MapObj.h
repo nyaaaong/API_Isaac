@@ -20,6 +20,20 @@ private:
 	int		m_iZOrder;
 
 public:
+	bool IsObj(const Vector2& tPos)
+	{
+		return IsObj(tPos, m_tSize);
+	}
+
+	bool IsObj(const Vector2& tPos, const Vector2& tSize) 
+	{
+		if (m_tPos.x < tPos.x + tSize.x && m_tPos.x + m_tSize.x > tPos.x &&
+			m_tPos.y < tPos.y + tSize.y && m_tPos.y + m_tSize.y > tPos.y)
+			return true;
+
+		return false;
+	}
+
 	int GetZOrder()	const
 	{
 		return m_iZOrder;
@@ -61,10 +75,6 @@ public:
 	void Update(float fTime);
 	void PostUpdate(float fTime);
 	void Render(HDC hDC);
-
-public:
-	bool IsObj(const Vector2& tPos);
-	bool IsObj(const Vector2& tPos, const Vector2& tSize);
 
 public:
 	void Save(FILE* pFile);
