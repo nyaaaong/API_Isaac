@@ -13,7 +13,10 @@ CEditorScene::CEditorScene()	:
 	m_iCurRoom(1),
 	m_iMaxRoom(20),
 	m_eCurObject(OBJ_ROCK),
-	m_eState(EEditor_State::Idle)
+	m_eState(EEditor_State::Idle),
+	m_fTimer(0.f),
+	m_fMaxTimer(3.f),
+	m_bCoolDown(false)
 {
 	m_vecMouse.resize(OBJ_MAX - 1);
 }
@@ -87,6 +90,20 @@ bool CEditorScene::Update(float fTime)
 		CInput::GetInst()->SetCallback<CEditorScene>("RightClick", KS_PUSH, this, &CEditorScene::DeleteObject);
 	}
 
+	if (m_eState == EEditor_State::Saved ||
+		m_eState == EEditor_State::Loaded)
+	{
+		m_bCoolDown = true;
+		m_fTimer += fTime;
+
+		if (m_fTimer >= m_fMaxTimer)
+		{
+			m_bCoolDown = false;
+			m_fTimer = 0.f;
+			m_eState = EEditor_State::Idle;
+		}
+	}
+
 	MouseWindowCheck();
 
 	MouseObjectView();
@@ -118,8 +135,6 @@ bool CEditorScene::Render(HDC hDC)
 
 void CEditorScene::NextRoom(float fTime)
 {
-	m_eState = EEditor_State::Idle;
-
 	++m_iCurRoom;
 
 	if (m_iCurRoom > m_iMaxRoom)
@@ -130,8 +145,6 @@ void CEditorScene::NextRoom(float fTime)
 
 void CEditorScene::PrevRoom(float fTime)
 {
-	m_eState = EEditor_State::Idle;
-
 	--m_iCurRoom;
 
 	if (m_iCurRoom < 1)
@@ -142,8 +155,6 @@ void CEditorScene::PrevRoom(float fTime)
 
 void CEditorScene::ClearRoom(float fTime)
 {
-	m_eState = EEditor_State::Idle;
-
 	GetCurrentMap()->Clear();
 }
 
@@ -233,7 +244,8 @@ void CEditorScene::LoadRoom(float fTime)
 
 void CEditorScene::NextObject(float fTime)
 {
-	m_eState = EEditor_State::Idle;
+	if (m_bCoolDown)
+		return;
 
 	int iCurObj = m_eCurObject + 1;
 
@@ -245,7 +257,8 @@ void CEditorScene::NextObject(float fTime)
 
 void CEditorScene::PrevObject(float fTime)
 {
-	m_eState = EEditor_State::Idle;
+	if (m_bCoolDown)
+		return;
 
 	int iCurObj = m_eCurObject - 1;
 
@@ -277,14 +290,16 @@ void CEditorScene::SelectObject4(float fTime)
 
 void CEditorScene::CreateObject(float fTime)
 {
-	m_eState = EEditor_State::Idle;
+	if (m_bCoolDown)
+		return;
 
 	GetCurrentMap()->Create(m_eCurObject, CInput::GetInst()->GetMousePos());
 }
 
 void CEditorScene::DeleteObject(float fTime)
 {
-	m_eState = EEditor_State::Idle;
+	if (m_bCoolDown)
+		return;
 
 	GetCurrentMap()->Delete(CInput::GetInst()->GetMousePos());
 }
@@ -299,6 +314,9 @@ void CEditorScene::LoadSound()
 
 void CEditorScene::GameMenu(float fTime)
 {
+	if (m_bCoolDown)
+		return;
+
 	CSceneManager::GetInst()->CreateScene<CMainMenu>();
 }
 
@@ -373,4 +391,7 @@ void CEditorScene::Load(const char* cFullPath)
 	CScene::Load(cFullPath);
 
 	m_eState = EEditor_State::Loaded;
+
+	SetMap("Room", 1);
+	m_iCurRoom = 1;
 }

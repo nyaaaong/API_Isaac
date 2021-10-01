@@ -20,6 +20,9 @@ private:
 	EEditor_State	m_eState;
 	std::vector<CSharedPtr<CUIImage>>	m_vecMouse;
 	CSharedPtr<CUIImage>	m_pCurMouse;
+	float	m_fTimer;
+	float	m_fMaxTimer;
+	bool	m_bCoolDown; // 파일 로드와 동시에 오브젝트를 생성하는 것을 방지한다.
 
 public:
 	virtual bool Init();
