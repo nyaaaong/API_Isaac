@@ -12,6 +12,8 @@ bool CStage::Init()
 	LoadBGM();
 	LoadMap();
 
+	SetMap("Room", 1);
+
 	CreateObjects();
 	CreatePrototypes();
 

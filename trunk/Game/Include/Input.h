@@ -83,14 +83,20 @@ public:
 	{
 		if (bCursor)
 		{
-			m_bShowCursor = true;
-			ShowCursor(TRUE);
+			if (!m_bShowCursor)
+			{
+				m_bShowCursor = true;
+				ShowCursor(TRUE);
+			}
 		}
 
 		else
 		{
-			m_bShowCursor = false;
-			ShowCursor(FALSE);
+			if (m_bShowCursor)
+			{
+				m_bShowCursor = false;
+				ShowCursor(FALSE);
+			}
 		}
 	}
 

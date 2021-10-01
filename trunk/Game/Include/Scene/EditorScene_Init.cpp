@@ -32,6 +32,8 @@ void CEditorScene::Start()
 	{
 		m_bStart = true;
 
+		CInput::GetInst()->SetShowCursor(false);
+
 		CInput::GetInst()->SetCallback<CEditorScene>("GameMenu", KS_DOWN, this, &CEditorScene::GameMenu);
 
 		CInput::GetInst()->SetCallback<CEditorScene>("NextObject", KS_DOWN, this, &CEditorScene::NextObject);
