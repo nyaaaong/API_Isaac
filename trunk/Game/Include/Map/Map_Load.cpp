@@ -40,7 +40,7 @@ void CMap::Load(FILE* pFile)
 	}
 }
 
-void CMap::Load(const char* cFileName, const std::string& strPath)
+void CMap::LoadFile(const char* cFileName, const std::string& strPath)
 {
 	char	cFullPath[MAX_PATH] = {};
 

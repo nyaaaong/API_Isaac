@@ -30,7 +30,7 @@ void CMap::Save(FILE* pFile)
 	}
 }
 
-void CMap::Save(const char* cFileName, const std::string& strPath)
+void CMap::SaveFile(const char* cFileName, const std::string& strPath)
 {
 	char	cFullPath[MAX_PATH] = {};
 

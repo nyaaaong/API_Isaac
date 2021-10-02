@@ -220,7 +220,6 @@
     <ClCompile Include="Scene\SceneResource.cpp" />
     <ClCompile Include="Scene\Room.cpp" />
     <ClCompile Include="Scene\Stage_Animation.cpp" />
-    <ClCompile Include="Scene\Stage_Map.cpp" />
     <ClCompile Include="Scene\Stage_Object.cpp" />
     <ClCompile Include="Scene\Stage_Prototype.cpp" />
     <ClCompile Include="Scene\Stage_Sound.cpp" />

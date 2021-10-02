@@ -21,9 +21,15 @@ private:
 	HPEN		m_hGreenPen;
 	HPEN		m_hRedPen;
 	bool		m_bIsActiveGame;
+	bool		m_bTitleUpdate;
 	char		m_cTextFPS[64];
 
 public:
+	bool IsTitleUpdate()	const
+	{
+		return m_bTitleUpdate;
+	}
+
 	bool IsActiveGame()	const
 	{
 		return m_bIsActiveGame;
@@ -55,6 +61,11 @@ public:
 	}
 
 public:
+	void SetTitleUpdate(bool bIsUpdate)
+	{
+		m_bTitleUpdate = bIsUpdate;
+	}
+
 	void SetActiveGame(bool bIsActiveGame)
 	{
 		m_bIsActiveGame = bIsActiveGame;
@@ -83,6 +94,7 @@ public:
 
 public:
 	float GetDeltaTime()	const;
+	float GetFPS()	const;
 
 public:
 	bool Init(HINSTANCE hInst);

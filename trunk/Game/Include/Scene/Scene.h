@@ -23,7 +23,7 @@ private:
 	int		m_iUICapacity;
 	Vector2	m_tActivityLT;	// 벽을 제외한 나머지 구역
 	Vector2	m_tActivityRB;
-	std::list<class CMap*>	m_MapList;
+	std::vector<class CMap*>	m_vecMap;
 	class CMap* m_pCurMap;
 
 public:
@@ -90,8 +90,10 @@ private:
 	void CreateTextureObject();
 
 protected:
-	virtual void Save(const char* cFullPath);
-	virtual void Load(const char* cFullPath);
+	virtual void SaveFile(const char* cFileName, const std::string& strPath = MAP_PATH);
+	virtual void SaveFullPath(const char* cFullPath);
+	virtual void LoadFile(const char* cFileName, const std::string& strPath = MAP_PATH);
+	virtual void LoadFullPath(const char* cFullPath);
 
 protected:
 	CScene();
@@ -222,7 +224,7 @@ public:
 
 		pMap->Start();
 
-		m_MapList.push_back(pMap);
+		m_vecMap.push_back(pMap);
 
 		return pMap;
 	}

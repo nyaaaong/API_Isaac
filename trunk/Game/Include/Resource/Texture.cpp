@@ -177,7 +177,7 @@ void CTexture::Load(FILE* pFile)
 		fread(&iNameLength, sizeof(int), 1, pFile);
 
 		TCHAR	cFileName[MAX_PATH] = {};
-		fread(&cFileName, sizeof(TCHAR), iNameLength, pFile);
+		fread(cFileName, sizeof(TCHAR), iNameLength, pFile);
 
 		LoadTexture(m_strName, cFileName);
 
@@ -206,7 +206,7 @@ void CTexture::Load(FILE* pFile)
 			fread(&iNameLength, sizeof(int), 1, pFile);
 
 			TCHAR	cFileName[MAX_PATH] = {};
-			fread(&cFileName, sizeof(TCHAR), iNameLength, pFile);
+			fread(cFileName, sizeof(TCHAR), iNameLength, pFile);
 
 			vecFileName.push_back(cFileName);
 		}

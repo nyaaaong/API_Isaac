@@ -75,7 +75,7 @@ void CEditorScene::SaveRoom(float fTime)
 		strcpy_s(cFullPath, cFilePath);
 #endif // UNICODE
 
-		Save(cFullPath);
+		SaveFullPath(cFullPath);
 	}
 
 	CInput::GetInst()->SetShowCursor(false);
@@ -108,7 +108,7 @@ void CEditorScene::LoadRoom(float fTime)
 		strcpy_s(cFullPath, cFilePath);
 #endif // UNICODE
 
-		Load(cFullPath);
+		LoadFullPath(cFullPath);
 	}
 
 	CInput::GetInst()->SetShowCursor(false);

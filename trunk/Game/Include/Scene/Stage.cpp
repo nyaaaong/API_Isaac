@@ -10,7 +10,8 @@ bool CStage::Init()
 	LoadAnimationSequence();
 	LoadSound();
 	LoadBGM();
-	LoadMap();
+
+	CScene::LoadFile("Map.dat");
 
 	SetMap("Room", 1);
 

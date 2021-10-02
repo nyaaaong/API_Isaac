@@ -97,17 +97,17 @@ public:
 	virtual void Render(HDC hDC);
 
 public:
+	bool IsSetObj(const Vector2& tPos, const Vector2& tObjSize = Vector2(75.f, 75.f)); // 설치가 가능한 구역인지
 	void Create(EObject eObj, const Vector2& tPos, const Vector2& tObjSize = Vector2(75.f, 75.f));
 	void Delete(const Vector2& tPos);
 	void Clear();
 	void Save(FILE* pFile);
-	void Save(const char* cFileName, const std::string& strPath = MAP_PATH);
-	void SaveFullPath(const char* cFullPath);
 	void Load(FILE* pFile);
-	void Load(const char* cFileName, const std::string& strPath = MAP_PATH);
-	void LoadFullPath(const char* cFullPath);
 
-public:
-	static int SortMapObjZOrder(const void* pSrc, const void* pDest);
+protected:
+	virtual void SaveFile(const char* cFileName, const std::string& strPath = MAP_PATH);
+	virtual void SaveFullPath(const char* cFullPath);
+	virtual void LoadFile(const char* cFileName, const std::string& strPath = MAP_PATH);
+	virtual void LoadFullPath(const char* cFullPath);
 };
 

@@ -3,7 +3,7 @@
 #include "MapObj.h"
 #include "../Scene/Scene.h"
 
-void CMap::Create(EObject eObj, const Vector2& tPos, const Vector2& tObjSize)
+bool CMap::IsSetObj(const Vector2& tPos, const Vector2& tObjSize)
 {
 	Vector2	tActLT = m_pScene->GetActivityLT();
 	Vector2	tActRB = m_pScene->GetActivityRB();
@@ -19,9 +19,19 @@ void CMap::Create(EObject eObj, const Vector2& tPos, const Vector2& tObjSize)
 		for (; iter != iterEnd; ++iter)
 		{
 			if ((*iter)->IsObj(tPos, tObjSize)) // 설치한 자리에 다른 오브젝트가 있는 지
-				return;
+				return false;
 		}
 
+		return true;
+	}
+
+	return false;
+}
+
+void CMap::Create(EObject eObj, const Vector2& tPos, const Vector2& tObjSize)
+{
+	if (IsSetObj(tPos, tObjSize)) // 설치 가능한 구역이라면
+	{
 		CMapObj* pMapObj = new CMapObj;
 
 		pMapObj->SetScene(m_pScene);
@@ -69,21 +79,4 @@ void CMap::Clear()
 	}
 
 	m_ObjList.clear();
-}
-
-int CMap::SortMapObjZOrder(const void* pSrc, const void* pDest)
-{
-	CMapObj* pSrcObj = *(CMapObj**)pSrc;
-	CMapObj* pDestObj = *(CMapObj**)pDest;
-
-	int iSrcZ = pSrcObj->GetZOrder();
-	int iDestZ = pDestObj->GetZOrder();
-
-	if (iSrcZ > iDestZ)
-		return -1;
-
-	else if (iSrcZ < iDestZ)
-		return 1;
-
-	return 0;
 }

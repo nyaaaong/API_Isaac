@@ -4,6 +4,7 @@
 #include "SceneCollision.h"
 #include "Camera.h"
 #include "../GameManager.h"
+#include "../PathManager.h"
 #include "../Map/Map.h"
 #include "../Map/MapObj.h"
 #include "../Resource/ResourceManager.h"
@@ -25,17 +26,16 @@ bool CScene::Init()
 
 void CScene::SetMap(const std::string& strName, int iRoomNum)
 {
-	std::list<CMap*>::iterator	iter = m_MapList.begin();
-	std::list<CMap*>::iterator	iterEnd = m_MapList.end();
+	size_t iSize = m_vecMap.size();
 
-	for (; iter != iterEnd; ++iter)
+	for (size_t i = 0; i < iSize; ++i)
 	{
-		(*iter)->m_bEnable = false;
+		m_vecMap[i]->m_bEnable = false;
 
-		if ((*iter)->GetName() == strName && (*iter)->GetRoomNumber() == iRoomNum)
+		if (m_vecMap[i]->GetRoomNumber() == iRoomNum)
 		{
-			(*iter)->m_bEnable = true;
-			m_pCurMap = (*iter);
+			m_vecMap[i]->m_bEnable = true;
+			m_pCurMap = m_vecMap[i];
 		}
 	}
 }
@@ -206,6 +206,30 @@ bool CScene::Update(float fTime)
 		}
 	}
 
+	{
+		std::vector<CMap*>::iterator	iter = m_vecMap.begin();
+		std::vector<CMap*>::iterator	iterEnd = m_vecMap.end();
+
+		for (; iter != iterEnd;)
+		{
+			if (!(*iter)->IsActive())
+			{
+				iter = m_vecMap.erase(iter);
+				iterEnd = m_vecMap.end();
+				continue;
+			}
+
+			else if (!(*iter)->IsEnable())
+			{
+				++iter;
+				continue;
+			}
+
+			(*iter)->Update(fTime);
+			++iter;
+		}
+	}
+
 	return true;
 }
 
@@ -261,39 +285,15 @@ bool CScene::PostUpdate(float fTime)
 	m_pCamera->Update(fTime);
 
 	{
-		std::list<CMap*>::iterator	iter = m_MapList.begin();
-		std::list<CMap*>::iterator	iterEnd = m_MapList.end();
+		std::vector<CMap*>::iterator	iter = m_vecMap.begin();
+		std::vector<CMap*>::iterator	iterEnd = m_vecMap.end();
 
 		for (; iter != iterEnd;)
 		{
 			if (!(*iter)->IsActive())
 			{
-				iter = m_MapList.erase(iter);
-				iterEnd = m_MapList.end();
-				continue;
-			}
-
-			else if (!(*iter)->IsEnable())
-			{
-				++iter;
-				continue;
-			}
-
-			(*iter)->Update(fTime);
-			++iter;
-		}
-	}
-
-	{
-		std::list<CMap*>::iterator	iter = m_MapList.begin();
-		std::list<CMap*>::iterator	iterEnd = m_MapList.end();
-
-		for (; iter != iterEnd;)
-		{
-			if (!(*iter)->IsActive())
-			{
-				iter = m_MapList.erase(iter);
-				iterEnd = m_MapList.end();
+				iter = m_vecMap.erase(iter);
+				iterEnd = m_vecMap.end();
 				continue;
 			}
 
@@ -372,15 +372,15 @@ bool CScene::Collision(float fTime)
 bool CScene::Render(HDC hDC)
 {
 	{
-		std::list<CMap*>::iterator	iter = m_MapList.begin();
-		std::list<CMap*>::iterator	iterEnd = m_MapList.end();
+		std::vector<CMap*>::iterator	iter = m_vecMap.begin();
+		std::vector<CMap*>::iterator	iterEnd = m_vecMap.end();
 
 		for (; iter != iterEnd;)
 		{
 			if (!(*iter)->IsActive())
 			{
-				iter = m_MapList.erase(iter);
-				iterEnd = m_MapList.end();
+				iter = m_vecMap.erase(iter);
+				iterEnd = m_vecMap.end();
 				continue;
 			}
 
@@ -526,7 +526,7 @@ void CScene::CreateTextureObject()
 	CResourceManager::GetInst()->LoadTexture("BackGround", TEXT("Room/Room.bmp"));
 }
 
-void CScene::Save(const char* cFullPath)
+void CScene::SaveFullPath(const char* cFullPath)
 {
 	FILE* pFile = nullptr;
 
@@ -535,21 +535,32 @@ void CScene::Save(const char* cFullPath)
 	if (!pFile)
 		return;
 
-	int	iSize = static_cast<int>(m_MapList.size());
+	int	iSize = static_cast<int>(m_vecMap.size());
 	fwrite(&iSize, sizeof(int), 1, pFile);
-
-	std::list<CMap*>::iterator	iter = m_MapList.begin();
 
 	for (int i = 0; i < iSize; ++i)
 	{
-		(*iter)->Save(pFile);
-		++iter;
+		m_vecMap[i]->Save(pFile);
 	}
 
 	fclose(pFile);
 }
 
-void CScene::Load(const char* cFullPath)
+void CScene::SaveFile(const char* cFileName, const std::string& strPath)
+{
+	char	cFullPath[MAX_PATH] = {};
+
+	const PathInfo* pInfo = CPathManager::GetInst()->FindPath(cFileName);
+
+	if (pInfo)
+		strcpy_s(cFullPath, pInfo->cPathMultibyte);
+
+	strcat_s(cFullPath, cFileName);
+
+	SaveFullPath(cFullPath);
+}
+
+void CScene::LoadFullPath(const char* cFullPath)
 {
 	FILE* pFile = nullptr;
 
@@ -559,19 +570,20 @@ void CScene::Load(const char* cFullPath)
 		return;
 
 	{
-		std::list<CMap*>::iterator	iter = m_MapList.begin();
-		std::list<CMap*>::iterator	iterEnd = m_MapList.end();
+		size_t iSize = m_vecMap.size();
 
-		for (; iter != iterEnd; ++iter)
+		for (size_t i = 0; i < iSize; ++i)
 		{
-			SAFE_DELETE((*iter));
+			SAFE_DELETE(m_vecMap[i]);
 		}
 
-		m_MapList.clear();
+		m_vecMap.clear();
 	}
 
 	int	iSize = 0;
 	fread(&iSize, sizeof(int), 1, pFile);
+
+	m_vecMap.resize(iSize);
 
 	for (int i = 0; i < iSize; ++i)
 	{
@@ -588,10 +600,24 @@ void CScene::Load(const char* cFullPath)
 
 		pMap->Start();
 
-		m_MapList.push_back(pMap);
+		m_vecMap[i] = pMap;
 	}
 
 	fclose(pFile);
+}
+
+void CScene::LoadFile(const char* cFileName, const std::string& strPath)
+{
+	char	cFullPath[MAX_PATH] = {};
+
+	const PathInfo* pInfo = CPathManager::GetInst()->FindPath(cFileName);
+
+	if (pInfo)
+		strcpy_s(cFullPath, pInfo->cPathMultibyte);
+
+	strcat_s(cFullPath, cFileName);
+
+	LoadFullPath(cFullPath);
 }
 
 CScene::CScene()	:
@@ -611,6 +637,8 @@ CScene::CScene()	:
 
 	m_pCamera = new CCamera;
 	m_pCamera->Init();
+
+	m_vecMap.reserve(20);
 }
 
 CScene::~CScene()
@@ -623,17 +651,14 @@ CScene::~CScene()
 		SAFE_RELEASE(m_pArrUI[i]);
 	}
 
+	size_t iSize = m_vecMap.size();
+
+	for (size_t i = 0; i < iSize; ++i)
 	{
-		std::list<CMap*>::iterator	iter = m_MapList.begin();
-		std::list<CMap*>::iterator	iterEnd = m_MapList.end();
-
-		for (; iter != iterEnd; ++iter)
-		{
-			SAFE_DELETE((*iter));
-		}
-
-		m_MapList.clear();
+		SAFE_DELETE(m_vecMap[i]);
 	}
+
+	m_vecMap.clear();
 
 	SAFE_DELETE_ARRAY(m_pArrUI);
 

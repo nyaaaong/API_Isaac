@@ -23,6 +23,9 @@ private:
 	float	m_fTimer;
 	float	m_fMaxTimer;
 	bool	m_bCoolDown; // 파일 로드와 동시에 오브젝트를 생성하는 것을 방지한다.
+	char	m_cTitleText[256];
+	char	m_cStateText[32];
+	char	m_cFPSText[64];
 
 public:
 	virtual bool Init();
@@ -62,8 +65,11 @@ private:
 private:
 	void MouseWindowCheck();
 	void MouseObjectView();
+	void MouseSetBox();
 	void EditorTextOut();
-	virtual void Save(const char* cFullPath);
-	virtual void Load(const char* cFullPath);
+
+private:
+	virtual void SaveFullPath(const char* cFullPath);
+	virtual void LoadFullPath(const char* cFullPath);
 };
 

@@ -40,8 +40,6 @@ void CMap::Render(HDC hDC)
 	if (m_pBackGround)
 		m_pBackGround->Render(hDC, Vector2(), Vector2(), Vector2(1280.f, 720.f));
 
-	qsort(&m_ObjList, m_ObjList.size(), sizeof(CMapObj*), SortMapObjZOrder);
-
 	std::list<CMapObj*>::iterator	iter = m_ObjList.begin();
 	std::list<CMapObj*>::iterator	iterEnd = m_ObjList.end();
 

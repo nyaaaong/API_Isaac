@@ -1,6 +1,7 @@
 
 #include "EditorScene.h"
 #include "../Input.h"
+#include "../GameManager.h"
 #include "../Resource/ResourceManager.h"
 
 void CEditorScene::CreateMouseCursor()
@@ -31,6 +32,9 @@ void CEditorScene::Start()
 	if (!m_bStart)
 	{
 		m_bStart = true;
+
+		// 타이틀바에 맵 정보를 넣기위해 게임매니저에서 갱신을 하지 않는다.
+		CGameManager::GetInst()->SetTitleUpdate(false);
 
 		CInput::GetInst()->SetShowCursor(false);
 
