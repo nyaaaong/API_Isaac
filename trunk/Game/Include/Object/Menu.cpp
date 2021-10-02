@@ -1,14 +1,14 @@
 
 #include "Menu.h"
 #include "../Input.h"
-#include "../Scene/Stage.h"
+#include "../Scene/StartRoom.h"
 #include "../Scene/EditorScene.h"
 #include "../Scene/SceneManager.h"
 #include "../GameManager.h"
 
 void CMenu::GameStart(float fTime)
 {
-	CSceneManager::GetInst()->CreateScene<CStage>();
+	CSceneManager::GetInst()->CreateScene<CStartRoom>();
 }
 
 void CMenu::GameEditor(float fTime)

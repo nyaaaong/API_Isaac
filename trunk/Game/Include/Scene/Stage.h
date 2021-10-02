@@ -8,8 +8,15 @@ class CStage :
 protected:
 	class CPlayerHUD* m_pPlayerHUD;
 	int		m_iStage;
+	bool	m_bStart;
+	int		m_bFirstRoom;
 
 public:
+	void FirstRoom()
+	{
+		m_bFirstRoom = true;
+	}
+
 	void SetStage(int iStage)
 	{
 		m_iStage = iStage;

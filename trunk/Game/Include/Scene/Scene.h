@@ -23,8 +23,12 @@ private:
 	int		m_iUICapacity;
 	Vector2	m_tActivityLT;	// 벽을 제외한 나머지 구역
 	Vector2	m_tActivityRB;
-	std::vector<class CMap*>	m_vecMap;
-	class CMap* m_pCurMap;
+	std::vector<class CRoomMap*>	m_vecRoomMap;
+	std::unordered_map<ESpecial_RoomType, class CRoomMap*>	m_mapSpecialRoomMap;
+	class CRoomMap* m_pCurMap;
+
+protected:
+	const int		m_iMaxRoomCount = 20;
 
 public:
 	void SetActivityLT(const Vector2& tPos)
@@ -38,7 +42,7 @@ public:
 	}
 
 public:
-	class CMap* GetCurrentMap()	const
+	class CRoomMap* GetCurrentMap()	const
 	{
 		return m_pCurMap;
 	}
@@ -60,6 +64,7 @@ public:
 
 public:
 	void SetMap(const std::string& strName, int iRoomNum);
+	void SetSpecialMap(ESpecial_RoomType eType);
 
 private:
 	CObj* FindPrototype(const std::string& strName);
@@ -206,7 +211,7 @@ public:
 	}
 
 	template <typename T>
-	T* CreateMap(const std::string& strName, int iRoomNum, const Vector2& tPos = Vector2(0.f, 0.f), const Vector2& tSize = Vector2(1280.f, 720.f))
+	T* CreateRoomMap(const std::string& strName, int iRoomNum, const Vector2& tPos = Vector2(0.f, 0.f), const Vector2& tSize = Vector2(1280.f, 720.f))
 	{
 		T* pMap = new T;
 
@@ -224,7 +229,31 @@ public:
 
 		pMap->Start();
 
-		m_vecMap.push_back(pMap);
+		m_vecRoomMap.push_back(pMap);
+
+		return pMap;
+	}
+
+	template <typename T>
+	T* CreateSpecialRoomMap(ESpecial_RoomType eType, const Vector2& tPos = Vector2(0.f, 0.f), const Vector2& tSize = Vector2(1280.f, 720.f))
+	{
+		T* pMap = new T;
+
+		pMap->SetScene(this);
+		pMap->SetPos(tPos);
+		pMap->SetSize(tSize);
+		pMap->SetSpecialRoomMap(true);
+		pMap->SetSpecialRoomType(eType);
+
+		if (!pMap->Init())
+		{
+			SAFE_DELETE(pMap);
+			return nullptr;
+		}
+
+		pMap->Start();
+
+		m_mapSpecialRoomMap.insert(std::make_pair(eType, pMap));
 
 		return pMap;
 	}

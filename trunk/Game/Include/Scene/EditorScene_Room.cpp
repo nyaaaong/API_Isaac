@@ -3,14 +3,14 @@
 #include "../Input.h"
 #include "../GameManager.h"
 #include "../PathManager.h"
-#include "../Map/Map.h"
+#include "../Map/RoomMap.h"
 
 void CEditorScene::NextRoom(float fTime)
 {
 	++m_iCurRoom;
 
-	if (m_iCurRoom > m_iMaxRoom)
-		m_iCurRoom = m_iMaxRoom;
+	if (m_iCurRoom > m_iMaxRoomCount)
+		m_iCurRoom = m_iMaxRoomCount;
 
 	SetMap("Room", m_iCurRoom);
 }

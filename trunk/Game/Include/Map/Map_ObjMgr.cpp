@@ -1,9 +1,9 @@
 
-#include "Map.h"
-#include "MapObj.h"
+#include "RoomMap.h"
+#include "RoomMapObj.h"
 #include "../Scene/Scene.h"
 
-bool CMap::IsSetObj(const Vector2& tPos, const Vector2& tObjSize)
+bool CRoomMap::IsSetObj(const Vector2& tPos, const Vector2& tObjSize)
 {
 	Vector2	tActLT = m_pScene->GetActivityLT();
 	Vector2	tActRB = m_pScene->GetActivityRB();
@@ -13,8 +13,8 @@ bool CMap::IsSetObj(const Vector2& tPos, const Vector2& tObjSize)
 		(tActLT.x <= tPos.x + tObjSize.x && tPos.x + tObjSize.x <= tActRB.x) &&
 		(tActLT.y <= tPos.y + tObjSize.y && tPos.y + tObjSize.y <= tActRB.y))
 	{
-		std::list<CMapObj*>::iterator	iter = m_ObjList.begin();
-		std::list<CMapObj*>::iterator	iterEnd = m_ObjList.end();
+		std::list<CRoomMapObj*>::iterator	iter = m_ObjList.begin();
+		std::list<CRoomMapObj*>::iterator	iterEnd = m_ObjList.end();
 
 		for (; iter != iterEnd; ++iter)
 		{
@@ -28,31 +28,31 @@ bool CMap::IsSetObj(const Vector2& tPos, const Vector2& tObjSize)
 	return false;
 }
 
-void CMap::Create(EObject eObj, const Vector2& tPos, const Vector2& tObjSize)
+void CRoomMap::Create(EObject eObj, const Vector2& tPos, const Vector2& tObjSize)
 {
 	if (IsSetObj(tPos, tObjSize)) // 설치 가능한 구역이라면
 	{
-		CMapObj* pMapObj = new CMapObj;
+		CRoomMapObj* pRoomMapObj = new CRoomMapObj;
 
-		pMapObj->SetScene(m_pScene);
-		pMapObj->SetObject(eObj);
-		pMapObj->SetPos(tPos);
-		pMapObj->SetSize(tObjSize);
+		pRoomMapObj->SetScene(m_pScene);
+		pRoomMapObj->SetObject(eObj);
+		pRoomMapObj->SetPos(tPos);
+		pRoomMapObj->SetSize(tObjSize);
 
-		if (!pMapObj->Init())
+		if (!pRoomMapObj->Init())
 		{
-			SAFE_DELETE(pMapObj);
+			SAFE_DELETE(pRoomMapObj);
 			return;
 		}
 
-		m_ObjList.push_back(pMapObj);
+		m_ObjList.push_back(pRoomMapObj);
 	}
 }
 
-void CMap::Delete(const Vector2& tPos)
+void CRoomMap::Delete(const Vector2& tPos)
 {
-	std::list<CMapObj*>::iterator	iter = m_ObjList.begin();
-	std::list<CMapObj*>::iterator	iterEnd = m_ObjList.end();
+	std::list<CRoomMapObj*>::iterator	iter = m_ObjList.begin();
+	std::list<CRoomMapObj*>::iterator	iterEnd = m_ObjList.end();
 
 	for (; iter != iterEnd; ++iter)
 	{
@@ -65,13 +65,13 @@ void CMap::Delete(const Vector2& tPos)
 	}
 }
 
-void CMap::Clear()
+void CRoomMap::Clear()
 {
 	if (!m_pScene)
 		return;
 
-	std::list<CMapObj*>::iterator	iter = m_ObjList.begin();
-	std::list<CMapObj*>::iterator	iterEnd = m_ObjList.end();
+	std::list<CRoomMapObj*>::iterator	iter = m_ObjList.begin();
+	std::list<CRoomMapObj*>::iterator	iterEnd = m_ObjList.end();
 
 	for (; iter != iterEnd; ++iter)
 	{

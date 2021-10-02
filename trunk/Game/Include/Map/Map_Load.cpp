@@ -1,9 +1,9 @@
 
-#include "Map.h"
-#include "MapObj.h"
+#include "RoomMap.h"
+#include "RoomMapObj.h"
 #include "../PathManager.h"
 
-void CMap::Load(FILE* pFile)
+void CRoomMap::Load(FILE* pFile)
 {
 	int	iLength = 0;
 	fread(&iLength, sizeof(int), 1, pFile);
@@ -25,22 +25,22 @@ void CMap::Load(FILE* pFile)
 
 	for (int i = 0; i < iSize; ++i)
 	{
-		CMapObj* pMapObj = new CMapObj;
+		CRoomMapObj* pRoomMapObj = new CRoomMapObj;
 
-		pMapObj->SetScene(m_pScene);
-		pMapObj->Load(pFile);
+		pRoomMapObj->SetScene(m_pScene);
+		pRoomMapObj->Load(pFile);
 
-		if (!pMapObj->Init())
+		if (!pRoomMapObj->Init())
 		{
-			SAFE_DELETE(pMapObj);
+			SAFE_DELETE(pRoomMapObj);
 			return;
 		}
 
-		m_ObjList.push_back(pMapObj);
+		m_ObjList.push_back(pRoomMapObj);
 	}
 }
 
-void CMap::LoadFile(const char* cFileName, const std::string& strPath)
+void CRoomMap::LoadFile(const char* cFileName, const std::string& strPath)
 {
 	char	cFullPath[MAX_PATH] = {};
 
@@ -54,7 +54,7 @@ void CMap::LoadFile(const char* cFileName, const std::string& strPath)
 	LoadFullPath(cFullPath);
 }
 
-void CMap::LoadFullPath(const char* cFullPath)
+void CRoomMap::LoadFullPath(const char* cFullPath)
 {
 	FILE* pFile = nullptr;
 

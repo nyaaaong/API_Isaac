@@ -5,8 +5,8 @@
 #include "Camera.h"
 #include "../GameManager.h"
 #include "../PathManager.h"
-#include "../Map/Map.h"
-#include "../Map/MapObj.h"
+#include "../Map/RoomMap.h"
+#include "../Map/RoomMapObj.h"
 #include "../Resource/ResourceManager.h"
 
 bool CScene::Init()
@@ -26,18 +26,29 @@ bool CScene::Init()
 
 void CScene::SetMap(const std::string& strName, int iRoomNum)
 {
-	size_t iSize = m_vecMap.size();
+	size_t iSize = m_vecRoomMap.size();
 
 	for (size_t i = 0; i < iSize; ++i)
 	{
-		m_vecMap[i]->m_bEnable = false;
+		m_vecRoomMap[i]->m_bEnable = false;
 
-		if (m_vecMap[i]->GetRoomNumber() == iRoomNum)
+		if (m_vecRoomMap[i]->GetRoomNumber() == iRoomNum)
 		{
-			m_vecMap[i]->m_bEnable = true;
-			m_pCurMap = m_vecMap[i];
+			m_pCurMap = m_vecRoomMap[i];
+			m_pCurMap->m_bEnable = true;
+			m_pCurMap->SetScene(this);
 		}
 	}
+}
+
+void CScene::SetSpecialMap(ESpecial_RoomType eType)
+{
+	std::unordered_map<ESpecial_RoomType, CRoomMap*>::iterator	iter = m_mapSpecialRoomMap.find(eType);
+
+	if (iter == m_mapSpecialRoomMap.end())
+		return;
+
+	m_pCurMap = iter->second;
 }
 
 CObj* CScene::FindPrototype(const std::string& strName)
@@ -207,15 +218,15 @@ bool CScene::Update(float fTime)
 	}
 
 	{
-		std::vector<CMap*>::iterator	iter = m_vecMap.begin();
-		std::vector<CMap*>::iterator	iterEnd = m_vecMap.end();
+		std::vector<CRoomMap*>::iterator	iter = m_vecRoomMap.begin();
+		std::vector<CRoomMap*>::iterator	iterEnd = m_vecRoomMap.end();
 
 		for (; iter != iterEnd;)
 		{
 			if (!(*iter)->IsActive())
 			{
-				iter = m_vecMap.erase(iter);
-				iterEnd = m_vecMap.end();
+				iter = m_vecRoomMap.erase(iter);
+				iterEnd = m_vecRoomMap.end();
 				continue;
 			}
 
@@ -226,6 +237,30 @@ bool CScene::Update(float fTime)
 			}
 
 			(*iter)->Update(fTime);
+			++iter;
+		}
+	}
+
+	{
+		std::unordered_map<ESpecial_RoomType, CRoomMap*>::iterator	iter = m_mapSpecialRoomMap.begin();
+		std::unordered_map<ESpecial_RoomType, CRoomMap*>::iterator	iterEnd = m_mapSpecialRoomMap.end();
+
+		for (; iter != iterEnd;)
+		{
+			if (!iter->second->IsActive())
+			{
+				iter = m_mapSpecialRoomMap.erase(iter);
+				iterEnd = m_mapSpecialRoomMap.end();
+				continue;
+			}
+
+			else if (!iter->second->IsEnable())
+			{
+				++iter;
+				continue;
+			}
+
+			iter->second->Update(fTime);
 			++iter;
 		}
 	}
@@ -285,15 +320,15 @@ bool CScene::PostUpdate(float fTime)
 	m_pCamera->Update(fTime);
 
 	{
-		std::vector<CMap*>::iterator	iter = m_vecMap.begin();
-		std::vector<CMap*>::iterator	iterEnd = m_vecMap.end();
+		std::vector<CRoomMap*>::iterator	iter = m_vecRoomMap.begin();
+		std::vector<CRoomMap*>::iterator	iterEnd = m_vecRoomMap.end();
 
 		for (; iter != iterEnd;)
 		{
 			if (!(*iter)->IsActive())
 			{
-				iter = m_vecMap.erase(iter);
-				iterEnd = m_vecMap.end();
+				iter = m_vecRoomMap.erase(iter);
+				iterEnd = m_vecRoomMap.end();
 				continue;
 			}
 
@@ -304,6 +339,30 @@ bool CScene::PostUpdate(float fTime)
 			}
 
 			(*iter)->PostUpdate(fTime);
+			++iter;
+		}
+	}
+
+	{
+		std::unordered_map<ESpecial_RoomType, CRoomMap*>::iterator	iter = m_mapSpecialRoomMap.begin();
+		std::unordered_map<ESpecial_RoomType, CRoomMap*>::iterator	iterEnd = m_mapSpecialRoomMap.end();
+
+		for (; iter != iterEnd;)
+		{
+			if (!iter->second->IsActive())
+			{
+				iter = m_mapSpecialRoomMap.erase(iter);
+				iterEnd = m_mapSpecialRoomMap.end();
+				continue;
+			}
+
+			else if (!iter->second->IsEnable())
+			{
+				++iter;
+				continue;
+			}
+
+			iter->second->PostUpdate(fTime);
 			++iter;
 		}
 	}
@@ -372,15 +431,39 @@ bool CScene::Collision(float fTime)
 bool CScene::Render(HDC hDC)
 {
 	{
-		std::vector<CMap*>::iterator	iter = m_vecMap.begin();
-		std::vector<CMap*>::iterator	iterEnd = m_vecMap.end();
+		std::unordered_map<ESpecial_RoomType, CRoomMap*>::iterator	iter = m_mapSpecialRoomMap.begin();
+		std::unordered_map<ESpecial_RoomType, CRoomMap*>::iterator	iterEnd = m_mapSpecialRoomMap.end();
+
+		for (; iter != iterEnd;)
+		{
+			if (!iter->second->IsActive())
+			{
+				iter = m_mapSpecialRoomMap.erase(iter);
+				iterEnd = m_mapSpecialRoomMap.end();
+				continue;
+			}
+
+			else if (!iter->second->IsEnable())
+			{
+				++iter;
+				continue;
+			}
+
+			iter->second->Render(hDC);
+			++iter;
+		}
+	}
+
+	{
+		std::vector<CRoomMap*>::iterator	iter = m_vecRoomMap.begin();
+		std::vector<CRoomMap*>::iterator	iterEnd = m_vecRoomMap.end();
 
 		for (; iter != iterEnd;)
 		{
 			if (!(*iter)->IsActive())
 			{
-				iter = m_vecMap.erase(iter);
-				iterEnd = m_vecMap.end();
+				iter = m_vecRoomMap.erase(iter);
+				iterEnd = m_vecRoomMap.end();
 				continue;
 			}
 
@@ -524,6 +607,7 @@ void CScene::CreateTextureObject()
 	}
 
 	CResourceManager::GetInst()->LoadTexture("BackGround", TEXT("Room/Room.bmp"));
+	CResourceManager::GetInst()->LoadTexture("StartRoom_BackGround", TEXT("Room/Room_Start.bmp"));
 }
 
 void CScene::SaveFullPath(const char* cFullPath)
@@ -535,12 +619,12 @@ void CScene::SaveFullPath(const char* cFullPath)
 	if (!pFile)
 		return;
 
-	int	iSize = static_cast<int>(m_vecMap.size());
+	int	iSize = static_cast<int>(m_vecRoomMap.size());
 	fwrite(&iSize, sizeof(int), 1, pFile);
 
 	for (int i = 0; i < iSize; ++i)
 	{
-		m_vecMap[i]->Save(pFile);
+		m_vecRoomMap[i]->Save(pFile);
 	}
 
 	fclose(pFile);
@@ -570,24 +654,24 @@ void CScene::LoadFullPath(const char* cFullPath)
 		return;
 
 	{
-		size_t iSize = m_vecMap.size();
+		size_t iSize = m_vecRoomMap.size();
 
 		for (size_t i = 0; i < iSize; ++i)
 		{
-			SAFE_DELETE(m_vecMap[i]);
+			SAFE_DELETE(m_vecRoomMap[i]);
 		}
 
-		m_vecMap.clear();
+		m_vecRoomMap.clear();
 	}
 
 	int	iSize = 0;
 	fread(&iSize, sizeof(int), 1, pFile);
 
-	m_vecMap.resize(iSize);
+	m_vecRoomMap.resize(iSize);
 
 	for (int i = 0; i < iSize; ++i)
 	{
-		CMap* pMap = new CMap;
+		CRoomMap* pMap = new CRoomMap;
 
 		pMap->SetScene(this);
 		pMap->Load(pFile);
@@ -600,7 +684,7 @@ void CScene::LoadFullPath(const char* cFullPath)
 
 		pMap->Start();
 
-		m_vecMap[i] = pMap;
+		m_vecRoomMap[i] = pMap;
 	}
 
 	fclose(pFile);
@@ -638,7 +722,7 @@ CScene::CScene()	:
 	m_pCamera = new CCamera;
 	m_pCamera->Init();
 
-	m_vecMap.reserve(20);
+	m_vecRoomMap.reserve(20);
 }
 
 CScene::~CScene()
@@ -651,14 +735,28 @@ CScene::~CScene()
 		SAFE_RELEASE(m_pArrUI[i]);
 	}
 
-	size_t iSize = m_vecMap.size();
-
-	for (size_t i = 0; i < iSize; ++i)
 	{
-		SAFE_DELETE(m_vecMap[i]);
+		std::unordered_map<ESpecial_RoomType, CRoomMap*>::iterator	iter = m_mapSpecialRoomMap.begin();
+		std::unordered_map<ESpecial_RoomType, CRoomMap*>::iterator	iterEnd = m_mapSpecialRoomMap.end();
+
+		for (; iter != iterEnd; ++iter)
+		{
+			SAFE_DELETE(iter->second);
+		}
+
+		m_mapSpecialRoomMap.clear();
 	}
 
-	m_vecMap.clear();
+	{
+		size_t iSize = m_vecRoomMap.size();
+
+		for (size_t i = 0; i < iSize; ++i)
+		{
+			SAFE_DELETE(m_vecRoomMap[i]);
+		}
+
+		m_vecRoomMap.clear();
+	}
 
 	SAFE_DELETE_ARRAY(m_pArrUI);
 

@@ -15,7 +15,6 @@ private:
 private:
 	bool	m_bStart;
 	int		m_iCurRoom;
-	int		m_iMaxRoom;
 	EObject	m_eCurObject;
 	EEditor_State	m_eState;
 	std::vector<CSharedPtr<CUIImage>>	m_vecMouse;

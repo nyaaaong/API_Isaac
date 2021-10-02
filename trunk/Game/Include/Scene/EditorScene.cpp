@@ -1,12 +1,11 @@
 
 #include "EditorScene.h"
 #include "../Input.h"
-#include "../Map/Map.h"
+#include "../Map/RoomMap.h"
 
 CEditorScene::CEditorScene()	:
 	m_bStart(false),
 	m_iCurRoom(1),
-	m_iMaxRoom(20),
 	m_eCurObject(OBJ_ROCK),
 	m_eState(EEditor_State::Idle),
 	m_fTimer(0.f),
@@ -28,9 +27,9 @@ bool CEditorScene::Init()
 	if (!CScene::Init())
 		return false;
 
-	for (int i = m_iCurRoom; i <= m_iMaxRoom; ++i)
+	for (int i = m_iCurRoom; i <= m_iMaxRoomCount; ++i)
 	{
-		CreateMap<CMap>("Room", i);
+		CreateRoomMap<CRoomMap>("Room", i);
 	}
 
 	SetMap("Room", 1);

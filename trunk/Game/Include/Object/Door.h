@@ -5,7 +5,7 @@
 class CDoor :
     public CObj
 {
-	friend class CRoom;
+	friend class CRoomBase;
 
 protected:
 	class CScene* m_pNextRoom;

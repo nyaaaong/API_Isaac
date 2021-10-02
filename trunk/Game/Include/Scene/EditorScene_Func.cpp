@@ -4,7 +4,7 @@
 #include "SceneManager.h"
 #include "../GameManager.h"
 #include "../Input.h"
-#include "../Map/Map.h"
+#include "../Map/RoomMap.h"
 
 void CEditorScene::LoadAnimationSequence()
 {
@@ -100,7 +100,7 @@ void CEditorScene::EditorTextOut()
 		break;
 	}
 
-	sprintf_s(m_cTitleText, "The Binding of Isaac　[에디터 모드]　방 : %d / %d　상태 : ", m_iCurRoom, m_iMaxRoom);
+	sprintf_s(m_cTitleText, "The Binding of Isaac　[에디터 모드]　방 : %d / %d　상태 : ", m_iCurRoom, m_iMaxRoomCount);
 	strcat_s(m_cTitleText, m_cStateText);
 
 	sprintf_s(m_cFPSText, "　FPS : %.f", CGameManager::GetInst()->GetFPS());

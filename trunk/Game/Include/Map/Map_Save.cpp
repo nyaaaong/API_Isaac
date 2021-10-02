@@ -1,9 +1,9 @@
 
-#include "Map.h"
-#include "MapObj.h"
+#include "RoomMap.h"
+#include "RoomMapObj.h"
 #include "../PathManager.h"
 
-void CMap::Save(FILE* pFile)
+void CRoomMap::Save(FILE* pFile)
 {
 	int	iLength = static_cast<int>(m_strName.length());
 	fwrite(&iLength, sizeof(int), 1, pFile);
@@ -20,8 +20,8 @@ void CMap::Save(FILE* pFile)
 	int	iSize = static_cast<int>(m_ObjList.size());
 	fwrite(&iSize, sizeof(int), 1, pFile);
 
-	std::list<CMapObj*>::iterator	iter = m_ObjList.begin();
-	std::list<CMapObj*>::iterator	iterEnd = m_ObjList.end();
+	std::list<CRoomMapObj*>::iterator	iter = m_ObjList.begin();
+	std::list<CRoomMapObj*>::iterator	iterEnd = m_ObjList.end();
 
 	for (int i = 0; i < iSize; ++i)
 	{
@@ -30,7 +30,7 @@ void CMap::Save(FILE* pFile)
 	}
 }
 
-void CMap::SaveFile(const char* cFileName, const std::string& strPath)
+void CRoomMap::SaveFile(const char* cFileName, const std::string& strPath)
 {
 	char	cFullPath[MAX_PATH] = {};
 
@@ -44,7 +44,7 @@ void CMap::SaveFile(const char* cFileName, const std::string& strPath)
 	SaveFullPath(cFullPath);
 }
 
-void CMap::SaveFullPath(const char* cFullPath)
+void CRoomMap::SaveFullPath(const char* cFullPath)
 {
 	FILE* pFile = nullptr;
 

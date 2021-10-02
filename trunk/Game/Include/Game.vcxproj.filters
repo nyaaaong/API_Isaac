@@ -192,6 +192,9 @@
     <Filter Include="01. Scene\00. Scene\02. Editor\00. Func">
       <UniqueIdentifier>{ff63160b-214a-48ab-88aa-eefc3f12f765}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Scene\00. Scene\01. Stage\00. Room\00. Rooms">
+      <UniqueIdentifier>{a947f290-a6b0-40db-9672-eb33dc8ce8ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -344,7 +347,7 @@
     <ClCompile Include="Scene\Stage.cpp">
       <Filter>01. Scene\00. Scene\01. Stage</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\Room.cpp">
+    <ClCompile Include="Scene\RoomBase.cpp">
       <Filter>01. Scene\00. Scene\01. Stage\00. Room</Filter>
     </ClCompile>
     <ClCompile Include="Scene\Stage_Animation.cpp">
@@ -362,13 +365,13 @@
     <ClCompile Include="Scene\EditorScene.cpp">
       <Filter>01. Scene\00. Scene\02. Editor</Filter>
     </ClCompile>
-    <ClCompile Include="Map\Map.cpp">
+    <ClCompile Include="Map\RoomMap.cpp">
       <Filter>07. Map</Filter>
     </ClCompile>
     <ClCompile Include="Object\BackGround.cpp">
       <Filter>02. Object\06. BackGround</Filter>
     </ClCompile>
-    <ClCompile Include="Map\MapObj.cpp">
+    <ClCompile Include="Map\RoomMapObj.cpp">
       <Filter>07. Map\00. Object</Filter>
     </ClCompile>
     <ClCompile Include="Map\Map_Save.cpp">
@@ -380,10 +383,10 @@
     <ClCompile Include="Map\Map_ObjMgr.cpp">
       <Filter>07. Map\01. Func</Filter>
     </ClCompile>
-    <ClCompile Include="Map\MapObj_Save.cpp">
+    <ClCompile Include="Map\RoomMapObj_Save.cpp">
       <Filter>07. Map\00. Object\00. Func</Filter>
     </ClCompile>
-    <ClCompile Include="Map\MapObj_Load.cpp">
+    <ClCompile Include="Map\RoomMapObj_Load.cpp">
       <Filter>07. Map\00. Object\00. Func</Filter>
     </ClCompile>
     <ClCompile Include="Scene\EditorScene_Obj.cpp">
@@ -397,6 +400,9 @@
     </ClCompile>
     <ClCompile Include="Scene\EditorScene_Init.cpp">
       <Filter>01. Scene\00. Scene\02. Editor\00. Func</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\StartRoom.cpp">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\00. Rooms</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -559,20 +565,23 @@
     <ClInclude Include="Scene\Stage.h">
       <Filter>01. Scene\00. Scene\01. Stage</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\Room.h">
+    <ClInclude Include="Scene\RoomBase.h">
       <Filter>01. Scene\00. Scene\01. Stage\00. Room</Filter>
     </ClInclude>
     <ClInclude Include="Scene\EditorScene.h">
       <Filter>01. Scene\00. Scene\02. Editor</Filter>
     </ClInclude>
-    <ClInclude Include="Map\Map.h">
+    <ClInclude Include="Map\RoomMap.h">
       <Filter>07. Map</Filter>
     </ClInclude>
     <ClInclude Include="Object\BackGround.h">
       <Filter>02. Object\06. BackGround</Filter>
     </ClInclude>
-    <ClInclude Include="Map\MapObj.h">
+    <ClInclude Include="Map\RoomMapObj.h">
       <Filter>07. Map\00. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\StartRoom.h">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\00. Rooms</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

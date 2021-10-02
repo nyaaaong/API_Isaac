@@ -1,7 +1,7 @@
 
 #include "EditorScene.h"
 #include "../Input.h"
-#include "../Map/Map.h"
+#include "../Map/RoomMap.h"
 
 void CEditorScene::NextObject(float fTime)
 {

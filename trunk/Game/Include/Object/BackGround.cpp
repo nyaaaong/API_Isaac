@@ -1,11 +1,20 @@
 #include "BackGround.h"
 
+void CBackGround::Start()
+{
+	CObj::Start();
+
+	if (!m_bStartRoom)
+		SetTexture("BackGround");
+
+	else
+		SetTexture("StartRoom_BackGround");
+}
+
 bool CBackGround::Init()
 {
 	if (!CObj::Init())
 		return false;
-
-	SetTexture("BackGround");
 
 	return true;
 }
@@ -20,7 +29,8 @@ CBackGround* CBackGround::Clone()
 	return new CBackGround(*this);
 }
 
-CBackGround::CBackGround()
+CBackGround::CBackGround()	:
+	m_bStartRoom(false)
 {
 	m_eObjectType = EObjectType::Map;
 }
@@ -28,6 +38,7 @@ CBackGround::CBackGround()
 CBackGround::CBackGround(const CBackGround& obj)	:
 	CObj(obj)
 {
+	m_bStartRoom = obj.m_bStartRoom;
 }
 
 CBackGround::~CBackGround()

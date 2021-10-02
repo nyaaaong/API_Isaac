@@ -1,7 +1,7 @@
 
 #include "Stage.h"
 #include "../GameManager.h"
-#include "../Map/Map.h"
+#include "../Map/RoomMap.h"
 #include "../Object/Player.h"
 #include "../Object/PlayerBody.h"
 #include "../UI/PlayerHUD.h"

@@ -13,8 +13,6 @@ bool CStage::Init()
 
 	CScene::LoadFile("Map.dat");
 
-	SetMap("Room", 1);
-
 	CreateObjects();
 	CreatePrototypes();
 
@@ -24,6 +22,21 @@ bool CStage::Init()
 bool CStage::Update(float fTime)
 {
 	CScene::Update(fTime);
+
+	/*if (!m_bStart)
+	{
+		if (m_bFirstRoom)
+		{
+			SetMap("Room", 0);
+		}
+
+		else
+		{
+			int iRoom = rand() % m_iMaxRoomCount + 1;
+
+			SetMap("Room", iRoom);
+		}
+	}*/
 
 	return true;
 }
@@ -51,7 +64,9 @@ bool CStage::Render(HDC hDC)
 
 CStage::CStage()	:
 	m_pPlayerHUD(nullptr),
-	m_iStage(1)
+	m_iStage(1),
+	m_bStart(false),
+	m_bFirstRoom(false)
 {
 }
 
