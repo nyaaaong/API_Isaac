@@ -4,7 +4,6 @@
 #include "../Object/PlayerTearEffect.h"
 #include "../Object/MonsterTearEffect.h"
 #include "../Object/BossMonstro.h"
-#include "../Object/BackGround.h"
 
 void CStage::CreatePrototypes()
 {
@@ -19,6 +18,4 @@ void CStage::CreatePrototypes()
 	CMonsterTearEffect* pMonsterTearEffect = CreatePrototype<CMonsterTearEffect>("MonsterTearEffect");
 
 	CBossMonstro* pMonstro = CreatePrototype<CBossMonstro>("Monstro");
-
-	CBackGround* pBackGround = CreatePrototype<CBackGround>("BackGround");
 }

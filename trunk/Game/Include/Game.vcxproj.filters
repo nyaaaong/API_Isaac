@@ -174,9 +174,6 @@
     <Filter Include="07. Map">
       <UniqueIdentifier>{dd9b6879-a39c-4681-bc73-7f2926713f2c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. Object\06. BackGround">
-      <UniqueIdentifier>{842b1997-074e-4937-9361-f28c4b0c548e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. Object\05. Item">
       <UniqueIdentifier>{e01bd6ac-9a63-4d1c-ae3b-59589bbca4ec}</UniqueIdentifier>
     </Filter>
@@ -192,7 +189,7 @@
     <Filter Include="01. Scene\00. Scene\02. Editor\00. Func">
       <UniqueIdentifier>{ff63160b-214a-48ab-88aa-eefc3f12f765}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Scene\00. Scene\01. Stage\00. Room\00. Rooms">
+    <Filter Include="01. Scene\00. Scene\01. Stage\00. Room\00. Special">
       <UniqueIdentifier>{a947f290-a6b0-40db-9672-eb33dc8ce8ba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -368,9 +365,6 @@
     <ClCompile Include="Map\RoomMap.cpp">
       <Filter>07. Map</Filter>
     </ClCompile>
-    <ClCompile Include="Object\BackGround.cpp">
-      <Filter>02. Object\06. BackGround</Filter>
-    </ClCompile>
     <ClCompile Include="Map\RoomMapObj.cpp">
       <Filter>07. Map\00. Object</Filter>
     </ClCompile>
@@ -402,7 +396,10 @@
       <Filter>01. Scene\00. Scene\02. Editor\00. Func</Filter>
     </ClCompile>
     <ClCompile Include="Scene\StartRoom.cpp">
-      <Filter>01. Scene\00. Scene\01. Stage\00. Room\00. Rooms</Filter>
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\00. Special</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Room.cpp">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -574,14 +571,14 @@
     <ClInclude Include="Map\RoomMap.h">
       <Filter>07. Map</Filter>
     </ClInclude>
-    <ClInclude Include="Object\BackGround.h">
-      <Filter>02. Object\06. BackGround</Filter>
-    </ClInclude>
     <ClInclude Include="Map\RoomMapObj.h">
       <Filter>07. Map\00. Object</Filter>
     </ClInclude>
     <ClInclude Include="Scene\StartRoom.h">
-      <Filter>01. Scene\00. Scene\01. Stage\00. Room\00. Rooms</Filter>
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\00. Special</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Room.h">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

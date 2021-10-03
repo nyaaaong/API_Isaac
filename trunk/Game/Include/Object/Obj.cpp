@@ -431,6 +431,8 @@ CObj::~CObj()
 	{
 		(*iter)->ClearCollisionList();
 	}
+
+	m_ColliderList.clear();
 }
 
 CCollider* CObj::FindCollider(const std::string& strName)

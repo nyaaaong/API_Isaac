@@ -24,6 +24,11 @@ bool CScene::Init()
 	return true;
 }
 
+void CScene::Start()
+{
+	m_bStart = true;
+}
+
 void CScene::SetMap(const std::string& strName, int iRoomNum)
 {
 	size_t iSize = m_vecRoomMap.size();
@@ -217,30 +222,7 @@ bool CScene::Update(float fTime)
 		}
 	}
 
-	{
-		std::vector<CRoomMap*>::iterator	iter = m_vecRoomMap.begin();
-		std::vector<CRoomMap*>::iterator	iterEnd = m_vecRoomMap.end();
-
-		for (; iter != iterEnd;)
-		{
-			if (!(*iter)->IsActive())
-			{
-				iter = m_vecRoomMap.erase(iter);
-				iterEnd = m_vecRoomMap.end();
-				continue;
-			}
-
-			else if (!(*iter)->IsEnable())
-			{
-				++iter;
-				continue;
-			}
-
-			(*iter)->Update(fTime);
-			++iter;
-		}
-	}
-
+	if (m_mapSpecialRoomMap.size() != 0)
 	{
 		std::unordered_map<ESpecial_RoomType, CRoomMap*>::iterator	iter = m_mapSpecialRoomMap.begin();
 		std::unordered_map<ESpecial_RoomType, CRoomMap*>::iterator	iterEnd = m_mapSpecialRoomMap.end();
@@ -265,8 +247,32 @@ bool CScene::Update(float fTime)
 		}
 	}
 
-	return true;
-}
+	else
+	{
+		std::vector<CRoomMap*>::iterator	iter = m_vecRoomMap.begin();
+		std::vector<CRoomMap*>::iterator	iterEnd = m_vecRoomMap.end();
+
+		for (; iter != iterEnd;)
+		{
+			if (!(*iter)->IsActive())
+			{
+				iter = m_vecRoomMap.erase(iter);
+				iterEnd = m_vecRoomMap.end();
+				continue;
+			}
+
+			else if (!(*iter)->IsEnable())
+			{
+				++iter;
+				continue;
+			}
+
+			(*iter)->Update(fTime);
+			++iter;
+		}
+	}
+
+	return true;}
 
 bool CScene::PostUpdate(float fTime)
 {
@@ -319,30 +325,8 @@ bool CScene::PostUpdate(float fTime)
 
 	m_pCamera->Update(fTime);
 
-	{
-		std::vector<CRoomMap*>::iterator	iter = m_vecRoomMap.begin();
-		std::vector<CRoomMap*>::iterator	iterEnd = m_vecRoomMap.end();
 
-		for (; iter != iterEnd;)
-		{
-			if (!(*iter)->IsActive())
-			{
-				iter = m_vecRoomMap.erase(iter);
-				iterEnd = m_vecRoomMap.end();
-				continue;
-			}
-
-			else if (!(*iter)->IsEnable())
-			{
-				++iter;
-				continue;
-			}
-
-			(*iter)->PostUpdate(fTime);
-			++iter;
-		}
-	}
-
+	if (m_mapSpecialRoomMap.size() != 0)
 	{
 		std::unordered_map<ESpecial_RoomType, CRoomMap*>::iterator	iter = m_mapSpecialRoomMap.begin();
 		std::unordered_map<ESpecial_RoomType, CRoomMap*>::iterator	iterEnd = m_mapSpecialRoomMap.end();
@@ -367,8 +351,32 @@ bool CScene::PostUpdate(float fTime)
 		}
 	}
 
-	return true;
-}
+	else
+	{
+		std::vector<CRoomMap*>::iterator	iter = m_vecRoomMap.begin();
+		std::vector<CRoomMap*>::iterator	iterEnd = m_vecRoomMap.end();
+
+		for (; iter != iterEnd;)
+		{
+			if (!(*iter)->IsActive())
+			{
+				iter = m_vecRoomMap.erase(iter);
+				iterEnd = m_vecRoomMap.end();
+				continue;
+			}
+
+			else if (!(*iter)->IsEnable())
+			{
+				++iter;
+				continue;
+			}
+
+			(*iter)->PostUpdate(fTime);
+			++iter;
+		}
+	}
+
+	return true;}
 
 bool CScene::Collision(float fTime)
 {
@@ -425,11 +433,11 @@ bool CScene::Collision(float fTime)
 
 	m_pCollision->Collision(fTime);
 
-	return true;
-}
+	return true;}
 
 bool CScene::Render(HDC hDC)
 {
+	if (m_mapSpecialRoomMap.size() != 0)
 	{
 		std::unordered_map<ESpecial_RoomType, CRoomMap*>::iterator	iter = m_mapSpecialRoomMap.begin();
 		std::unordered_map<ESpecial_RoomType, CRoomMap*>::iterator	iterEnd = m_mapSpecialRoomMap.end();
@@ -454,6 +462,7 @@ bool CScene::Render(HDC hDC)
 		}
 	}
 
+	else
 	{
 		std::vector<CRoomMap*>::iterator	iter = m_vecRoomMap.begin();
 		std::vector<CRoomMap*>::iterator	iterEnd = m_vecRoomMap.end();
@@ -582,8 +591,7 @@ bool CScene::Render(HDC hDC)
 		}
 	}
 
-	return true;
-}
+	return true;}
 
 void CScene::CreateTextureObject()
 {
@@ -682,8 +690,6 @@ void CScene::LoadFullPath(const char* cFullPath)
 			return;
 		}
 
-		pMap->Start();
-
 		m_vecRoomMap[i] = pMap;
 	}
 
@@ -694,7 +700,7 @@ void CScene::LoadFile(const char* cFileName, const std::string& strPath)
 {
 	char	cFullPath[MAX_PATH] = {};
 
-	const PathInfo* pInfo = CPathManager::GetInst()->FindPath(cFileName);
+	const PathInfo* pInfo = CPathManager::GetInst()->FindPath(strPath);
 
 	if (pInfo)
 		strcpy_s(cFullPath, pInfo->cPathMultibyte);
@@ -705,7 +711,8 @@ void CScene::LoadFile(const char* cFileName, const std::string& strPath)
 }
 
 CScene::CScene()	:
-	m_pCurMap(nullptr)
+	m_pCurMap(nullptr),
+	m_bStart(false)
 {
 	m_pResource = new CSceneResource;
 	m_pCollision = new CSceneCollision;

@@ -40,6 +40,11 @@ void CRoomBase::CreateMonster()
 	m_pPlayerHUD->SetBossMonster(static_cast<CCharacter*>(pMonstro));*/
 }
 
+void CRoomBase::Start()
+{
+	CStage::Start();
+}
+
 bool CRoomBase::Update(float fTime)
 {
 	CStage::Update(fTime);

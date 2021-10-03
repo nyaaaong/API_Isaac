@@ -8,7 +8,6 @@ class CStage :
 protected:
 	class CPlayerHUD* m_pPlayerHUD;
 	int		m_iStage;
-	bool	m_bStart;
 	int		m_bFirstRoom;
 
 public:
@@ -31,8 +30,6 @@ public:
 private:
 	void LoadAnimationSequence();
 	void LoadSound();
-	void LoadBGM();
-	void LoadMap();
 	void CreateObjects();
 	void CreatePrototypes();
 
@@ -50,6 +47,7 @@ private:
 
 public:
 	virtual bool Init();
+	virtual void Start();
 	virtual bool Update(float fTime);
 	virtual bool PostUpdate(float fTime);
 	virtual bool Collision(float fTime);

@@ -112,7 +112,6 @@ public:
 	}
 
 public:
-	virtual void Start();
 	virtual bool Init();
 	virtual void Update(float fTime);
 	virtual void PostUpdate(float fTime);

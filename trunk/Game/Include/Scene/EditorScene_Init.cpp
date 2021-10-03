@@ -29,31 +29,28 @@ void CEditorScene::CreateMouseCursor()
 
 void CEditorScene::Start()
 {
-	if (!m_bStart)
-	{
-		m_bStart = true;
+	CScene::Start();
 
-		// 타이틀바에 맵 정보를 넣기위해 게임매니저에서 갱신을 하지 않는다.
-		CGameManager::GetInst()->SetTitleUpdate(false);
+	// 타이틀바에 맵 정보를 넣기위해 게임매니저에서 갱신을 하지 않는다.
+	CGameManager::GetInst()->SetTitleUpdate(false);
 
-		CInput::GetInst()->SetShowCursor(false);
+	CInput::GetInst()->SetShowCursor(false);
 
-		CInput::GetInst()->SetCallback<CEditorScene>("GameMenu", KS_DOWN, this, &CEditorScene::GameMenu);
+	CInput::GetInst()->SetCallback<CEditorScene>("EditorGameMenu", KS_DOWN, this, &CEditorScene::GameMenu);
 
-		CInput::GetInst()->SetCallback<CEditorScene>("NextObject", KS_DOWN, this, &CEditorScene::NextObject);
-		CInput::GetInst()->SetCallback<CEditorScene>("PrevObject", KS_DOWN, this, &CEditorScene::PrevObject);
-		CInput::GetInst()->SetCallback<CEditorScene>("SelectObject1", KS_DOWN, this, &CEditorScene::SelectObject1);
-		CInput::GetInst()->SetCallback<CEditorScene>("SelectObject2", KS_DOWN, this, &CEditorScene::SelectObject1);
-		CInput::GetInst()->SetCallback<CEditorScene>("SelectObject3", KS_DOWN, this, &CEditorScene::SelectObject1);
-		CInput::GetInst()->SetCallback<CEditorScene>("SelectObject4", KS_DOWN, this, &CEditorScene::SelectObject1);
+	CInput::GetInst()->SetCallback<CEditorScene>("EditorNextObject", KS_DOWN, this, &CEditorScene::NextObject);
+	CInput::GetInst()->SetCallback<CEditorScene>("EditorPrevObject", KS_DOWN, this, &CEditorScene::PrevObject);
+	CInput::GetInst()->SetCallback<CEditorScene>("EditorSelectObject1", KS_DOWN, this, &CEditorScene::SelectObject1);
+	CInput::GetInst()->SetCallback<CEditorScene>("EditorSelectObject2", KS_DOWN, this, &CEditorScene::SelectObject1);
+	CInput::GetInst()->SetCallback<CEditorScene>("EditorSelectObject3", KS_DOWN, this, &CEditorScene::SelectObject1);
+	CInput::GetInst()->SetCallback<CEditorScene>("EditorSelectObject4", KS_DOWN, this, &CEditorScene::SelectObject1);
 
-		CInput::GetInst()->SetCallback<CEditorScene>("SaveRoom", KS_DOWN, this, &CEditorScene::SaveRoom);
-		CInput::GetInst()->SetCallback<CEditorScene>("LoadRoom", KS_DOWN, this, &CEditorScene::LoadRoom);
-		CInput::GetInst()->SetCallback<CEditorScene>("ClearRoom", KS_DOWN, this, &CEditorScene::ClearRoom);
-		CInput::GetInst()->SetCallback<CEditorScene>("NextRoom", KS_DOWN, this, &CEditorScene::NextRoom);
-		CInput::GetInst()->SetCallback<CEditorScene>("PrevRoom", KS_DOWN, this, &CEditorScene::PrevRoom);
+	CInput::GetInst()->SetCallback<CEditorScene>("EditorSaveRoom", KS_DOWN, this, &CEditorScene::SaveRoom);
+	CInput::GetInst()->SetCallback<CEditorScene>("EditorLoadRoom", KS_DOWN, this, &CEditorScene::LoadRoom);
+	CInput::GetInst()->SetCallback<CEditorScene>("EditorClearRoom", KS_DOWN, this, &CEditorScene::ClearRoom);
+	CInput::GetInst()->SetCallback<CEditorScene>("EditorNextRoom", KS_DOWN, this, &CEditorScene::NextRoom);
+	CInput::GetInst()->SetCallback<CEditorScene>("EditorPrevRoom", KS_DOWN, this, &CEditorScene::PrevRoom);
 
-		CInput::GetInst()->SetCallback<CEditorScene>("LeftClick", KS_PUSH, this, &CEditorScene::CreateObject);
-		CInput::GetInst()->SetCallback<CEditorScene>("RightClick", KS_PUSH, this, &CEditorScene::DeleteObject);
-	}
+	CInput::GetInst()->SetCallback<CEditorScene>("EditorLeftClick", KS_PUSH, this, &CEditorScene::CreateObject);
+	CInput::GetInst()->SetCallback<CEditorScene>("EditorRightClick", KS_PUSH, this, &CEditorScene::DeleteObject);
 }

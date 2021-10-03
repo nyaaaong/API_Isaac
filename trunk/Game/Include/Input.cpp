@@ -8,49 +8,51 @@ bool CInput::Init(HWND hWnd)
 
 	// ----------- MainMenu ----------- 
 
-	CreateKey("GameStart1", VK_RETURN);
-	CreateKey("GameStart2", VK_SPACE);
-	CreateKey("GameEditor", 'E');
-	SetCtrlKey("GameEditor", true);
-	CreateKey("GameExit", VK_ESCAPE);
+	CreateKey("MenuGameStart1", VK_RETURN);
+	CreateKey("MenuGameStart2", VK_SPACE);
+	CreateKey("MenuGameEditor", 'E');
+	SetCtrlKey("MenuGameEditor", true);
+	CreateKey("MenuGameExit", VK_ESCAPE);
 
 	// ----------- Editor ----------- 
 
-	CreateKey("GameMenu", VK_BACK);
-	SetCtrlKey("GameMenu", true);
+	CreateKey("EditorGameMenu", VK_BACK);
+	SetCtrlKey("EditorGameMenu", true);
 
-	CreateKey("NextObject", 'E');
-	CreateKey("PrevObject", 'Q');
-	CreateKey("SelectObject1", '1'); 
-	CreateKey("SelectObject2", '2'); 
-	CreateKey("SelectObject3", '3'); 
-	CreateKey("SelectObject4", '4');
+	CreateKey("EditorNextObject", 'E');
+	CreateKey("EditorPrevObject", 'Q');
+	CreateKey("EditorSelectObject1", '1'); 
+	CreateKey("EditorSelectObject2", '2'); 
+	CreateKey("EditorSelectObject3", '3'); 
+	CreateKey("EditorSelectObject4", '4');
 
-	CreateKey("SaveRoom", 'S');
-	SetCtrlKey("SaveRoom", true);
-	CreateKey("LoadRoom", 'L');
-	SetCtrlKey("LoadRoom", true);
-	CreateKey("ClearRoom", 'N');
-	SetCtrlKey("ClearRoom", true);
-	CreateKey("NextRoom", 'D');
-	CreateKey("PrevRoom", 'A');
+	CreateKey("EditorSaveRoom", 'S');
+	SetCtrlKey("EditorSaveRoom", true);
+	CreateKey("EditorLoadRoom", 'L');
+	SetCtrlKey("EditorLoadRoom", true);
+	CreateKey("EditorClearRoom", 'N');
+	SetCtrlKey("EditorClearRoom", true);
+	CreateKey("EditorNextRoom", 'D');
+	CreateKey("EditorPrevRoom", 'A');
 
-	CreateKey("LeftClick", VK_LBUTTON);
-	CreateKey("RightClick", VK_RBUTTON);
+	CreateKey("EditorLeftClick", VK_LBUTTON);
+	CreateKey("EditorRightClick", VK_RBUTTON);
 
 	// ----------- Player ----------- 
 
-	CreateKey("MoveUp", 'W');
-	CreateKey("MoveDown", 'S');
-	CreateKey("MoveLeft", 'A');
-	CreateKey("MoveRight", 'D');
+	CreateKey("PlayerMoveUp", 'W');
+	CreateKey("PlayerMoveDown", 'S');
+	CreateKey("PlayerMoveLeft", 'A');
+	CreateKey("PlayerMoveRight", 'D');
 
-	CreateKey("FireUp", VK_UP);
-	CreateKey("FireDown", VK_DOWN);
-	CreateKey("FireLeft", VK_LEFT);
-	CreateKey("FireRight", VK_RIGHT);
+	CreateKey("PlayerFireUp", VK_UP);
+	CreateKey("PlayerFireDown", VK_DOWN);
+	CreateKey("PlayerFireLeft", VK_LEFT);
+	CreateKey("PlayerFireRight", VK_RIGHT);
 
-	CreateKey("Bomb", 'E');
+	CreateKey("PlayerBomb", 'E');
+
+	CreateKey("PlayerNextRoom", 'O');
 
 	return true;
 }

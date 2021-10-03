@@ -10,15 +10,6 @@ void CStage::LoadSound()
 	EffectSound();
 }
 
-void CStage::LoadBGM()
-{
-	if (m_iStage == 1)
-	{
-		GetSceneResource()->LoadSound("BGM", true, "Stage1BGM", "Music/Stage1.ogg");
-		GetSceneResource()->SoundPlay("Stage1BGM");
-	}
-}
-
 void CStage::PlayerSound()
 {
 	// ÇÇ°ÝÀ½, Á×À½

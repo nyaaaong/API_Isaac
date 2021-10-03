@@ -33,6 +33,9 @@ bool CSceneManager::Init()
 
 bool CSceneManager::Update(float fTime)
 {
+	if (!m_pScene->IsStart())
+		m_pScene->Start();
+
 	m_pScene->Update(fTime);
 
 	return ChangeScene();

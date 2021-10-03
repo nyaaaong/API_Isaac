@@ -25,10 +25,10 @@ void CMenu::Start()
 {
 	CObj::Start();
 
-	CInput::GetInst()->SetCallback<CMenu>("GameStart1", KS_PUSH, this, &CMenu::GameStart);
-	CInput::GetInst()->SetCallback<CMenu>("GameStart2", KS_PUSH, this, &CMenu::GameStart);
-	CInput::GetInst()->SetCallback<CMenu>("GameEditor", KS_PUSH, this, &CMenu::GameEditor);
-	CInput::GetInst()->SetCallback<CMenu>("GameExit", KS_PUSH, this, &CMenu::GameExit);
+	CInput::GetInst()->SetCallback<CMenu>("MenuGameStart1", KS_PUSH, this, &CMenu::GameStart);
+	CInput::GetInst()->SetCallback<CMenu>("MenuGameStart2", KS_PUSH, this, &CMenu::GameStart);
+	CInput::GetInst()->SetCallback<CMenu>("MenuGameEditor", KS_PUSH, this, &CMenu::GameEditor);
+	CInput::GetInst()->SetCallback<CMenu>("MenuGameExit", KS_PUSH, this, &CMenu::GameExit);
 }
 
 bool CMenu::Init()

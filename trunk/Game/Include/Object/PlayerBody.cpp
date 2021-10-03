@@ -109,6 +109,7 @@ CPlayerBody* CPlayerBody::Clone()
 CPlayerBody::CPlayerBody()	:
 	m_pPlayer(nullptr)
 {
+	int  a = 0;
 }
 
 CPlayerBody::CPlayerBody(const CPlayerBody& obj)	:
@@ -119,4 +120,5 @@ CPlayerBody::CPlayerBody(const CPlayerBody& obj)	:
 
 CPlayerBody::~CPlayerBody()
 {
+	int a = 0;
 }

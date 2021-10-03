@@ -34,11 +34,13 @@ bool CPlayerHUD::Init()
 	m_pBossHPEmptyBar->SetTextureColorKey();
 	m_pBossHPEmptyBar->SetPos(tRS.iW * 0.3f + 50, 53.f);
 	m_pBossHPEmptyBar->SetBackGroundBar(true);
+	m_pBossHPEmptyBar->SetVisibility(false);
 
 	m_pBossHPBar->SetTexture("BossHPBar", TEXT("UI/Boss/HP.bmp"));
 	m_pBossHPBar->SetZOrder(EZOrder::UI);
 	m_pBossHPBar->SetTextureColorKey();
 	m_pBossHPBar->SetPos(tRS.iW * 0.3f + 101.f, 53.f);
+	m_pBossHPBar->SetVisibility(false);
 
 	return true;
 }
@@ -69,9 +71,6 @@ void CPlayerHUD::Update(float fTime)
 			return;
 		}
 	}
-
-	m_pBossHPEmptyBar->SetVisibility(false);
-	m_pBossHPBar->SetVisibility(false);
 }
 
 void CPlayerHUD::SetPlayer(CCharacter* pPlayer)

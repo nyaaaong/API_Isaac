@@ -20,23 +20,21 @@ bool CMainMenu::Init()
 	return true;
 }
 
+void CMainMenu::Start()
+{
+	CScene::Start();
+
+	CInput::GetInst()->SetShowCursor(true); // 에디터에서 메인화면으로 전환됐을때를 대비해서 마우스를 무조건 보이게 한다.
+}
+
 bool CMainMenu::Update(float fTime)
 {
-	if (!CScene::Update(fTime))
-		return false;
-
-	if (!m_bStart)
-	{
-		CInput::GetInst()->SetShowCursor(true); // 에디터에서 메인화면으로 전환됐을때를 대비해서 마우스를 무조건 보이게 한다.
-		
-		m_bStart = true;
-	}
+	CScene::Update(fTime);
 
 	return true;
 }
 
-CMainMenu::CMainMenu()	:
-	m_bStart(false)
+CMainMenu::CMainMenu()
 {
 }
 

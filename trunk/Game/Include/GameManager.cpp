@@ -144,7 +144,6 @@ void CGameManager::Logic()
 
 	if (Collision(fTime))
 		return;
-
 	Render(fTime);
 }
 

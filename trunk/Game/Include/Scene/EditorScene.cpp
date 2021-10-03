@@ -4,7 +4,6 @@
 #include "../Map/RoomMap.h"
 
 CEditorScene::CEditorScene()	:
-	m_bStart(false),
 	m_iCurRoom(1),
 	m_eCurObject(OBJ_ROCK),
 	m_eState(EEditor_State::Idle),
@@ -45,8 +44,6 @@ bool CEditorScene::Init()
 bool CEditorScene::Update(float fTime)
 {
 	CScene::Update(fTime);
-
-	Start();
 
 	if (m_eState == EEditor_State::Saved ||
 		m_eState == EEditor_State::Loaded)

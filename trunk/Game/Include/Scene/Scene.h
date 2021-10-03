@@ -26,6 +26,7 @@ private:
 	std::vector<class CRoomMap*>	m_vecRoomMap;
 	std::unordered_map<ESpecial_RoomType, class CRoomMap*>	m_mapSpecialRoomMap;
 	class CRoomMap* m_pCurMap;
+	bool	m_bStart;
 
 protected:
 	const int		m_iMaxRoomCount = 20;
@@ -42,6 +43,11 @@ public:
 	}
 
 public:
+	bool IsStart()	const
+	{
+		return m_bStart;
+	}
+
 	class CRoomMap* GetCurrentMap()	const
 	{
 		return m_pCurMap;
@@ -86,6 +92,7 @@ public:
 
 public:
 	virtual bool Init();
+	virtual void Start();
 	virtual bool Update(float fTime);
 	virtual bool PostUpdate(float fTime);
 	virtual bool Collision(float fTime);
@@ -227,8 +234,6 @@ public:
 			return nullptr;
 		}
 
-		pMap->Start();
-
 		m_vecRoomMap.push_back(pMap);
 
 		return pMap;
@@ -250,8 +255,6 @@ public:
 			SAFE_DELETE(pMap);
 			return nullptr;
 		}
-
-		pMap->Start();
 
 		m_mapSpecialRoomMap.insert(std::make_pair(eType, pMap));
 

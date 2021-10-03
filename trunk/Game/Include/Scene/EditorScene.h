@@ -13,7 +13,6 @@ private:
 	virtual ~CEditorScene();
 
 private:
-	bool	m_bStart;
 	int		m_iCurRoom;
 	EObject	m_eCurObject;
 	EEditor_State	m_eState;
@@ -28,13 +27,13 @@ private:
 
 public:
 	virtual bool Init();
+	virtual void Start();
 	virtual bool Update(float fTime);
 	virtual bool PostUpdate(float fTime);
 	virtual bool Render(HDC hDC);
 
 private:
 	void CreateMouseCursor();
-	void Start();
 
 private:
 	void NextRoom(float fTime);

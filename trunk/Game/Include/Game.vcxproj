@@ -174,7 +174,6 @@
     <ClCompile Include="Map\Map_ObjMgr.cpp" />
     <ClCompile Include="Map\Map_Save.cpp" />
     <ClCompile Include="Math.cpp" />
-    <ClCompile Include="Object\BackGround.cpp" />
     <ClCompile Include="Object\BossMonstro.cpp" />
     <ClCompile Include="Object\Character.cpp" />
     <ClCompile Include="Object\Door.cpp" />
@@ -213,6 +212,7 @@
     <ClCompile Include="Scene\EditorScene_Obj.cpp" />
     <ClCompile Include="Scene\EditorScene_Room.cpp" />
     <ClCompile Include="Scene\MainMenu.cpp" />
+    <ClCompile Include="Scene\Room.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\Stage.cpp" />
     <ClCompile Include="Scene\SceneCollision.cpp" />
@@ -255,7 +255,6 @@
     <ClInclude Include="Map\RoomMap.h" />
     <ClInclude Include="Map\RoomMapObj.h" />
     <ClInclude Include="Math.h" />
-    <ClInclude Include="Object\BackGround.h" />
     <ClInclude Include="Object\BossMonstro.h" />
     <ClInclude Include="Object\Character.h" />
     <ClInclude Include="Object\Door.h" />
@@ -282,6 +281,7 @@
     <ClInclude Include="Scene\Camera.h" />
     <ClInclude Include="Scene\EditorScene.h" />
     <ClInclude Include="Scene\MainMenu.h" />
+    <ClInclude Include="Scene\Room.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\Stage.h" />
     <ClInclude Include="Scene\SceneCollision.h" />

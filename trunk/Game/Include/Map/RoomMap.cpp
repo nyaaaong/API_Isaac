@@ -24,10 +24,6 @@ bool CRoomMap::Init()
 	return true;
 }
 
-void CRoomMap::Start()
-{
-}
-
 void CRoomMap::Update(float fTime)
 {
 	std::list<CRoomMapObj*>::iterator	iter = m_ObjList.begin();
