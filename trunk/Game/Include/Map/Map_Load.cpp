@@ -1,6 +1,6 @@
 
 #include "RoomMap.h"
-#include "RoomMapObj.h"
+#include "RoomObj.h"
 #include "../PathManager.h"
 
 void CRoomMap::Load(FILE* pFile)
@@ -25,18 +25,18 @@ void CRoomMap::Load(FILE* pFile)
 
 	for (int i = 0; i < iSize; ++i)
 	{
-		CRoomMapObj* pRoomMapObj = new CRoomMapObj;
+		CRoomObj* pRoomObj = new CRoomObj;
 
-		pRoomMapObj->SetScene(m_pScene);
-		pRoomMapObj->Load(pFile);
+		pRoomObj->SetScene(m_pScene);
+		pRoomObj->Load(pFile);
 
-		if (!pRoomMapObj->Init())
+		if (!pRoomObj->Init())
 		{
-			SAFE_DELETE(pRoomMapObj);
+			SAFE_DELETE(pRoomObj);
 			return;
 		}
 
-		m_ObjList.push_back(pRoomMapObj);
+		m_ObjList.push_back(pRoomObj);
 	}
 }
 

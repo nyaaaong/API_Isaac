@@ -159,18 +159,6 @@
     <Filter Include="02. Object\04. Door">
       <UniqueIdentifier>{49d22f14-6ee4-4609-8beb-c5fb22df059f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. Object\04. Door\00. Top">
-      <UniqueIdentifier>{4f6ff2e2-236b-4f24-a7dc-eac5ab92fa08}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Object\04. Door\01. Bottom">
-      <UniqueIdentifier>{dde3a319-ec74-432a-bb42-9ca41ef031eb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Object\04. Door\02. Left">
-      <UniqueIdentifier>{4aed06be-6c0a-4ecf-b8f6-116d7bf38792}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Object\04. Door\03. Right">
-      <UniqueIdentifier>{0a08506f-5322-4977-8f7b-643bdf610249}</UniqueIdentifier>
-    </Filter>
     <Filter Include="07. Map">
       <UniqueIdentifier>{dd9b6879-a39c-4681-bc73-7f2926713f2c}</UniqueIdentifier>
     </Filter>
@@ -191,6 +179,12 @@
     </Filter>
     <Filter Include="01. Scene\00. Scene\01. Stage\00. Room\00. Special">
       <UniqueIdentifier>{a947f290-a6b0-40db-9672-eb33dc8ce8ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene\00. Scene\01. Stage\00. Room\01. Normal">
+      <UniqueIdentifier>{47755654-ad78-41bb-8b6d-fecf361e6c70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene\00. Scene\03. Func">
+      <UniqueIdentifier>{95eeeabb-93d5-4314-b25e-d8570261d13f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -365,7 +359,7 @@
     <ClCompile Include="Map\RoomMap.cpp">
       <Filter>07. Map</Filter>
     </ClCompile>
-    <ClCompile Include="Map\RoomMapObj.cpp">
+    <ClCompile Include="Map\RoomObj.cpp">
       <Filter>07. Map\00. Object</Filter>
     </ClCompile>
     <ClCompile Include="Map\Map_Save.cpp">
@@ -377,10 +371,10 @@
     <ClCompile Include="Map\Map_ObjMgr.cpp">
       <Filter>07. Map\01. Func</Filter>
     </ClCompile>
-    <ClCompile Include="Map\RoomMapObj_Save.cpp">
+    <ClCompile Include="Map\RoomObj_Save.cpp">
       <Filter>07. Map\00. Object\00. Func</Filter>
     </ClCompile>
-    <ClCompile Include="Map\RoomMapObj_Load.cpp">
+    <ClCompile Include="Map\RoomObj_Load.cpp">
       <Filter>07. Map\00. Object\00. Func</Filter>
     </ClCompile>
     <ClCompile Include="Scene\EditorScene_Obj.cpp">
@@ -398,8 +392,41 @@
     <ClCompile Include="Scene\StartRoom.cpp">
       <Filter>01. Scene\00. Scene\01. Stage\00. Room\00. Special</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\Room.cpp">
-      <Filter>01. Scene\00. Scene\01. Stage\00. Room</Filter>
+    <ClCompile Include="Scene\BossRoom.cpp">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\00. Special</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Room1.cpp">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Room2.cpp">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Room3.cpp">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Room4.cpp">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Room5.cpp">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Room6.cpp">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Scene_Init.cpp">
+      <Filter>01. Scene\00. Scene\03. Func</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Scene_File.cpp">
+      <Filter>01. Scene\00. Scene\03. Func</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Scene_Sort.cpp">
+      <Filter>01. Scene\00. Scene\03. Func</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Scene_Other.cpp">
+      <Filter>01. Scene\00. Scene\03. Func</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Scene_Map.cpp">
+      <Filter>01. Scene\00. Scene\03. Func</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -571,14 +598,32 @@
     <ClInclude Include="Map\RoomMap.h">
       <Filter>07. Map</Filter>
     </ClInclude>
-    <ClInclude Include="Map\RoomMapObj.h">
+    <ClInclude Include="Map\RoomObj.h">
       <Filter>07. Map\00. Object</Filter>
     </ClInclude>
     <ClInclude Include="Scene\StartRoom.h">
       <Filter>01. Scene\00. Scene\01. Stage\00. Room\00. Special</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\Room.h">
-      <Filter>01. Scene\00. Scene\01. Stage\00. Room</Filter>
+    <ClInclude Include="Scene\BossRoom.h">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\00. Special</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Room1.h">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Room2.h">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Room3.h">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Room4.h">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Room5.h">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Room6.h">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

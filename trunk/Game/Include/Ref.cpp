@@ -2,12 +2,14 @@
 
 CRef::CRef()	:
 	m_bActive(true),
+	m_bEnable(true),
 	m_iRefCount(0)
 {
 }
 
 CRef::CRef(const CRef& ref)	:
 	m_bActive(true),
+	m_bEnable(true),
 	m_iRefCount(0),
 	m_strName(ref.m_strName)
 {

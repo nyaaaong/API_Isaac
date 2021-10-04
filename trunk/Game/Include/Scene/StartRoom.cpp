@@ -1,6 +1,6 @@
 
 #include "StartRoom.h"
-#include "Room.h"
+#include "Room1.h"
 #include "SceneManager.h"
 #include "SceneResource.h"
 #include "../Input.h"
@@ -13,6 +13,11 @@ bool CStartRoom::Init()
 
 	CreateSpecialRoomMap<CRoomMap>(ESpecial_RoomType::Start);
 
+	m_bClearRoom = true;
+
+	SetDoor(DD_RIGHT, false);
+	SetDoor(DD_TOP, false);
+
 	return true;
 }
 
@@ -22,8 +27,6 @@ void CStartRoom::Start()
 
 	GetSceneResource()->LoadSound("BGM", true, "Stage1BGM", "Music/Stage1.ogg");
 	GetSceneResource()->SoundPlay("Stage1BGM");
-
-	CInput::GetInst()->SetCallback<CStartRoom>("PlayerNextRoom", KS_DOWN, this, &CStartRoom::Next);
 }
 
 bool CStartRoom::Update(float fTime)
@@ -51,11 +54,6 @@ bool CStartRoom::Render(HDC hDC)
 	CRoomBase::Render(hDC);
 
 	return true;
-}
-
-void CStartRoom::Next(float fTime)
-{
-	CSceneManager::GetInst()->CreateScene<CRoom>();
 }
 
 CStartRoom::CStartRoom()

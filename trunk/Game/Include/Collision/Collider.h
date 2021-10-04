@@ -10,18 +10,12 @@ protected:
 	class CObj* m_pOwner;
 	ECollider_Type	m_eType;
 	Vector2	m_tOffset;
-	bool	m_bEnable;
 	CollisionProfile* m_pProfile;
 	std::function<void(CCollider*, CCollider*, float)>	m_pBeginFunc;
 	std::function<void(CCollider*, CCollider*, float)>	m_pEndFunc;
 	std::list<CSharedPtr<CCollider>>	m_CollisionList;
 
 public:
-	void SetEnable(bool bEnable)
-	{
-		m_bEnable = bEnable;
-	}
-
 	void SetOffset(const Vector2& tOffset)
 	{
 		m_tOffset = tOffset;
@@ -57,11 +51,6 @@ public:
 	CollisionProfile* GetProfile()	const
 	{
 		return m_pProfile;
-	}
-
-	bool GetEnable()	const
-	{
-		return m_bEnable;
 	}
 
 	class CObj* GetOwner()	const

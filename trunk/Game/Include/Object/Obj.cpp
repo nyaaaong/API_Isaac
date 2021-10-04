@@ -184,7 +184,7 @@ void CObj::Update(float fTime)
 			continue;
 		}
 
-		else if ((*iter)->GetEnable())
+		else if ((*iter)->IsEnable())
 			(*iter)->Update(fTime);
 
 		++iter;
@@ -217,7 +217,7 @@ void CObj::PostUpdate(float fTime)
 			continue;
 		}
 
-		else if ((*iter)->GetEnable())
+		else if ((*iter)->IsEnable())
 			(*iter)->PostUpdate(fTime);
 
 		++iter;
@@ -312,7 +312,7 @@ void CObj::Render(HDC hDC)
 			continue;
 		}
 
-		else if ((*iter)->GetEnable())
+		else if ((*iter)->IsEnable())
 			(*iter)->Render(hDC);
 
 		++iter;

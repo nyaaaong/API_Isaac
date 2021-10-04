@@ -68,6 +68,21 @@ public:
 		return m_tActivityRB;
 	}
 
+	class CSceneResource* GetSceneResource()	const
+	{
+		return m_pResource;
+	}
+
+	class CSceneCollision* GetSceneCollision()	const
+	{
+		return m_pCollision;
+	}
+
+	class CCamera* GetCamera()	const
+	{
+		return m_pCamera;
+	}
+
 public:
 	void SetMap(const std::string& strName, int iRoomNum);
 	void SetSpecialMap(ESpecial_RoomType eType);
@@ -79,11 +94,6 @@ public:
 	CObj* FindObject(const std::string& strName);
 	void SetPlayer(const std::string& strName);
 	void SetPlayer(CObj* pPlayer);
-
-public:
-	class CSceneResource* GetSceneResource()	const;
-	class CSceneCollision* GetSceneCollision()	const;
-	class CCamera* GetCamera()	const;
 
 public:
 	static int SortY(const void* pSrc, const void* pDest);
@@ -99,7 +109,7 @@ public:
 	virtual bool Render(HDC hDC);
 
 private:
-	void CreateTextureObject();
+	void Init_CreateTextureObject();
 
 protected:
 	virtual void SaveFile(const char* cFileName, const std::string& strPath = MAP_PATH);

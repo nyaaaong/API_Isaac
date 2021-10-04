@@ -7,6 +7,7 @@ class CRef
 protected:
 	std::string m_strName;
 	bool	m_bActive;
+	bool	m_bEnable;
 	int		m_iRefCount;
 
 public:
@@ -41,6 +42,16 @@ public:
 	bool IsActive()	const
 	{
 		return m_bActive;
+	}
+
+	void Enable(bool bEnable)
+	{
+		m_bEnable = bEnable;
+	}
+
+	bool IsEnable()	const
+	{
+		return m_bEnable;
 	}
 
 	std::string GetName()	const

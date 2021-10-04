@@ -1,6 +1,6 @@
 
 #include "RoomMap.h"
-#include "RoomMapObj.h"
+#include "RoomObj.h"
 #include "../Scene/Scene.h"
 
 bool CRoomMap::IsSetObj(const Vector2& tPos, const Vector2& tObjSize)
@@ -13,8 +13,8 @@ bool CRoomMap::IsSetObj(const Vector2& tPos, const Vector2& tObjSize)
 		(tActLT.x <= tPos.x + tObjSize.x && tPos.x + tObjSize.x <= tActRB.x) &&
 		(tActLT.y <= tPos.y + tObjSize.y && tPos.y + tObjSize.y <= tActRB.y))
 	{
-		std::list<CRoomMapObj*>::iterator	iter = m_ObjList.begin();
-		std::list<CRoomMapObj*>::iterator	iterEnd = m_ObjList.end();
+		std::list<CRoomObj*>::iterator	iter = m_ObjList.begin();
+		std::list<CRoomObj*>::iterator	iterEnd = m_ObjList.end();
 
 		for (; iter != iterEnd; ++iter)
 		{
@@ -32,27 +32,27 @@ void CRoomMap::Create(EObject eObj, const Vector2& tPos, const Vector2& tObjSize
 {
 	if (IsSetObj(tPos, tObjSize)) // 설치 가능한 구역이라면
 	{
-		CRoomMapObj* pRoomMapObj = new CRoomMapObj;
+		CRoomObj* pRoomObj = new CRoomObj;
 
-		pRoomMapObj->SetScene(m_pScene);
-		pRoomMapObj->SetObject(eObj);
-		pRoomMapObj->SetPos(tPos);
-		pRoomMapObj->SetSize(tObjSize);
+		pRoomObj->SetScene(m_pScene);
+		pRoomObj->SetObject(eObj);
+		pRoomObj->SetPos(tPos);
+		pRoomObj->SetSize(tObjSize);
 
-		if (!pRoomMapObj->Init())
+		if (!pRoomObj->Init())
 		{
-			SAFE_DELETE(pRoomMapObj);
+			SAFE_DELETE(pRoomObj);
 			return;
 		}
 
-		m_ObjList.push_back(pRoomMapObj);
+		m_ObjList.push_back(pRoomObj);
 	}
 }
 
 void CRoomMap::Delete(const Vector2& tPos)
 {
-	std::list<CRoomMapObj*>::iterator	iter = m_ObjList.begin();
-	std::list<CRoomMapObj*>::iterator	iterEnd = m_ObjList.end();
+	std::list<CRoomObj*>::iterator	iter = m_ObjList.begin();
+	std::list<CRoomObj*>::iterator	iterEnd = m_ObjList.end();
 
 	for (; iter != iterEnd; ++iter)
 	{
@@ -70,8 +70,8 @@ void CRoomMap::Clear()
 	if (!m_pScene)
 		return;
 
-	std::list<CRoomMapObj*>::iterator	iter = m_ObjList.begin();
-	std::list<CRoomMapObj*>::iterator	iterEnd = m_ObjList.end();
+	std::list<CRoomObj*>::iterator	iter = m_ObjList.begin();
+	std::list<CRoomObj*>::iterator	iterEnd = m_ObjList.end();
 
 	for (; iter != iterEnd; ++iter)
 	{

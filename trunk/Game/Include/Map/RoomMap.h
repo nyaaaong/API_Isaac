@@ -13,15 +13,15 @@ protected:
 
 protected:
 	class CScene* m_pScene;
+	CSharedPtr<CTexture>	m_pBackGround;
 	std::string	m_strName;
 	Vector2	m_tPos;
 	Vector2	m_tSize;
 	bool	m_bEnable;
 	bool	m_bActive;
-	int		m_iRoomNum;
-	CSharedPtr<CTexture>	m_pBackGround;
-	std::list<class CRoomMapObj*>	m_ObjList;
 	bool	m_bIsSpecial;
+	int		m_iRoomNum;
+	std::list<class CRoomObj*>	m_ObjList;
 	ESpecial_RoomType	m_eSpecialRoomType;
 
 public:

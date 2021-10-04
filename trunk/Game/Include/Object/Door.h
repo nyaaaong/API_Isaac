@@ -5,16 +5,27 @@
 class CDoor :
     public CObj
 {
+	friend class CScene;
 	friend class CRoomBase;
 
 protected:
-	class CScene* m_pNextRoom;
+	EDoorType	m_eDoorType;
+	EDoorDir	m_eDoorDir;
+	bool		m_bOpenStart;
 
 public:
-	class CScene* GetNextRoom()	const
+	void SetDoorType(EDoorType eDoorType)
 	{
-		return m_pNextRoom;
+		m_eDoorType = eDoorType;
 	}
+
+	void SetDoorDir(EDoorDir eDoorDir)
+	{
+		m_eDoorDir = eDoorDir;
+	}
+
+private:
+	void SetDoor(bool bIsOpen);
 
 public:
 	virtual void CollisionBegin(class CCollider* pSrc, class CCollider* pDest, float fTime);
@@ -23,7 +34,6 @@ public:
 	virtual void Start();
 	virtual bool Init();
 	virtual void Update(float fTime);
-	virtual void PostUpdate(float fTime);
 	virtual void Collision(float fTime);
 	virtual void Render(HDC hDC);
 	virtual CDoor* Clone();

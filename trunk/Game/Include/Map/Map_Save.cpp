@@ -1,6 +1,6 @@
 
 #include "RoomMap.h"
-#include "RoomMapObj.h"
+#include "RoomObj.h"
 #include "../PathManager.h"
 
 void CRoomMap::Save(FILE* pFile)
@@ -20,8 +20,8 @@ void CRoomMap::Save(FILE* pFile)
 	int	iSize = static_cast<int>(m_ObjList.size());
 	fwrite(&iSize, sizeof(int), 1, pFile);
 
-	std::list<CRoomMapObj*>::iterator	iter = m_ObjList.begin();
-	std::list<CRoomMapObj*>::iterator	iterEnd = m_ObjList.end();
+	std::list<CRoomObj*>::iterator	iter = m_ObjList.begin();
+	std::list<CRoomObj*>::iterator	iterEnd = m_ObjList.end();
 
 	for (int i = 0; i < iSize; ++i)
 	{

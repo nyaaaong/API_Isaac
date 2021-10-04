@@ -94,8 +94,7 @@ CCollider::CCollider()	:
 	m_pScene(nullptr),
 	m_pOwner(nullptr),
 	m_pProfile(nullptr),
-	m_eType(ECollider_Type::Box),
-	m_bEnable(true)
+	m_eType(ECollider_Type::Box)
 {
 }
 
@@ -104,8 +103,7 @@ CCollider::CCollider(const CCollider& collider) :
 	m_pScene(nullptr),
 	m_pOwner(nullptr),
 	m_pProfile(nullptr),
-	m_eType(ECollider_Type::Box),
-	m_bEnable(true)
+	m_eType(ECollider_Type::Box)
 {
 	m_eType = collider.m_eType;
 	m_tOffset = collider.m_tOffset;

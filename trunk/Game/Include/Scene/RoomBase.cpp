@@ -8,41 +8,33 @@ bool CRoomBase::Init()
 	if (!CStage::Init())
 		return false;
 
-	return true;
-}
-
-void CRoomBase::CreateDoor()
-{
-	int iCount = rand() % 4 + 1;
-
-	for (int i = 0; i < iCount; ++i)
+	for (int i = 0; i < DT_MAX; ++i)
 	{
-		CDoor* pDoor = new CDoor;
+		std::vector<CDoor*>	vecData;
 
-		pDoor->SetScene(this);
+		m_vecDoor.push_back(vecData);
 
-		if (!pDoor->Init())
+		for (int j = 0; j < DD_MAX; ++j)
 		{
-			SAFE_DELETE(pDoor);
-			return;
+			m_vecDoor[i][j] = CreateObject<CDoor>("Door");
+			m_vecDoor[i][j]->SetDoorType(static_cast<EDoorType>(i));
+			m_vecDoor[i][j]->SetDoorDir(static_cast<EDoorDir>(j));
+			m_vecDoor[i][j]->Enable(false);
 		}
-
-		m_vecDoor.push_back(pDoor);
 	}
+
+	return true;
 }
 
 void CRoomBase::CreateMonster()
 {
 
-	/*Vector2	tPlayerPos = GetPlayer()->GetPos();
-
-	CSharedPtr<CBossMonstro> pMonstro = CreateObject<CBossMonstro>("Monstro", "Monstro", Vector2(tPlayerPos.x + 600.f, tPlayerPos.y + 20.f));
-	m_pPlayerHUD->SetBossMonster(static_cast<CCharacter*>(pMonstro));*/
 }
 
 void CRoomBase::Start()
 {
-	CStage::Start();
+	CStage::Start(); 
+	CreateMonster();
 }
 
 bool CRoomBase::Update(float fTime)
@@ -73,20 +65,39 @@ bool CRoomBase::Render(HDC hDC)
 	return true;
 }
 
-CRoomBase::CRoomBase()	:
-	m_iLeftDoor(0),
-	m_iTopDoor(0),
-	m_iRightDoor(0),
-	m_iBottomDoor(0)
+void CRoomBase::SetDoor(EDoorDir eDoorDir, bool bIsBossDoor)
 {
+	if (!bIsBossDoor)
+		m_vecDoor[DT_NORMAL][eDoorDir]->Enable(true);
+	
+	else
+		m_vecDoor[DT_BOSS][eDoorDir]->Enable(true);
+}
+
+void CRoomBase::DoorFunc(EDoorDir eDoorDir)
+{
+	switch (eDoorDir)
+	{
+	case DD_LEFT:
+		break;
+	case DD_TOP:
+		break;
+	case DD_RIGHT:
+		break;
+	case DD_BOTTOM:
+		break;
+	}
+}
+
+CRoomBase::CRoomBase()	:
+	m_bClearRoom(false)
+{
+	m_vecDoor.resize(DT_MAX);
+
+	m_vecDoor[0].resize(DD_MAX);
+	m_vecDoor[1].resize(DD_MAX);
 }
 
 CRoomBase::~CRoomBase()
 {
-	size_t iSize = m_vecDoor.size();
-
-	for (size_t i = 0; i < iSize; ++i)
-	{
-		SAFE_RELEASE(m_vecDoor[i]);
-	}
 }

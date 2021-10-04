@@ -50,7 +50,7 @@ enum class EZOrder
 	Effect = -100,
 	Monster = -30,
 	Player = -20,
-	RoomMapObject = -15,
+	RoomObject = -15,
 	PlayerBody = -10,
 	BackGround = 0
 };
@@ -71,12 +71,20 @@ enum class EObjectType
 	Map
 };
 
-enum class EDoorDir
+enum EDoorDir
 {
-	Left,
-	Top,
-	Right,
-	Bottom
+	DD_LEFT,
+	DD_TOP,
+	DD_RIGHT,
+	DD_BOTTOM,
+	DD_MAX
+};
+
+enum EDoorType
+{
+	DT_NORMAL,
+	DT_BOSS,
+	DT_MAX
 };
 
 enum EObject

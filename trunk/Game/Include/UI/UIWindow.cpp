@@ -47,6 +47,12 @@ void CUIWindow::Update(float fTime)
 			continue;
 		}
 
+		else if (!m_pArrWidget[i]->IsEnable())
+		{
+			++i;
+			continue;
+		}
+
 		m_pArrWidget[i]->Update(fTime);
 		++i;
 	}
@@ -70,6 +76,12 @@ void CUIWindow::PostUpdate(float fTime)
 		}
 
 		else if (!m_pArrWidget[i]->GetVisibility())
+		{
+			++i;
+			continue;
+		}
+
+		else if (!m_pArrWidget[i]->IsEnable())
 		{
 			++i;
 			continue;

@@ -4,10 +4,7 @@
 #include "SceneCollision.h"
 #include "Camera.h"
 #include "../GameManager.h"
-#include "../PathManager.h"
 #include "../Map/RoomMap.h"
-#include "../Map/RoomMapObj.h"
-#include "../Resource/ResourceManager.h"
 
 bool CScene::Init()
 {
@@ -19,7 +16,7 @@ bool CScene::Init()
 	SetActivityLT(Vector2(140.f, 120.f));	// 활동 구역의 시작 위치
 	SetActivityRB(Vector2(tRS.iW - 140.f, tRS.iH - 120.f));	// 활동 구역의 크기
 
-	CreateTextureObject();
+	Init_CreateTextureObject();
 
 	return true;
 }
@@ -27,150 +24,6 @@ bool CScene::Init()
 void CScene::Start()
 {
 	m_bStart = true;
-}
-
-void CScene::SetMap(const std::string& strName, int iRoomNum)
-{
-	size_t iSize = m_vecRoomMap.size();
-
-	for (size_t i = 0; i < iSize; ++i)
-	{
-		m_vecRoomMap[i]->m_bEnable = false;
-
-		if (m_vecRoomMap[i]->GetRoomNumber() == iRoomNum)
-		{
-			m_pCurMap = m_vecRoomMap[i];
-			m_pCurMap->m_bEnable = true;
-			m_pCurMap->SetScene(this);
-		}
-	}
-}
-
-void CScene::SetSpecialMap(ESpecial_RoomType eType)
-{
-	std::unordered_map<ESpecial_RoomType, CRoomMap*>::iterator	iter = m_mapSpecialRoomMap.find(eType);
-
-	if (iter == m_mapSpecialRoomMap.end())
-		return;
-
-	m_pCurMap = iter->second;
-}
-
-CObj* CScene::FindPrototype(const std::string& strName)
-{
-	std::unordered_map<std::string, CSharedPtr<CObj>>::iterator	iter = m_mapPrototype.find(strName);
-
-	if (iter == m_mapPrototype.end())
-		return nullptr;
-
-	return iter->second;
-}
-
-CObj* CScene::FindObject(const std::string& strName)
-{
-	std::list<CSharedPtr<CObj>>::iterator iter = m_ObjList.begin();
-	std::list<CSharedPtr<CObj>>::iterator iterEnd = m_ObjList.end();
-
-	for (; iter != iterEnd; ++iter)
-	{
-		if ((*iter)->GetName() == strName)
-			return (*iter);
-	}
-
-	return nullptr;
-}
-
-void CScene::SetPlayer(const std::string& strName)
-{
-	CObj* pPlayer = FindObject(strName);
-
-	SetPlayer(pPlayer);
-}
-
-void CScene::SetPlayer(CObj* pPlayer)
-{
-	if (!pPlayer)
-		assert(!("if (!pPlayer)"));
-
-	m_pPlayer = pPlayer;
-
-	std::list<CSharedPtr<CObj>>::iterator	iter = m_ObjList.begin();
-	std::list<CSharedPtr<CObj>>::iterator	iterEnd = m_ObjList.end();
-
-	for (; iter != iterEnd; ++iter)
-	{
-		if (*iter == pPlayer)
-		{
-			m_ObjList.erase(iter);
-			return;
-		}
-	}
-}
-
-CSceneResource* CScene::GetSceneResource() const
-{
-	return m_pResource;
-}
-
-CSceneCollision* CScene::GetSceneCollision() const
-{
-	return m_pCollision;
-}
-
-CCamera* CScene::GetCamera() const
-{
-	return m_pCamera;
-}
-
-int CScene::SortY(const void* pSrc, const void* pDest)
-{
-	CObj* pSrcObj = *(CObj**)pSrc;
-	CObj* pDestObj = *(CObj**)pDest;
-
-	float	fSrcY = pSrcObj->GetBottom();
-	float	fDestY = pDestObj->GetBottom();
-
-	if (fSrcY < fDestY)
-		return -1;
-
-	else if (fSrcY > fDestY)
-		return 1;
-
-	return 0;
-}
-
-int CScene::SortUIZOrder(const void* pSrc, const void* pDest)
-{
-	CUIWindow* pSrcObj = *(CUIWindow**)pSrc;
-	CUIWindow* pDestObj = *(CUIWindow**)pDest;
-
-	int iSrcZ = pSrcObj->GetZOrder();
-	int iDestZ = pDestObj->GetZOrder();
-
-	if (iSrcZ > iDestZ)
-		return -1;
-
-	else if (iSrcZ < iDestZ)
-		return 1;
-
-	return 0;
-}
-
-int CScene::SortObjZOrder(const void* pSrc, const void* pDest)
-{
-	CObj* pSrcObj = *(CObj**)pSrc;
-	CObj* pDestObj = *(CObj**)pDest;
-
-	int iSrcZ = pSrcObj->GetZOrder();
-	int iDestZ = pDestObj->GetZOrder();
-
-	if (iSrcZ > iDestZ)
-		return -1;
-
-	else if (iSrcZ < iDestZ)
-		return 1;
-
-	return 0;
 }
 
 bool CScene::Update(float fTime)
@@ -188,6 +41,12 @@ bool CScene::Update(float fTime)
 			{
 				iter = m_ObjList.erase(iter);
 				iterEnd = m_ObjList.end();
+				continue;
+			}
+
+			else if (!(*iter)->IsEnable())
+			{
+				++iter;
 				continue;
 			}
 
@@ -212,6 +71,12 @@ bool CScene::Update(float fTime)
 			}
 
 			else if (!m_pArrUI[i]->GetVisibility())
+			{
+				++i;
+				continue;
+			}
+
+			else if (!m_pArrUI[i]->IsEnable())
 			{
 				++i;
 				continue;
@@ -292,6 +157,12 @@ bool CScene::PostUpdate(float fTime)
 				continue;
 			}
 
+			else if (!(*iter)->IsEnable())
+			{
+				++iter;
+				continue;
+			}
+
 			(*iter)->PostUpdate(fTime * (*iter)->m_fTimeScale);
 			++iter;
 		}
@@ -313,6 +184,12 @@ bool CScene::PostUpdate(float fTime)
 			}
 
 			else if (!m_pArrUI[i]->GetVisibility())
+			{
+				++i;
+				continue;
+			}
+
+			else if (!m_pArrUI[i]->IsEnable())
 			{
 				++i;
 				continue;
@@ -395,6 +272,11 @@ bool CScene::Collision(float fTime)
 				iterEnd = m_ObjList.end();
 				continue;
 			}
+			if (!(*iter)->IsEnable())
+			{
+				++iter;
+				continue;
+			}
 
 			(*iter)->Collision(fTime * (*iter)->m_fTimeScale);
 			++iter;
@@ -420,6 +302,12 @@ bool CScene::Collision(float fTime)
 			}
 
 			else if (!m_pArrUI[i]->GetVisibility())
+			{
+				++i;
+				continue;
+			}
+
+			else if (!m_pArrUI[i]->IsEnable())
 			{
 				++i;
 				continue;
@@ -500,6 +388,12 @@ bool CScene::Render(HDC hDC)
 			{
 				iter = m_ObjList.erase(iter);
 				iterEnd = m_ObjList.end();
+				continue;
+			}
+			
+			else if (!(*iter)->IsEnable())
+			{
+				++iter;
 				continue;
 			}
 
@@ -591,123 +485,7 @@ bool CScene::Render(HDC hDC)
 		}
 	}
 
-	return true;}
-
-void CScene::CreateTextureObject()
-{
-	for (int i = OBJ_ROCK; i < OBJ_MAX; ++i)
-	{
-		// 경로
-		TCHAR	cPath[MAX_PATH] = {};
-		wsprintf(cPath, TEXT("Room/Object/%d.bmp"), i);
-
-		// 텍스쳐명
-		char	cTextureName[32] = "Object";
-
-		// 번호를 문자로
-		char cNum[16] = {};
-		sprintf_s(cNum, "%d", i);
-
-		// 텍스쳐명 + 숫자
-		strcat_s(cTextureName, cNum);
-
-		CResourceManager::GetInst()->LoadTexture(cTextureName, cPath);
-	}
-
-	CResourceManager::GetInst()->LoadTexture("BackGround", TEXT("Room/Room.bmp"));
-	CResourceManager::GetInst()->LoadTexture("StartRoom_BackGround", TEXT("Room/Room_Start.bmp"));
-}
-
-void CScene::SaveFullPath(const char* cFullPath)
-{
-	FILE* pFile = nullptr;
-
-	fopen_s(&pFile, cFullPath, "wb");
-
-	if (!pFile)
-		return;
-
-	int	iSize = static_cast<int>(m_vecRoomMap.size());
-	fwrite(&iSize, sizeof(int), 1, pFile);
-
-	for (int i = 0; i < iSize; ++i)
-	{
-		m_vecRoomMap[i]->Save(pFile);
-	}
-
-	fclose(pFile);
-}
-
-void CScene::SaveFile(const char* cFileName, const std::string& strPath)
-{
-	char	cFullPath[MAX_PATH] = {};
-
-	const PathInfo* pInfo = CPathManager::GetInst()->FindPath(cFileName);
-
-	if (pInfo)
-		strcpy_s(cFullPath, pInfo->cPathMultibyte);
-
-	strcat_s(cFullPath, cFileName);
-
-	SaveFullPath(cFullPath);
-}
-
-void CScene::LoadFullPath(const char* cFullPath)
-{
-	FILE* pFile = nullptr;
-
-	fopen_s(&pFile, cFullPath, "rb");
-
-	if (!pFile)
-		return;
-
-	{
-		size_t iSize = m_vecRoomMap.size();
-
-		for (size_t i = 0; i < iSize; ++i)
-		{
-			SAFE_DELETE(m_vecRoomMap[i]);
-		}
-
-		m_vecRoomMap.clear();
-	}
-
-	int	iSize = 0;
-	fread(&iSize, sizeof(int), 1, pFile);
-
-	m_vecRoomMap.resize(iSize);
-
-	for (int i = 0; i < iSize; ++i)
-	{
-		CRoomMap* pMap = new CRoomMap;
-
-		pMap->SetScene(this);
-		pMap->Load(pFile);
-
-		if (!pMap->Init())
-		{
-			SAFE_DELETE(pMap);
-			return;
-		}
-
-		m_vecRoomMap[i] = pMap;
-	}
-
-	fclose(pFile);
-}
-
-void CScene::LoadFile(const char* cFileName, const std::string& strPath)
-{
-	char	cFullPath[MAX_PATH] = {};
-
-	const PathInfo* pInfo = CPathManager::GetInst()->FindPath(strPath);
-
-	if (pInfo)
-		strcpy_s(cFullPath, pInfo->cPathMultibyte);
-
-	strcat_s(cFullPath, cFileName);
-
-	LoadFullPath(cFullPath);
+	return true;
 }
 
 CScene::CScene()	:

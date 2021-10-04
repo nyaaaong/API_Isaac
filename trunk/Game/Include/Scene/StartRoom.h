@@ -15,9 +15,6 @@ public:
 	virtual bool Collision(float fTime);
 	virtual bool Render(HDC hDC);
 
-private:
-	void Next(float fTime);
-
 protected:
 	CStartRoom();
 	virtual ~CStartRoom();
