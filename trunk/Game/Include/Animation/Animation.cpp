@@ -170,12 +170,6 @@ AnimationInfo* CAnimation::FindInfo(const std::string& strName)
 
 void CAnimation::Update(float fTime)
 {
-	if (!m_pCurrentAnimation)
-		return;
-
-	if (m_pCurrentAnimation->pSequence->GetName() == "HeadFireDown")
-		int a = 0;
-
 	m_pCurrentAnimation->fTime += fTime * m_pCurrentAnimation->fPlayScale;
 
 	bool bAnimEnd = false;

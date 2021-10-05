@@ -23,6 +23,11 @@ bool CPlayerBody::Init()
 	AddAnimation("BodyMoveLeft");
 	AddAnimation("BodyMoveRight");
 
+	m_pColliderBox = AddCollider<CColliderBox>("PlayerBody");
+	m_pColliderBox->SetExtent(m_tSize);
+	m_pColliderBox->SetOffset(0.f, PLAYER_BODY_OFFSET_Y);
+	m_pColliderBox->SetCollisionProfile("PlayerBody");
+
 	return true;
 }
 
@@ -109,7 +114,6 @@ CPlayerBody* CPlayerBody::Clone()
 CPlayerBody::CPlayerBody()	:
 	m_pPlayer(nullptr)
 {
-	int  a = 0;
 }
 
 CPlayerBody::CPlayerBody(const CPlayerBody& obj)	:
@@ -120,5 +124,4 @@ CPlayerBody::CPlayerBody(const CPlayerBody& obj)	:
 
 CPlayerBody::~CPlayerBody()
 {
-	int a = 0;
 }

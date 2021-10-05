@@ -4,6 +4,7 @@
 #include "../Scene/Scene.h"
 #include "../Scene/RoomBase.h"
 #include "../Resource/ResourceManager.h"
+#include "../Collision/ColliderBox.h"
 
 void CDoor::SetDoor(bool bIsOpen)
 {
@@ -89,6 +90,22 @@ void CDoor::SetDoor(bool bIsOpen)
 
 	SetTexture(strName, strPath);
 	SetTextureColorKey();
+
+	switch (m_eDoorDir)
+	{
+	case DD_LEFT:
+		m_pColliderBox->SetOffset(-15.f, 0.f);
+		break;
+	case DD_TOP:
+		m_pColliderBox->SetOffset(0.f, -15.f);
+		break;
+	case DD_RIGHT:
+		m_pColliderBox->SetOffset(15.f, 0.f);
+		break;
+	case DD_BOTTOM:
+		m_pColliderBox->SetOffset(0.f, 15.f);
+		break;
+	}
 }
 
 void CDoor::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
@@ -113,6 +130,9 @@ bool CDoor::Init()
 	SetZOrder(EZOrder::RoomObject);
 
 	// 충돌 생성
+	m_pColliderBox = AddCollider<CColliderBox>("Door");
+	m_pColliderBox->SetExtent(m_tSize * 0.3f);
+	m_pColliderBox->SetCollisionProfile("Door");
 
 	return true;
 }

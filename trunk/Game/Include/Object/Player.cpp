@@ -14,10 +14,6 @@ bool CPlayer::Init()
 
 	AddPlayerAnimation();
 
-	//m_pColliderBox = AddCollider<CColliderBox>("PlayerHead");
-	//m_pColliderBox->SetExtent(100.f, 130.f);
-	//m_pColliderBox->SetCollisionProfile("PlayerHead");
-
 	m_pColliderSphere = AddCollider<CColliderSphere>("PlayerHead");
 	m_pColliderSphere->SetRadius(40.f);
 	m_pColliderSphere->SetCollisionProfile("PlayerHead");
@@ -32,7 +28,6 @@ void CPlayer::Start()
 	AddCallback();
 
 	m_pColliderSphere->SetCollisionBeginFunc<CPlayer>(this, &CPlayer::CollisionBegin);
-	//m_pColliderBox->SetCollisionBeginFunc<CPlayer>(this, &CPlayer::CollisionBegin);
 }
 
 void CPlayer::Update(float fTime)
@@ -40,8 +35,6 @@ void CPlayer::Update(float fTime)
 	CCharacter::Update(fTime);
 
 	NoDamageTime(fTime);
-
-	//m_pPlayerBody->SetPos(m_tPos);
 
 	UpdateMoveUpDown();
 }

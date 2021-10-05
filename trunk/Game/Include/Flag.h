@@ -26,6 +26,7 @@ enum ECollision_Channel
 {
 	Channel_Wall,
 	Channel_Object,
+	Channel_Door,
 	Channel_PlayerHead,
 	Channel_PlayerBody,
 	Channel_Monster,
