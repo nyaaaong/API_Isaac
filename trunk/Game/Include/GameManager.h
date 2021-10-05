@@ -23,6 +23,7 @@ private:
 	bool		m_bIsActiveGame;
 	bool		m_bTitleUpdate;
 	char		m_cTextFPS[64];
+	float		m_fUpdateTimer;
 
 public:
 	bool IsTitleUpdate()	const

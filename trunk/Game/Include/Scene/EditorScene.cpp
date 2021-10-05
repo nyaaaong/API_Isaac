@@ -62,6 +62,7 @@ bool CEditorScene::Update(float fTime)
 	MouseWindowCheck();
 	MouseObjectView();
 	MouseSetBox();
+
 	EditorTextOut();
 
 	if (m_pCurMouse)

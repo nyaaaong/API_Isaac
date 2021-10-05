@@ -10,6 +10,7 @@ class CRoomBase :
 protected:
 	std::vector<std::vector<class CDoor*>>	m_vecDoor;
 	bool	m_bClearRoom;
+	int		m_iRoomNum;
 
 public:
 	bool IsClearRoom()	const

@@ -9,6 +9,8 @@ bool CRoom6::Init()
 	if (!CRoomBase::Init())
 		return false;
 
+	SetMap("Room", m_iRoomNum);
+
 	return true;
 }
 

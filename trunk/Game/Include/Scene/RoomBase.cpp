@@ -23,6 +23,8 @@ bool CRoomBase::Init()
 		}
 	}
 
+	m_iRoomNum = rand() % m_iMaxRoomCount;
+
 	return true;
 }
 
@@ -90,7 +92,8 @@ void CRoomBase::DoorFunc(EDoorDir eDoorDir)
 }
 
 CRoomBase::CRoomBase()	:
-	m_bClearRoom(false)
+	m_bClearRoom(false),
+	m_iRoomNum(0)
 {
 	m_vecDoor.resize(DT_MAX);
 

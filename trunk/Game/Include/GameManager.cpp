@@ -27,7 +27,8 @@ CGameManager::CGameManager()	:
 	m_hRedPen(0),
 	m_bIsActiveGame(true),
 	m_bTitleUpdate(true),
-	m_cTextFPS{}
+	m_cTextFPS{},
+	m_fUpdateTimer(1.f)
 {
 }
 
@@ -144,17 +145,25 @@ void CGameManager::Logic()
 
 	if (Collision(fTime))
 		return;
+
 	Render(fTime);
 }
 
 bool CGameManager::Update(float fTime)
 {
+	m_fUpdateTimer += fTime;
+
 	//	타이틀바에 FPS 출력
 	if (m_bTitleUpdate)
 	{
-		memset(m_cTextFPS, 0, sizeof(char) * 64);
-		sprintf_s(m_cTextFPS, "The Binding of Isaac　　FPS : %.f", m_pTimer->GetFPS());
-		SetWindowTextA(m_hWnd, m_cTextFPS);
+		if (m_fUpdateTimer >= 1.f)
+		{
+			m_fUpdateTimer = 0.f;
+
+			memset(m_cTextFPS, 0, sizeof(char) * 64);
+			sprintf_s(m_cTextFPS, "The Binding of Isaac　　FPS : %.f", m_pTimer->GetFPS());
+			SetWindowTextA(m_hWnd, m_cTextFPS);
+		}
 	}
 
 	return CSceneManager::GetInst()->Update(fTime);
