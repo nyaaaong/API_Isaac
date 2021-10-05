@@ -25,6 +25,18 @@ bool CRoomBase::Init()
 
 	m_iRoomNum = rand() % m_iMaxRoomCount;
 
+	size_t	iSize = m_vecRoomNum.size();
+
+	for (size_t i = 0; i < iSize; ++i)
+	{
+		if (m_vecRoomNum[i] == m_iRoomNum)
+		{
+			m_iRoomNum = rand() % m_iMaxRoomCount;
+			i = 0;
+			continue;
+		}
+	}
+
 	return true;
 }
 
@@ -99,6 +111,8 @@ CRoomBase::CRoomBase()	:
 
 	m_vecDoor[0].resize(DD_MAX);
 	m_vecDoor[1].resize(DD_MAX);
+
+	m_vecRoomNum.reserve(6);
 }
 
 CRoomBase::~CRoomBase()
