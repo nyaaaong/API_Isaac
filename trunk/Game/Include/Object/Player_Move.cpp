@@ -100,13 +100,13 @@ void CPlayer::UpdateMoveUpDown()
 {
 	if (m_bMoveDown)
 	{
-		if (m_tPos.y == m_tPrevPos.y)
+		if (m_tPos.y == m_tPrevPos.y && !m_bIsMove)
 			m_bMoveDown = false;
 	}
 
 	if (m_bMoveUp)
 	{
-		if (m_tPos.y == m_tPrevPos.y)
+		if (m_tPos.y == m_tPrevPos.y && !m_bIsMove)
 			m_bMoveUp = false;
 	}
 }
