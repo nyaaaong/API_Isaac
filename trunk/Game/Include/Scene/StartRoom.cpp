@@ -18,7 +18,7 @@ bool CStartRoom::Init()
 	SetDoor(DD_RIGHT, false);
 	SetDoor(DD_TOP, false);
 
-	//CreatePlayer()
+	CreatePlayer(Vector2::LEFT);
 
 	return true;
 }

@@ -41,7 +41,6 @@ protected:
 	bool					m_bPhysics;
 	bool					m_bIsGround;
 	bool					m_bIsJump;
-	EObjectType				m_eObjectType;
 
 public:
 	bool IsCull()	const
@@ -55,11 +54,6 @@ public:
 	}
 
 public:
-	EObjectType GetObjectType()	const
-	{
-		return m_eObjectType;
-	}
-
 	int GetZOrder()	const
 	{
 		return m_iZOrder;

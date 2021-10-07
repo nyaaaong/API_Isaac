@@ -1,7 +1,8 @@
 
 #include "Tear.h"
-#include "../Collision/ColliderSphere.h"
 #include "Player.h"
+#include "Block.h"
+#include "../Collision/ColliderSphere.h"
 #include "../Scene/Scene.h"
 #include "../Scene/SceneResource.h"
 #include "PlayerTearEffect.h"
@@ -79,9 +80,30 @@ void CTear::Start()
 void CTear::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 {
 	if (pDest->GetName() == "Monster")
+	{
 		pDest->GetOwner()->SetDamage(m_fDamage);
+		TearDestroy();
+	}
 
-	TearDestroy();
+	else if (pDest->GetName() == "MapObject")
+	{
+		CBlock* pBlock = dynamic_cast<CBlock*>(pDest->GetOwner());
+
+		switch (pBlock->GetType())
+		{
+		case MT_ROCK:
+			break;
+		case MT_IRON:
+			break;
+		case MT_SPIKE:
+			return;
+		case MT_POOP:
+			pBlock->SetDamage(1.f);
+			break;
+		}
+
+		TearDestroy();
+	}
 }
 
 void CTear::TearDestroy()
@@ -157,7 +179,6 @@ CTear::CTear() :
 	m_fDamage(0),
 	m_eTearType(ETearType::None)
 {
-	m_eObjectType = EObjectType::Tear;
 }
 
 CTear::CTear(const CTear& obj)	:

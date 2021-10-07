@@ -5,7 +5,7 @@
 #include "../Resource/ResourceManager.h"
 
 CRoomObj::CRoomObj()	:
-	m_eObject(OBJ_ROCK),
+	m_eType(MT_ROCK),
 	m_pScene(nullptr),
 	m_iZOrder(static_cast<int>(EZOrder::RoomObject))
 {
@@ -17,18 +17,18 @@ CRoomObj::~CRoomObj()
 
 bool CRoomObj::Init()
 {
-	switch (m_eObject)
+	switch (m_eType)
 	{
-	case OBJ_ROCK:
+	case MT_ROCK:
 		m_pTexture = CResourceManager::GetInst()->FindTexture("Object1");
 		break;
-	case OBJ_IRON:
+	case MT_IRON:
 		m_pTexture = CResourceManager::GetInst()->FindTexture("Object2");
 		break;
-	case OBJ_SPIKE:
+	case MT_SPIKE:
 		m_pTexture = CResourceManager::GetInst()->FindTexture("Object3");
 		break;
-	case OBJ_POOP:
+	case MT_POOP:
 		m_pTexture = CResourceManager::GetInst()->FindTexture("Object4");
 		break;
 	}

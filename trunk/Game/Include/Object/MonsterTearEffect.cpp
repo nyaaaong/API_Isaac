@@ -57,7 +57,6 @@ CMonsterTearEffect* CMonsterTearEffect::Clone()
 
 CMonsterTearEffect::CMonsterTearEffect()
 {
-	m_eObjectType = EObjectType::Effect;
 }
 
 CMonsterTearEffect::CMonsterTearEffect(const CMonsterTearEffect& obj)	:

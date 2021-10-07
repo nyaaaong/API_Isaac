@@ -112,14 +112,12 @@ void CPlayer::UpdateMoveUpDown()
 
 	if (m_bMoveDown)
 	{
-		//if (m_tPos.y == m_tPrevPos.y && m_tPos.y != fPlayerBodyDownY)
 		if (!CInput::GetInst()->GetKeyPush("PlayerMoveDown"))
 			m_bMoveDown = false;
 	}
 
 	if (m_bMoveUp)
 	{
-		//if (m_tPos.y == m_tPrevPos.y && m_tPos.y != fPlayerBodyUpY)
 		if (!CInput::GetInst()->GetKeyPush("PlayerMoveUp"))
 			m_bMoveUp = false;
 	}

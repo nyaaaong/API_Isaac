@@ -6,7 +6,7 @@ void CRoomObj::Load(FILE* pFile)
 	fread(&m_tPos, sizeof(Vector2), 1, pFile);
 	fread(&m_tSize, sizeof(Vector2), 1, pFile);
 
-	fread(&m_eObject, sizeof(EObject), 1, pFile);
+	fread(&m_eType, sizeof(EMapObject_Type), 1, pFile);
 
 	fread(&m_iZOrder, sizeof(int), 1, pFile);
 

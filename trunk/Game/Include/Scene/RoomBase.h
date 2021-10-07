@@ -31,6 +31,10 @@ protected:
 	void SetDoor(EDoorDir eDoorDir, bool bIsBossDoor);
 	const Vector2& GetDoorPos(EDoorDir eDoorDir, bool bIsBossDoor);
 
+private:
+	void CreateDoor();
+	void CreateRoomNum();
+
 protected:
 	virtual void CreateMonster();
 	virtual void DoorFunc(EDoorDir eDoorDir);

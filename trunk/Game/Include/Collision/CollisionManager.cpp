@@ -5,7 +5,6 @@ CCollisionManager* CCollisionManager::m_pInst = nullptr;
 
 bool CCollisionManager::Init()
 {
-	CreateProfile("Wall", Channel_Wall, true);
 	CreateProfile("Object", Channel_Object, true);
 	CreateProfile("Door", Channel_Door, true);
 	CreateProfile("PlayerHead", Channel_PlayerHead, true);
@@ -16,18 +15,6 @@ bool CCollisionManager::Init()
 	CreateProfile("Bomb", Channel_Bomb, true);
 	CreateProfile("BombExplosion", Channel_BombExplosion, true);
 
-	SetCollisionState("Wall", Channel_Wall, ECollision_State::Ignore);
-	SetCollisionState("Wall", Channel_Object, ECollision_State::Ignore);
-	SetCollisionState("Wall", Channel_Door, ECollision_State::Ignore);
-	SetCollisionState("Wall", Channel_PlayerHead, ECollision_State::Ignore);
-	SetCollisionState("Wall", Channel_PlayerBody, ECollision_State::Ignore);
-	SetCollisionState("Wall", Channel_Monster, ECollision_State::Ignore);
-	SetCollisionState("Wall", Channel_PlayerAttack, ECollision_State::Ignore);
-	SetCollisionState("Wall", Channel_MonsterAttack, ECollision_State::Ignore);
-	SetCollisionState("Wall", Channel_Bomb, ECollision_State::Ignore);
-	SetCollisionState("Wall", Channel_BombExplosion, ECollision_State::Ignore);
-
-	SetCollisionState("Door", Channel_Wall, ECollision_State::Ignore);
 	SetCollisionState("Door", Channel_Object, ECollision_State::Ignore);
 	SetCollisionState("Door", Channel_Door, ECollision_State::Ignore);
 	SetCollisionState("Door", Channel_PlayerHead, ECollision_State::Ignore);
@@ -38,8 +25,8 @@ bool CCollisionManager::Init()
 	SetCollisionState("Door", Channel_Bomb, ECollision_State::Ignore);
 	SetCollisionState("Door", Channel_BombExplosion, ECollision_State::Ignore);
 
-	SetCollisionState("Object", Channel_Wall, ECollision_State::Ignore);
 	SetCollisionState("Object", Channel_Object, ECollision_State::Ignore);
+	SetCollisionState("Object", Channel_Door, ECollision_State::Ignore);
 	SetCollisionState("Object", Channel_PlayerHead, ECollision_State::Ignore);
 	SetCollisionState("Object", Channel_PlayerBody, ECollision_State::Ignore);
 	SetCollisionState("Object", Channel_Monster, ECollision_State::Ignore);
@@ -47,29 +34,38 @@ bool CCollisionManager::Init()
 	SetCollisionState("Object", Channel_MonsterAttack, ECollision_State::Ignore);
 	SetCollisionState("Object", Channel_Bomb, ECollision_State::Ignore);
 
+	SetCollisionState("PlayerHead", Channel_Object, ECollision_State::Ignore);
+	SetCollisionState("PlayerHead", Channel_Door, ECollision_State::Ignore);
 	SetCollisionState("PlayerHead", Channel_PlayerHead, ECollision_State::Ignore);
 	SetCollisionState("PlayerHead", Channel_PlayerBody, ECollision_State::Ignore);
 	SetCollisionState("PlayerHead", Channel_PlayerAttack, ECollision_State::Ignore);
-	SetCollisionState("PlayerHead", Channel_Door, ECollision_State::Ignore);
+	SetCollisionState("PlayerHead", Channel_Bomb, ECollision_State::Ignore);
 
 	SetCollisionState("PlayerBody", Channel_PlayerHead, ECollision_State::Ignore);
 	SetCollisionState("PlayerBody", Channel_PlayerBody, ECollision_State::Ignore);
 	SetCollisionState("PlayerBody", Channel_PlayerAttack, ECollision_State::Ignore);
 
+	SetCollisionState("Monster", Channel_Door, ECollision_State::Ignore);
 	SetCollisionState("Monster", Channel_Monster, ECollision_State::Ignore);
 	SetCollisionState("Monster", Channel_MonsterAttack, ECollision_State::Ignore);
+	SetCollisionState("Monster", Channel_Bomb, ECollision_State::Ignore);
 
+	SetCollisionState("PlayerTear", Channel_Door, ECollision_State::Ignore);
 	SetCollisionState("PlayerTear", Channel_PlayerHead, ECollision_State::Ignore);
 	SetCollisionState("PlayerTear", Channel_PlayerBody, ECollision_State::Ignore);
 	SetCollisionState("PlayerTear", Channel_PlayerAttack, ECollision_State::Ignore);
 	SetCollisionState("PlayerTear", Channel_MonsterAttack, ECollision_State::Ignore);
 	SetCollisionState("PlayerTear", Channel_BombExplosion, ECollision_State::Ignore);
 
+	SetCollisionState("MonsterTear", Channel_Door, ECollision_State::Ignore);
 	SetCollisionState("MonsterTear", Channel_Monster, ECollision_State::Ignore);
 	SetCollisionState("MonsterTear", Channel_PlayerAttack, ECollision_State::Ignore);
 	SetCollisionState("MonsterTear", Channel_MonsterAttack, ECollision_State::Ignore);
 	SetCollisionState("MonsterTear", Channel_BombExplosion, ECollision_State::Ignore);
 
+	SetCollisionState("BombExplosion", Channel_Door, ECollision_State::Ignore);
+	SetCollisionState("BombExplosion", Channel_PlayerAttack, ECollision_State::Ignore);
+	SetCollisionState("BombExplosion", Channel_MonsterAttack, ECollision_State::Ignore);
 	SetCollisionState("BombExplosion", Channel_BombExplosion, ECollision_State::Ignore);
 
 	return true;

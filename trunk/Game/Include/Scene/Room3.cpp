@@ -10,6 +10,7 @@ bool CRoom3::Init()
 		return false;
 
 	SetMap("Room", m_iRoomNum);
+	LoadMapObject();
 
 	return true;
 }

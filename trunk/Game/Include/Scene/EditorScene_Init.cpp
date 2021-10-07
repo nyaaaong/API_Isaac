@@ -6,7 +6,7 @@
 
 void CEditorScene::CreateMouseCursor()
 {
-	for (int i = OBJ_ROCK; i < OBJ_MAX; ++i)
+	for (int i = MT_ROCK; i < MT_MAX; ++i)
 	{
 		// 텍스쳐명
 		char	cTextureName[32] = "Object";

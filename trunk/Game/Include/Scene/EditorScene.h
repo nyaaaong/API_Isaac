@@ -14,7 +14,7 @@ private:
 
 private:
 	int		m_iCurRoom;
-	EObject	m_eCurObject;
+	EMapObject_Type	m_eCurType;
 	EEditor_State	m_eState;
 	std::vector<CSharedPtr<CUIImage>>	m_vecMouse;
 	CSharedPtr<CUIImage>	m_pCurMouse;

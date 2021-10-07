@@ -14,7 +14,7 @@ bool CBossRoom::Init()
 	CreateSpecialRoomMap<CRoomMap>(ESpecial_RoomType::Boss);
 	SetDoor(EDoorDir::DD_RIGHT, true);
 
-	CreatePlayer(Vector2(GetFieldRB().x - 50.f, GetFieldRB().y * 0.5f));
+	CreatePlayer(Vector2::RIGHT);
 
 	return true;
 }

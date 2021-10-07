@@ -186,6 +186,9 @@
     <Filter Include="01. Scene\00. Scene\03. Func">
       <UniqueIdentifier>{95eeeabb-93d5-4314-b25e-d8570261d13f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Object\06. Block">
+      <UniqueIdentifier>{f47723ca-39a5-4745-9b3d-f5dcebf9c7b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -362,13 +365,13 @@
     <ClCompile Include="Map\RoomObj.cpp">
       <Filter>07. Map\00. Object</Filter>
     </ClCompile>
-    <ClCompile Include="Map\Map_Save.cpp">
+    <ClCompile Include="Map\RoomMap_Save.cpp">
       <Filter>07. Map\01. Func</Filter>
     </ClCompile>
-    <ClCompile Include="Map\Map_Load.cpp">
+    <ClCompile Include="Map\RoomMap_Load.cpp">
       <Filter>07. Map\01. Func</Filter>
     </ClCompile>
-    <ClCompile Include="Map\Map_ObjMgr.cpp">
+    <ClCompile Include="Map\RoomMap_ObjMgr.cpp">
       <Filter>07. Map\01. Func</Filter>
     </ClCompile>
     <ClCompile Include="Map\RoomObj_Save.cpp">
@@ -418,6 +421,9 @@
     </ClCompile>
     <ClCompile Include="Scene\Scene_Map.cpp">
       <Filter>01. Scene\00. Scene\03. Func</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Block.cpp">
+      <Filter>02. Object\06. Block</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -606,6 +612,9 @@
     </ClInclude>
     <ClInclude Include="Scene\Room3.h">
       <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Block.h">
+      <Filter>02. Object\06. Block</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

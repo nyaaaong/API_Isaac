@@ -6,7 +6,6 @@ CCharacter::CCharacter()	:
 	m_tBulletStartDir(Vector2(0.f, 1.f)),
 	m_fTearTimer(0.f)
 {
-	m_eObjectType = EObjectType::Character;
 }
 
 CCharacter::CCharacter(const CCharacter& obj)	:

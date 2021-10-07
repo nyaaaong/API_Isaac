@@ -52,7 +52,7 @@ void CEditorScene::MouseWindowCheck()
 
 void CEditorScene::MouseObjectView()
 {
-	m_pCurMouse = m_vecMouse[m_eCurObject - 1];
+	m_pCurMouse = m_vecMouse[m_eCurType - 1];
 }
 
 void CEditorScene::MouseSetBox()

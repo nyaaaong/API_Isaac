@@ -349,7 +349,6 @@ CObj::CObj() :
 	m_bCameraCull(false),
 	m_bStart(false),
 	m_iZOrder(0),
-	m_eObjectType(EObjectType::Object),
 	m_bEnableDamage(true),
 	m_pColliderBox(nullptr),
 	m_pColliderSphere(nullptr),
@@ -406,7 +405,6 @@ CObj::CObj(const CObj& obj)	:
 	m_bStart = false;
 	m_iZOrder = obj.m_iZOrder;
 	m_pTexture = obj.m_pTexture;
-	m_eObjectType = obj.m_eObjectType;
 	m_bEnableDamage = obj.m_bEnableDamage;
 	m_bInvisible = obj.m_bInvisible;
 	m_fGravityAcc = obj.m_fGravityAcc;

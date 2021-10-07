@@ -5,7 +5,7 @@
 
 CEditorScene::CEditorScene()	:
 	m_iCurRoom(1),
-	m_eCurObject(OBJ_ROCK),
+	m_eCurType(MT_ROCK),
 	m_eState(EEditor_State::Idle),
 	m_fTimer(0.f),
 	m_fMaxTimer(5.f),
@@ -14,7 +14,7 @@ CEditorScene::CEditorScene()	:
 	m_cStateText{},
 	m_cFPSText{}
 {
-	m_vecMouse.resize(OBJ_MAX - 1);
+	m_vecMouse.resize(MT_MAX - 1);
 }
 
 CEditorScene::~CEditorScene()

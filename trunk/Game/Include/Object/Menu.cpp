@@ -1,6 +1,7 @@
 
 #include "Menu.h"
 #include "../Input.h"
+#include "../Scene/Room1.h"
 #include "../Scene/StartRoom.h"
 #include "../Scene/BossRoom.h"
 #include "../Scene/EditorScene.h"
@@ -10,7 +11,8 @@
 void CMenu::GameStart(float fTime)
 {
 	//CSceneManager::GetInst()->CreateScene<CStartRoom>();
-	CSceneManager::GetInst()->CreateScene<CBossRoom>();
+	//CSceneManager::GetInst()->CreateScene<CBossRoom>();
+	CSceneManager::GetInst()->CreateScene<CRoom1>();
 }
 
 void CMenu::GameEditor(float fTime)
@@ -71,7 +73,6 @@ CMenu* CMenu::Clone()
 
 CMenu::CMenu()
 {
-	m_eObjectType = EObjectType::Map;
 }
 
 CMenu::CMenu(const CMenu& obj)	:

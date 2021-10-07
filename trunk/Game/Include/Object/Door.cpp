@@ -4,6 +4,81 @@
 #include "../Resource/ResourceManager.h"
 #include "../Collision/ColliderBox.h"
 
+void CDoor::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
+{
+	CObj::CollisionBegin(pSrc, pDest, fTime);
+}
+
+void CDoor::Start()
+{
+	CObj::Start();
+
+	SetDoor(false);
+}
+
+bool CDoor::Init()
+{
+	if (!CObj::Init())
+		return false;
+
+	SetPivot(0.5f, 0.5f);
+
+	SetZOrder(EZOrder::RoomObject);
+
+	// 中宜 持失
+	m_pColliderBox = AddCollider<CColliderBox>("Door");
+	m_pColliderBox->SetExtent(m_tSize * 0.3f);
+	m_pColliderBox->SetCollisionProfile("Door");
+
+	return true;
+}
+
+void CDoor::Update(float fTime)
+{
+	CObj::Update(fTime);
+
+	if (!m_bOpenStart && dynamic_cast<CRoomBase*>(m_pScene)->IsClearRoom())
+	{
+		m_bOpenStart = true;
+
+		SetDoor(true);
+	}
+}
+
+void CDoor::Collision(float fTime)
+{
+	CObj::Collision(fTime);
+}
+
+void CDoor::Render(HDC hDC)
+{
+	CObj::Render(hDC);
+}
+
+CDoor* CDoor::Clone()
+{
+	return new CDoor(*this);
+}
+
+CDoor::CDoor()	:
+	m_eDoorType(DT_MAX),
+	m_eDoorDir(DD_MAX),
+	m_bOpenStart(false)
+{
+}
+
+CDoor::CDoor(const CDoor& obj)	:
+	CObj(obj)
+{
+	m_eDoorType = obj.m_eDoorType;
+	m_eDoorDir = obj.m_eDoorDir;
+	m_bOpenStart = false;
+}
+
+CDoor::~CDoor()
+{
+}
+
 void CDoor::SetDoor(bool bIsOpen)
 {
 	std::string	strName;
@@ -84,79 +159,4 @@ void CDoor::SetDoor(bool bIsOpen)
 		m_pColliderBox->SetOffset(0.f, 15.f);
 		break;
 	}
-}
-
-void CDoor::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
-{
-	CObj::CollisionBegin(pSrc, pDest, fTime);
-}
-
-void CDoor::Start()
-{
-	CObj::Start();
-
-	SetDoor(false);
-}
-
-bool CDoor::Init()
-{
-	if (!CObj::Init())
-		return false;
-
-	SetPivot(0.5f, 0.5f);
-
-	SetZOrder(EZOrder::RoomObject);
-
-	// 中宜 持失
-	m_pColliderBox = AddCollider<CColliderBox>("Door");
-	m_pColliderBox->SetExtent(m_tSize * 0.3f);
-	m_pColliderBox->SetCollisionProfile("Door");
-
-	return true;
-}
-
-void CDoor::Update(float fTime)
-{
-	CObj::Update(fTime);
-
-	if (!m_bOpenStart && dynamic_cast<CRoomBase*>(m_pScene)->IsClearRoom())
-	{
-		m_bOpenStart = true;
-
-		SetDoor(true);
-	}
-}
-
-void CDoor::Collision(float fTime)
-{
-	CObj::Collision(fTime);
-}
-
-void CDoor::Render(HDC hDC)
-{
-	CObj::Render(hDC);
-}
-
-CDoor* CDoor::Clone()
-{
-	return new CDoor(*this);
-}
-
-CDoor::CDoor()	:
-	m_eDoorType(DT_MAX),
-	m_eDoorDir(DD_MAX),
-	m_bOpenStart(false)
-{
-}
-
-CDoor::CDoor(const CDoor& obj)	:
-	CObj(obj)
-{
-	m_eDoorType = obj.m_eDoorType;
-	m_eDoorDir = obj.m_eDoorDir;
-	m_bOpenStart = false;
-}
-
-CDoor::~CDoor()
-{
 }

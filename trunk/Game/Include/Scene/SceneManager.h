@@ -9,6 +9,7 @@ class CSceneManager
 private:
 	CScene* m_pScene;
 	CScene* m_pNextScene;
+	Vector2	m_tPrevScenePlayerPos; // 이전 방에서 어느 방향의 문을 사용 했는지
 
 public:
 	CScene* GetScene()	const
@@ -46,6 +47,18 @@ public:
 private:
 	CSceneManager();
 	~CSceneManager();
+
+public:
+	const Vector2& GetPrevScenePlayerPos()	const
+	{
+		return m_tPrevScenePlayerPos;
+	}
+
+public:
+	void SetPrevScenePlayerPos(const Vector2& tPos)
+	{
+		m_tPrevScenePlayerPos = tPos;
+	}
 
 public:
 	template <typename T>

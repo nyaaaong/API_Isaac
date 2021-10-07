@@ -24,7 +24,6 @@ enum class ECollider_Type
 
 enum ECollision_Channel
 {
-	Channel_Wall,
 	Channel_Object,
 	Channel_Door,
 	Channel_PlayerHead,
@@ -64,15 +63,6 @@ enum class ETearType
 	Monster
 };
 
-enum class EObjectType
-{
-	Object,
-	Character,
-	Tear,
-	Effect,
-	Map
-};
-
 enum EDoorDir
 {
 	DD_LEFT,
@@ -89,14 +79,14 @@ enum EDoorType
 	DT_MAX
 };
 
-enum EObject
+enum EMapObject_Type
 {
-	OBJ_NONE,
-	OBJ_ROCK,
-	OBJ_IRON,
-	OBJ_SPIKE,
-	OBJ_POOP,
-	OBJ_MAX
+	MT_NONE,
+	MT_ROCK,
+	MT_IRON,
+	MT_SPIKE,
+	MT_POOP,
+	MT_MAX
 };
 
 enum class EEditor_State

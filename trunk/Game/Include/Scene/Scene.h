@@ -85,6 +85,7 @@ public:
 
 public:
 	void SetMap(const std::string& strName, int iRoomNum);
+	void LoadMapObject();
 	void SetSpecialMap(ESpecial_RoomType eType);
 
 private:

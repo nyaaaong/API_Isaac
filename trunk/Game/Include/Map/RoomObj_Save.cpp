@@ -6,7 +6,7 @@ void CRoomObj::Save(FILE* pFile)
 	fwrite(&m_tPos, sizeof(Vector2), 1, pFile);
 	fwrite(&m_tSize, sizeof(Vector2), 1, pFile);
 
-	fwrite(&m_eObject, sizeof(EObject), 1, pFile);
+	fwrite(&m_eType, sizeof(EMapObject_Type), 1, pFile);
 
 	fwrite(&m_iZOrder, sizeof(int), 1, pFile);
 

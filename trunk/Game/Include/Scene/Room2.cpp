@@ -10,6 +10,8 @@ bool CRoom2::Init()
 		return false;
 
 	SetMap("Room", m_iRoomNum);
+	LoadMapObject();
+	CreatePlayer(Vector2::DOWN);
 
 	return true;
 }

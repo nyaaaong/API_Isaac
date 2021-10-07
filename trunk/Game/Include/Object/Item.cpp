@@ -12,7 +12,7 @@ void CItem::Start()
 
 bool CItem::Init()
 {
-	if (CObj::Init())
+	if (!CObj::Init())
 		return false;
 
 	SetZOrder(EZOrder::Item);

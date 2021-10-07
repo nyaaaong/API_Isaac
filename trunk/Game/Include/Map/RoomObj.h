@@ -15,14 +15,24 @@ private:
 	Vector2	m_tPos;
 	Vector2	m_tSize;
 	CSharedPtr<CTexture>	m_pTexture;
-	EObject	m_eObject;
+	EMapObject_Type	m_eType;
 	class CScene* m_pScene;
 	int		m_iZOrder;
 
 public:
-	const Vector2 GetPos()	const
+	const Vector2& GetPos()	const
 	{
 		return m_tPos;
+	}
+
+	const Vector2& GetSize()	const
+	{
+		return m_tSize;
+	}
+
+	EMapObject_Type GetType()	const
+	{
+		return m_eType;
 	}
 
 	bool IsObj(const Vector2& tPos)
@@ -45,9 +55,9 @@ public:
 	}
 
 public:
-	void SetObject(EObject eObject)
+	void SetObject(EMapObject_Type eType)
 	{
-		m_eObject = eObject;
+		m_eType = eType;
 	}
 
 	void SetZOrder(int iZOrder)
@@ -63,11 +73,6 @@ public:
 	void SetSize(const Vector2& tSize)
 	{
 		m_tSize = tSize;
-	}
-
-	void SetRoomObj(EObject eObj)
-	{
-		m_eObject = eObj;
 	}
 
 	void SetScene(class CScene* pScene)

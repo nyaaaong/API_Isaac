@@ -57,7 +57,6 @@ CPlayerTearEffect* CPlayerTearEffect::Clone()
 
 CPlayerTearEffect::CPlayerTearEffect()
 {
-	m_eObjectType = EObjectType::Effect;
 }
 
 CPlayerTearEffect::CPlayerTearEffect(const CPlayerTearEffect& obj) :

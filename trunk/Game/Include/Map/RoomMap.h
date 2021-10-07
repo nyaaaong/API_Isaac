@@ -120,7 +120,7 @@ public:
 
 public:
 	bool IsSetObj(const Vector2& tPos, const Vector2& tObjSize = Vector2(75.f, 75.f)); // 설치가 가능한 구역인지
-	void Create(EObject eObj, const Vector2& tPos, const Vector2& tObjSize = Vector2(75.f, 75.f));
+	void Create(EMapObject_Type eObj, const Vector2& tPos, const Vector2& tObjSize = Vector2(75.f, 75.f));
 	void Delete(const Vector2& tPos);
 	void Clear();
 	void Save(FILE* pFile);

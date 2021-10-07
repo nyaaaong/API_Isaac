@@ -1,5 +1,8 @@
 #pragma once
+
 #include "Scene.h"
+#include "SceneManager.h"
+
 class CStage :
     public CScene
 {
@@ -46,6 +49,15 @@ private:
 
 protected:
 	void CreatePlayer(const Vector2& tStartPos);
+
+protected:
+	// 방을 이동하는 함수. 이동할 방의 클래스명을 타입네임으로 적어주고, tPos에는 플레이어가 이동할 문의 방향을 적어준다.
+	template <typename T>
+	void MoveRoom(const Vector2& tPos)
+	{
+		CSceneManager::GetInst()->SetPrevScenePlayerPos(tPos);
+		CSceneManager::GetInst()->CreateScene<T>();
+	}
 
 public:
 	virtual bool Init();
