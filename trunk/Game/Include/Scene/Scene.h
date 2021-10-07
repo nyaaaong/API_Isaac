@@ -21,25 +21,25 @@ private:
 	CUIWindow** m_pArrUI;
 	int		m_iUICount;
 	int		m_iUICapacity;
-	Vector2	m_tActivityLT;	// 벽을 제외한 나머지 구역
-	Vector2	m_tActivityRB;
+	Vector2	m_tFieldLT;	// 벽을 제외한 나머지 구역
+	Vector2	m_tFieldRB;
 	std::vector<class CRoomMap*>	m_vecRoomMap;
 	std::unordered_map<ESpecial_RoomType, class CRoomMap*>	m_mapSpecialRoomMap;
 	class CRoomMap* m_pCurMap;
 	bool	m_bStart;
 
 protected:
-	const int		m_iMaxRoomCount = 20;
+	const int		m_iMaxRoomCount = 10;
 
 public:
-	void SetActivityLT(const Vector2& tPos)
+	void SetFieldLT(const Vector2& tPos)
 	{
-		m_tActivityLT = tPos;
+		m_tFieldLT = tPos;
 	}
 
-	void SetActivityRB(const Vector2& tSize)
+	void SetFieldRB(const Vector2& tSize)
 	{
-		m_tActivityRB = tSize;
+		m_tFieldRB = tSize;
 	}
 
 public:
@@ -58,14 +58,14 @@ public:
 		return m_pPlayer;
 	}
 
-	const Vector2& GetActivityLT()	const
+	const Vector2& GetFieldLT()	const
 	{
-		return m_tActivityLT;
+		return m_tFieldLT;
 	}
 
-	const Vector2& GetActivityRB()	const
+	const Vector2& GetFieldRB()	const
 	{
-		return m_tActivityRB;
+		return m_tFieldRB;
 	}
 
 	class CSceneResource* GetSceneResource()	const

@@ -12,7 +12,6 @@ bool CStage::Init()
 
 	CScene::LoadFile("Map.dat");
 
-	CreateObjects();
 	CreatePrototypes();
 
 	return true;

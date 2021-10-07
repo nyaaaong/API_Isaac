@@ -64,6 +64,36 @@ void CInput::Update(float fTime)
 	UpdateKeyInfo(fTime);
 }
 
+bool CInput::GetKeyDown(const std::string& strName)
+{
+	KeyInfo* pInfo = FindKeyInfo(strName);
+
+	if (!pInfo)
+		return false;
+
+	return m_vecKeyState[pInfo->tState.iKey].bState[KS_DOWN];
+}
+
+bool CInput::GetKeyPush(const std::string& strName)
+{
+	KeyInfo* pInfo = FindKeyInfo(strName);
+
+	if (!pInfo)
+		return false;
+
+	return m_vecKeyState[pInfo->tState.iKey].bState[KS_PUSH];
+}
+
+bool CInput::GetKeyUp(const std::string& strName)
+{
+	KeyInfo* pInfo = FindKeyInfo(strName);
+
+	if (!pInfo)
+		return false;
+
+	return m_vecKeyState[pInfo->tState.iKey].bState[KS_UP];
+}
+
 void CInput::ClearCallback()
 {
 	std::unordered_map<std::string, KeyInfo*>::iterator	iter = m_mapInfo.begin();

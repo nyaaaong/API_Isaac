@@ -347,7 +347,7 @@
     <ClCompile Include="Scene\Stage_Sound.cpp">
       <Filter>01. Scene\00. Scene\01. Stage\02. Sound</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\Stage_Object.cpp">
+    <ClCompile Include="Scene\Stage_Player.cpp">
       <Filter>01. Scene\00. Scene\01. Stage\03. Init</Filter>
     </ClCompile>
     <ClCompile Include="Scene\Stage_Prototype.cpp">
@@ -402,15 +402,6 @@
       <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
     </ClCompile>
     <ClCompile Include="Scene\Room3.cpp">
-      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\Room4.cpp">
-      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\Room5.cpp">
-      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\Room6.cpp">
       <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
     </ClCompile>
     <ClCompile Include="Scene\Scene_Init.cpp">
@@ -614,15 +605,6 @@
       <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
     </ClInclude>
     <ClInclude Include="Scene\Room3.h">
-      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\Room4.h">
-      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\Room5.h">
-      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\Room6.h">
       <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
     </ClInclude>
   </ItemGroup>

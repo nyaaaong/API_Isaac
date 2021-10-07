@@ -30,7 +30,6 @@ public:
 private:
 	void LoadAnimationSequence();
 	void LoadSound();
-	void CreateObjects();
 	void CreatePrototypes();
 
 private:
@@ -44,6 +43,9 @@ private:
 	void EnemySound();
 	void BossSound();
 	void EffectSound();
+
+protected:
+	void CreatePlayer(const Vector2& tStartPos);
 
 public:
 	virtual bool Init();

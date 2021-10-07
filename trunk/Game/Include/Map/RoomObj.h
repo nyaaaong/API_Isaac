@@ -20,6 +20,11 @@ private:
 	int		m_iZOrder;
 
 public:
+	const Vector2 GetPos()	const
+	{
+		return m_tPos;
+	}
+
 	bool IsObj(const Vector2& tPos)
 	{
 		return IsObj(tPos, m_tSize);

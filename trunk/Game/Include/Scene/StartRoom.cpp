@@ -18,6 +18,8 @@ bool CStartRoom::Init()
 	SetDoor(DD_RIGHT, false);
 	SetDoor(DD_TOP, false);
 
+	//CreatePlayer()
+
 	return true;
 }
 

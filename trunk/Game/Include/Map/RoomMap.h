@@ -2,6 +2,7 @@
 
 #include "../GameInfo.h"
 #include "../Resource/Texture.h"
+#include "RoomObj.h"
 
 class CRoomMap
 {
@@ -21,7 +22,7 @@ protected:
 	bool	m_bActive;
 	bool	m_bIsSpecial;
 	int		m_iRoomNum;
-	std::list<class CRoomObj*>	m_ObjList;
+	std::list<CRoomObj*>	m_RoomObjList;
 	ESpecial_RoomType	m_eSpecialRoomType;
 
 public:
@@ -124,6 +125,7 @@ public:
 	void Clear();
 	void Save(FILE* pFile);
 	void Load(FILE* pFile);
+	CRoomObj* GetRoomObj(const Vector2& tPos)	const;
 
 protected:
 	virtual void SaveFile(const char* cFileName, const std::string& strPath = MAP_PATH);

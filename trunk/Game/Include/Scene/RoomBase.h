@@ -29,6 +29,7 @@ public:
 
 protected:
 	void SetDoor(EDoorDir eDoorDir, bool bIsBossDoor);
+	const Vector2& GetDoorPos(EDoorDir eDoorDir, bool bIsBossDoor);
 
 protected:
 	virtual void CreateMonster();

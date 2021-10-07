@@ -216,9 +216,6 @@
     <ClCompile Include="Scene\Room1.cpp" />
     <ClCompile Include="Scene\Room2.cpp" />
     <ClCompile Include="Scene\Room3.cpp" />
-    <ClCompile Include="Scene\Room4.cpp" />
-    <ClCompile Include="Scene\Room5.cpp" />
-    <ClCompile Include="Scene\Room6.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\Scene_File.cpp" />
     <ClCompile Include="Scene\Scene_Init.cpp" />
@@ -231,7 +228,7 @@
     <ClCompile Include="Scene\SceneResource.cpp" />
     <ClCompile Include="Scene\RoomBase.cpp" />
     <ClCompile Include="Scene\Stage_Animation.cpp" />
-    <ClCompile Include="Scene\Stage_Object.cpp" />
+    <ClCompile Include="Scene\Stage_Player.cpp" />
     <ClCompile Include="Scene\Stage_Prototype.cpp" />
     <ClCompile Include="Scene\Stage_Sound.cpp" />
     <ClCompile Include="Scene\StartRoom.cpp" />
@@ -296,9 +293,6 @@
     <ClInclude Include="Scene\Room1.h" />
     <ClInclude Include="Scene\Room2.h" />
     <ClInclude Include="Scene\Room3.h" />
-    <ClInclude Include="Scene\Room4.h" />
-    <ClInclude Include="Scene\Room5.h" />
-    <ClInclude Include="Scene\Room6.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\Stage.h" />
     <ClInclude Include="Scene\SceneCollision.h" />

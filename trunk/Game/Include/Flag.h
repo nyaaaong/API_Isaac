@@ -48,6 +48,7 @@ enum class EZOrder
 	FadeEffect = -10000,
 	UI = -1000,
 	BackGroundBar = -900,
+	Item = -900,
 	Effect = -100,
 	Monster = -30,
 	Player = -20,

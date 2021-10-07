@@ -101,6 +101,11 @@ public:
 	}
 
 public:
+	bool GetKeyDown(const std::string& strName);
+	bool GetKeyPush(const std::string& strName);
+	bool GetKeyUp(const std::string& strName);
+
+public:
 	void ClearCallback();
 
 public:

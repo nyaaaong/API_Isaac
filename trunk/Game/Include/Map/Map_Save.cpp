@@ -17,11 +17,11 @@ void CRoomMap::Save(FILE* pFile)
 
 	fwrite(&m_iRoomNum, sizeof(int), 1, pFile);
 
-	int	iSize = static_cast<int>(m_ObjList.size());
+	int	iSize = static_cast<int>(m_RoomObjList.size());
 	fwrite(&iSize, sizeof(int), 1, pFile);
 
-	std::list<CRoomObj*>::iterator	iter = m_ObjList.begin();
-	std::list<CRoomObj*>::iterator	iterEnd = m_ObjList.end();
+	std::list<CRoomObj*>::iterator	iter = m_RoomObjList.begin();
+	std::list<CRoomObj*>::iterator	iterEnd = m_RoomObjList.end();
 
 	for (int i = 0; i < iSize; ++i)
 	{

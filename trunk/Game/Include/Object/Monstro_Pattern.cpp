@@ -23,7 +23,7 @@ void CBossMonstro::PatternJump(float fTime)
 
 void CBossMonstro::PatternJumpNotify()
 {
-	Jump();
+	Jump(m_tM2PDir.y);
 }
 
 void CBossMonstro::PatternFire(float fTime)

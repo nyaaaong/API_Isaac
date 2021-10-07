@@ -2,13 +2,15 @@
 #include "Menu.h"
 #include "../Input.h"
 #include "../Scene/StartRoom.h"
+#include "../Scene/BossRoom.h"
 #include "../Scene/EditorScene.h"
 #include "../Scene/SceneManager.h"
 #include "../GameManager.h"
 
 void CMenu::GameStart(float fTime)
 {
-	CSceneManager::GetInst()->CreateScene<CStartRoom>();
+	//CSceneManager::GetInst()->CreateScene<CStartRoom>();
+	CSceneManager::GetInst()->CreateScene<CBossRoom>();
 }
 
 void CMenu::GameEditor(float fTime)

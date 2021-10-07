@@ -54,8 +54,8 @@ private:
 	void Bomb(float fTime);
 
 public:
-	virtual void Move(const Vector2& tDir, bool bUseActivity);
-	virtual void Move(const Vector2& tDir, float fSpeed, bool bUseActivity);
+	virtual void Move(const Vector2& tDir, bool bUseField);
+	virtual void Move(const Vector2& tDir, float fSpeed, bool bUseField);
 	virtual float SetDamage(float fDamage);
 	virtual void CollisionBegin(class CCollider* pSrc, class CCollider* pDest, float fTime);
 

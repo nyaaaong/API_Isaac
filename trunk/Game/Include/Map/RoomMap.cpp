@@ -1,5 +1,4 @@
 #include "RoomMap.h"
-#include "RoomObj.h"
 #include "../Resource/ResourceManager.h"
 
 bool CRoomMap::Init()
@@ -13,6 +12,9 @@ bool CRoomMap::Init()
 			break;
 		case ESpecial_RoomType::Item:
 			break;
+		case ESpecial_RoomType::Boss:
+			m_pBackGround = CResourceManager::GetInst()->FindTexture("BackGround");
+			break;
 		}
 	}
 
@@ -24,8 +26,8 @@ bool CRoomMap::Init()
 
 void CRoomMap::Update(float fTime)
 {
-	std::list<CRoomObj*>::iterator	iter = m_ObjList.begin();
-	std::list<CRoomObj*>::iterator	iterEnd = m_ObjList.end();
+	std::list<CRoomObj*>::iterator	iter = m_RoomObjList.begin();
+	std::list<CRoomObj*>::iterator	iterEnd = m_RoomObjList.end();
 
 	for (; iter != iterEnd; ++iter)
 	{
@@ -35,8 +37,8 @@ void CRoomMap::Update(float fTime)
 
 void CRoomMap::PostUpdate(float fTime)
 {
-	std::list<CRoomObj*>::iterator	iter = m_ObjList.begin();
-	std::list<CRoomObj*>::iterator	iterEnd = m_ObjList.end();
+	std::list<CRoomObj*>::iterator	iter = m_RoomObjList.begin();
+	std::list<CRoomObj*>::iterator	iterEnd = m_RoomObjList.end();
 
 	for (; iter != iterEnd; ++iter)
 	{
@@ -49,8 +51,8 @@ void CRoomMap::Render(HDC hDC)
 	if (m_pBackGround)
 		m_pBackGround->Render(hDC, Vector2(), Vector2(), Vector2(1280.f, 720.f));
 
-	std::list<CRoomObj*>::iterator	iter = m_ObjList.begin();
-	std::list<CRoomObj*>::iterator	iterEnd = m_ObjList.end();
+	std::list<CRoomObj*>::iterator	iter = m_RoomObjList.begin();
+	std::list<CRoomObj*>::iterator	iterEnd = m_RoomObjList.end();
 
 	for (; iter != iterEnd; ++iter)
 	{
@@ -70,13 +72,13 @@ CRoomMap::CRoomMap()	:
 
 CRoomMap::~CRoomMap()
 {
-	std::list<CRoomObj*>::iterator	iter = m_ObjList.begin();
-	std::list<CRoomObj*>::iterator	iterEnd = m_ObjList.end();
+	std::list<CRoomObj*>::iterator	iter = m_RoomObjList.begin();
+	std::list<CRoomObj*>::iterator	iterEnd = m_RoomObjList.end();
 
 	for (; iter != iterEnd; ++iter)
 	{
 		SAFE_DELETE((*iter));
 	}
 
-	m_ObjList.clear();
+	m_RoomObjList.clear();
 }

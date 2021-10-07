@@ -36,7 +36,7 @@ void CRoomMap::Load(FILE* pFile)
 			return;
 		}
 
-		m_ObjList.push_back(pRoomObj);
+		m_RoomObjList.push_back(pRoomObj);
 	}
 }
 

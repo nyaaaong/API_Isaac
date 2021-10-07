@@ -88,34 +88,34 @@ void CObj::SetScene(CScene* pScene)
 		m_pAnimation->m_pScene = pScene;
 }
 
-void CObj::Move(const Vector2& tDir, bool bUseActivity)
+void CObj::Move(const Vector2& tDir, bool bUseField)
 {
-	Move(tDir, m_fMoveSpeed, bUseActivity);
+	Move(tDir, m_fMoveSpeed, bUseField);
 }
 
-void CObj::Move(const Vector2& tDir, float fSpeed, bool bUseActivity)
+void CObj::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 {
 	Vector2	tCurMove = tDir * fSpeed * CGameManager::GetInst()->GetDeltaTime() * m_fTimeScale;
 	m_tVelocity += tCurMove;
 	m_tPrevPos = m_tPos;
 	m_tPos += tCurMove;
 
-	if (bUseActivity)
+	if (bUseField)
 	{
-		Vector2	tActivityLT = m_pScene->GetActivityLT();
-		Vector2	tActivityRB = m_pScene->GetActivityRB();
+		Vector2	tFieldLT = m_pScene->GetFieldLT();
+		Vector2	tFieldRB = m_pScene->GetFieldRB();
 		
-		if (m_tPos.x - m_tSize.x * m_tPivot.x + m_tOffset.x < tActivityLT.x)
-			m_tPos.x = tActivityLT.x + m_tSize.x * m_tPivot.x - m_tOffset.x;
+		if (m_tPos.x - m_tSize.x * m_tPivot.x + m_tOffset.x < tFieldLT.x)
+			m_tPos.x = tFieldLT.x + m_tSize.x * m_tPivot.x - m_tOffset.x;
 
-		else if (m_tPos.y - m_tSize.y * m_tPivot.y + m_tOffset.y < tActivityLT.y)
-			m_tPos.y = tActivityLT.y + m_tSize.y * m_tPivot.y - m_tOffset.y;
+		else if (m_tPos.y - m_tSize.y * m_tPivot.y + m_tOffset.y < tFieldLT.y)
+			m_tPos.y = tFieldLT.y + m_tSize.y * m_tPivot.y - m_tOffset.y;
 
-		else if (m_tPos.x + m_tSize.x * m_tPivot.x + m_tOffset.x > tActivityRB.x)
-			m_tPos.x = tActivityRB.x - m_tSize.x * m_tPivot.x - m_tOffset.x;
+		else if (m_tPos.x + m_tSize.x * m_tPivot.x + m_tOffset.x > tFieldRB.x)
+			m_tPos.x = tFieldRB.x - m_tSize.x * m_tPivot.x - m_tOffset.x;
 
-		else if (m_tPos.y + m_tSize.y * m_tPivot.y + m_tOffset.y > tActivityRB.y)
-			m_tPos.y = tActivityRB.y - m_tSize.y * m_tPivot.y - m_tOffset.y;
+		else if (m_tPos.y + m_tSize.y * m_tPivot.y + m_tOffset.y > tFieldRB.y)
+			m_tPos.y = tFieldRB.y - m_tSize.y * m_tPivot.y - m_tOffset.y;
 	}
 }
 
@@ -157,7 +157,6 @@ void CObj::Update(float fTime)
 
 		/*
 		9.8 m/s^2
-		t초후 y값
 		V: 속도, A: 가속도, G : 중력
 		y = V * A - 0.5 * G * t * t
 		0 = 0.5GA^2 * VA - y
@@ -221,6 +220,20 @@ void CObj::PostUpdate(float fTime)
 			(*iter)->PostUpdate(fTime);
 
 		++iter;
+	}
+
+	if (m_bPhysics && !m_bIsGround && m_tPos.y - m_tPrevPos.y > 0.f)
+	{
+		float	tPosY = m_tPos.y + (1.f - m_tPivot.y) * m_tSize.y;
+		float	tPrevPosY = m_tPrevPos.y + (1.f - m_tPivot.y) * m_tSize.y;
+
+		if (m_fFallEndY <= tPosY || m_fFallEndY <= tPrevPosY)
+		{
+			m_fFallTime = 0.f;
+			m_tPos.y = m_fFallEndY;
+			m_bIsGround = true;
+			m_bIsJump = false;
+		}
 	}
 }
 
@@ -346,6 +359,7 @@ CObj::CObj() :
 	m_bIsJump(false),
 	m_fFallTime(0.f),
 	m_fFallStartY(0.f),
+	m_fFallEndY(0.f),
 	m_fJumpVelocity(0.f),
 	m_fGravityAcc(10.f)
 {
@@ -400,6 +414,7 @@ CObj::CObj(const CObj& obj)	:
 	m_bIsGround = obj.m_bIsGround;
 	m_fFallTime = obj.m_fFallTime;
 	m_fFallStartY = obj.m_fFallStartY;
+	m_fFallEndY = obj.m_fFallEndY;
 	m_bIsJump = obj.m_bIsJump;
 	m_fJumpVelocity = obj.m_fJumpVelocity;
 

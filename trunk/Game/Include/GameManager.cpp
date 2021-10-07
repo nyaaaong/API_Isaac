@@ -209,7 +209,7 @@ ATOM CGameManager::Register()
 
 BOOL CGameManager::Create()
 {
-	m_hWnd = CreateWindowW(TEXT("The Binding of Isaac"), 0, WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU, 400, 250, m_tRS.iW, m_tRS.iH, nullptr, nullptr, m_hInst, nullptr);
+	m_hWnd = CreateWindowW(TEXT("The Binding of Isaac"), 0, WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU, 600, 250, m_tRS.iW, m_tRS.iH, nullptr, nullptr, m_hInst, nullptr);
 
 	if (!m_hWnd)
 		return FALSE;
@@ -217,7 +217,7 @@ BOOL CGameManager::Create()
 	RECT    rc = { 0, 0, m_tRS.iW, m_tRS.iH };
 
 	AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
-	SetWindowPos(m_hWnd, HWND_TOPMOST, 400, 250, rc.right - rc.left, rc.bottom - rc.top, SWP_NOZORDER);
+	SetWindowPos(m_hWnd, HWND_TOPMOST, 600, 250, rc.right - rc.left, rc.bottom - rc.top, SWP_NOZORDER);
 
 	ShowWindow(m_hWnd, SW_SHOW);
 	UpdateWindow(m_hWnd);

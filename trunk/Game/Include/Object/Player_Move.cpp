@@ -1,15 +1,17 @@
 
 #include "Player.h"
 #include "PlayerBody.h"
+#include "../Input.h"
+#include "../Scene/Scene.h"
 
-void CPlayer::Move(const Vector2& tDir, bool bUseActivity)
+void CPlayer::Move(const Vector2& tDir, bool bUseField)
 {
-	m_pPlayerBody->Move(tDir, m_eInfo.fMoveSpeed, bUseActivity);
+	m_pPlayerBody->Move(tDir, m_eInfo.fMoveSpeed, bUseField);
 }
 
-void CPlayer::Move(const Vector2& tDir, float fSpeed, bool bUseActivity)
+void CPlayer::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 {
-	m_pPlayerBody->Move(tDir, fSpeed, bUseActivity);
+	m_pPlayerBody->Move(tDir, fSpeed, bUseField);
 }
 
 void CPlayer::MoveUp(float fTime)
@@ -98,15 +100,27 @@ bool CPlayer::CheckMoveUpDown()
 
 void CPlayer::UpdateMoveUpDown()
 {
+	Vector2	tFieldLT = m_pScene->GetFieldLT();
+	Vector2	tFieldRB = m_pScene->GetFieldRB();
+	float	tBodyPosY = m_pPlayerBody->GetPos().y;
+	float	tBodySizeY = m_pPlayerBody->GetSize().y;
+	float	tBodyPivotY = m_pPlayerBody->GetPivot().y;
+	float	tBodyOffsetY = m_pPlayerBody->GetOffset().y;
+
+	float	fPlayerBodyUpY = tFieldLT.y + tBodySizeY * tBodyPivotY - tBodyOffsetY;
+	float	fPlayerBodyDownY = tFieldRB.y - tBodySizeY * tBodyPivotY - tBodyOffsetY;
+
 	if (m_bMoveDown)
 	{
-		if (m_tPos.y == m_tPrevPos.y && !m_bIsMove)
+		//if (m_tPos.y == m_tPrevPos.y && m_tPos.y != fPlayerBodyDownY)
+		if (!CInput::GetInst()->GetKeyPush("PlayerMoveDown"))
 			m_bMoveDown = false;
 	}
 
 	if (m_bMoveUp)
 	{
-		if (m_tPos.y == m_tPrevPos.y && !m_bIsMove)
+		//if (m_tPos.y == m_tPrevPos.y && m_tPos.y != fPlayerBodyUpY)
+		if (!CInput::GetInst()->GetKeyPush("PlayerMoveUp"))
 			m_bMoveUp = false;
 	}
 }

@@ -32,6 +32,7 @@ protected:
 	float					m_fGravityAcc;
 	float					m_fFallTime;
 	float					m_fFallStartY;
+	float					m_fFallEndY;
 	float					m_fJumpVelocity;
 	bool					m_bCameraCull;
 	bool					m_bStart;
@@ -105,14 +106,16 @@ public:
 		m_tVelocity = tVelocity;
 	}
 
-	void Jump()
+	void Jump(float fFallEndY)
 	{
 		if (!m_bIsJump)
 		{
 			m_bIsJump = true;
 			m_bIsGround = false;
 
+			m_fFallTime = 0.f;
 			m_fFallStartY = m_tPos.y;
+			m_fFallEndY = fFallEndY;
 		}
 	}
 
@@ -250,8 +253,8 @@ public:
 	void SetScene(class CScene* pScene);
 
 public:
-	virtual void Move(const Vector2& tDir, bool bUseActivity);	// bUseActivity = true는 활동 범위 내부에서만 움직이게 할 것인지를 뜻한다.
-	virtual void Move(const Vector2& tDir, float fSpeed, bool bUseActivity);
+	virtual void Move(const Vector2& tDir, bool bUseField);	// bUseField = true는 활동 범위 내부에서만 움직이게 할 것인지를 뜻한다.
+	virtual void Move(const Vector2& tDir, float fSpeed, bool bUseField);
 	virtual float SetDamage(float fDamage);
 	virtual void CollisionBegin(class CCollider* pSrc, class CCollider* pDest, float fTime);
 

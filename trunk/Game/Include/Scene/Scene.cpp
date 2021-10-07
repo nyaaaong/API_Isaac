@@ -13,8 +13,8 @@ bool CScene::Init()
 
 	Resolution	tRS = CGameManager::GetInst()->GetResolution();
 
-	SetActivityLT(Vector2(140.f, 120.f));	// 활동 구역의 시작 위치
-	SetActivityRB(Vector2(tRS.iW - 140.f, tRS.iH - 120.f));	// 활동 구역의 크기
+	SetFieldLT(Vector2(140.f, 120.f));	// 활동 구역의 시작 위치
+	SetFieldRB(Vector2(tRS.iW - 140.f, tRS.iH - 120.f));	// 활동 구역의 크기
 
 	Init_CreateTextureObject();
 

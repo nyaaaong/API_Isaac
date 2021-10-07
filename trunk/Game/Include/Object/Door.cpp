@@ -1,7 +1,5 @@
 
 #include "Door.h"
-#include "../GameManager.h"
-#include "../Scene/Scene.h"
 #include "../Scene/RoomBase.h"
 #include "../Resource/ResourceManager.h"
 #include "../Collision/ColliderBox.h"
@@ -12,36 +10,24 @@ void CDoor::SetDoor(bool bIsOpen)
 	TCHAR	strPath[MAX_PATH] = TEXT("Room/Door/");
 	TCHAR	strFileName[MAX_PATH] = {};
 
-	Resolution	tRS = CGameManager::GetInst()->GetResolution();
-	Vector2	tScreenLT = m_pScene->GetActivityLT();
-	Vector2	tScreenRB = m_pScene->GetActivityRB();
-
 	if (m_eDoorType == DT_NORMAL)
 	{
 		switch (m_eDoorDir)
 		{
 		case DD_LEFT:
 			strName = "DoorLeft";
-			SetPos(tScreenLT.x, tRS.iH * 0.5f);
-			SetOffset(-50.f, 0.f);
 			lstrcpy(strFileName, TEXT("Door_Left"));
 			break;
 		case DD_TOP:
 			strName = "DoorTop";
-			SetPos(tRS.iW * 0.5f, tScreenLT.y);
-			SetOffset(0.f, -50.f);
 			lstrcpy(strFileName, TEXT("Door_Top"));
 			break;
 		case DD_RIGHT:
 			strName = "DoorRight";
-			SetPos(tScreenRB.x, tRS.iH * 0.5f);
-			SetOffset(50.f, 0.f);
 			lstrcpy(strFileName, TEXT("Door_Right"));
 			break;
 		case DD_BOTTOM:
 			strName = "DoorBottom";
-			SetPos(tRS.iW * 0.5f, tScreenRB.y);
-			SetOffset(0.f, 50.f);
 			lstrcpy(strFileName, TEXT("Door_Bottom"));
 			break;
 		}
@@ -53,26 +39,18 @@ void CDoor::SetDoor(bool bIsOpen)
 		{
 		case DD_LEFT:
 			strName = "DoorBossLeft";
-			SetPos(tScreenLT.x, tRS.iH * 0.5f);
-			SetOffset(-50.f, 0.f);
 			lstrcpy(strFileName, TEXT("Door_Boss_Left"));
 			break;
 		case DD_TOP:
 			strName = "DoorBossTop";
-			SetPos(tRS.iW * 0.5f, tScreenLT.y);
-			SetOffset(0.f, -50.f);
 			lstrcpy(strFileName, TEXT("Door_Boss_Top"));
 			break;
 		case DD_RIGHT:
 			strName = "DoorBossRight";
-			SetPos(tScreenRB.x, tRS.iH * 0.5f);
-			SetOffset(50.f, 0.f);
 			lstrcpy(strFileName, TEXT("Door_Boss_Right"));
 			break;
 		case DD_BOTTOM:
 			strName = "DoorBossBottom";
-			SetPos(tRS.iW * 0.5f, tScreenRB.y);
-			SetOffset(0.f, 50.f);
 			lstrcpy(strFileName, TEXT("Door_Boss_Bottom"));
 			break;
 		}

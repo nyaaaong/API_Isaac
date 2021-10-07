@@ -15,6 +15,8 @@ bool CItem::Init()
 	if (CObj::Init())
 		return false;
 
+	SetZOrder(EZOrder::Item);
+
 	return true;
 }
 
