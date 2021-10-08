@@ -1,7 +1,7 @@
 
 #include "Menu.h"
 #include "../Input.h"
-#include "../Scene/Room1.h"
+#include "../Scene/Room2.h"
 #include "../Scene/StartRoom.h"
 #include "../Scene/BossRoom.h"
 #include "../Scene/EditorScene.h"
@@ -12,7 +12,7 @@ void CMenu::GameStart(float fTime)
 {
 	//CSceneManager::GetInst()->CreateScene<CStartRoom>();
 	//CSceneManager::GetInst()->CreateScene<CBossRoom>();
-	CSceneManager::GetInst()->CreateScene<CRoom1>();
+	CSceneManager::GetInst()->CreateScene<CRoom2>();
 }
 
 void CMenu::GameEditor(float fTime)

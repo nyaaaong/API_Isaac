@@ -46,8 +46,8 @@ void CScene::SetPlayerPos(const Vector2& tPos)
 	m_pPlayer->m_tPos  = tPos;
 	m_pPlayerBody->m_tPos = tPos;
 
-	CheckFieldPos(m_pPlayerBody);
-	m_pPlayer->m_tPos = m_pPlayerBody->m_tPos;
+	if (CheckFieldPos(m_pPlayerBody))
+		m_pPlayer->m_tPos = m_pPlayerBody->m_tPos;
 }
 
 void CScene::SetPlayerPos(float x, float y)
@@ -58,8 +58,8 @@ void CScene::SetPlayerPos(float x, float y)
 	m_pPlayer->m_tPos = Vector2(x, y);
 	m_pPlayerBody->m_tPos = Vector2(x, y);
 
-	CheckFieldPos(m_pPlayerBody);
-	m_pPlayer->m_tPos = m_pPlayerBody->m_tPos;
+	if (CheckFieldPos(m_pPlayerBody))
+		m_pPlayer->m_tPos = m_pPlayerBody->m_tPos;
 }
 
 void CScene::SetPlayerPosX(float x)
@@ -73,8 +73,8 @@ void CScene::SetPlayerPosX(float x)
 	m_pPlayer->m_tPos.x = x;
 	m_pPlayerBody->m_tPos.x = x;
 
-	CheckFieldPos(m_pPlayerBody);
-	m_pPlayer->m_tPos.x = m_pPlayerBody->m_tPos.x;
+	if (CheckFieldPos(m_pPlayerBody))
+		m_pPlayer->m_tPos.x = m_pPlayerBody->m_tPos.x;
 }
 
 void CScene::SetPlayerPosY(float y)
@@ -88,8 +88,8 @@ void CScene::SetPlayerPosY(float y)
 	m_pPlayer->m_tPos.y = y;
 	m_pPlayerBody->m_tPos.y = y;
 
-	CheckFieldPos(m_pPlayerBody);
-	m_pPlayer->m_tPos.y = m_pPlayerBody->m_tPos.y;
+	if (CheckFieldPos(m_pPlayerBody))
+		m_pPlayer->m_tPos.y = m_pPlayerBody->m_tPos.y;
 }
 
 void CScene::SetPlayerMove(const Vector2& tPos)
@@ -103,8 +103,11 @@ void CScene::SetPlayerMove(const Vector2& tPos)
 	m_pPlayer->m_tPos += tPos;
 	m_pPlayerBody->m_tPos += tPos;
 
-	CheckFieldPos(m_pPlayerBody);
-	m_pPlayer->m_tPos = m_pPlayerBody->m_tPos;
+	m_pPlayer->m_tVelocity += tPos;
+	m_pPlayerBody->m_tVelocity += tPos;
+
+	if (CheckFieldPos(m_pPlayerBody))
+		m_pPlayer->m_tPos = m_pPlayerBody->m_tPos;
 }
 
 void CScene::SetPlayerMove(float x, float y)
@@ -121,8 +124,8 @@ void CScene::SetPlayerMove(float x, float y)
 	m_pPlayer->m_tVelocity += Vector2(x, y);
 	m_pPlayerBody->m_tVelocity += Vector2(x, y);
 
-	CheckFieldPos(m_pPlayerBody);
-	m_pPlayer->m_tPos = m_pPlayerBody->m_tPos;
+	if (CheckFieldPos(m_pPlayerBody))
+		m_pPlayer->m_tPos = m_pPlayerBody->m_tPos;
 }
 
 void CScene::SetPlayerMoveX(float x)
@@ -139,8 +142,8 @@ void CScene::SetPlayerMoveX(float x)
 	m_pPlayer->m_tVelocity.x += x;
 	m_pPlayerBody->m_tVelocity.x += x;
 
-	CheckFieldPos(m_pPlayerBody);
-	m_pPlayer->m_tPos.x = m_pPlayerBody->m_tPos.x;
+	if (CheckFieldPos(m_pPlayerBody))
+		m_pPlayer->m_tPos.x = m_pPlayerBody->m_tPos.x;
 }
 
 void CScene::SetPlayerMoveY(float y)
@@ -157,8 +160,8 @@ void CScene::SetPlayerMoveY(float y)
 	m_pPlayer->m_tVelocity.y += y;
 	m_pPlayerBody->m_tVelocity.y += y;
 
-	CheckFieldPos(m_pPlayerBody);
-	m_pPlayer->m_tPos.y = m_pPlayerBody->m_tPos.y;
+	if (CheckFieldPos(m_pPlayerBody))
+		m_pPlayer->m_tPos.y = m_pPlayerBody->m_tPos.y;
 }
 
 bool CScene::CheckFieldPos(CObj* pCharacter)

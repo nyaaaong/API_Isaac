@@ -13,6 +13,9 @@ bool CRoom2::Init()
 	LoadMapObject();
 	CreatePlayer(Vector2::DOWN);
 
+	SetDoor(DD_LEFT, false);
+	SetDoor(DD_BOTTOM, false);
+
 	return true;
 }
 

@@ -100,8 +100,8 @@ void CPlayerBody::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 
 	if (bUseField)
 	{
-		m_pScene->CheckFieldPos(this);
-		m_pPlayer->m_tPos = m_tPos;
+		if (m_pScene->CheckFieldPos(this))
+			m_pPlayer->m_tPos = m_tPos;
 	}
 }
 

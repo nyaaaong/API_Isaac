@@ -1,6 +1,7 @@
 
 #include "StartRoom.h"
 #include "Room1.h"
+#include "Room2.h"
 #include "SceneManager.h"
 #include "SceneResource.h"
 #include "../Input.h"
@@ -56,6 +57,18 @@ bool CStartRoom::Render(HDC hDC)
 	CRoomBase::Render(hDC);
 
 	return true;
+}
+
+void CStartRoom::DoorFunc(EDoorDir eDoorDir)
+{
+	switch (eDoorDir)
+	{
+	case DD_TOP:
+		break;
+	case DD_RIGHT:
+		MoveRoom<CRoom2>(Vector2::RIGHT);
+		break;
+	}
 }
 
 CStartRoom::CStartRoom()

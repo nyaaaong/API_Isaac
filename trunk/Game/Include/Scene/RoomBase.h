@@ -35,7 +35,7 @@ private:
 	void CreateDoor();
 	void CreateRoomNum();
 
-protected:
+public:
 	virtual void CreateMonster();
 	virtual void DoorFunc(EDoorDir eDoorDir);
 

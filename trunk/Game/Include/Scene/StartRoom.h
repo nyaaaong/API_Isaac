@@ -15,6 +15,9 @@ public:
 	virtual bool Collision(float fTime);
 	virtual bool Render(HDC hDC);
 
+public:
+	virtual void DoorFunc(EDoorDir eDoorDir);
+
 protected:
 	CStartRoom();
 	virtual ~CStartRoom();

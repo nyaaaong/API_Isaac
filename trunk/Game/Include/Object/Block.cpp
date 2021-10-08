@@ -76,11 +76,11 @@ void CBlock::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 		break;
 	case MT_IRON:
 		break;
-	case MT_SPIKE:
-		if (pDest->GetName() == "PlayerHead" || pDest->GetName() == "PlayerBody")
-			pDest->GetOwner()->SetDamage(1.f);
-		break;
 	case MT_POOP:
+		break;
+	case MT_SPIKE:
+		if (pDest->GetName() == "PlayerBody")
+			pDest->GetOwner()->SetDamage(1.f);
 		break;
 	}
 }
@@ -90,13 +90,9 @@ void CBlock::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
 	const RectInfo& tSrcRC = dynamic_cast<CColliderBox*>(pSrc)->GetInfo();
 	const RectInfo& tDestRC = dynamic_cast<CColliderBox*>(pDest)->GetInfo();
 
-	Vector2	tDir = pDest->GetOwner()->GetPos() - pDest->GetOwner()->GetPrevPos();
+	CObj* pDestObj = pDest->GetOwner();
 
-	RectInfo	tResultRC;
-	tResultRC.fL = tSrcRC.fR - tDestRC.fL;
-	tResultRC.fR = tSrcRC.fL - tDestRC.fR;
-	tResultRC.fT = tSrcRC.fB - tDestRC.fT;
-	tResultRC.fB = tSrcRC.fT - tDestRC.fB;
+	Vector2	tDestVelocity = pDestObj->GetVelocity();
 
 	switch (m_eType)
 	{
@@ -107,19 +103,7 @@ void CBlock::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
 		{
 			if (tSrcRC.fL < tDestRC.fR && tSrcRC.fR > tDestRC.fL &&
 				tSrcRC.fT < tDestRC.fB && tSrcRC.fB > tDestRC.fT) // 충돌한 경우
-			{
-				if (tDir.x > 0.f) // 오른쪽으로 이동한 경우
-					m_pScene->SetPlayerMoveX(tResultRC.fR);
-
-				else if (tDir.x < 0.f) // 왼쪽으로 이동한 경우
-					m_pScene->SetPlayerMoveX(tResultRC.fL);
-
-				if (tDir.y > 0.f) // 아래쪽으로 이동한 경우
-					m_pScene->SetPlayerMoveY(tResultRC.fB);
-				
-				else if (tDir.y < 0.f) // 윗쪽으로 이동한 경우
-					m_pScene->SetPlayerMoveY(tResultRC.fT);
-			}
+				m_pScene->SetPlayerMove(tDestVelocity * -1.f);
 		}
 		break;
 	}

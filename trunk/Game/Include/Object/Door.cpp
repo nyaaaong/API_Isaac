@@ -6,7 +6,13 @@
 
 void CDoor::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 {
-	CObj::CollisionBegin(pSrc, pDest, fTime);
+	CRoomBase* pRoom = dynamic_cast<CRoomBase*>(m_pScene);
+
+	if (!pRoom->IsClearRoom())
+		return;
+
+	if (pDest->GetName() == "PlayerBody")
+		pRoom->DoorFunc(m_eDoorDir);
 }
 
 void CDoor::Start()
@@ -14,6 +20,7 @@ void CDoor::Start()
 	CObj::Start();
 
 	SetDoor(false);
+	m_pColliderBox->SetCollisionBeginFunc<CDoor>(this, &CDoor::CollisionBegin);
 }
 
 bool CDoor::Init()
