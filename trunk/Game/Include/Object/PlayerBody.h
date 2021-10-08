@@ -11,13 +11,8 @@ private:
 	class CPlayer* m_pPlayer;
 
 public:
-	void SetPlayer(class CPlayer* pPlayer)
-	{
-		m_pPlayer = pPlayer;
-	}
-
-public:
 	virtual void Move(const Vector2& tDir, float fSpeed, bool bUseField);
+	virtual float SetDamage(float fDamage);
 
 public:
 	virtual void Start();

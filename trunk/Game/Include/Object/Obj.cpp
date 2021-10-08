@@ -101,22 +101,7 @@ void CObj::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 	m_tPos += tCurMove;
 
 	if (bUseField)
-	{
-		Vector2	tFieldLT = m_pScene->GetFieldLT();
-		Vector2	tFieldRB = m_pScene->GetFieldRB();
-		
-		if (m_tPos.x - m_tSize.x * m_tPivot.x + m_tOffset.x < tFieldLT.x)
-			m_tPos.x = tFieldLT.x + m_tSize.x * m_tPivot.x - m_tOffset.x;
-
-		else if (m_tPos.y - m_tSize.y * m_tPivot.y + m_tOffset.y < tFieldLT.y)
-			m_tPos.y = tFieldLT.y + m_tSize.y * m_tPivot.y - m_tOffset.y;
-
-		else if (m_tPos.x + m_tSize.x * m_tPivot.x + m_tOffset.x > tFieldRB.x)
-			m_tPos.x = tFieldRB.x - m_tSize.x * m_tPivot.x - m_tOffset.x;
-
-		else if (m_tPos.y + m_tSize.y * m_tPivot.y + m_tOffset.y > tFieldRB.y)
-			m_tPos.y = tFieldRB.y - m_tSize.y * m_tPivot.y - m_tOffset.y;
-	}
+		m_pScene->CheckFieldPos(this);
 }
 
 float CObj::SetDamage(float fDamage)
@@ -128,6 +113,10 @@ float CObj::SetDamage(float fDamage)
 }
 
 void CObj::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
+{
+}
+
+void CObj::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
 {
 }
 
@@ -343,7 +332,6 @@ CObj* CObj::Clone()
 CObj::CObj() :
 	m_pScene(nullptr),
 	m_pAnimation(nullptr),
-	m_pPlayerBody(nullptr),
 	m_fMoveSpeed(200.f),
 	m_fTimeScale(1.f),
 	m_bCameraCull(false),
@@ -365,7 +353,6 @@ CObj::CObj() :
 }
 
 CObj::CObj(const CObj& obj)	:
-	m_pPlayerBody(nullptr),
 	m_pColliderBox(nullptr),
 	m_pColliderSphere(nullptr)
 {

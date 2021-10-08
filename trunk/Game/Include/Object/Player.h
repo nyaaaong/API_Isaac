@@ -23,9 +23,6 @@ private:
 	float	m_fBlinkSpeed;	// ÇÇ°Ý ½Ã ±ôºýÀÌ´Â ¼Óµµ
 	class CPlayerBody* m_pPlayerBody;
 
-public:
-	void SetPlayerBody(class CPlayerBody* pPlayerBody);
-
 private:
 	void NoDamageTime(float fTime);
 

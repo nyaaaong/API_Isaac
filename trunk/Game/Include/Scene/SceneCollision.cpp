@@ -57,9 +57,15 @@ void CSceneCollision::Collision(float fTime)
 						pSrc->CallCollisionBegin(pDest, fTime);
 						pDest->CallCollisionBegin(pSrc, fTime);
 					}
+
+					else if (pSrc->CheckCollisionList(pDest)) // 충돌 중일 때
+					{
+						pSrc->CallCollisionColliding(pDest, fTime);
+						pDest->CallCollisionColliding(pSrc, fTime);
+					}
 				}
 
-				else if (pSrc->CheckCollisionList(pDest)) // 충돌이 되고 있었을 때
+				else if (pSrc->CheckCollisionList(pDest)) // 충돌이 해제되고 충돌이 되고 있었을때
 				{
 					pSrc->DeleteCollisionList(pDest);
 					pDest->DeleteCollisionList(pSrc);

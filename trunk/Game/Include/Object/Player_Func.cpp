@@ -2,14 +2,6 @@
 #include "Player.h"
 #include "PlayerBody.h"
 
-void CPlayer::SetPlayerBody(CPlayerBody* pPlayerBody)
-{
-	m_pPlayerBody = pPlayerBody;
-
-	if (m_pPlayerBody)
-		m_pPlayerBody->SetPos(m_tPos);
-}
-
 void CPlayer::NoDamageTime(float fTime)
 {
 	if (m_bHit || !m_bEnableDamage)	// 피격이 됐거나 무적 시간인 경우

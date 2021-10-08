@@ -87,32 +87,8 @@ void CBossMonstro::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 
 	if (bUseField)
 	{
-		Vector2	tFieldLT = m_pScene->GetFieldLT();
-		Vector2	tFieldRB = m_pScene->GetFieldRB();
-
-		if (m_tPos.x - m_tSize.x * m_tPivot.x + m_tOffset.x < tFieldLT.x)
-		{
-			m_tPos.x = tFieldLT.x + m_tSize.x * m_tPivot.x - m_tOffset.x;
+		if (m_pScene->CheckFieldPos(this))
 			m_tM2PDir.x *= -1.f;
-		}
-
-		else if (m_tPos.y - m_tSize.y * m_tPivot.y + m_tOffset.y < tFieldLT.y)
-		{
-			m_tPos.y = tFieldLT.y + m_tSize.y * m_tPivot.y - m_tOffset.y;
-			m_tM2PDir.y *= -1.f;
-		}
-
-		else if (m_tPos.x + m_tSize.x * m_tPivot.x + m_tOffset.x > tFieldRB.x)
-		{
-			m_tPos.x = tFieldRB.x - m_tSize.x * m_tPivot.x - m_tOffset.x;
-			m_tM2PDir.x *= -1.f;
-		}
-
-		else if (m_tPos.y + m_tSize.y * m_tPivot.y + m_tOffset.y > tFieldRB.y)
-		{
-			m_tPos.y = tFieldRB.y - m_tSize.y * m_tPivot.y - m_tOffset.y;
-			m_tM2PDir.y *= -1.f;
-		}
 	}
 }
 

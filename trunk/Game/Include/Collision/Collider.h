@@ -12,6 +12,7 @@ protected:
 	Vector2	m_tOffset;
 	CollisionProfile* m_pProfile;
 	std::function<void(CCollider*, CCollider*, float)>	m_pBeginFunc;
+	std::function<void(CCollider*, CCollider*, float)>	m_pCollidingFunc;
 	std::function<void(CCollider*, CCollider*, float)>	m_pEndFunc;
 	std::list<CSharedPtr<CCollider>>	m_CollisionList;
 
@@ -75,6 +76,7 @@ public:
 	void DeleteCollisionList(CCollider* pCollider);
 	void ClearCollisionList();
 	void CallCollisionBegin(CCollider* pDest, float fTime);
+	void CallCollisionColliding(CCollider* pDest, float fTime);
 	void CallCollisionEnd(CCollider* pDest, float fTime);
 
 public:
@@ -95,6 +97,12 @@ public:
 	void SetCollisionBeginFunc(T* pObj, void(T::* pFunc)(CCollider*, CCollider*, float))
 	{
 		m_pBeginFunc = std::bind(pFunc, pObj, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+	}
+
+	template <typename T>
+	void SetCollisionCollidingFunc(T* pObj, void(T::* pFunc)(CCollider*, CCollider*, float))
+	{
+		m_pCollidingFunc = std::bind(pFunc, pObj, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 	}
 
 	template <typename T>

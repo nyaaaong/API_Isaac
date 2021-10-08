@@ -31,6 +31,9 @@ bool CScene::Update(float fTime)
 	if (m_pPlayer)
 		m_pPlayer->Update(fTime);
 
+	if (m_pPlayerBody)
+		m_pPlayerBody->Update(fTime);
+
 	{
 		std::list<CSharedPtr<CObj>>::iterator	iter = m_ObjList.begin();
 		std::list<CSharedPtr<CObj>>::iterator	iterEnd = m_ObjList.end();
@@ -143,6 +146,9 @@ bool CScene::PostUpdate(float fTime)
 {
 	if (m_pPlayer)
 		m_pPlayer->PostUpdate(fTime);
+
+	if (m_pPlayerBody)
+		m_pPlayerBody->PostUpdate(fTime);
 
 	{
 		std::list<CSharedPtr<CObj>>::iterator	iter = m_ObjList.begin();
@@ -259,6 +265,9 @@ bool CScene::Collision(float fTime)
 {
 	if (m_pPlayer)
 		m_pPlayer->Collision(fTime);
+
+	if (m_pPlayerBody)
+		m_pPlayerBody->Collision(fTime);
 
 	{
 		std::list<CSharedPtr<CObj>>::iterator	iter = m_ObjList.begin();
@@ -378,6 +387,9 @@ bool CScene::Render(HDC hDC)
 	if (m_pPlayer)
 		m_pPlayer->PrevRender();
 
+	if (m_pPlayerBody)
+		m_pPlayerBody->PrevRender();
+
 	{
 		std::list<CSharedPtr<CObj>>::iterator	iter = m_ObjList.begin();
 		std::list<CSharedPtr<CObj>>::iterator	iterEnd = m_ObjList.end();
@@ -440,6 +452,15 @@ bool CScene::Render(HDC hDC)
 		if (!m_pPlayer->IsCull())
 		{
 			m_pArrRender[m_iRenderCount] = m_pPlayer;
+			++m_iRenderCount;
+		}
+	}
+
+	if (m_pPlayerBody)
+	{
+		if (!m_pPlayerBody->IsCull())
+		{
+			m_pArrRender[m_iRenderCount] = m_pPlayerBody;
 			++m_iRenderCount;
 		}
 	}

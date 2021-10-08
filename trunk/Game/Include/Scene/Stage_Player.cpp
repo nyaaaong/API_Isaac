@@ -44,12 +44,9 @@ void CStage::CreatePlayer(const Vector2& tStartPos)
 	}
 
 	CPlayer* pPlayer = CreateObject<CPlayer>("Player", tPos, Vector2(84.f, 75.f));
-	SetPlayer(pPlayer);
 
 	CPlayerBody* pPlayerBody = CreateObject<CPlayerBody>("PlayerBody", tPos, Vector2(56.f, 45.f));
-
-	pPlayer->SetPlayerBody(pPlayerBody);
-	pPlayerBody->SetPlayer(pPlayer);
+	SetPlayer(pPlayer, pPlayerBody);
 
 	m_pPlayerHUD = CreateUIWindow<CPlayerHUD>("PlayerHUD");
 	m_pPlayerHUD->SetPlayer(pPlayer);

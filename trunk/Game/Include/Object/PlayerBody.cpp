@@ -31,53 +31,11 @@ bool CPlayerBody::Init()
 	return true;
 }
 
-void CPlayerBody::Move(const Vector2& tDir, float fSpeed, bool bUseField)
-{
-	Vector2	tCurMove = tDir * fSpeed * CGameManager::GetInst()->GetDeltaTime() * m_fTimeScale;
-
-	m_tVelocity += tCurMove;
-	m_pPlayer->m_tVelocity = tCurMove;
-
-	m_tPrevPos = m_tPos;
-	m_pPlayer->m_tPrevPos = m_tPos;
-
-	m_tPos += tCurMove;
-	m_pPlayer->m_tPos += tCurMove;
-
-	if (bUseField)
-	{
-		Vector2	tFieldLT = m_pScene->GetFieldLT();
-		Vector2	tFieldRB = m_pScene->GetFieldRB();
-
-		if (m_tPos.x - m_tSize.x * m_tPivot.x + m_tOffset.x < tFieldLT.x)
-		{
-			m_tPos.x = tFieldLT.x + m_tSize.x * m_tPivot.x - m_tOffset.x;
-			m_pPlayer->m_tPos.x = m_tPos.x;
-		}
-
-		else if (m_tPos.y - m_tSize.y * m_tPivot.y + m_tOffset.y < tFieldLT.y)
-		{
-			m_tPos.y = tFieldLT.y + m_tSize.y * m_tPivot.y - m_tOffset.y;
-			m_pPlayer->m_tPos.y = m_tPos.y;
-		}
-
-		else if (m_tPos.x + m_tSize.x * m_tPivot.x + m_tOffset.x > tFieldRB.x)
-		{
-			m_tPos.x = tFieldRB.x - m_tSize.x * m_tPivot.x - m_tOffset.x;
-			m_pPlayer->m_tPos.x = m_tPos.x;
-		}
-
-		else if (m_tPos.y + m_tSize.y * m_tPivot.y + m_tOffset.y > tFieldRB.y)
-		{
-			m_tPos.y = tFieldRB.y - m_tSize.y * m_tPivot.y - m_tOffset.y;
-			m_pPlayer->m_tPos.y = m_tPos.y;
-		}
-	}
-}
-
 void CPlayerBody::Start()
 {
 	CObj::Start();
+
+	m_pPlayer = dynamic_cast<CPlayer*>(m_pScene->GetPlayer());
 }
 
 void CPlayerBody::Update(float fTime)
@@ -124,4 +82,30 @@ CPlayerBody::CPlayerBody(const CPlayerBody& obj)	:
 
 CPlayerBody::~CPlayerBody()
 {
+}
+
+
+void CPlayerBody::Move(const Vector2& tDir, float fSpeed, bool bUseField)
+{
+	Vector2	tCurMove = tDir * fSpeed * CGameManager::GetInst()->GetDeltaTime() * m_fTimeScale;
+
+	m_tVelocity += tCurMove;
+	m_pPlayer->m_tVelocity = tCurMove;
+
+	m_tPrevPos = m_tPos;
+	m_pPlayer->m_tPrevPos = m_tPos;
+
+	m_tPos += tCurMove;
+	m_pPlayer->m_tPos += tCurMove;
+
+	if (bUseField)
+	{
+		m_pScene->CheckFieldPos(this);
+		m_pPlayer->m_tPos = m_tPos;
+	}
+}
+
+float CPlayerBody::SetDamage(float fDamage)
+{
+	return m_pPlayer->SetDamage(fDamage);
 }

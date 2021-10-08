@@ -15,6 +15,7 @@ private:
 	class CSceneCollision* m_pCollision;
 	class CCamera* m_pCamera;
 	CSharedPtr<CObj>	m_pPlayer;
+	CSharedPtr<CObj>	m_pPlayerBody;
 	CObj** m_pArrRender;
 	int		m_iRenderCount;
 	int		m_iRenderCapacity;
@@ -51,6 +52,11 @@ public:
 	class CRoomMap* GetCurrentMap()	const
 	{
 		return m_pCurMap;
+	}
+
+	CObj* GetPlayerBody()	const
+	{
+		return m_pPlayerBody;
 	}
 
 	CObj* GetPlayer()	const
@@ -93,8 +99,18 @@ private:
 
 public:
 	CObj* FindObject(const std::string& strName);
-	void SetPlayer(const std::string& strName);
-	void SetPlayer(CObj* pPlayer);
+	void SetPlayer(CObj* pPlayerHead, CObj* pPlayerBody);
+	void SetPlayerPos(const Vector2& tPos);
+	void SetPlayerPos(float x, float y);
+	void SetPlayerPosX(float x);
+	void SetPlayerPosY(float y);
+	void SetPlayerMove(const Vector2& tPos);
+	void SetPlayerMove(float x, float y);
+	void SetPlayerMoveX(float x);
+	void SetPlayerMoveY(float y);
+	bool CheckFieldPos(CObj* pCharacter);
+	bool IsObj(const Vector2& tPos);
+	bool IsObj(float x, float y);
 
 public:
 	static int SortY(const void* pSrc, const void* pDest);

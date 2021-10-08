@@ -60,6 +60,12 @@ void CCollider::CallCollisionBegin(CCollider* pDest, float fTime)
 		m_pBeginFunc(this, pDest, fTime);
 }
 
+void CCollider::CallCollisionColliding(CCollider* pDest, float fTime)
+{
+	if (m_pCollidingFunc)
+		m_pCollidingFunc(this, pDest, fTime);
+}
+
 void CCollider::CallCollisionEnd(CCollider* pDest, float fTime)
 {
 	if (m_pEndFunc)

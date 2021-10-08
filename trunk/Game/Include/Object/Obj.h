@@ -14,7 +14,6 @@ protected:
 	class CScene*			m_pScene;
 	class CColliderBox*		m_pColliderBox;
 	class CColliderSphere*	m_pColliderSphere;
-	CObj*					m_pPlayerBody;
 	CAnimation*				m_pAnimation;
 	CSharedPtr<CTexture>	m_pTexture;
 	std::list<CSharedPtr<CCollider>>	m_ColliderList;
@@ -67,6 +66,11 @@ public:
 	const Vector2& GetPos()	const
 	{
 		return m_tPos;
+	}
+
+	const Vector2& GetPrevPos()	const
+	{
+		return m_tPrevPos;
 	}
 
 	const Vector2& GetSize()	const
@@ -126,11 +130,6 @@ public:
 	void SetJumpVelocity(float fJumpVelocity)
 	{
 		m_fJumpVelocity = fJumpVelocity;
-	}
-
-	void SetPlayerBody(CObj* pPlayerBody)
-	{
-		m_pPlayerBody = pPlayerBody;
 	}
 
 	void Invisible(bool bInvisible)
@@ -251,6 +250,7 @@ public:
 	virtual void Move(const Vector2& tDir, float fSpeed, bool bUseField);
 	virtual float SetDamage(float fDamage);
 	virtual void CollisionBegin(class CCollider* pSrc, class CCollider* pDest, float fTime);
+	virtual void CollisionColliding(class CCollider* pSrc, class CCollider* pDest, float fTime);
 
 public:
 	void SetTexture(const std::string& strName);

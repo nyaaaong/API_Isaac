@@ -1,8 +1,9 @@
 
 #include "Player.h"
+#include "PlayerBody.h"
+#include "../Scene/Scene.h"
 #include "../Collision/ColliderBox.h"
 #include "../Collision/ColliderSphere.h"
-#include "PlayerBody.h"
 
 bool CPlayer::Init()
 {
@@ -26,6 +27,10 @@ void CPlayer::Start()
 	CCharacter::Start();
 
 	AddCallback();
+
+	m_pPlayerBody = dynamic_cast<CPlayerBody*>(m_pScene->GetPlayerBody());
+	m_pPlayerBody->Start();
+	m_pPlayerBody->SetPos(m_tPos);
 
 	m_pColliderSphere->SetCollisionBeginFunc<CPlayer>(this, &CPlayer::CollisionBegin);
 }
@@ -91,7 +96,7 @@ CPlayer::CPlayer() :
 	m_fSkill1Time(0.f),
 	m_pPlayerBody(nullptr),
 	m_fNoDmgTimer(0.f),
-	m_fNoDmgTimerMax(1.5f),
+	m_fNoDmgTimerMax(1.3f),
 	m_bHit(false),
 	m_fBlinkTimer(0.f),
 	m_fBlinkSpeed(0.2f)

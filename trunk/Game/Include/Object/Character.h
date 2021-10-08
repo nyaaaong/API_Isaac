@@ -86,6 +86,8 @@ protected:
 public:
 	virtual float SetDamage(float fDamage);
 	virtual void CollisionBegin(class CCollider* pSrc, class CCollider* pDest, float fTime);
+	virtual void Move(const Vector2& tDir, bool bUseField);
+	virtual void Move(const Vector2& tDir, float fSpeed, bool bUseField);
 
 public:
 	virtual void Start();

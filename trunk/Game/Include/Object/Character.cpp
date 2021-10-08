@@ -40,6 +40,16 @@ void CCharacter::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 {
 }
 
+void CCharacter::Move(const Vector2& tDir, bool bUseField)
+{
+	CObj::Move(tDir, bUseField);
+}
+
+void CCharacter::Move(const Vector2& tDir, float fSpeed, bool bUseField)
+{
+	CObj::Move(tDir, fSpeed, bUseField);
+}
+
 void CCharacter::Start()
 {
 	CObj::Start();

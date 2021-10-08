@@ -28,11 +28,8 @@ bool CCollisionManager::Init()
 	SetCollisionState("Object", Channel_Object, ECollision_State::Ignore);
 	SetCollisionState("Object", Channel_Door, ECollision_State::Ignore);
 	SetCollisionState("Object", Channel_PlayerHead, ECollision_State::Ignore);
-	SetCollisionState("Object", Channel_PlayerBody, ECollision_State::Ignore);
-	SetCollisionState("Object", Channel_Monster, ECollision_State::Ignore);
 	SetCollisionState("Object", Channel_PlayerAttack, ECollision_State::Ignore);
 	SetCollisionState("Object", Channel_MonsterAttack, ECollision_State::Ignore);
-	SetCollisionState("Object", Channel_Bomb, ECollision_State::Ignore);
 
 	SetCollisionState("PlayerHead", Channel_Object, ECollision_State::Ignore);
 	SetCollisionState("PlayerHead", Channel_Door, ECollision_State::Ignore);
