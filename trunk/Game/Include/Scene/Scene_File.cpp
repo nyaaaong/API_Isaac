@@ -46,17 +46,6 @@ void CScene::LoadFullPath(const char* cFullPath)
 	if (!pFile)
 		return;
 
-	{
-		size_t iSize = m_vecRoomMap.size();
-
-		for (size_t i = 0; i < iSize; ++i)
-		{
-			SAFE_DELETE(m_vecRoomMap[i]);
-		}
-
-		m_vecRoomMap.clear();
-	}
-
 	int	iSize = 0;
 	fread(&iSize, sizeof(int), 1, pFile);
 

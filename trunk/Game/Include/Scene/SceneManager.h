@@ -11,12 +11,18 @@ private:
 	CScene* m_pNextScene;
 	Vector2	m_tPrevScenePlayerPos; // 이전 방에서 어느 방향의 문을 사용 했는지
 	std::vector<class CRoomMap*>	m_vecPlayRoom;
+	std::vector<class CRoomMap*>	m_vecPlaySpecialRoom;
 
 public:
 	CScene* GetScene()	const
 	{
 		return m_pScene;
 	}
+
+public:
+	bool IsPlayRoom(int iRoomNum);
+	bool PushPlayRoom(class CRoomMap* pRoom);
+	bool PushPlaySpecialRoom(class CRoomMap* pSpecialRoom);
 
 private:
 	bool ChangeScene();

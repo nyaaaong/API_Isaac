@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "SceneResource.h"
 #include "SceneCollision.h"
+#include "SceneManager.h"
 #include "Camera.h"
 #include "../GameManager.h"
 #include "../Map/RoomMap.h"
@@ -541,7 +542,7 @@ CScene::~CScene()
 		SAFE_RELEASE(m_pArrUI[i]);
 	}
 
-	{
+	/*{
 		std::unordered_map<ESpecial_RoomType, CRoomMap*>::iterator	iter = m_mapSpecialRoomMap.begin();
 		std::unordered_map<ESpecial_RoomType, CRoomMap*>::iterator	iterEnd = m_mapSpecialRoomMap.end();
 
@@ -551,17 +552,20 @@ CScene::~CScene()
 		}
 
 		m_mapSpecialRoomMap.clear();
-	}
+	}*/
 
 	{
 		size_t iSize = m_vecRoomMap.size();
 
 		for (size_t i = 0; i < iSize; ++i)
 		{
+			if (CSceneManager::GetInst()->IsPlayRoom(m_vecRoomMap[i]->GetRoomNumber()))
+				continue; // 만약 게임 플레이 될 방이라면 지우지 않고 진행한다.
+
 			SAFE_DELETE(m_vecRoomMap[i]);
 		}
 
-		m_vecRoomMap.clear();
+		//m_vecRoomMap.clear();
 	}
 
 	SAFE_DELETE_ARRAY(m_pArrUI);

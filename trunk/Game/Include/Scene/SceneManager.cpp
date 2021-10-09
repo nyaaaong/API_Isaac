@@ -6,6 +6,49 @@
 
 CSceneManager* CSceneManager::m_pInst = nullptr;
 
+bool CSceneManager::IsPlayRoom(int iRoomNum)
+{
+	size_t iSize = m_vecPlayRoom.size();
+
+	for (size_t i = 0; i < iSize; ++i)
+	{
+		if (m_vecPlayRoom[i]->GetRoomNumber() == iRoomNum)
+			return true;
+	}
+
+	return false;
+}
+
+bool CSceneManager::PushPlayRoom(CRoomMap* pRoom)
+{
+	size_t iSize = m_vecPlayRoom.size();
+
+	for (size_t i = 0; i < iSize; ++i)
+	{
+		if (m_vecPlayRoom[i] == pRoom)
+			return false;
+	}
+
+	m_vecPlayRoom.push_back(pRoom);
+
+	return true;
+}
+
+bool CSceneManager::PushPlaySpecialRoom(CRoomMap* pSpecialRoom)
+{
+	size_t iSize = m_vecPlaySpecialRoom.size();
+
+	for (size_t i = 0; i < iSize; ++i)
+	{
+		if (m_vecPlaySpecialRoom[i] == pSpecialRoom)
+			return false;
+	}
+
+	m_vecPlaySpecialRoom.push_back(pSpecialRoom);
+
+	return true;
+}
+
 bool CSceneManager::ChangeScene()
 {
 	if (m_pNextScene)
@@ -68,18 +111,32 @@ CSceneManager::CSceneManager()	:
 	m_pNextScene(nullptr)
 {
 	m_vecPlayRoom.reserve(3);
+	m_vecPlaySpecialRoom.reserve(3);
 }
 
 CSceneManager::~CSceneManager()
 {
-	size_t iSize = m_vecPlayRoom.size();
-
-	for (size_t i = 0; i < iSize; ++i)
 	{
-		SAFE_DELETE(m_vecPlayRoom[i]);
+		size_t iSize = m_vecPlaySpecialRoom.size();
+
+		for (size_t i = 0; i < iSize; ++i)
+		{
+			SAFE_DELETE(m_vecPlaySpecialRoom[i]);
+		}
+
+		m_vecPlaySpecialRoom.clear();
 	}
 
-	m_vecPlayRoom.clear();
+	{
+		size_t iSize = m_vecPlayRoom.size();
+
+		for (size_t i = 0; i < iSize; ++i)
+		{
+			SAFE_DELETE(m_vecPlayRoom[i]);
+		}
+
+		m_vecPlayRoom.clear();
+	}
 
 	SAFE_DELETE(m_pNextScene);
 	SAFE_DELETE(m_pScene);
