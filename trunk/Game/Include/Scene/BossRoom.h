@@ -20,6 +20,7 @@ public:
 
 protected:
 	virtual void CreateMonster();
+	virtual void DoorFunc(EDoorDir eDoorDir);
 
 protected:
 	CBossRoom();

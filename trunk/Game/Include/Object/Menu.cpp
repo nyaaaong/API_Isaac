@@ -10,9 +10,9 @@
 
 void CMenu::GameStart(float fTime)
 {
-	//CSceneManager::GetInst()->CreateScene<CStartRoom>();
+	CSceneManager::GetInst()->CreateScene<CStartRoom>();
 	//CSceneManager::GetInst()->CreateScene<CBossRoom>();
-	CSceneManager::GetInst()->CreateScene<CRoom2>();
+	//CSceneManager::GetInst()->CreateScene<CRoom2>();
 }
 
 void CMenu::GameEditor(float fTime)

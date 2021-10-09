@@ -7,6 +7,7 @@
 class CRoomMap
 {
 	friend class CScene;
+	friend class CSceneManager;
 
 protected:
 	CRoomMap();

@@ -64,6 +64,7 @@ void CStartRoom::DoorFunc(EDoorDir eDoorDir)
 	switch (eDoorDir)
 	{
 	case DD_TOP:
+		MoveRoom<CRoom1>(Vector2::UP);
 		break;
 	case DD_RIGHT:
 		MoveRoom<CRoom2>(Vector2::RIGHT);

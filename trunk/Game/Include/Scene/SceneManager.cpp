@@ -2,6 +2,7 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include "../Input.h"
+#include "../Map/RoomMap.h"
 
 CSceneManager* CSceneManager::m_pInst = nullptr;
 
@@ -66,10 +67,20 @@ CSceneManager::CSceneManager()	:
 	m_pScene(nullptr),
 	m_pNextScene(nullptr)
 {
+	m_vecPlayRoom.reserve(3);
 }
 
 CSceneManager::~CSceneManager()
 {
+	size_t iSize = m_vecPlayRoom.size();
+
+	for (size_t i = 0; i < iSize; ++i)
+	{
+		SAFE_DELETE(m_vecPlayRoom[i]);
+	}
+
+	m_vecPlayRoom.clear();
+
 	SAFE_DELETE(m_pNextScene);
 	SAFE_DELETE(m_pScene);
 }

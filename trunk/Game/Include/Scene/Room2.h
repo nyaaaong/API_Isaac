@@ -16,6 +16,9 @@ public:
 	virtual bool Collision(float fTime);
 	virtual bool Render(HDC hDC);
 
+public:
+	virtual void DoorFunc(EDoorDir eDoorDir);
+
 protected:
 	CRoom2();
 	virtual ~CRoom2();

@@ -1,5 +1,7 @@
 
 #include "Room3.h"
+#include "Room2.h"
+#include "BossRoom.h"
 #include "SceneManager.h"
 #include "../Input.h"
 #include "../Map/RoomMap.h"
@@ -11,6 +13,15 @@ bool CRoom3::Init()
 
 	SetMap("Room", m_iRoomNum);
 	LoadMapObject();
+
+	CreatePlayer(Vector2::DOWN);
+
+	SetDoor(DD_TOP, false);
+	SetDoor(DD_LEFT, false);
+
+#ifdef _DEBUG
+	m_bClearRoom = true;
+#endif // _DEBUG
 
 	return true;
 }
@@ -46,6 +57,19 @@ bool CRoom3::Render(HDC hDC)
 	CRoomBase::Render(hDC);
 
 	return true;
+}
+
+void CRoom3::DoorFunc(EDoorDir eDoorDir)
+{
+	switch (eDoorDir)
+	{
+	case DD_LEFT:
+		MoveRoom<CBossRoom>(Vector2::LEFT);
+		break;
+	case DD_TOP:
+		MoveRoom<CRoom2>(Vector2::UP);
+		break;
+	}
 }
 
 CRoom3::CRoom3()

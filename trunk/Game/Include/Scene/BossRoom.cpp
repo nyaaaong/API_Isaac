@@ -1,4 +1,6 @@
+
 #include "BossRoom.h"
+#include "Room3.h"
 #include "SceneManager.h"
 #include "SceneResource.h"
 #include "../Input.h"
@@ -15,6 +17,10 @@ bool CBossRoom::Init()
 	SetDoor(EDoorDir::DD_RIGHT, true);
 
 	CreatePlayer(Vector2::RIGHT);
+
+#ifdef _DEBUG
+	m_bClearRoom = true;
+#endif // _DEBUG
 
 	return true;
 }
@@ -66,6 +72,16 @@ void CBossRoom::CreateMonster()
 	//
 	//CSharedPtr<CBossMonstro> pMonstro = CreateObject<CBossMonstro>("Monstro", "Monstro", Vector2(tPlayerPos.x - 600.f, tPlayerPos.y + 20.f));
 	//m_pPlayerHUD->SetBossMonster(static_cast<CCharacter*>(pMonstro));
+}
+
+void CBossRoom::DoorFunc(EDoorDir eDoorDir)
+{
+	switch (eDoorDir)
+	{
+	case DD_RIGHT:
+		MoveRoom<CRoom3>(Vector2::RIGHT);
+		break;
+	}
 }
 
 void CBossRoom::Next(float fTime)
