@@ -1,52 +1,19 @@
 
 #include "SceneManager.h"
 #include "Scene.h"
+#include "SceneResource.h"
 #include "../Input.h"
 #include "../Map/RoomMap.h"
 
 CSceneManager* CSceneManager::m_pInst = nullptr;
 
-bool CSceneManager::IsPlayRoom(int iRoomNum)
+void CSceneManager::MusicStart()
 {
-	size_t iSize = m_vecPlayRoom.size();
+	m_pResource->SetVolume("BGM", 10);
+	m_pResource->SetVolume("Effect", 30);
 
-	for (size_t i = 0; i < iSize; ++i)
-	{
-		if (m_vecPlayRoom[i]->GetRoomNumber() == iRoomNum)
-			return true;
-	}
-
-	return false;
-}
-
-bool CSceneManager::PushPlayRoom(CRoomMap* pRoom)
-{
-	size_t iSize = m_vecPlayRoom.size();
-
-	for (size_t i = 0; i < iSize; ++i)
-	{
-		if (m_vecPlayRoom[i] == pRoom)
-			return false;
-	}
-
-	m_vecPlayRoom.push_back(pRoom);
-
-	return true;
-}
-
-bool CSceneManager::PushPlaySpecialRoom(CRoomMap* pSpecialRoom)
-{
-	size_t iSize = m_vecPlaySpecialRoom.size();
-
-	for (size_t i = 0; i < iSize; ++i)
-	{
-		if (m_vecPlaySpecialRoom[i] == pSpecialRoom)
-			return false;
-	}
-
-	m_vecPlaySpecialRoom.push_back(pSpecialRoom);
-
-	return true;
+	m_pResource->LoadSound("BGM", true, "Stage1BGM", "Music/Stage1.ogg");
+	m_pResource->SoundPlay("Stage1BGM");
 }
 
 bool CSceneManager::ChangeScene()
@@ -110,34 +77,12 @@ CSceneManager::CSceneManager()	:
 	m_pScene(nullptr),
 	m_pNextScene(nullptr)
 {
-	m_vecPlayRoom.reserve(3);
-	m_vecPlaySpecialRoom.reserve(3);
+	m_pResource = new CSceneResource;
 }
 
 CSceneManager::~CSceneManager()
 {
-	{
-		size_t iSize = m_vecPlaySpecialRoom.size();
-
-		for (size_t i = 0; i < iSize; ++i)
-		{
-			SAFE_DELETE(m_vecPlaySpecialRoom[i]);
-		}
-
-		m_vecPlaySpecialRoom.clear();
-	}
-
-	{
-		size_t iSize = m_vecPlayRoom.size();
-
-		for (size_t i = 0; i < iSize; ++i)
-		{
-			SAFE_DELETE(m_vecPlayRoom[i]);
-		}
-
-		m_vecPlayRoom.clear();
-	}
-
+	SAFE_DELETE(m_pResource);
 	SAFE_DELETE(m_pNextScene);
 	SAFE_DELETE(m_pScene);
 }

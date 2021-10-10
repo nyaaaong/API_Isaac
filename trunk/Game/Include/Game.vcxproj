@@ -166,6 +166,7 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map\MapManager.cpp" />
     <ClCompile Include="Map\RoomMap.cpp" />
     <ClCompile Include="Map\RoomObj.cpp" />
     <ClCompile Include="Map\RoomObj_Load.cpp" />
@@ -261,6 +262,7 @@
     <ClInclude Include="GameInfo.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Map\MapManager.h" />
     <ClInclude Include="Map\RoomMap.h" />
     <ClInclude Include="Map\RoomObj.h" />
     <ClInclude Include="Math.h" />

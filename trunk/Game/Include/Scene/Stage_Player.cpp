@@ -8,22 +8,28 @@
 void CStage::CreatePlayer(const Vector2& tStartPos)
 {
 	Vector2 tPos;
+	Vector2	tPrevPos = CSceneManager::GetInst()->GetPrevScenePlayerPos();
 	Vector2	tFieldLT = GetFieldLT();
 	Vector2	tFieldRB = GetFieldRB();
 
-	if (Vector2() != CSceneManager::GetInst()->GetPrevScenePlayerPos()) // 이전에 들어온 방향과 반대로 tPos를 정해준다.
+	Vector2	tDirL = Vector2(tFieldLT.x + 75.f, tFieldRB.y * 0.55f);;
+	Vector2	tDirR = Vector2(tFieldRB.x - 75.f, tFieldRB.y * 0.55f);
+	Vector2	tDirT = Vector2(tFieldRB.x * 0.55f, tFieldLT.y + 75.f);
+	Vector2	tDirB = Vector2(tFieldRB.x * 0.55f, tFieldRB.y - 75.f);
+
+	if (tPrevPos != tPos) // 이전에 들어온 방향과 반대로 tPos를 정해준다.
 	{
-		if (tPos == Vector2::LEFT)
-			tPos = Vector2(tFieldRB.x - 100.f, tFieldRB.y * 0.5f);
+		if (tPrevPos == Vector2::LEFT)
+			tPos = tDirR;
 
-		else if (tPos == Vector2::RIGHT)
-			tPos = Vector2(tFieldLT.x + 100.f, tFieldRB.y * 0.5f);
+		else if (tPrevPos == Vector2::RIGHT)
+			tPos = tDirL;
 
-		else if (tPos == Vector2::UP)
-			tPos = Vector2(tFieldRB.x * 0.5f, tFieldRB.y - 100.f);
+		else if (tPrevPos == Vector2::UP)
+			tPos = tDirB;
 
-		else if (tPos == Vector2::DOWN)
-			tPos = Vector2(tFieldRB.x * 0.5f, tFieldLT.y + 100.f);
+		else if (tPrevPos == Vector2::DOWN)
+			tPos = tDirT;
 	}
 
 	else // 디버그 및 테스트를 위해서 이전 방에서 들어오지 않은 경우 인자 값의 방향으로 정해준다.
@@ -31,16 +37,16 @@ void CStage::CreatePlayer(const Vector2& tStartPos)
 		tPos = tStartPos;
 
 		if (tPos == Vector2::LEFT)
-			tPos = Vector2(tFieldLT.x + 100.f, tFieldRB.y * 0.5f);
+			tPos = tDirL;
 
 		else if (tPos == Vector2::RIGHT)
-			tPos = Vector2(tFieldRB.x - 100.f, tFieldRB.y * 0.5f);
+			tPos = tDirR;
 
 		else if (tPos == Vector2::UP)
-			tPos = Vector2(tFieldRB.x * 0.5f, tFieldLT.y + 100.f);
+			tPos = tDirT;
 
 		else if (tPos == Vector2::DOWN)
-			tPos = Vector2(tFieldRB.x * 0.5f, tFieldRB.y - 100.f);
+			tPos = tDirB;
 	}
 
 	CPlayer* pPlayer = CreateObject<CPlayer>("Player", tPos, Vector2(84.f, 75.f));

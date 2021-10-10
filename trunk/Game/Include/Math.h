@@ -285,7 +285,7 @@ public:
 
 	bool operator != (const Vector2& v)
 	{
-		return x != v.x && y != v.y;
+		return x != v.x || y != v.y;
 	}
 
 	float Length()	const

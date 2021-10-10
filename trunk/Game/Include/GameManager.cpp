@@ -7,6 +7,7 @@
 #include "PathManager.h"
 #include "Resource/ResourceManager.h"
 #include "Collision/CollisionManager.h"
+#include "Map/MapManager.h"
 
 CGameManager* CGameManager::m_pInst = nullptr;
 bool CGameManager::m_bLoop = true;
@@ -34,6 +35,7 @@ CGameManager::CGameManager()	:
 
 CGameManager::~CGameManager()
 {
+	CMapManager::DestroyInst();
 	CSceneManager::DestroyInst();
 	CInput::DestroyInst();
 	CCollisionManager::DestroyInst();
@@ -85,6 +87,9 @@ bool CGameManager::Init(HINSTANCE hInst)
 		return false;
 
 	if (!CSceneManager::GetInst()->Init())
+		return false;
+
+	if (!CMapManager::GetInst()->Init())
 		return false;
 
 	CSceneManager::GetInst()->CreateScene<CMainMenu>();

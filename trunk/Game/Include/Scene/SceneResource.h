@@ -14,6 +14,7 @@
 class CSceneResource
 {
 	friend class CScene;
+	friend class CSceneManager;
 
 private:
 	std::unordered_map<std::string, CSharedPtr<CTexture>>	m_mapTexture;

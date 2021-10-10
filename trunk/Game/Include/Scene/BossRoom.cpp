@@ -5,6 +5,7 @@
 #include "SceneResource.h"
 #include "../Input.h"
 #include "../Map/RoomMap.h"
+#include "../Map/MapManager.h"
 #include "../Object/BossMonstro.h"
 #include "../UI/PlayerHUD.h"
 
@@ -13,7 +14,9 @@ bool CBossRoom::Init()
 	if (!CRoomBase::Init())
 		return false;
 
-	CreateSpecialRoomMap<CRoomMap>(ESpecial_RoomType::Boss);
+	CMapManager::GetInst()->CreateSpecialRoomMap(this, ESpecial_RoomType::Boss);
+	CMapManager::GetInst()->SetSpecialMap(this, ESpecial_RoomType::Boss);
+
 	SetDoor(EDoorDir::DD_RIGHT, true);
 
 	CreatePlayer(Vector2::RIGHT);

@@ -4,6 +4,7 @@
 #include "../GameManager.h"
 #include "../PathManager.h"
 #include "../Map/RoomMap.h"
+#include "../Map/MapManager.h"
 
 void CEditorScene::NextRoom(float fTime)
 {
@@ -12,7 +13,7 @@ void CEditorScene::NextRoom(float fTime)
 	if (m_iCurRoom > m_iMaxRoomCount)
 		m_iCurRoom = m_iMaxRoomCount;
 
-	SetMap("Room", m_iCurRoom);
+	CMapManager::GetInst()->SetMap(this, m_iCurRoom);
 }
 
 void CEditorScene::PrevRoom(float fTime)
@@ -22,7 +23,7 @@ void CEditorScene::PrevRoom(float fTime)
 	if (m_iCurRoom < 1)
 		m_iCurRoom = 1;
 
-	SetMap("Room", m_iCurRoom);
+	CMapManager::GetInst()->SetMap(this, m_iCurRoom);
 }
 
 void CEditorScene::ClearRoom(float fTime)

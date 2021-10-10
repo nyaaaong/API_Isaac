@@ -1,4 +1,5 @@
 #include "RoomMap.h"
+#include "MapManager.h"
 #include "../Resource/ResourceManager.h"
 
 bool CRoomMap::Init()
@@ -26,6 +27,8 @@ bool CRoomMap::Init()
 
 void CRoomMap::Update(float fTime)
 {
+	CMapManager::GetInst()->RoomUpdater();
+
 	std::list<CRoomObj*>::iterator	iter = m_RoomObjList.begin();
 	std::list<CRoomObj*>::iterator	iterEnd = m_RoomObjList.end();
 
@@ -37,6 +40,8 @@ void CRoomMap::Update(float fTime)
 
 void CRoomMap::PostUpdate(float fTime)
 {
+	CMapManager::GetInst()->RoomUpdater();
+
 	std::list<CRoomObj*>::iterator	iter = m_RoomObjList.begin();
 	std::list<CRoomObj*>::iterator	iterEnd = m_RoomObjList.end();
 
@@ -50,6 +55,8 @@ void CRoomMap::Render(HDC hDC)
 {
 	if (m_pBackGround)
 		m_pBackGround->Render(hDC, Vector2(), Vector2(), Vector2(1280.f, 720.f));
+
+	CMapManager::GetInst()->RoomUpdater();
 
 	std::list<CRoomObj*>::iterator	iter = m_RoomObjList.begin();
 	std::list<CRoomObj*>::iterator	iterEnd = m_RoomObjList.end();

@@ -2,25 +2,11 @@
 #include "Scene.h"
 #include "../PathManager.h"
 #include "../Map/RoomMap.h"
+#include "../Map/MapManager.h"
 
 void CScene::SaveFullPath(const char* cFullPath)
 {
-	FILE* pFile = nullptr;
-
-	fopen_s(&pFile, cFullPath, "wb");
-
-	if (!pFile)
-		return;
-
-	int	iSize = static_cast<int>(m_vecRoomMap.size());
-	fwrite(&iSize, sizeof(int), 1, pFile);
-
-	for (int i = 0; i < iSize; ++i)
-	{
-		m_vecRoomMap[i]->Save(pFile);
-	}
-
-	fclose(pFile);
+	CMapManager::GetInst()->SaveFullPath(cFullPath);
 }
 
 void CScene::SaveFile(const char* cFileName, const std::string& strPath)
@@ -39,35 +25,7 @@ void CScene::SaveFile(const char* cFileName, const std::string& strPath)
 
 void CScene::LoadFullPath(const char* cFullPath)
 {
-	FILE* pFile = nullptr;
-
-	fopen_s(&pFile, cFullPath, "rb");
-
-	if (!pFile)
-		return;
-
-	int	iSize = 0;
-	fread(&iSize, sizeof(int), 1, pFile);
-
-	m_vecRoomMap.resize(iSize);
-
-	for (int i = 0; i < iSize; ++i)
-	{
-		CRoomMap* pMap = new CRoomMap;
-
-		pMap->SetScene(this);
-		pMap->Load(pFile);
-
-		if (!pMap->Init())
-		{
-			SAFE_DELETE(pMap);
-			return;
-		}
-
-		m_vecRoomMap[i] = pMap;
-	}
-
-	fclose(pFile);
+	CMapManager::GetInst()->LoadFullPath(this, cFullPath);
 }
 
 void CScene::LoadFile(const char* cFileName, const std::string& strPath)

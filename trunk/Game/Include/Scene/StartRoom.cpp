@@ -6,13 +6,15 @@
 #include "SceneResource.h"
 #include "../Input.h"
 #include "../Map/RoomMap.h"
+#include "../Map/MapManager.h"
 
 bool CStartRoom::Init()
 {
 	if (!CRoomBase::Init())
 		return false;
 
-	CreateSpecialRoomMap<CRoomMap>(ESpecial_RoomType::Start);
+	CMapManager::GetInst()->CreateSpecialRoomMap(this, ESpecial_RoomType::Start);
+	CMapManager::GetInst()->SetSpecialMap(this, ESpecial_RoomType::Start);
 
 	m_bClearRoom = true;
 
@@ -27,9 +29,6 @@ bool CStartRoom::Init()
 void CStartRoom::Start()
 {
 	CRoomBase::Start();
-
-	GetSceneResource()->LoadSound("BGM", true, "Stage1BGM", "Music/Stage1.ogg");
-	GetSceneResource()->SoundPlay("Stage1BGM");
 }
 
 bool CStartRoom::Update(float fTime)

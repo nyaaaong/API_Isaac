@@ -425,6 +425,9 @@
     <ClCompile Include="Object\Block.cpp">
       <Filter>02. Object\06. Block</Filter>
     </ClCompile>
+    <ClCompile Include="Map\MapManager.cpp">
+      <Filter>07. Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameInfo.h">
@@ -615,6 +618,9 @@
     </ClInclude>
     <ClInclude Include="Object\Block.h">
       <Filter>02. Object\06. Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\MapManager.h">
+      <Filter>07. Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

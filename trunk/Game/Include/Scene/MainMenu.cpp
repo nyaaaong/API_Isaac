@@ -12,6 +12,7 @@ bool CMainMenu::Init()
 
 	LoadAnimationSequence();
 
+	GetSceneResource()->SetVolume("BGM", 10);
 	GetSceneResource()->LoadSound("BGM", true, "MenuBGM", "Music/Menu.ogg");
 	GetSceneResource()->SoundPlay("MenuBGM");
 

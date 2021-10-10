@@ -52,8 +52,7 @@ bool CStage::Render(HDC hDC)
 
 CStage::CStage()	:
 	m_pPlayerHUD(nullptr),
-	m_iStage(1),
-	m_bFirstRoom(false)
+	m_iStage(1)
 {
 }
 

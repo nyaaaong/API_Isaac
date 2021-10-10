@@ -5,6 +5,7 @@
 #include "../GameManager.h"
 #include "../Input.h"
 #include "../Map/RoomMap.h"
+#include "../Map/MapManager.h"
 
 void CEditorScene::LoadAnimationSequence()
 {
@@ -122,6 +123,6 @@ void CEditorScene::LoadFullPath(const char* cFullPath)
 
 	m_eState = EEditor_State::Loaded;
 
-	SetMap("Room", 1);
+	CMapManager::GetInst()->SetMap(this, 1);
 	m_iCurRoom = 1;
 }

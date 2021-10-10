@@ -7,6 +7,7 @@
 class CScene
 {
 	friend class CSceneManager;
+	friend class CMapManager;
 
 private:
 	std::list<CSharedPtr<CObj>>	m_ObjList;
@@ -14,19 +15,17 @@ private:
 	class CSceneResource* m_pResource;
 	class CSceneCollision* m_pCollision;
 	class CCamera* m_pCamera;
+	class CRoomMap* m_pCurMap;
+	CObj** m_pArrRender;
+	CUIWindow** m_pArrUI;
 	CSharedPtr<CObj>	m_pPlayer;
 	CSharedPtr<CObj>	m_pPlayerBody;
-	CObj** m_pArrRender;
-	int		m_iRenderCount;
-	int		m_iRenderCapacity;
-	CUIWindow** m_pArrUI;
-	int		m_iUICount;
-	int		m_iUICapacity;
 	Vector2	m_tFieldLT;	// 벽을 제외한 나머지 구역
 	Vector2	m_tFieldRB;
-	std::vector<class CRoomMap*>	m_vecRoomMap;
-	std::unordered_map<ESpecial_RoomType, class CRoomMap*>	m_mapSpecialRoomMap;
-	class CRoomMap* m_pCurMap;
+	int		m_iRenderCount;
+	int		m_iRenderCapacity;
+	int		m_iUICount;
+	int		m_iUICapacity;
 	bool	m_bStart;
 
 protected:
@@ -90,9 +89,7 @@ public:
 	}
 
 public:
-	void SetMap(const std::string& strName, int iRoomNum);
 	void LoadMapObject();
-	void SetSpecialMap(ESpecial_RoomType eType);
 
 private:
 	CObj* FindPrototype(const std::string& strName);
@@ -244,48 +241,6 @@ public:
 		return nullptr;
 	}
 
-	template <typename T>
-	T* CreateRoomMap(const std::string& strName, int iRoomNum, const Vector2& tPos = Vector2(0.f, 0.f), const Vector2& tSize = Vector2(1280.f, 720.f))
-	{
-		T* pMap = new T;
-
-		pMap->SetScene(this);
-		pMap->SetRoomNumber(iRoomNum);
-		pMap->SetPos(tPos);
-		pMap->SetSize(tSize);
-		pMap->SetName(strName);
-
-		if (!pMap->Init())
-		{
-			SAFE_DELETE(pMap);
-			return nullptr;
-		}
-
-		m_vecRoomMap.push_back(pMap);
-
-		return pMap;
-	}
-
-	template <typename T>
-	T* CreateSpecialRoomMap(ESpecial_RoomType eType, const Vector2& tPos = Vector2(0.f, 0.f), const Vector2& tSize = Vector2(1280.f, 720.f))
-	{
-		T* pMap = new T;
-
-		pMap->SetScene(this);
-		pMap->SetPos(tPos);
-		pMap->SetSize(tSize);
-		pMap->SetSpecialRoomMap(true);
-		pMap->SetSpecialRoomType(eType);
-
-		if (!pMap->Init())
-		{
-			SAFE_DELETE(pMap);
-			return nullptr;
-		}
-
-		m_mapSpecialRoomMap.insert(std::make_pair(eType, pMap));
-
-		return pMap;
-	}
+	
 };
 

@@ -10,7 +10,6 @@ bool CRoomBase::Init()
 		return false;
 
 	CreateDoor();
-	CreateRoomNum();	
 
 	return true;
 }
@@ -114,23 +113,6 @@ void CRoomBase::CreateDoor()
 	}
 }
 
-void CRoomBase::CreateRoomNum()
-{
-	m_iRoomNum = rand() % m_iMaxRoomCount + 1;
-
-	size_t	iSize = m_vecRoomNum.size();
-
-	for (size_t i = 0; i < iSize; ++i)
-	{
-		if (m_vecRoomNum[i] == m_iRoomNum)
-		{
-			m_iRoomNum = rand() % m_iMaxRoomCount + 1;
-			i = 0;
-			continue;
-		}
-	}
-}
-
 void CRoomBase::DoorFunc(EDoorDir eDoorDir)
 {
 	switch (eDoorDir)
@@ -147,15 +129,12 @@ void CRoomBase::DoorFunc(EDoorDir eDoorDir)
 }
 
 CRoomBase::CRoomBase()	:
-	m_bClearRoom(false),
-	m_iRoomNum(0)
+	m_bClearRoom(false)
 {
 	m_vecDoor.resize(DT_MAX);
 
 	m_vecDoor[0].resize(DD_MAX);
 	m_vecDoor[1].resize(DD_MAX);
-
-	m_vecRoomNum.reserve(3);
 }
 
 CRoomBase::~CRoomBase()

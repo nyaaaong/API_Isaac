@@ -4,15 +4,19 @@
 #include "SceneManager.h"
 #include "../Input.h"
 #include "../Map/RoomMap.h"
+#include "../Map/MapManager.h"
 
 bool CRoom1::Init()
 {
 	if (!CRoomBase::Init())
 		return false;
 
-	SetMap("Room", m_iRoomNum);
+	CMapManager::GetInst()->SetMap(this, 1);
 	LoadMapObject();
 	CreatePlayer(Vector2::DOWN);
+
+	SetDoor(DD_LEFT, false);
+	SetDoor(DD_BOTTOM, false);
 
 #ifdef _DEBUG
 	m_bClearRoom = true;

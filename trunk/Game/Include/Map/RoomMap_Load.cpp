@@ -35,7 +35,7 @@ void CRoomMap::Load(FILE* pFile)
 			SAFE_DELETE(pRoomObj);
 			return;
 		}
-
+				
 		m_RoomObjList.push_back(pRoomObj);
 	}
 }

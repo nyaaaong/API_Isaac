@@ -2,6 +2,7 @@
 #include "EditorScene.h"
 #include "../Input.h"
 #include "../Map/RoomMap.h"
+#include "../Map/MapManager.h"
 
 CEditorScene::CEditorScene()	:
 	m_iCurRoom(1),
@@ -28,10 +29,10 @@ bool CEditorScene::Init()
 
 	for (int i = m_iCurRoom; i <= m_iMaxRoomCount; ++i)
 	{
-		CreateRoomMap<CRoomMap>("Room", i);
+		CMapManager::GetInst()->CreateRoomMap(this, "Room", i);
 	}
 
-	SetMap("Room", 1);
+	CMapManager::GetInst()->SetMap(this, 1);
 
 	CreateMouseCursor();
 

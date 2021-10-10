@@ -5,13 +5,14 @@
 #include "SceneManager.h"
 #include "../Input.h"
 #include "../Map/RoomMap.h"
+#include "../Map/MapManager.h"
 
 bool CRoom3::Init()
 {
 	if (!CRoomBase::Init())
 		return false;
 
-	SetMap("Room", m_iRoomNum);
+	CMapManager::GetInst()->SetMap(this, 3);
 	LoadMapObject();
 
 	CreatePlayer(Vector2::DOWN);
