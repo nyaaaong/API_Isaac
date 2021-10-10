@@ -1,6 +1,7 @@
 
 #include "Stage.h"
 #include "SceneResource.h"
+#include "SceneManager.h"
 
 void CStage::LoadAnimationSequence()
 {
@@ -8,6 +9,8 @@ void CStage::LoadAnimationSequence()
 	EnemyAnimation();
 	BossAnimation();
 	TearAnimation();
+
+	CSceneManager::GetInst()->InputAnimFrameData();
 }
 
 void CStage::PlayerAnimation()

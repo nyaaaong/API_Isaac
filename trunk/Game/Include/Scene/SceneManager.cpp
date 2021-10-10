@@ -75,7 +75,8 @@ bool CSceneManager::Render(HDC hDC)
 
 CSceneManager::CSceneManager()	:
 	m_pScene(nullptr),
-	m_pNextScene(nullptr)
+	m_pNextScene(nullptr),
+	m_bInputAnimFrameData(false)
 {
 	m_pResource = new CSceneResource;
 }

@@ -50,6 +50,9 @@ CAnimation::~CAnimation()
 
 void CAnimation::AddAnimation(const std::string& strSequenceName, bool bLoop, float fPlayTime, float fPlayScale, bool bReverse)
 {
+	if (strSequenceName == "HeadFireLeft")
+		int a = 0;
+
 	CAnimationSequence* pSequence = m_pScene->GetSceneResource()->FindAnimationSequence(strSequenceName);
 
 	if (!pSequence)
@@ -170,6 +173,11 @@ AnimationInfo* CAnimation::FindInfo(const std::string& strName)
 
 void CAnimation::Update(float fTime)
 {
+	std::string strName = m_pCurrentAnimation->pSequence->GetName();
+
+	if (strName == "HeadFireLeft")
+		int a = 0;
+
 	m_pCurrentAnimation->fTime += fTime * m_pCurrentAnimation->fPlayScale;
 
 	bool bAnimEnd = false;

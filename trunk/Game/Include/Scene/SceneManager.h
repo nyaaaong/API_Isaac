@@ -11,11 +11,23 @@ private:
 	CScene* m_pNextScene;
 	Vector2	m_tPrevScenePlayerPos; // 이전 방에서 어느 방향의 문을 사용 했는지
 	class CSceneResource* m_pResource;
+	bool	m_bInputAnimFrameData; // 중복된 애니메이션 프레임을 넣는것을 방지하기 위한 변수
 
 public:
+	bool IsInputAnimFrameData()	const
+	{
+		return m_bInputAnimFrameData;
+	}
+	
 	CScene* GetScene()	const
 	{
 		return m_pScene;
+	}
+
+public:
+	void InputAnimFrameData()
+	{
+		m_bInputAnimFrameData = true;
 	}
 
 public:

@@ -1,6 +1,62 @@
 
 #include "SceneResource.h"
+#include "SceneManager.h"
 #include "../Resource/ResourceManager.h"
+
+CSceneResource::CSceneResource()
+{
+}
+
+CSceneResource::~CSceneResource()
+{
+	{
+		std::unordered_map<std::string, CSharedPtr<CAnimationSequence>>::iterator	iter = m_mapAnimationSequence.begin();
+		std::unordered_map<std::string, CSharedPtr<CAnimationSequence>>::iterator	iterEnd = m_mapAnimationSequence.end();
+
+		std::string	strName;
+
+		for (; iter != iterEnd;)
+		{
+			strName = iter->first;
+
+			iter = m_mapAnimationSequence.erase(iter);
+
+			CResourceManager::GetInst()->ReleaseAnimationSequence(strName);
+		}
+	}
+
+	{
+		std::unordered_map<std::string, CSharedPtr<CTexture>>::iterator	iter = m_mapTexture.begin();
+		std::unordered_map<std::string, CSharedPtr<CTexture>>::iterator	iterEnd = m_mapTexture.end();
+
+		std::string	strName;
+
+		for (; iter != iterEnd;)
+		{
+			strName = iter->first;
+
+			iter = m_mapTexture.erase(iter);
+
+			CResourceManager::GetInst()->ReleaseTexture(strName);
+		}
+	}
+
+	{
+		std::unordered_map<std::string, CSharedPtr<CSound>>::iterator	iter = m_mapSound.begin();
+		std::unordered_map<std::string, CSharedPtr<CSound>>::iterator	iterEnd = m_mapSound.end();
+
+		std::string	strName;
+
+		for (; iter != iterEnd;)
+		{
+			strName = iter->first;
+
+			iter = m_mapSound.erase(iter);
+
+			CResourceManager::GetInst()->ReleaseSound(strName);
+		}
+	}
+}
 
 bool CSceneResource::LoadTexture(const std::string& strName, const TCHAR* cFileName, const std::string& strPathName)
 {
@@ -17,12 +73,12 @@ bool CSceneResource::LoadTexture(const std::string& strName, const TCHAR* cFileN
 	return true;
 }
 
-bool CSceneResource::LoadTexture(const std::string& strName, const std::vector<std::wstring>& vecFileName, const std::string& strPathName)
+bool CSceneResource::LoadTextureFullPath(const std::string& strName, const TCHAR* cFullPath)
 {
 	if (FindTexture(strName))
 		return true;
 
-	if (!CResourceManager::GetInst()->LoadTexture(strName, vecFileName, strPathName))
+	if (!CResourceManager::GetInst()->LoadTextureFullPath(strName, cFullPath))
 		return false;
 
 	CTexture* pTexture = CResourceManager::GetInst()->FindTexture(strName);
@@ -32,12 +88,12 @@ bool CSceneResource::LoadTexture(const std::string& strName, const std::vector<s
 	return true;
 }
 
-bool CSceneResource::LoadTextureFullPath(const std::string& strName, const TCHAR* cFullPath)
+bool CSceneResource::LoadTexture(const std::string& strName, const std::vector<std::wstring>& vecFileName, const std::string& strPathName)
 {
 	if (FindTexture(strName))
 		return true;
 
-	if (!CResourceManager::GetInst()->LoadTexture(strName, cFullPath))
+	if (!CResourceManager::GetInst()->LoadTexture(strName, vecFileName, strPathName))
 		return false;
 
 	CTexture* pTexture = CResourceManager::GetInst()->FindTexture(strName);
@@ -118,6 +174,9 @@ bool CSceneResource::CreateAnimationSequence(const std::string& strSequenceName,
 
 void CSceneResource::AddAnimationFrameData(const std::string& strSequenceName, const Vector2& tStartPos, const Vector2& tSize)
 {
+	if (CSceneManager::GetInst()->IsInputAnimFrameData()) // 吝汗 积己 规瘤
+		return;
+
 	CAnimationSequence* pSequence = FindAnimationSequence(strSequenceName);
 
 	if (!pSequence)
@@ -128,6 +187,9 @@ void CSceneResource::AddAnimationFrameData(const std::string& strSequenceName, c
 
 void CSceneResource::AddAnimationFrameData(const std::string& strSequenceName, float fPosX, float fPosY, float fSizeX, float fSizeY)
 {
+	if (CSceneManager::GetInst()->IsInputAnimFrameData()) // 吝汗 积己 规瘤
+		return;
+
 	CAnimationSequence* pSequence = FindAnimationSequence(strSequenceName);
 
 	if (!pSequence)
@@ -144,61 +206,6 @@ CAnimationSequence* CSceneResource::FindAnimationSequence(const std::string& str
 		return nullptr;
 
 	return iter->second;
-}
-
-CSceneResource::CSceneResource()
-{
-}
-
-CSceneResource::~CSceneResource()
-{
-	{
-		std::unordered_map<std::string, CSharedPtr<CAnimationSequence>>::iterator	iter = m_mapAnimationSequence.begin();
-		std::unordered_map<std::string, CSharedPtr<CAnimationSequence>>::iterator	iterEnd = m_mapAnimationSequence.end();
-
-		std::string	strName;
-
-		for (; iter != iterEnd;)
-		{
-			strName = iter->first;
-
-			iter = m_mapAnimationSequence.erase(iter);
-
-			CResourceManager::GetInst()->ReleaseAnimationSequence(strName);
-		}
-	}
-
-	{
-		std::unordered_map<std::string, CSharedPtr<CTexture>>::iterator	iter = m_mapTexture.begin();
-		std::unordered_map<std::string, CSharedPtr<CTexture>>::iterator	iterEnd = m_mapTexture.end();
-
-		std::string	strName;
-
-		for (; iter != iterEnd;)
-		{
-			strName = iter->first;
-
-			iter = m_mapTexture.erase(iter);
-
-			CResourceManager::GetInst()->ReleaseTexture(strName);
-		}
-	}
-
-	{
-		std::unordered_map<std::string, CSharedPtr<CSound>>::iterator	iter = m_mapSound.begin();
-		std::unordered_map<std::string, CSharedPtr<CSound>>::iterator	iterEnd = m_mapSound.end();
-
-		std::string	strName;
-
-		for (; iter != iterEnd;)
-		{
-			strName = iter->first;
-
-			iter = m_mapSound.erase(iter);
-
-			CResourceManager::GetInst()->ReleaseSound(strName);
-		}
-	}
 }
 
 bool CSceneResource::LoadSound(const std::string& strGroupName, bool bLoop, const std::string& strName, const char* cFileName, const std::string& strPathName)
