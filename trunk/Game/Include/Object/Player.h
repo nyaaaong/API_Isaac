@@ -22,6 +22,13 @@ private:
 	float	m_fBlinkTimer;	// 깜빡이는 속도를 조절하기 위해 누적시킬 시간
 	float	m_fBlinkSpeed;	// 피격 시 깜빡이는 속도
 	class CPlayerBody* m_pPlayerBody;
+	Vector2	m_tMoveDir;
+
+public:
+	const Vector2& GetMoveDir()	const
+	{
+		return m_tMoveDir;
+	}
 
 public:
 	void UseBomb(bool bUse)

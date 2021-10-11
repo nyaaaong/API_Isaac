@@ -1,5 +1,6 @@
 
 #include "Scene.h"
+#include "../GameManager.h"
 #include "../Map/RoomMap.h"
 
 void CScene::SetPlayer(CObj* pPlayerHead, CObj* pPlayerBody)
@@ -36,6 +37,18 @@ void CScene::SetPlayer(CObj* pPlayerHead, CObj* pPlayerBody)
 
 		++iter;
 	}
+}
+
+void CScene::SetPlayerPrevPos()
+{
+	if (!m_pPlayer || !m_pPlayerBody)
+		return;
+
+	m_pPlayer->m_tPos = m_pPlayer->m_tPrevPos;
+	m_pPlayerBody->m_tPos = m_pPlayer->m_tPrevPos;
+
+	if (CheckFieldPos(m_pPlayerBody))
+		m_pPlayer->m_tPos = m_pPlayerBody->m_tPos;
 }
 
 void CScene::SetPlayerPos(const Vector2& tPos)
@@ -100,11 +113,11 @@ void CScene::SetPlayerMove(const Vector2& tPos)
 	m_pPlayer->m_tPrevPos = m_pPlayer->m_tPos;
 	m_pPlayerBody->m_tPrevPos = m_pPlayerBody->m_tPos;
 
-	m_pPlayer->m_tPos += tPos;
-	m_pPlayerBody->m_tPos += tPos;
+	m_pPlayer->m_tPos += tPos * CGameManager::GetInst()->GetDeltaTime() * m_pPlayer->m_fTimeScale;
+	m_pPlayerBody->m_tPos += tPos * CGameManager::GetInst()->GetDeltaTime() * m_pPlayerBody->m_fTimeScale;
 
-	m_pPlayer->m_tVelocity += tPos;
-	m_pPlayerBody->m_tVelocity += tPos;
+	m_pPlayer->m_tVelocity += tPos * CGameManager::GetInst()->GetDeltaTime() * m_pPlayer->m_fTimeScale;
+	m_pPlayerBody->m_tVelocity += tPos * CGameManager::GetInst()->GetDeltaTime() * m_pPlayerBody->m_fTimeScale;
 
 	if (CheckFieldPos(m_pPlayerBody))
 		m_pPlayer->m_tPos = m_pPlayerBody->m_tPos;
@@ -118,11 +131,11 @@ void CScene::SetPlayerMove(float x, float y)
 	m_pPlayer->m_tPrevPos = m_pPlayer->m_tPos;
 	m_pPlayerBody->m_tPrevPos = m_pPlayerBody->m_tPos;
 
-	m_pPlayer->m_tPos += Vector2(x, y);
-	m_pPlayerBody->m_tPos += Vector2(x, y);
+	m_pPlayer->m_tPos += Vector2(x, y) * CGameManager::GetInst()->GetDeltaTime() * m_pPlayer->m_fTimeScale;
+	m_pPlayerBody->m_tPos += Vector2(x, y) * CGameManager::GetInst()->GetDeltaTime() * m_pPlayerBody->m_fTimeScale;
 
-	m_pPlayer->m_tVelocity += Vector2(x, y);
-	m_pPlayerBody->m_tVelocity += Vector2(x, y);
+	m_pPlayer->m_tVelocity += Vector2(x, y) * CGameManager::GetInst()->GetDeltaTime() * m_pPlayer->m_fTimeScale;
+	m_pPlayerBody->m_tVelocity += Vector2(x, y) * CGameManager::GetInst()->GetDeltaTime() * m_pPlayerBody->m_fTimeScale;
 
 	if (CheckFieldPos(m_pPlayerBody))
 		m_pPlayer->m_tPos = m_pPlayerBody->m_tPos;
@@ -136,11 +149,11 @@ void CScene::SetPlayerMoveX(float x)
 	m_pPlayer->m_tPrevPos.x = m_pPlayer->m_tPos.x;
 	m_pPlayerBody->m_tPrevPos.x = m_pPlayer->m_tPos.x;
 
-	m_pPlayer->m_tPos.x += x;
-	m_pPlayerBody->m_tPos.x += x;
+	m_pPlayer->m_tPos.x += x * CGameManager::GetInst()->GetDeltaTime() * m_pPlayer->m_fTimeScale;
+	m_pPlayerBody->m_tPos.x += x * CGameManager::GetInst()->GetDeltaTime() * m_pPlayerBody->m_fTimeScale;
 
-	m_pPlayer->m_tVelocity.x += x;
-	m_pPlayerBody->m_tVelocity.x += x;
+	m_pPlayer->m_tVelocity.x += x * CGameManager::GetInst()->GetDeltaTime() * m_pPlayer->m_fTimeScale;
+	m_pPlayerBody->m_tVelocity.x += x * CGameManager::GetInst()->GetDeltaTime() * m_pPlayerBody->m_fTimeScale;
 
 	if (CheckFieldPos(m_pPlayerBody))
 		m_pPlayer->m_tPos.x = m_pPlayerBody->m_tPos.x;
@@ -154,11 +167,11 @@ void CScene::SetPlayerMoveY(float y)
 	m_pPlayer->m_tPrevPos.y = m_pPlayer->m_tPos.y;
 	m_pPlayerBody->m_tPrevPos.y = m_pPlayer->m_tPos.y;
 
-	m_pPlayer->m_tPos.y += y;
-	m_pPlayerBody->m_tPos.y += y;
+	m_pPlayer->m_tPos.y += y * CGameManager::GetInst()->GetDeltaTime() * m_pPlayer->m_fTimeScale;
+	m_pPlayerBody->m_tPos.y += y * CGameManager::GetInst()->GetDeltaTime() * m_pPlayerBody->m_fTimeScale;
 
-	m_pPlayer->m_tVelocity.y += y;
-	m_pPlayerBody->m_tVelocity.y += y;
+	m_pPlayer->m_tVelocity.y += y * CGameManager::GetInst()->GetDeltaTime() * m_pPlayer->m_fTimeScale;
+	m_pPlayerBody->m_tVelocity.y += y * CGameManager::GetInst()->GetDeltaTime() * m_pPlayerBody->m_fTimeScale;
 
 	if (CheckFieldPos(m_pPlayerBody))
 		m_pPlayer->m_tPos.y = m_pPlayerBody->m_tPos.y;

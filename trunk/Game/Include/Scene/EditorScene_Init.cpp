@@ -3,9 +3,12 @@
 #include "../Input.h"
 #include "../GameManager.h"
 #include "../Resource/ResourceManager.h"
+#include "../Map/MapManager.h"
 
 void CEditorScene::CreateMouseCursor()
 {
+	CMapManager::GetInst()->SetRoomShuffle(false);
+
 	for (int i = MT_ROCK; i < MT_MAX; ++i)
 	{
 		// 텍스쳐명

@@ -120,8 +120,8 @@ public:
 	virtual void Render(HDC hDC);
 
 public:
-	bool IsObj(const Vector2& tPos); // 위치에 오브젝트가 있는지
-	bool IsObj(float x, float y);
+	bool IsObj(const Vector2& tPos, EMapObject_Type eType = MT_MAX); // 위치에 오브젝트가 있는지
+	bool IsObj(float x, float y, EMapObject_Type eType = MT_MAX);
 	bool IsSetObj(const Vector2& tPos, const Vector2& tObjSize = Vector2(75.f, 75.f)); // 설치가 가능한 구역인지
 	void Create(EMapObject_Type eObj, const Vector2& tPos, const Vector2& tObjSize = Vector2(75.f, 75.f));
 	void Delete(const Vector2& tPos);

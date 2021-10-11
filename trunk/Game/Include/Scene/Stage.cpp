@@ -1,11 +1,14 @@
 
 #include "Stage.h"
 #include "SceneResource.h"
+#include "../Map/MapManager.h"
 
 bool CStage::Init()
 {
 	if (!CScene::Init())
 		return false;
+
+	CMapManager::GetInst()->SetRoomShuffle(true);
 
 	LoadAnimationSequence();
 	LoadSound();

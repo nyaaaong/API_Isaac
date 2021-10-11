@@ -1,5 +1,6 @@
 
 #include "RoomObj.h"
+#include "RoomMap.h"
 #include "../Scene/Scene.h"
 #include "../Scene/Camera.h"
 #include "../Resource/ResourceManager.h"

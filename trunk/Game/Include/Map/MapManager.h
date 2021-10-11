@@ -29,11 +29,42 @@ public:
 private:
 	std::unordered_map<ESpecial_RoomType, CRoomMap*>	m_mapSpecialRoomMap;
 	std::vector<CRoomMap*>	m_vecRoomMap;
+	bool		m_bRoomShuffle;
+	Vector2		m_tBlockSize;
+	Vector2		m_tBlockPivot;
 
 public:
+	const Vector2& GetBlockSize()	const
+	{
+		return m_tBlockSize;
+	}
+
+	const Vector2& GetBlockPivot()	const
+	{
+		return m_tBlockPivot;
+	}
+
 	bool HasRoomMap()	const
 	{
 		return !m_vecRoomMap.empty();
+	}
+
+public:
+	void SetBlockSize(const Vector2& tBlockSize)
+	{
+		if (m_tBlockSize == Vector2())
+			m_tBlockSize = tBlockSize;
+	}
+
+	void SetBlockPivot(const Vector2& tBlockPivot)
+	{
+		if (m_tBlockPivot == Vector2())
+			m_tBlockPivot = tBlockPivot;
+	}
+
+	void SetRoomShuffle(bool bShuffle)
+	{
+		m_bRoomShuffle = bShuffle;
 	}
 
 public:
@@ -46,7 +77,7 @@ public:
 	//void Render(HDC hDC);
 
 public:
-	void SetMap(class CScene* pCurScene, int iRoomNum);
+	void SetMap(class CScene* pCurScene, int iIdx);
 	void SetSpecialMap(class CScene* pCurScene, ESpecial_RoomType eType);
 	
 public:

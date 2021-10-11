@@ -6,12 +6,16 @@
 
 void CPlayer::Move(const Vector2& tDir, bool bUseField)
 {
+	m_tMoveDir = tDir;
+
 	if (m_pPlayerBody)
 		m_pPlayerBody->Move(tDir, m_eInfo.fMoveSpeed, bUseField);
 }
 
 void CPlayer::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 {
+	m_tMoveDir = tDir;
+
 	if (m_pPlayerBody)
 		m_pPlayerBody->Move(tDir, fSpeed, bUseField);
 }

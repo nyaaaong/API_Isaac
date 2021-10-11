@@ -12,10 +12,10 @@ void CStage::CreatePlayer(const Vector2& tStartPos)
 	Vector2	tFieldLT = GetFieldLT();
 	Vector2	tFieldRB = GetFieldRB();
 
-	Vector2	tDirL = Vector2(tFieldLT.x + 75.f, tFieldRB.y * 0.55f);;
-	Vector2	tDirR = Vector2(tFieldRB.x - 75.f, tFieldRB.y * 0.55f);
-	Vector2	tDirT = Vector2(tFieldRB.x * 0.55f, tFieldLT.y + 75.f);
-	Vector2	tDirB = Vector2(tFieldRB.x * 0.55f, tFieldRB.y - 75.f);
+	Vector2	tDirL = Vector2(tFieldLT.x + 70.f, tFieldRB.y * 0.55f);;
+	Vector2	tDirR = Vector2(tFieldRB.x - 70.f, tFieldRB.y * 0.55f);
+	Vector2	tDirT = Vector2(tFieldRB.x * 0.56f, tFieldLT.y);
+	Vector2	tDirB = Vector2(tFieldRB.x * 0.56f, tFieldRB.y - 80.f);
 
 	if (tPrevPos != tPos) // 이전에 들어온 방향과 반대로 tPos를 정해준다.
 	{

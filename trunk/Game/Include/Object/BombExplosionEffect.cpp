@@ -1,7 +1,6 @@
 
 #include "BombExplosionEffect.h"
-#include "Player.h"
-#include "PlayerBody.h"
+#include "Block.h"
 #include "../Collision/ColliderBox.h"
 
 CBombExplosionEffect::CBombExplosionEffect()
@@ -35,6 +34,8 @@ bool CBombExplosionEffect::Init()
 
 void CBombExplosionEffect::Start()
 {
+	CObj::Start();
+
 	SetAnimationEndNotify<CBombExplosionEffect>("BombExplosion", this, &CBombExplosionEffect::AnimationFinish);
 
 	m_pColliderBox = AddCollider<CColliderBox>("BombExplosion");
@@ -56,13 +57,27 @@ void CBombExplosionEffect::AnimationFinish()
 
 void CBombExplosionEffect::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 {
-	if (pDest->GetName() == "PlayerHead" || 
-		pDest->GetName() == "PlayerBody")
+	std::string	strDestName = pDest->GetName();
+	CObj* pDestObj = pDest->GetOwner();
+
+	if (strDestName == "PlayerHead" || 
+		strDestName == "PlayerBody")
 	{
-		if (!pDest->GetOwner()->IsEnableDamage())
+		if (!pDestObj->IsEnableDamage())
 			return;
 
-		pDest->GetOwner()->SetDamage(1.f);
+		pDestObj->SetDamage(1.f);
 	}
 
+	else if (pDest->GetProfile()->strName == "Object")
+	{
+		CBlock* pBlock = dynamic_cast<CBlock*>(pDestObj);
+		switch (pBlock->GetType())
+		{
+		case MT_ROCK:
+		case MT_POOP:
+			pBlock->SetDamage(2.f);
+			break;
+		}
+	}
 }

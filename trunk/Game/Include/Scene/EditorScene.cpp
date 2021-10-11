@@ -16,6 +16,8 @@ CEditorScene::CEditorScene()	:
 	m_cFPSText{}
 {
 	m_vecMouse.resize(MT_MAX - 1);
+
+	SetEditorScene();
 }
 
 CEditorScene::~CEditorScene()

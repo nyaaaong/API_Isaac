@@ -9,6 +9,13 @@ class CPlayerBody :
 
 private:
 	class CPlayer* m_pPlayer;
+	Vector2	m_tMoveDir;
+
+public:
+	const Vector2& GetMoveDir()	const
+	{
+		return m_tMoveDir;
+	}
 
 public:
 	virtual void Move(const Vector2& tDir, float fSpeed, bool bUseField);

@@ -27,11 +27,17 @@ private:
 	int		m_iUICount;
 	int		m_iUICapacity;
 	bool	m_bStart;
+	bool	m_bIsEditor;
 
 protected:
 	const int		m_iMaxRoomCount = 10;
 
 public:
+	void SetEditorScene()
+	{
+		m_bIsEditor = true;
+	}
+
 	void SetFieldLT(const Vector2& tPos)
 	{
 		m_tFieldLT = tPos;
@@ -97,6 +103,7 @@ private:
 public:
 	CObj* FindObject(const std::string& strName);
 	void SetPlayer(CObj* pPlayerHead, CObj* pPlayerBody);
+	void SetPlayerPrevPos();
 	void SetPlayerPos(const Vector2& tPos);
 	void SetPlayerPos(float x, float y);
 	void SetPlayerPosX(float x);

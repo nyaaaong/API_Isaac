@@ -2,6 +2,7 @@
 #include "PlayerBody.h"
 #include "Player.h"
 #include "../Scene/Scene.h"
+#include "../Map/MapManager.h"
 #include "../Collision/ColliderBox.h"
 #include "../GameManager.h"
 
@@ -87,7 +88,17 @@ CPlayerBody::~CPlayerBody()
 
 void CPlayerBody::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 {
+	m_tMoveDir = tDir;
+
 	Vector2	tCurMove = tDir * fSpeed * CGameManager::GetInst()->GetDeltaTime() * m_fTimeScale;
+	Vector2	tBlockSize = CMapManager::GetInst()->GetBlockSize();
+	Vector2	tBlockPivot = CMapManager::GetInst()->GetBlockPivot();
+	CRoomMap* pCurMap = m_pScene->GetCurrentMap();
+
+	if (pCurMap->IsObj(m_tPos.x - tBlockSize.x * tBlockPivot.x + tCurMove.x, m_tPos.y + tCurMove.y, MT_ROCK) ||
+		pCurMap->IsObj(m_tPos.x - tBlockSize.x * tBlockPivot.x + tCurMove.x, m_tPos.y + tCurMove.y, MT_IRON) ||
+		pCurMap->IsObj(m_tPos.x - tBlockSize.x * tBlockPivot.x + tCurMove.x, m_tPos.y + tCurMove.y, MT_POOP))
+		return;
 
 	m_tVelocity += tCurMove;
 	m_pPlayer->m_tVelocity = tCurMove;

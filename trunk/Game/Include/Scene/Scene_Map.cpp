@@ -27,5 +27,6 @@ void CScene::LoadMapObject()
 			assert(!"if (!pBlock)");
 
 		pBlock->m_eType = eObjType;
+		pBlock->SetRoomObj((*iter));
 	}
 }

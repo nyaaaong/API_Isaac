@@ -3,7 +3,8 @@
 
 CMapManager* CMapManager::m_pInst = nullptr;
 
-CMapManager::CMapManager()
+CMapManager::CMapManager()	:
+	m_bRoomShuffle(true)
 {
 	m_mapSpecialRoomMap.reserve(3);
 	m_vecRoomMap.reserve(10);
@@ -89,7 +90,7 @@ void CMapManager::RoomUpdater()
 	}
 }
 
-void CMapManager::SetMap(CScene* pCurScene, int iRoomNum)
+void CMapManager::SetMap(CScene* pCurScene, int iIdx)
 {
 	size_t iSize = m_vecRoomMap.size();
 
@@ -97,7 +98,7 @@ void CMapManager::SetMap(CScene* pCurScene, int iRoomNum)
 	{
 		m_vecRoomMap[i]->m_bEnable = false;
 
-		if (i == iRoomNum)
+		if (i == iIdx - 1)
 		{
 			pCurScene->m_pCurMap = m_vecRoomMap[i];
 			pCurScene->m_pCurMap->m_bEnable = true;
@@ -176,7 +177,8 @@ void CMapManager::LoadFullPath(CScene* pCurScene, const char* cFullPath)
 
 	fclose(pFile);
 
-	RoomShuffle();
+	if (m_bRoomShuffle)
+		RoomShuffle();
 }
 
 void CMapManager::CreateRoomMap(CScene* pCurScene, const std::string& strName, int iRoomNum, const Vector2& tPos, const Vector2& tSize)

@@ -1,6 +1,7 @@
 
 #include "Player.h"
 #include "PlayerBody.h"
+#include "../Input.h"
 #include "../GameManager.h"
 #include "../Scene/Scene.h"
 #include "../Collision/ColliderBox.h"
@@ -49,7 +50,11 @@ void CPlayer::PostUpdate(float fTime)
 {
 	CCharacter::PostUpdate(fTime);
 
-	if (m_bIsMove && m_tVelocity.Length() == 0.f) // 움직인다는데 실제로 이동하지 않은 경우
+	if (!m_bIsFire &&
+		!CInput::GetInst()->GetKeyPush("PlayerMoveUp") &&
+		!CInput::GetInst()->GetKeyPush("PlayerMoveDown") &&
+		!CInput::GetInst()->GetKeyPush("PlayerMoveLeft") &&
+		!CInput::GetInst()->GetKeyPush("PlayerMoveRight"))
 		DefaultAnimation();
 }
 

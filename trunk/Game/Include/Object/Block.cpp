@@ -1,12 +1,16 @@
 
 #include "Block.h"
-#include "Character.h"
+#include "PlayerBody.h"
+#include "../Map/RoomObj.h"
+#include "../Map/MapManager.h"
 #include "../Scene/Scene.h"
 #include "../Collision/ColliderBox.h"
 
 void CBlock::Start()
 {
 	CObj::Start();
+
+	m_fLife = m_pRoomObj->m_fLife;
 
 	m_pColliderBox->SetCollisionBeginFunc<CBlock>(this, &CBlock::CollisionBegin);
 	m_pColliderBox->SetCollisionCollidingFunc<CBlock>(this, &CBlock::CollisionColliding);
@@ -20,6 +24,9 @@ bool CBlock::Init()
 	SetPivot(0.5f, 0.5f);
 	SetPos(m_tPos + m_tSize * m_tPivot);
 
+	CMapManager::GetInst()->SetBlockSize(m_tSize);
+	CMapManager::GetInst()->SetBlockPivot(m_tPivot);
+
 	SetZOrder(EZOrder::RoomObject);
 
 	m_pColliderBox = AddCollider<CColliderBox>("MapObject");
@@ -32,6 +39,20 @@ bool CBlock::Init()
 void CBlock::Update(float fTime)
 {
 	CObj::Update(fTime);
+
+	if (m_fLife != m_fPrevLife)
+	{
+		m_fPrevLife = m_fLife;
+
+		if (m_eType == MT_ROCK)
+			m_fLife = 0.f;
+		
+		if (m_pRoomObj)
+			m_pRoomObj->m_fLife = m_fLife;
+
+		if (m_fLife <= 0.f)
+			Destroy();
+	}
 }
 
 void CBlock::PostUpdate(float fTime)
@@ -51,8 +72,10 @@ void CBlock::Render(HDC hDC)
 
 CBlock::CBlock()	:
 	m_eType(MT_NONE),
-	m_fHP(4),
-	m_fHPMax(4)
+	m_fPrevLife(4.f),
+	m_fLife(4.f),
+	m_fLifeMax(4.f),
+	m_pRoomObj(nullptr)
 {
 }
 
@@ -60,8 +83,10 @@ CBlock::CBlock(const CBlock& obj) :
 	CObj(obj)
 {
 	m_eType = obj.m_eType;
-	m_fHP = obj.m_fHP;
-	m_fHPMax = obj.m_fHPMax;
+	m_fPrevLife = obj.m_fPrevLife;
+	m_fLife = obj.m_fLife;
+	m_fLifeMax = obj.m_fLifeMax;
+	m_pRoomObj = obj.m_pRoomObj;
 }
 
 CBlock::~CBlock()
@@ -87,24 +112,37 @@ void CBlock::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 
 void CBlock::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
 {
-	const RectInfo& tSrcRC = dynamic_cast<CColliderBox*>(pSrc)->GetInfo();
-	const RectInfo& tDestRC = dynamic_cast<CColliderBox*>(pDest)->GetInfo();
+	//switch (m_eType)
+	//{
+	//case MT_ROCK:
+	//case MT_IRON:
+	//case MT_POOP:
+	//	if (pDest->GetName() == "PlayerBody")
+	//	{
+	//		const RectInfo& tSrcRC = dynamic_cast<CColliderBox*>(pSrc)->GetInfo();
+	//		const RectInfo& tDestRC = dynamic_cast<CColliderBox*>(pDest)->GetInfo();
 
-	CObj* pDestObj = pDest->GetOwner();
+	//		CPlayerBody* pDestObj = dynamic_cast<CPlayerBody*>(pDest->GetOwner());
 
-	Vector2	tDestVelocity = pDestObj->GetVelocity();
+	//		Vector2	tDestPos = pDestObj->GetPos();
+	//		Vector2	tDestDir = pDestObj->GetMoveDir();
 
-	switch (m_eType)
-	{
-	case MT_ROCK:
-	case MT_IRON:
-	case MT_POOP:
-		if (pDest->GetName() == "PlayerBody")
-		{
-			if (tSrcRC.fL < tDestRC.fR && tSrcRC.fR > tDestRC.fL &&
-				tSrcRC.fT < tDestRC.fB && tSrcRC.fB > tDestRC.fT) // 충돌한 경우
-				m_pScene->SetPlayerMove(tDestVelocity * -1.f);
-		}
-		break;
-	}
+	//		if (tSrcRC.fL < tDestRC.fR && tSrcRC.fR > tDestRC.fL &&
+	//			tSrcRC.fT < tDestRC.fB && tSrcRC.fB > tDestRC.fT) // 충돌한 경우
+	//			m_pScene->SetPlayerPos(tDestPos + (tDestDir * -1.5f));
+	//	}
+	//	break;
+	//}
+}
+
+float CBlock::SetDamage(float fDamage)
+{
+	fDamage = CObj::SetDamage(fDamage);
+
+	m_fLife -= fDamage;
+
+	if (m_fLife < 0.f)
+		m_fLife = 0.f;
+
+	return fDamage;
 }

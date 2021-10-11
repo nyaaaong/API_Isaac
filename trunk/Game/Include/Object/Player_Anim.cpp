@@ -44,6 +44,7 @@ void CPlayer::ChangeDirAnimation(const std::string& strAnimType)
 
 void CPlayer::DefaultAnimation()
 {
+	//m_bBlockCollision = false;
 	m_bIsMove = false;
 	m_bMoveDown = false;
 	m_bMoveUp = false;

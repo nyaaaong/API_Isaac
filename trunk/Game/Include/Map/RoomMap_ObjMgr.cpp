@@ -3,23 +3,26 @@
 #include "RoomObj.h"
 #include "../Scene/Scene.h"
 
-bool CRoomMap::IsObj(const Vector2& tPos)
+bool CRoomMap::IsObj(const Vector2& tPos, EMapObject_Type eType)
 {
 	std::list<CRoomObj*>::const_iterator	iter = m_RoomObjList.begin();
 	std::list<CRoomObj*>::const_iterator	iterEnd = m_RoomObjList.end();
 
 	for (; iter != iterEnd; ++iter)
 	{
-		if ((*iter)->IsObj(tPos))
-			return true;
+		if ((*iter)->GetType() == eType)
+		{
+			if ((*iter)->IsObj(tPos))
+				return true;
+		}
 	}
 		
     return false;
 }
 
-bool CRoomMap::IsObj(float x, float y)
+bool CRoomMap::IsObj(float x, float y, EMapObject_Type eType)
 {
-    return IsObj(Vector2(x, y));
+    return IsObj(Vector2(x, y), eType);
 }
 
 bool CRoomMap::IsSetObj(const Vector2& tPos, const Vector2& tObjSize)

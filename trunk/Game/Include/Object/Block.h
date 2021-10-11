@@ -9,12 +9,15 @@ class CBlock :
 
 private:
 	EMapObject_Type	m_eType;
-	float	m_fHP;
-	float	m_fHPMax;
+	float	m_fPrevLife;
+	float	m_fLife;
+	float	m_fLifeMax;
+	class CRoomObj* m_pRoomObj;
 
 public:
 	virtual void CollisionBegin(class CCollider* pSrc, class CCollider* pDest, float fTime);
 	virtual void CollisionColliding(class CCollider* pSrc, class CCollider* pDest, float fTime);
+	virtual float SetDamage(float fDamage);
 
 public:
 	virtual void Start();
@@ -33,6 +36,12 @@ public:
 	EMapObject_Type GetType()	const
 	{
 		return m_eType;
-	}		
+	}
+
+public:
+	void SetRoomObj(class CRoomObj* pObj)
+	{
+		m_pRoomObj = pObj;
+	}
 };
 

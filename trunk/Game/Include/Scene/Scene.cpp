@@ -368,7 +368,8 @@ bool CScene::Render(HDC hDC)
 
 CScene::CScene()	:
 	m_pCurMap(nullptr),
-	m_bStart(false)
+	m_bStart(false),
+	m_bIsEditor(false)
 {
 	m_pResource = new CSceneResource;
 	m_pCollision = new CSceneCollision;

@@ -56,7 +56,7 @@ void CPlayer::FireEnd()
 
 void CPlayer::SetFireStart()
 {
-	CSharedPtr<CTear>	pTear = m_pScene->CreateObject<CTear>("PlayerTear", "PlayerTear", m_tPos + (m_tBulletStartDir * Vector2(100.f, 100.f)), Vector2(80.f, 80.f));
+	CSharedPtr<CTear>	pTear = m_pScene->CreateObject<CTear>("PlayerTear", "PlayerTear", m_tPos + m_tBulletStartDir * 50.f, Vector2(80.f, 80.f));
 	pTear->SetDir(m_tBulletStartDir);
 	pTear->SetMoveSpeed(m_eInfo.fShotSpeed);
 
