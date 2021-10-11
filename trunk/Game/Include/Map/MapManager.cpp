@@ -172,7 +172,8 @@ void CMapManager::LoadFullPath(CScene* pCurScene, const char* cFullPath)
 			return;
 		}
 
-		m_vecRoomMap.push_back(pMap);
+		SAFE_DELETE(m_vecRoomMap[i]); // 에디터에서 임시로 추가했던 방들을 제거하고
+		m_vecRoomMap[i] = pMap; // 새로 저장한다.
 	}
 
 	fclose(pFile);
