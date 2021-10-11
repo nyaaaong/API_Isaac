@@ -3,6 +3,8 @@
 #include "../Object/Tear.h"
 #include "../Object/PlayerTearEffect.h"
 #include "../Object/MonsterTearEffect.h"
+#include "../Object/Bomb.h"
+#include "../Object/BombExplosionEffect.h"
 #include "../Object/BossMonstro.h"
 #include "../Object/Door.h"
 
@@ -20,5 +22,6 @@ void CStage::CreatePrototypes()
 
 	CBossMonstro* pMonstro = CreatePrototype<CBossMonstro>("Monstro");
 
-	//CDoor* pDoor = CreatePrototype<CDoor>("Door");
+	CBomb* pBomb = CreatePrototype<CBomb>("Bomb");
+	CBombExplosionEffect*	pExplosion = CreatePrototype<CBombExplosionEffect>("BombExplosion");
 }

@@ -12,7 +12,7 @@ class CPlayer :
 private:
 	bool	m_bIsFire;
 	bool	m_bIsMove;
-	bool	m_bBombEnable;
+	bool	m_bUseBomb;
 	bool	m_bMoveUp;
 	bool	m_bMoveDown;
 	bool	m_bHit;		// 체력이 깎였을 경우
@@ -23,6 +23,12 @@ private:
 	float	m_fBlinkSpeed;	// 피격 시 깜빡이는 속도
 	class CPlayerBody* m_pPlayerBody;
 
+public:
+	void UseBomb(bool bUse)
+	{
+		m_bUseBomb = bUse;
+	}
+
 private:
 	void NoDamageTime(float fTime);
 
@@ -32,7 +38,6 @@ protected:
 private:
 	void AddPlayerAnimation();
 	void AddCallback();
-	void BombEnable();
 	void ChangeDirAnimation(const std::string& strAnimType);
 	void DefaultAnimation();
 	bool CheckMoveUpDown();

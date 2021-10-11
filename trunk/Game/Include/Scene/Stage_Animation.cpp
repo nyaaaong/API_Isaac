@@ -9,6 +9,7 @@ void CStage::LoadAnimationSequence()
 	EnemyAnimation();
 	BossAnimation();
 	TearAnimation();
+	BombAnimation();
 
 	CSceneManager::GetInst()->InputAnimFrameData();
 }
@@ -230,6 +231,20 @@ void CStage::TearAnimation()
 		for (int j = 0; j < 4; ++j)
 		{
 			GetSceneResource()->AddAnimationFrameData("MonsterTearDrop", Vector2(j * 192.f, i * 192.f), Vector2(192.f, 192.f));
+		}
+	}
+}
+
+void CStage::BombAnimation()
+{
+	GetSceneResource()->CreateAnimationSequence("BombExplosion", "BombExplosion", TEXT("Player/Bomb/Explosion/Explosion.bmp"));
+	GetSceneResource()->SetTextureColorKey("BombExplosion");
+
+	for (int i = 0; i < 3; ++i)
+	{
+		for (int j = 0; j < 4; ++j)
+		{
+			GetSceneResource()->AddAnimationFrameData("BombExplosion", Vector2(j * 288.f, i * 288.f), Vector2(288.f, 288.f));
 		}
 	}
 }

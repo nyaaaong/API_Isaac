@@ -10,12 +10,8 @@ public:
 	void AnimationFinish();
 
 public:
-	virtual void Start();
 	virtual bool Init();
-	virtual void Update(float fTime);
-	virtual void PostUpdate(float fTime);
-	virtual void Collision(float fTime);
-	virtual void Render(HDC hDC);
+	virtual void Start();
 	virtual CPlayerTearEffect* Clone();
 
 protected:

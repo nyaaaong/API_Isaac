@@ -74,7 +74,7 @@ void CTear::Start()
 	}
 
 	if (m_pColliderSphere)
-		m_pColliderSphere->SetCollisionBeginFunc(this, &CTear::CollisionBegin);
+		m_pColliderSphere->SetCollisionBeginFunc<CTear>(this, &CTear::CollisionBegin);
 }
 
 void CTear::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
@@ -152,21 +152,6 @@ void CTear::Update(float fTime)
 
 	else if (m_tPos.y >= tFieldRB.y)
 		TearDestroy();
-}
-
-void CTear::PostUpdate(float fTime)
-{
-	CObj::PostUpdate(fTime);
-}
-
-void CTear::Collision(float fTime)
-{
-	CObj::Collision(fTime);
-}
-
-void CTear::Render(HDC hDC)
-{
-	CObj::Render(hDC);
 }
 
 CTear* CTear::Clone()

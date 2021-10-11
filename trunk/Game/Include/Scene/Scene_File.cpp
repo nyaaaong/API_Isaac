@@ -30,6 +30,9 @@ void CScene::LoadFullPath(const char* cFullPath)
 
 void CScene::LoadFile(const char* cFileName, const std::string& strPath)
 {
+	if (CMapManager::GetInst()->HasRoomMap())
+		return;
+
 	char	cFullPath[MAX_PATH] = {};
 
 	const PathInfo* pInfo = CPathManager::GetInst()->FindPath(strPath);

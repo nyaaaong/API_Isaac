@@ -1,6 +1,8 @@
 
 #include "Player.h"
 #include "PlayerBody.h"
+#include "../Scene/Scene.h"
+#include "../Scene/SceneResource.h"
 
 void CPlayer::NoDamageTime(float fTime)
 {
@@ -11,6 +13,8 @@ void CPlayer::NoDamageTime(float fTime)
 			m_bHit = false;
 			m_bEnableDamage = false;
 			m_pPlayerBody->EnableDamage(m_bEnableDamage);
+
+			m_pScene->GetSceneResource()->SoundPlay("PlayerHit");
 		}
 
 		else // 피격 후 무적 시간인 경우

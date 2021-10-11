@@ -189,6 +189,12 @@
     <Filter Include="02. Object\06. Block">
       <UniqueIdentifier>{f47723ca-39a5-4745-9b3d-f5dcebf9c7b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Object\02. Effect\01. Bomb">
+      <UniqueIdentifier>{84e866c9-19f7-4de6-8844-5b458b94d3e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\07. Bomb">
+      <UniqueIdentifier>{879c225f-a7b3-460e-8d07-0ded1694fafa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -428,6 +434,12 @@
     <ClCompile Include="Map\MapManager.cpp">
       <Filter>07. Map</Filter>
     </ClCompile>
+    <ClCompile Include="Object\BombExplosionEffect.cpp">
+      <Filter>02. Object\02. Effect\01. Bomb</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Bomb.cpp">
+      <Filter>02. Object\07. Bomb</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameInfo.h">
@@ -621,6 +633,12 @@
     </ClInclude>
     <ClInclude Include="Map\MapManager.h">
       <Filter>07. Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\BombExplosionEffect.h">
+      <Filter>02. Object\02. Effect\01. Bomb</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Bomb.h">
+      <Filter>02. Object\07. Bomb</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

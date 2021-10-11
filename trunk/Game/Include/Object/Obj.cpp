@@ -354,7 +354,8 @@ CObj::CObj() :
 
 CObj::CObj(const CObj& obj)	:
 	m_pColliderBox(nullptr),
-	m_pColliderSphere(nullptr)
+	m_pColliderSphere(nullptr),
+	m_pAnimation(nullptr)
 {
 	m_pScene = obj.m_pScene;
 

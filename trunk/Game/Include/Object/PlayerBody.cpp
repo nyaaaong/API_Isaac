@@ -107,5 +107,8 @@ void CPlayerBody::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 
 float CPlayerBody::SetDamage(float fDamage)
 {
+	if (!m_bEnableDamage)
+		return 0.f;
+
 	return m_pPlayer->SetDamage(fDamage);
 }

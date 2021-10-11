@@ -176,6 +176,8 @@
     <ClCompile Include="Map\RoomMap_Save.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Object\Block.cpp" />
+    <ClCompile Include="Object\Bomb.cpp" />
+    <ClCompile Include="Object\BombExplosionEffect.cpp" />
     <ClCompile Include="Object\BossMonstro.cpp" />
     <ClCompile Include="Object\Character.cpp" />
     <ClCompile Include="Object\Door.cpp" />
@@ -267,6 +269,8 @@
     <ClInclude Include="Map\RoomObj.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Object\Block.h" />
+    <ClInclude Include="Object\Bomb.h" />
+    <ClInclude Include="Object\BombExplosionEffect.h" />
     <ClInclude Include="Object\BossMonstro.h" />
     <ClInclude Include="Object\Character.h" />
     <ClInclude Include="Object\Door.h" />

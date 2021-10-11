@@ -18,6 +18,8 @@ private:
 	EMapObject_Type	m_eType;
 	class CScene* m_pScene;
 	int		m_iZOrder;
+	float		m_fLife; // 0이 되면 씬에서의 오브젝트 제거. RoomObj 자체를 제거하지는 않는다.
+	float		m_fMaxLife;
 
 public:
 	const Vector2& GetPos()	const
@@ -89,5 +91,9 @@ public:
 public:
 	void Save(FILE* pFile);
 	void Load(FILE* pFile);
+
+private:
+	void RockUpdater();
+	void PoopUpdater();
 };
 

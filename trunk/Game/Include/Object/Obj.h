@@ -53,6 +53,11 @@ public:
 	}
 
 public:
+	bool IsEnableDamage()	const
+	{
+		return m_bEnableDamage;
+	}
+
 	int GetZOrder()	const
 	{
 		return m_iZOrder;

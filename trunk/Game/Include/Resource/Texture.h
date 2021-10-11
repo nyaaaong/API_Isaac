@@ -59,7 +59,7 @@ public:
 		m_vecTextureInfo[iIdx]->iColorKey = RGB(r, g, b);
 	}
 
-	void SetColorKey(unsigned int iColorKey, int iIdx = 0)
+	void SetColorKey(unsigned int iColorKey = RGB(255, 0, 255), int iIdx = 0)
 	{
 		m_vecTextureInfo[iIdx]->bColorKeyEnable = true;
 		m_vecTextureInfo[iIdx]->iColorKey = iColorKey;

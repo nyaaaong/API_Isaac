@@ -126,10 +126,10 @@ private:
 	void Init_CreateTextureObject();
 
 protected:
-	virtual void SaveFile(const char* cFileName, const std::string& strPath = MAP_PATH);
-	virtual void SaveFullPath(const char* cFullPath);
-	virtual void LoadFile(const char* cFileName, const std::string& strPath = MAP_PATH);
-	virtual void LoadFullPath(const char* cFullPath);
+	void SaveFile(const char* cFileName, const std::string& strPath = MAP_PATH);
+	void SaveFullPath(const char* cFullPath);
+	void LoadFile(const char* cFileName, const std::string& strPath = MAP_PATH);
+	void LoadFullPath(const char* cFullPath);
 
 protected:
 	CScene();

@@ -1,6 +1,7 @@
 
 #include "Player.h"
 #include "PlayerBody.h"
+#include "../GameManager.h"
 #include "../Scene/Scene.h"
 #include "../Collision/ColliderBox.h"
 #include "../Collision/ColliderSphere.h"
@@ -70,9 +71,14 @@ void CPlayer::Render(HDC hDC)
 
 float CPlayer::SetDamage(float fDamage)
 {
+	if (!m_bEnableDamage)
+		return 0.f;
+
 	m_bHit = true;
 
 	fDamage = CCharacter::SetDamage(fDamage);
+
+	NoDamageTime(CGameManager::GetInst()->GetDeltaTime());
 
 	return fDamage;
 }
@@ -90,13 +96,13 @@ CPlayer* CPlayer::Clone()
 CPlayer::CPlayer() :
 	m_bIsFire(false),
 	m_bIsMove(false),
-	m_bBombEnable(false),
+	m_bUseBomb(false),
 	m_bMoveUp(false),
 	m_bMoveDown(false),
 	m_fSkill1Time(0.f),
 	m_pPlayerBody(nullptr),
 	m_fNoDmgTimer(0.f),
-	m_fNoDmgTimerMax(1.3f),
+	m_fNoDmgTimerMax(2.f),
 	m_bHit(false),
 	m_fBlinkTimer(0.f),
 	m_fBlinkSpeed(0.2f)
@@ -122,7 +128,7 @@ CPlayer::CPlayer(const CPlayer& obj) :
 {
 	m_fSkill1Time = obj.m_fSkill1Time;
 	m_eInfo = obj.m_eInfo;
-	m_bBombEnable = false;
+	m_bUseBomb = false;
 	m_fNoDmgTimer = obj.m_fNoDmgTimer;
 	m_fNoDmgTimerMax = obj.m_fNoDmgTimerMax;
 	m_bHit = obj.m_bHit;

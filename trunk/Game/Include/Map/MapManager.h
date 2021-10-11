@@ -31,6 +31,12 @@ private:
 	std::vector<CRoomMap*>	m_vecRoomMap;
 
 public:
+	bool HasRoomMap()	const
+	{
+		return !m_vecRoomMap.empty();
+	}
+
+public:
 	bool Init();
 	//void Start();
 	void RoomUpdater();
@@ -50,5 +56,8 @@ public:
 public:
 	void CreateRoomMap(class CScene* pCurScene, const std::string& strName, int iRoomNum, const Vector2& tPos = Vector2(0.f, 0.f), const Vector2& tSize = Vector2(1280.f, 720.f));
 	void CreateSpecialRoomMap(class CScene* pCurScene, ESpecial_RoomType eType, const Vector2& tPos = Vector2(0.f, 0.f), const Vector2& tSize = Vector2(1280.f, 720.f));
+
+private:
+	void RoomShuffle();
 };
 

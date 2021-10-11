@@ -34,6 +34,7 @@ private:
 	void EnemyAnimation();
 	void BossAnimation();
 	void TearAnimation();
+	void BombAnimation();
 
 private:
 	void PlayerSound();

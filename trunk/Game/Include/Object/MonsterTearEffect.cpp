@@ -15,14 +15,14 @@ bool CMonsterTearEffect::Init()
 	CreateAnimation();
 	AddAnimation("MonsterTearDrop", false, 0.3f);
 
-	SetAnimationEndNotify<CMonsterTearEffect>("MonsterTearDrop", this, &CMonsterTearEffect::AnimationFinish);
-
 	return true;
 }
 
 void CMonsterTearEffect::Start()
 {
 	CObj::Start();
+
+	SetAnimationEndNotify<CMonsterTearEffect>("MonsterTearDrop", this, &CMonsterTearEffect::AnimationFinish);
 }
 
 void CMonsterTearEffect::AnimationFinish()

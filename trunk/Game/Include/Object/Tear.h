@@ -41,7 +41,13 @@ public:
 		m_fDistance = fDistance;
 	}
 
-private:
+public:
+	const Vector2& GetDir()	const
+	{
+		return m_tDir;
+	}
+
+public:
 	void TearDestroy();
 
 public:
@@ -51,9 +57,6 @@ public:
 	virtual void Start();
 	virtual bool Init();
 	virtual void Update(float fTime);
-	virtual void PostUpdate(float fTime);
-	virtual void Collision(float fTime);
-	virtual void Render(HDC hDC);
 	virtual CTear* Clone();
 
 protected:

@@ -97,7 +97,7 @@ void CMapManager::SetMap(CScene* pCurScene, int iRoomNum)
 	{
 		m_vecRoomMap[i]->m_bEnable = false;
 
-		if (m_vecRoomMap[i]->GetRoomNumber() == iRoomNum)
+		if (i == iRoomNum)
 		{
 			pCurScene->m_pCurMap = m_vecRoomMap[i];
 			pCurScene->m_pCurMap->m_bEnable = true;
@@ -175,6 +175,8 @@ void CMapManager::LoadFullPath(CScene* pCurScene, const char* cFullPath)
 	}
 
 	fclose(pFile);
+
+	RoomShuffle();
 }
 
 void CMapManager::CreateRoomMap(CScene* pCurScene, const std::string& strName, int iRoomNum, const Vector2& tPos, const Vector2& tSize)
@@ -218,4 +220,22 @@ void CMapManager::CreateSpecialRoomMap(CScene* pCurScene, ESpecial_RoomType eTyp
 	}
 
 	m_mapSpecialRoomMap.insert(std::make_pair(eType, pMap));
+}
+
+void CMapManager::RoomShuffle()
+{
+	int iSize = static_cast<int>(m_vecRoomMap.size());
+
+	int	Idx1 = 0, Idx2 = 0;
+	CRoomMap* pTemp = nullptr;
+
+	for (int i = 0; i < 30; ++i)
+	{
+		Idx1 = rand() % iSize;
+		Idx2 = rand() % iSize;
+
+		pTemp = m_vecRoomMap[Idx1];
+		m_vecRoomMap[Idx1] = m_vecRoomMap[Idx2];
+		m_vecRoomMap[Idx2] = pTemp;
+	}
 }

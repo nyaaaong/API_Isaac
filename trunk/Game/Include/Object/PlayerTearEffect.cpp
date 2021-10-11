@@ -23,31 +23,13 @@ bool CPlayerTearEffect::Init()
 void CPlayerTearEffect::Start()
 {
 	CObj::Start();
+
+	SetAnimationEndNotify<CPlayerTearEffect>("PlayerTearDrop", this, &CPlayerTearEffect::AnimationFinish);
 }
 
 void CPlayerTearEffect::AnimationFinish()
 {
 	Destroy();
-}
-
-void CPlayerTearEffect::Update(float fTime)
-{
-	CObj::Update(fTime);
-}
-
-void CPlayerTearEffect::PostUpdate(float fTime)
-{
-	CObj::PostUpdate(fTime);
-}
-
-void CPlayerTearEffect::Collision(float fTime)
-{
-	CObj::Collision(fTime);
-}
-
-void CPlayerTearEffect::Render(HDC hDC)
-{
-	CObj::Render(hDC);
 }
 
 CPlayerTearEffect* CPlayerTearEffect::Clone()
