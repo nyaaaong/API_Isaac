@@ -35,6 +35,11 @@ private:
 	bool		m_bIsEditor;
 
 public:
+	bool IsEditorScene()	const
+	{
+		return m_bIsEditor;
+	}
+
 	const Vector2& GetBlockSize()	const
 	{
 		return m_tBlockSize;

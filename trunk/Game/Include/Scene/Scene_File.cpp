@@ -31,7 +31,7 @@ void CScene::SaveFile(const char* cFileName, const std::string& strPath)
 
 void CScene::LoadFullPath(const char* cFullPath)
 {
-	if (CMapManager::GetInst()->HasRoomMap())
+	if (!CMapManager::GetInst()->IsEditorScene() && CMapManager::GetInst()->HasRoomMap())
 		return;
 
 	CMapManager::GetInst()->LoadFullPath(this, cFullPath);
@@ -39,7 +39,7 @@ void CScene::LoadFullPath(const char* cFullPath)
 
 void CScene::LoadFile(const char* cFileName, const std::string& strPath)
 {
-	if (CMapManager::GetInst()->HasRoomMap())
+	if (!CMapManager::GetInst()->IsEditorScene() && CMapManager::GetInst()->HasRoomMap())
 		return;
 
 	char	cFullPath[MAX_PATH] = {};
