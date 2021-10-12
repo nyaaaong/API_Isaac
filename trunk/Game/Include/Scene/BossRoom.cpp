@@ -17,7 +17,7 @@ bool CBossRoom::Init()
 	CMapManager::GetInst()->CreateSpecialRoomMap(this, ESpecial_RoomType::Boss);
 	CMapManager::GetInst()->SetSpecialMap(this, ESpecial_RoomType::Boss);
 
-	SetDoor(EDoorDir::DD_RIGHT, true);
+	SetDoor(EDoorDir::DD_RIGHT, DT_BOSS);
 
 	CreatePlayer(Vector2::RIGHT);
 
@@ -32,8 +32,6 @@ void CBossRoom::Start()
 {
 	CRoomBase::Start();
 
-	Vector2	tDoorPos = GetDoorPos(EDoorDir::DD_RIGHT, true);
-
 	// º¸½º bgm
 	//GetSceneResource()->LoadSound("BGM", true, "Stage1BGM", "Music/Stage1.ogg");
 	//GetSceneResource()->SoundPlay("Stage1BGM");
@@ -41,36 +39,10 @@ void CBossRoom::Start()
 	//CInput::GetInst()->SetCallback<CBossRoom>("PlayerNextRoom", KS_DOWN, this, &CBossRoom::Next);
 }
 
-bool CBossRoom::Update(float fTime)
-{
-	CRoomBase::Update(fTime);
-
-	return true;
-}
-
-bool CBossRoom::PostUpdate(float fTime)
-{
-	CRoomBase::PostUpdate(fTime);
-
-	return true;
-}
-
-bool CBossRoom::Collision(float fTime)
-{
-	CRoomBase::Collision(fTime);
-
-	return true;
-}
-
-bool CBossRoom::Render(HDC hDC)
-{
-	CRoomBase::Render(hDC);
-
-	return true;
-}
-
 void CBossRoom::CreateMonster()
 {
+	Vector2	tDoorPos = GetDoorPos(EDoorDir::DD_RIGHT, DT_BOSS);
+
 	//Vector2	tPlayerPos = GetPlayer()->GetPos();
 	//
 	//CSharedPtr<CBossMonstro> pMonstro = CreateObject<CBossMonstro>("Monstro", "Monstro", Vector2(tPlayerPos.x - 600.f, tPlayerPos.y + 20.f));

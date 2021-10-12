@@ -1,5 +1,6 @@
 
 #include "Room1.h"
+#include "ItemRoom.h"
 #include "StartRoom.h"
 #include "SceneManager.h"
 #include "../Input.h"
@@ -15,8 +16,8 @@ bool CRoom1::Init()
 	LoadMapObject();
 	CreatePlayer(Vector2::DOWN);
 
-	SetDoor(DD_LEFT, false);
-	SetDoor(DD_BOTTOM, false);
+	SetDoor(DD_LEFT, DT_ITEM);
+	SetDoor(DD_BOTTOM, DT_NORMAL);
 
 #ifdef _DEBUG
 	m_bClearRoom = true;
@@ -64,7 +65,7 @@ void CRoom1::DoorFunc(EDoorDir eDoorDir)
 	switch (eDoorDir)
 	{
 	case DD_LEFT:
-		//MoveRoom<CItemRoom>(Vector2::LEFT);
+		MoveRoom<CItemRoom>(Vector2::LEFT);
 		break;
 	case DD_BOTTOM:
 		MoveRoom<CStartRoom>(Vector2::DOWN);

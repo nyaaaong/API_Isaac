@@ -443,6 +443,12 @@
     <ClCompile Include="Object\ObjManager.cpp">
       <Filter>02. Object</Filter>
     </ClCompile>
+    <ClCompile Include="Scene\ItemRoom.cpp">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\00. Special</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\ItemRock.cpp">
+      <Filter>02. Object\05. Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameInfo.h">
@@ -645,6 +651,12 @@
     </ClInclude>
     <ClInclude Include="Object\ObjManager.h">
       <Filter>02. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\ItemRoom.h">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\00. Special</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\ItemRock.h">
+      <Filter>02. Object\05. Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

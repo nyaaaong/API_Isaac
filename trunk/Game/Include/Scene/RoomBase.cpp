@@ -53,22 +53,14 @@ bool CRoomBase::Render(HDC hDC)
 	return true;
 }
 
-void CRoomBase::SetDoor(EDoorDir eDoorDir, bool bIsBossDoor)
+void CRoomBase::SetDoor(EDoorDir eDoorDir, EDoorType eDoorType)
 {
-	if (!bIsBossDoor)
-		m_vecDoor[DT_NORMAL][eDoorDir]->Enable(true);
-	
-	else
-		m_vecDoor[DT_BOSS][eDoorDir]->Enable(true);
+	m_vecDoor[eDoorType][eDoorDir]->Enable(true);
 }
 
-const Vector2& CRoomBase::GetDoorPos(EDoorDir eDoorDir, bool bIsBossDoor)
+const Vector2& CRoomBase::GetDoorPos(EDoorDir eDoorDir, EDoorType eDoorType)
 {
-	if (!bIsBossDoor)
-		return m_vecDoor[DT_NORMAL][eDoorDir]->GetPos();
-
-	else
-		return m_vecDoor[DT_BOSS][eDoorDir]->GetPos();
+	return m_vecDoor[eDoorType][eDoorDir]->GetPos();
 }
 
 void CRoomBase::CreateDoor()
@@ -115,17 +107,6 @@ void CRoomBase::CreateDoor()
 
 void CRoomBase::DoorFunc(EDoorDir eDoorDir)
 {
-	switch (eDoorDir)
-	{
-	case DD_LEFT:
-		break;
-	case DD_TOP:
-		break;
-	case DD_RIGHT:
-		break;
-	case DD_BOTTOM:
-		break;
-	}
 }
 
 CRoomBase::CRoomBase()	:
@@ -133,8 +114,10 @@ CRoomBase::CRoomBase()	:
 {
 	m_vecDoor.resize(DT_MAX);
 
-	m_vecDoor[0].resize(DD_MAX);
-	m_vecDoor[1].resize(DD_MAX);
+	for (int i = 0; i < DT_MAX; ++i)
+	{
+		m_vecDoor[i].resize(DD_MAX);
+	}
 }
 
 CRoomBase::~CRoomBase()

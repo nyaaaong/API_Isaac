@@ -16,8 +16,8 @@ bool CRoom2::Init()
 	LoadMapObject();
 	CreatePlayer(Vector2::DOWN);
 
-	SetDoor(DD_LEFT, false);
-	SetDoor(DD_BOTTOM, false);
+	SetDoor(DD_LEFT, DT_NORMAL);
+	SetDoor(DD_BOTTOM, DT_NORMAL);
 
 #ifdef _DEBUG
 	m_bClearRoom = true;

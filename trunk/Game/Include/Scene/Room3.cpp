@@ -17,8 +17,8 @@ bool CRoom3::Init()
 
 	CreatePlayer(Vector2::DOWN);
 
-	SetDoor(DD_TOP, false);
-	SetDoor(DD_LEFT, false);
+	SetDoor(DD_TOP, DT_NORMAL);
+	SetDoor(DD_LEFT, DT_NORMAL);
 
 #ifdef _DEBUG
 	m_bClearRoom = true;

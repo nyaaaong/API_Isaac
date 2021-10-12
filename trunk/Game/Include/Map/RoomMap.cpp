@@ -4,20 +4,8 @@
 
 bool CRoomMap::Init()
 {
-	if (m_bIsSpecial)
-	{
-		switch (m_eSpecialRoomType)
-		{
-		case ESpecial_RoomType::Start:
-			m_pBackGround = CResourceManager::GetInst()->FindTexture("StartRoom_BackGround");
-			break;
-		case ESpecial_RoomType::Item:
-			break;
-		case ESpecial_RoomType::Boss:
-			m_pBackGround = CResourceManager::GetInst()->FindTexture("BackGround");
-			break;
-		}
-	}
+	if (m_eSpecialRoomType == ESpecial_RoomType::Start)
+		m_pBackGround = CResourceManager::GetInst()->FindTexture("StartRoom_BackGround");
 
 	else
 		m_pBackGround = CResourceManager::GetInst()->FindTexture("BackGround");
@@ -73,7 +61,7 @@ CRoomMap::CRoomMap()	:
 	m_iRoomNum(0),
 	m_pScene(nullptr),
 	m_bIsSpecial(false),
-	m_eSpecialRoomType(ESpecial_RoomType::Start)
+	m_eSpecialRoomType(ESpecial_RoomType::None)
 {
 }
 

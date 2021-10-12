@@ -95,10 +95,13 @@ void CPlayerBody::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 	Vector2	tBlockPivot = CMapManager::GetInst()->GetBlockPivot();
 	CRoomMap* pCurMap = m_pScene->GetCurrentMap();
 
-	if (pCurMap->IsObj(m_tPos.x - tBlockSize.x * tBlockPivot.x + tCurMove.x, m_tPos.y + tCurMove.y, MT_ROCK) ||
-		pCurMap->IsObj(m_tPos.x - tBlockSize.x * tBlockPivot.x + tCurMove.x, m_tPos.y + tCurMove.y, MT_IRON) ||
-		pCurMap->IsObj(m_tPos.x - tBlockSize.x * tBlockPivot.x + tCurMove.x, m_tPos.y + tCurMove.y, MT_POOP))
-		return;
+	if (pCurMap)
+	{
+		if (pCurMap->IsObj(m_tPos.x - tBlockSize.x * tBlockPivot.x + tCurMove.x, m_tPos.y + tCurMove.y, MT_ROCK) ||
+			pCurMap->IsObj(m_tPos.x - tBlockSize.x * tBlockPivot.x + tCurMove.x, m_tPos.y + tCurMove.y, MT_IRON) ||
+			pCurMap->IsObj(m_tPos.x - tBlockSize.x * tBlockPivot.x + tCurMove.x, m_tPos.y + tCurMove.y, MT_POOP))
+			return;
+	}
 
 	m_tVelocity += tCurMove;
 	m_pPlayer->m_tVelocity = tCurMove;

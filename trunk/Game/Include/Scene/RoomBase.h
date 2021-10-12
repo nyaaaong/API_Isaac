@@ -26,8 +26,8 @@ public:
 	virtual bool Render(HDC hDC);
 
 protected:
-	void SetDoor(EDoorDir eDoorDir, bool bIsBossDoor);
-	const Vector2& GetDoorPos(EDoorDir eDoorDir, bool bIsBossDoor);
+	void SetDoor(EDoorDir eDoorDir, EDoorType eDoorType);
+	const Vector2& GetDoorPos(EDoorDir eDoorDir, EDoorType eDoorType);
 
 private:
 	void CreateDoor();

@@ -18,8 +18,8 @@ bool CStartRoom::Init()
 
 	m_bClearRoom = true;
 
-	SetDoor(DD_RIGHT, false);
-	SetDoor(DD_TOP, false);
+	SetDoor(DD_RIGHT, DT_NORMAL);
+	SetDoor(DD_TOP, DT_NORMAL);
 
 	CreatePlayer(Vector2::LEFT);
 

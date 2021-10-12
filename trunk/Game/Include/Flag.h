@@ -51,9 +51,9 @@ enum class EZOrder
 	Item = -100,
 	Monster = -30,
 	Player = -20,
+	PlayerBody = -19,
 	Bomb = -18,
 	RoomObject = -15,
-	PlayerBody = -10,
 	BackGround = 0
 };
 
@@ -77,6 +77,7 @@ enum EDoorType
 {
 	DT_NORMAL,
 	DT_BOSS,
+	DT_ITEM,
 	DT_MAX
 };
 
@@ -99,6 +100,7 @@ enum class EEditor_State
 
 enum class ESpecial_RoomType
 {
+	None,
 	Start,
 	Item,
 	Boss

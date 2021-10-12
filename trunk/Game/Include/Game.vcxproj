@@ -183,6 +183,7 @@
     <ClCompile Include="Object\Character.cpp" />
     <ClCompile Include="Object\Door.cpp" />
     <ClCompile Include="Object\Item.cpp" />
+    <ClCompile Include="Object\ItemRock.cpp" />
     <ClCompile Include="Object\Menu.cpp" />
     <ClCompile Include="Object\MonsterBase.cpp" />
     <ClCompile Include="Object\MonsterTearEffect.cpp" />
@@ -218,6 +219,7 @@
     <ClCompile Include="Scene\EditorScene_Init.cpp" />
     <ClCompile Include="Scene\EditorScene_Obj.cpp" />
     <ClCompile Include="Scene\EditorScene_Room.cpp" />
+    <ClCompile Include="Scene\ItemRoom.cpp" />
     <ClCompile Include="Scene\MainMenu.cpp" />
     <ClCompile Include="Scene\Room1.cpp" />
     <ClCompile Include="Scene\Room2.cpp" />
@@ -277,6 +279,7 @@
     <ClInclude Include="Object\Character.h" />
     <ClInclude Include="Object\Door.h" />
     <ClInclude Include="Object\Item.h" />
+    <ClInclude Include="Object\ItemRock.h" />
     <ClInclude Include="Object\Menu.h" />
     <ClInclude Include="Object\MonsterBase.h" />
     <ClInclude Include="Object\MonsterTearEffect.h" />
@@ -300,6 +303,7 @@
     <ClInclude Include="Scene\BossRoom.h" />
     <ClInclude Include="Scene\Camera.h" />
     <ClInclude Include="Scene\EditorScene.h" />
+    <ClInclude Include="Scene\ItemRoom.h" />
     <ClInclude Include="Scene\MainMenu.h" />
     <ClInclude Include="Scene\Room1.h" />
     <ClInclude Include="Scene\Room2.h" />

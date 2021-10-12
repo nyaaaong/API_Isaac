@@ -138,6 +138,29 @@ void CDoor::SetDoor(bool bIsOpen)
 		}
 	}
 
+	else if (m_eDoorType == DT_ITEM)
+	{
+		switch (m_eDoorDir)
+		{
+		case DD_LEFT:
+			strName = "DoorItemLeft";
+			lstrcpy(strFileName, TEXT("Door_Item_Left"));
+			break;
+		case DD_TOP:
+			strName = "DoorItemTop";
+			lstrcpy(strFileName, TEXT("Door_Item_Top"));
+			break;
+		case DD_RIGHT:
+			strName = "DoorItemRight";
+			lstrcpy(strFileName, TEXT("Door_Item_Right"));
+			break;
+		case DD_BOTTOM:
+			strName = "DoorItemBottom";
+			lstrcpy(strFileName, TEXT("Door_Item_Bottom"));
+			break;
+		}
+	}
+
 	if (bIsOpen)
 	{
 		strName += "Open";
