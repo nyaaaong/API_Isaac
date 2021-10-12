@@ -6,17 +6,11 @@
 
 void CScene::SaveFullPath(const char* cFullPath)
 {
-	if (CMapManager::GetInst()->HasRoomMap())
-		return;
-
 	CMapManager::GetInst()->SaveFullPath(cFullPath);
 }
 
 void CScene::SaveFile(const char* cFileName, const std::string& strPath)
 {
-	if (CMapManager::GetInst()->HasRoomMap())
-		return;
-
 	char	cFullPath[MAX_PATH] = {};
 
 	const PathInfo* pInfo = CPathManager::GetInst()->FindPath(cFileName);
