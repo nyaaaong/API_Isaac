@@ -4,7 +4,8 @@
 CMapManager* CMapManager::m_pInst = nullptr;
 
 CMapManager::CMapManager()	:
-	m_bRoomShuffle(true)
+	m_bRoomShuffle(true),
+	m_bIsEditor(false)
 {
 	m_mapSpecialRoomMap.reserve(3);
 	m_vecRoomMap.reserve(10);
