@@ -22,6 +22,8 @@ CEditorScene::CEditorScene()	:
 
 CEditorScene::~CEditorScene()
 {
+	CMapManager::GetInst()->RoomMapClear();
+
 }
 
 bool CEditorScene::Init()

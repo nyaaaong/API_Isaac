@@ -37,8 +37,8 @@ CGameManager::CGameManager()	:
 CGameManager::~CGameManager()
 {
 	CObjManager::DestroyInst();
-	CMapManager::DestroyInst();
 	CSceneManager::DestroyInst();
+	CMapManager::DestroyInst();
 	CInput::DestroyInst();
 	CCollisionManager::DestroyInst();
 	CResourceManager::DestroyInst();
