@@ -2,9 +2,10 @@
 #include "GameManager.h"
 #include "Timer.h"
 #include "Input.h"
+#include "PathManager.h"
 #include "Scene/SceneManager.h"
 #include "Scene/MainMenu.h"
-#include "PathManager.h"
+#include "Object/ObjManager.h"
 #include "Resource/ResourceManager.h"
 #include "Collision/CollisionManager.h"
 #include "Map/MapManager.h"
@@ -35,6 +36,7 @@ CGameManager::CGameManager()	:
 
 CGameManager::~CGameManager()
 {
+	CObjManager::DestroyInst();
 	CMapManager::DestroyInst();
 	CSceneManager::DestroyInst();
 	CInput::DestroyInst();
@@ -87,6 +89,9 @@ bool CGameManager::Init(HINSTANCE hInst)
 		return false;
 
 	if (!CSceneManager::GetInst()->Init())
+		return false;
+
+	if (!CObjManager::GetInst()->Init())
 		return false;
 
 	if (!CMapManager::GetInst()->Init())

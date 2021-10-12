@@ -1,6 +1,7 @@
 
 #include "Player.h"
 #include "PlayerBody.h"
+#include "ObjManager.h"
 #include "../Input.h"
 #include "../GameManager.h"
 #include "../Scene/Scene.h"
@@ -20,6 +21,8 @@ bool CPlayer::Init()
 	m_pColliderSphere = AddCollider<CColliderSphere>("PlayerHead");
 	m_pColliderSphere->SetRadius(40.f);
 	m_pColliderSphere->SetCollisionProfile("PlayerHead");
+
+	CObjManager::GetInst()->PullPlayerInfo(m_tInfo);
 
 	return true;
 }
@@ -112,15 +115,15 @@ CPlayer::CPlayer() :
 	m_fBlinkTimer(0.f),
 	m_fBlinkSpeed(0.2f)
 {
-	m_eInfo.fAttack = 3.f;
-	m_eInfo.fHP = PLAYER_HP_MAX;
-	m_eInfo.fHPMax = PLAYER_HP_MAX;
-	m_eInfo.iBomb = 3;
-	m_eInfo.iBombMax = 99;
-	m_eInfo.fTearTimer = 0.5f;
-	m_eInfo.fShotSpeed = 400.f;
-	m_eInfo.fTearDistance = 500.f;
-	m_eInfo.fMoveSpeed = 300.f;
+	m_tInfo.fAttack = 3.f;
+	m_tInfo.fHP = PLAYER_HP_MAX;
+	m_tInfo.fHPMax = PLAYER_HP_MAX;
+	m_tInfo.iBomb = 3;
+	m_tInfo.iBombMax = 99;
+	m_tInfo.fTearTimer = 0.5f;
+	m_tInfo.fShotSpeed = 400.f;
+	m_tInfo.fTearDistance = 500.f;
+	m_tInfo.fMoveSpeed = 300.f;
 }
 
 CPlayer::CPlayer(const CPlayer& obj) :
@@ -132,7 +135,7 @@ CPlayer::CPlayer(const CPlayer& obj) :
 	m_pPlayerBody(obj.m_pPlayerBody)
 {
 	m_fSkill1Time = obj.m_fSkill1Time;
-	m_eInfo = obj.m_eInfo;
+	m_tInfo = obj.m_tInfo;
 	m_bUseBomb = false;
 	m_fNoDmgTimer = obj.m_fNoDmgTimer;
 	m_fNoDmgTimerMax = obj.m_fNoDmgTimerMax;

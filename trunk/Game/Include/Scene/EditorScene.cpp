@@ -17,7 +17,7 @@ CEditorScene::CEditorScene()	:
 {
 	m_vecMouse.resize(MT_MAX - 1);
 
-	SetEditorScene();
+	CMapManager::GetInst()->SetEditorScene(true);
 }
 
 CEditorScene::~CEditorScene()

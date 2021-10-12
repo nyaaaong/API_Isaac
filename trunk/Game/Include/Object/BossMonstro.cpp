@@ -48,7 +48,7 @@ void CBossMonstro::PostUpdate(float fTime)
 {
 	CMonsterBase::PostUpdate(fTime);
 
-	if (m_eInfo.fHP <= 0.f)
+	if (m_tInfo.fHP <= 0.f)
 		Destroy();
 }
 
@@ -75,7 +75,7 @@ CBossMonstro* CBossMonstro::Clone()
 
 void CBossMonstro::Move(const Vector2& tDir, bool bUseField)
 {
-	Move(tDir, m_eInfo.fMoveSpeed, bUseField);
+	Move(tDir, m_tInfo.fMoveSpeed, bUseField);
 }
 
 void CBossMonstro::Move(const Vector2& tDir, float fSpeed, bool bUseField)
@@ -96,21 +96,21 @@ void CBossMonstro::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime
 {
 	if (pDest->GetProfile()->strName == "PlayerHead" ||
 		pDest->GetProfile()->strName == "PlayerBody")
-		pDest->GetOwner()->SetDamage(m_eInfo.fAttack);
+		pDest->GetOwner()->SetDamage(m_tInfo.fAttack);
 }
 
 CBossMonstro::CBossMonstro()	:
 	m_bMove(false)
 {
-	m_eInfo.fAttack = 1.f;
-	m_eInfo.fHP = 100.f;
-	m_eInfo.fHPMax = 100.f;
-	m_eInfo.iBomb = 0;
-	m_eInfo.iBombMax = 0;
-	m_eInfo.fTearTimer = 1.f;
-	m_eInfo.fShotSpeed = 300.f;
-	m_eInfo.fTearDistance = 500.f;
-	m_eInfo.fMoveSpeed = 500.f;
+	m_tInfo.fAttack = 1.f;
+	m_tInfo.fHP = 100.f;
+	m_tInfo.fHPMax = 100.f;
+	m_tInfo.iBomb = 0;
+	m_tInfo.iBombMax = 0;
+	m_tInfo.fTearTimer = 1.f;
+	m_tInfo.fShotSpeed = 300.f;
+	m_tInfo.fTearDistance = 500.f;
+	m_tInfo.fMoveSpeed = 500.f;
 }
 
 CBossMonstro::CBossMonstro(const CBossMonstro& obj)	:

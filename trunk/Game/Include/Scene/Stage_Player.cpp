@@ -3,6 +3,7 @@
 #include "SceneManager.h"
 #include "../Object/Player.h"
 #include "../Object/PlayerBody.h"
+#include "../Object/ObjManager.h"
 #include "../UI/PlayerHUD.h"
 
 void CStage::CreatePlayer(const Vector2& tStartPos)

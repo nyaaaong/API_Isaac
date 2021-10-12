@@ -188,6 +188,7 @@
     <ClCompile Include="Object\Monstro_Anim.cpp" />
     <ClCompile Include="Object\Monstro_Pattern.cpp" />
     <ClCompile Include="Object\Obj.cpp" />
+    <ClCompile Include="Object\ObjManager.cpp" />
     <ClCompile Include="Object\Player.cpp" />
     <ClCompile Include="Object\PlayerBody.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -279,6 +280,7 @@
     <ClInclude Include="Object\MonsterBase.h" />
     <ClInclude Include="Object\MonsterTearEffect.h" />
     <ClInclude Include="Object\Obj.h" />
+    <ClInclude Include="Object\ObjManager.h" />
     <ClInclude Include="Object\Player.h" />
     <ClInclude Include="Object\PlayerBody.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>

@@ -1,5 +1,6 @@
 
 #include "Scene.h"
+#include "../Object/ObjManager.h"
 #include "../GameManager.h"
 #include "../Map/RoomMap.h"
 

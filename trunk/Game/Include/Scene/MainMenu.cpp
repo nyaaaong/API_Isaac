@@ -4,11 +4,14 @@
 #include "Scene.h"
 #include "../Input.h"
 #include "../Object/Menu.h"
+#include "../Map/MapManager.h"
 
 bool CMainMenu::Init()
 {
 	if (!CScene::Init())
 		return false;
+
+	CMapManager::GetInst()->SetEditorScene(false);
 
 	LoadAnimationSequence();
 

@@ -2,7 +2,7 @@
 #include "../GameManager.h"
 
 CCharacter::CCharacter()	:
-	m_eInfo{},
+	m_tInfo{},
 	m_tBulletStartDir(Vector2::DOWN),
 	m_fTearTimer(0.f)
 {
@@ -13,7 +13,7 @@ CCharacter::CCharacter(const CCharacter& obj)	:
 	m_tBulletStartDir(Vector2::DOWN),
 	m_fTearTimer(0.f)
 {
-	m_eInfo = obj.m_eInfo;
+	m_tInfo = obj.m_tInfo;
 }
 
 CCharacter::~CCharacter()
@@ -28,10 +28,10 @@ float CCharacter::SetDamage(float fDamage)
 {
 	fDamage = CObj::SetDamage(fDamage);
 
-	m_eInfo.fHP -= fDamage;
+	m_tInfo.fHP -= fDamage;
 
-	if (m_eInfo.fHP < 0.f)
-		m_eInfo.fHP = 0.f;
+	if (m_tInfo.fHP < 0.f)
+		m_tInfo.fHP = 0.f;
 
     return fDamage;
 }

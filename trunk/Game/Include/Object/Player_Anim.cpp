@@ -9,10 +9,10 @@ void CPlayer::AddPlayerAnimation()
 	AddAnimation("HeadIdleLeft", false);
 	AddAnimation("HeadIdleRight", false);
 
-	AddAnimation("HeadFireDown", false, m_eInfo.fTearTimer);
-	AddAnimation("HeadFireUp", false, m_eInfo.fTearTimer);
-	AddAnimation("HeadFireLeft", false, m_eInfo.fTearTimer);
-	AddAnimation("HeadFireRight", false, m_eInfo.fTearTimer);
+	AddAnimation("HeadFireDown", false, m_tInfo.fTearTimer);
+	AddAnimation("HeadFireUp", false, m_tInfo.fTearTimer);
+	AddAnimation("HeadFireLeft", false, m_tInfo.fTearTimer);
+	AddAnimation("HeadFireRight", false, m_tInfo.fTearTimer);
 
 	AddAnimationNotify("HeadFireUp", 2, this, &CPlayer::SetFireStart);
 	AddAnimationNotify("HeadFireLeft", 2, this, &CPlayer::SetFireStart);

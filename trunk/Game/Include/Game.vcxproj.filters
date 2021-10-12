@@ -440,6 +440,9 @@
     <ClCompile Include="Object\Bomb.cpp">
       <Filter>02. Object\07. Bomb</Filter>
     </ClCompile>
+    <ClCompile Include="Object\ObjManager.cpp">
+      <Filter>02. Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameInfo.h">
@@ -639,6 +642,9 @@
     </ClInclude>
     <ClInclude Include="Object\Bomb.h">
       <Filter>02. Object\07. Bomb</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\ObjManager.h">
+      <Filter>02. Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,8 @@
 
 #include "../GameInfo.h"
 #include "Scene.h"
+#include "../Object/Character.h"
+#include "../Object/ObjManager.h"
 
 class CSceneManager
 {
@@ -80,6 +82,11 @@ public:
 	template <typename T>
 	bool CreateScene()
 	{
+		CCharacter* pPlayer = dynamic_cast<CCharacter*>(m_pScene->GetPlayer());
+
+		if (pPlayer)
+			CObjManager::GetInst()->PushPlayerInfo(pPlayer->GetInfo());
+
 		m_pNextScene = new T;
 
 		if (!m_pNextScene->Init())

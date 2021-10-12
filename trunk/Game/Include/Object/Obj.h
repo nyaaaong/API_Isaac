@@ -9,6 +9,7 @@ class CObj :
 	public CRef
 {
 	friend class CScene;
+	friend class CObjManager;
 
 protected:
 	class CScene*			m_pScene;

@@ -8,60 +8,65 @@ class CCharacter :
 	friend class CScene;
 
 protected:
-	CharacterInfo	m_eInfo;
+	CharacterInfo	m_tInfo;
 	Vector2			m_tBulletStartDir;
 	float			m_fTearTimer;
 
 public:
 	bool IsDead()	const
 	{
-		return m_eInfo.fHP <= 0.f;
+		return m_tInfo.fHP <= 0.f;
 	}
 
 public:
+	const CharacterInfo& GetInfo()	const
+	{
+		return m_tInfo;
+	}
+
 	float GetAttack()	const
 	{
-		return m_eInfo.fAttack;
+		return m_tInfo.fAttack;
 	}
 
 	float GetHP()	const
 	{
-		return m_eInfo.fHP;
+		return m_tInfo.fHP;
 	}
 
 	float GetHPMax()	const
 	{
-		return m_eInfo.fHPMax;
+		return m_tInfo.fHPMax;
 	}
 
 	int GetBomb()	const
 	{
-		return m_eInfo.iBomb;
+		return m_tInfo.iBomb;
 	}
 
 	int GetBombMax()	const
 	{
-		return m_eInfo.iBombMax;
+		return m_tInfo.iBombMax;
 	}
 
 	float GetTearTimer()	const
 	{
-		return m_eInfo.fTearTimer;
+		return m_tInfo.fTearTimer;
 	}
 
 	float GetShotSpeed()	const
 	{
-		return m_eInfo.fShotSpeed;
+		return m_tInfo.fShotSpeed;
 	}
 
 	float GetTearDistance()	const
 	{
-		return m_eInfo.fTearDistance;
+		return m_tInfo.fTearDistance;
 	}
 
 	float GetMoveSpeed()	const
 	{
-		return m_eInfo.fMoveSpeed;
+		return m_tInfo.fMoveSpeed;
 	}
 
 	const Vector2& GetBulletStartDir()	const

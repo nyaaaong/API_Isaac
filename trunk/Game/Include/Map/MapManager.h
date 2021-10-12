@@ -32,6 +32,7 @@ private:
 	bool		m_bRoomShuffle;
 	Vector2		m_tBlockSize;
 	Vector2		m_tBlockPivot;
+	bool		m_bIsEditor;
 
 public:
 	const Vector2& GetBlockSize()	const
@@ -50,6 +51,11 @@ public:
 	}
 
 public:
+	void SetEditorScene(bool IsEditor)
+	{
+		m_bIsEditor = IsEditor;
+	}
+
 	void SetBlockSize(const Vector2& tBlockSize)
 	{
 		if (m_tBlockSize == Vector2())

@@ -27,17 +27,11 @@ private:
 	int		m_iUICount;
 	int		m_iUICapacity;
 	bool	m_bStart;
-	bool	m_bIsEditor;
 
 protected:
 	const int		m_iMaxRoomCount = 10;
 
 public:
-	void SetEditorScene()
-	{
-		m_bIsEditor = true;
-	}
-
 	void SetFieldLT(const Vector2& tPos)
 	{
 		m_tFieldLT = tPos;

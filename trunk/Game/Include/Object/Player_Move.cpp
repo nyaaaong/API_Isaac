@@ -9,7 +9,7 @@ void CPlayer::Move(const Vector2& tDir, bool bUseField)
 	m_tMoveDir = tDir;
 
 	if (m_pPlayerBody)
-		m_pPlayerBody->Move(tDir, m_eInfo.fMoveSpeed, bUseField);
+		m_pPlayerBody->Move(tDir, m_tInfo.fMoveSpeed, bUseField);
 }
 
 void CPlayer::Move(const Vector2& tDir, float fSpeed, bool bUseField)
@@ -25,7 +25,7 @@ void CPlayer::MoveUp(float fTime)
 	m_bIsMove = true;
 	m_bMoveUp = true;
 
-	Move(Vector2::UP, m_eInfo.fMoveSpeed, true);
+	Move(Vector2::UP, m_tInfo.fMoveSpeed, true);
 
 	if (!m_bIsFire)
 	{
@@ -42,7 +42,7 @@ void CPlayer::MoveDown(float fTime)
 	m_bIsMove = true;
 	m_bMoveDown = true;
 
-	Move(Vector2::DOWN, m_eInfo.fMoveSpeed, true);
+	Move(Vector2::DOWN, m_tInfo.fMoveSpeed, true);
 
 	if (!m_bIsFire)
 	{
@@ -58,7 +58,7 @@ void CPlayer::MoveLeft(float fTime)
 {
 	m_bIsMove = true;
 
-	Move(Vector2::LEFT, m_eInfo.fMoveSpeed, true);
+	Move(Vector2::LEFT, m_tInfo.fMoveSpeed, true);
 
 	if (!m_bIsFire)
 	{
@@ -79,7 +79,7 @@ void CPlayer::MoveRight(float fTime)
 {
 	m_bIsMove = true;
 
-	Move(Vector2::RIGHT, m_eInfo.fMoveSpeed, true);
+	Move(Vector2::RIGHT, m_tInfo.fMoveSpeed, true);
 
 	if (!m_bIsFire)
 	{
