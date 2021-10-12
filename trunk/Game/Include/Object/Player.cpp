@@ -110,7 +110,7 @@ CPlayer::CPlayer() :
 	m_fSkill1Time(0.f),
 	m_pPlayerBody(nullptr),
 	m_fNoDmgTimer(0.f),
-	m_fNoDmgTimerMax(2.f),
+	m_fNoDmgTimerMax(3.f),
 	m_bHit(false),
 	m_fBlinkTimer(0.f),
 	m_fBlinkSpeed(0.2f)

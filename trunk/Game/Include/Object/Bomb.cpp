@@ -10,7 +10,7 @@
 CBomb::CBomb()	:
 	m_fDistance(0.f),
 	m_fTimer(0.f),
-	m_fTimerMax(2.5f)
+	m_fTimerMax(2.f)
 {
 	m_fMoveSpeed = 0.f;
 }
