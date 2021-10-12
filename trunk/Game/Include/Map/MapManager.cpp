@@ -189,6 +189,22 @@ void CMapManager::LoadFullPath(CScene* pCurScene, const char* cFullPath)
 		RoomShuffle();
 }
 
+void CMapManager::RoomMapClear()
+{
+	{
+		size_t iSize = m_vecRoomMap.size();
+
+		for (size_t i = 0; i < iSize; ++i)
+		{
+			SAFE_DELETE(m_vecRoomMap[i]);
+		}
+
+		m_vecRoomMap.clear();
+	}
+
+	m_vecRoomMap.reserve(10);
+}
+
 void CMapManager::CreateRoomMap(CScene* pCurScene, const std::string& strName, int iRoomNum, const Vector2& tPos, const Vector2& tSize)
 {
 	CRoomMap* pMap = new CRoomMap;

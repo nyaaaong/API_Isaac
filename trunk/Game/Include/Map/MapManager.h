@@ -94,6 +94,7 @@ public:
 public:
 	void SaveFullPath(const char* cFullPath);
 	void LoadFullPath(class CScene* pCurScene, const char* cFullPath);
+	void RoomMapClear();
 
 public:
 	void CreateRoomMap(class CScene* pCurScene, const std::string& strName, int iRoomNum, const Vector2& tPos = Vector2(0.f, 0.f), const Vector2& tSize = Vector2(1280.f, 720.f));

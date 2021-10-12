@@ -33,6 +33,8 @@ void CScene::LoadFullPath(const char* cFullPath)
 
 void CScene::LoadFile(const char* cFileName, const std::string& strPath)
 {
+	CMapManager::GetInst()->RoomMapClear();
+
 	if (!CMapManager::GetInst()->IsEditorScene() && CMapManager::GetInst()->HasRoomMap())
 		return;
 

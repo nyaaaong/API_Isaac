@@ -9,7 +9,7 @@ CEditorScene::CEditorScene()	:
 	m_eCurType(MT_ROCK),
 	m_eState(EEditor_State::Idle),
 	m_fTimer(0.f),
-	m_fMaxTimer(5.f),
+	m_fMaxTimer(3.f),
 	m_bCoolDown(false),
 	m_cTitleText{},
 	m_cStateText{},
