@@ -2,6 +2,7 @@
 #include "Stage.h"
 #include "SceneResource.h"
 #include "../Map/MapManager.h"
+#include "../Object/MonsterSpawner.h"
 
 bool CStage::Init()
 {
@@ -15,14 +16,15 @@ bool CStage::Init()
 
 	CScene::LoadFile("Map.dat");
 
-	CreatePrototypes();
-
 	return true;
 }
 
 void CStage::Start()
 {
 	CScene::Start();
+
+	CMonsterSpawner::GetInst()->SetScene(this);
+	CreatePrototypes();
 }
 
 bool CStage::Update(float fTime)

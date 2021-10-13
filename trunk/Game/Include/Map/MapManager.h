@@ -33,6 +33,7 @@ private:
 	Vector2		m_tBlockSize;
 	Vector2		m_tBlockPivot;
 	bool		m_bIsEditor;
+	bool		m_bIsClear;
 
 public:
 	bool IsEditorScene()	const
@@ -88,8 +89,14 @@ public:
 	//void Render(HDC hDC);
 
 public:
+	bool GetClearMap(int iIdx)	const;
+	bool GetClearSpecialMap(ESpecial_RoomType eType)	const;
+
+public:
 	void SetMap(class CScene* pCurScene, int iIdx);
 	void SetSpecialMap(class CScene* pCurScene, ESpecial_RoomType eType);
+	void SetClearMap(int iIdx);
+	void SetSpecialClearMap(ESpecial_RoomType eType);
 	
 public:
 	void SaveFullPath(const char* cFullPath);

@@ -91,15 +91,20 @@ void CPlayerBody::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 	m_tMoveDir = tDir;
 
 	Vector2	tCurMove = tDir * fSpeed * CGameManager::GetInst()->GetDeltaTime() * m_fTimeScale;
+	Vector2	tPosLT = m_tPos - m_tSize * m_tPivot + m_tOffset;
+	Vector2	tPosRB = m_tPos + m_tSize * m_tPivot + m_tOffset;
+
 	Vector2	tBlockSize = CMapManager::GetInst()->GetBlockSize();
 	Vector2	tBlockPivot = CMapManager::GetInst()->GetBlockPivot();
+	Vector2	tBlock = tBlockSize * tBlockPivot;
+
 	CRoomMap* pCurMap = m_pScene->GetCurrentMap();
 
 	if (pCurMap)
 	{
-		if (pCurMap->IsObj(m_tPos.x - tBlockSize.x * tBlockPivot.x + tCurMove.x, m_tPos.y + tCurMove.y, MT_ROCK) ||
-			pCurMap->IsObj(m_tPos.x - tBlockSize.x * tBlockPivot.x + tCurMove.x, m_tPos.y + tCurMove.y, MT_IRON) ||
-			pCurMap->IsObj(m_tPos.x - tBlockSize.x * tBlockPivot.x + tCurMove.x, m_tPos.y + tCurMove.y, MT_POOP))
+		if (pCurMap->IsObj(m_tPos.x - tBlock.x + tCurMove.x, m_tPos.y + tCurMove.y, MT_ROCK) ||
+			pCurMap->IsObj(m_tPos.x - tBlock.x + tCurMove.x, m_tPos.y + tCurMove.y, MT_IRON) ||
+			pCurMap->IsObj(m_tPos.x - tBlock.x + tCurMove.x, m_tPos.y + tCurMove.y, MT_POOP))
 			return;
 	}
 

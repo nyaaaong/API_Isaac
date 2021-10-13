@@ -130,6 +130,68 @@ void CStage::PlayerAnimation()
 
 void CStage::EnemyAnimation()
 {
+	// ============== Charger ==============
+	// -------------- Move --------------
+	GetSceneResource()->CreateAnimationSequence("ChargerMoveRight", "ChargerMoveRight", TEXT("Monster/Enemy/Charger/Charger.bmp"));
+	GetSceneResource()->SetTextureColorKey("ChargerMoveRight");
+
+	for (int i = 0; i < 4; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("ChargerMoveRight", Vector2(128.f * i, 0.f), Vector2(128.f, 128.f));
+	}
+
+	GetSceneResource()->CreateAnimationSequence("ChargerMoveLeft", "ChargerMoveLeft", TEXT("Monster/Enemy/Charger/Charger.bmp"));
+	GetSceneResource()->SetTextureColorKey("ChargerMoveLeft");
+
+	for (int i = 0; i < 4; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("ChargerMoveLeft", Vector2(128.f * i, 128.f), Vector2(128.f, 128.f));
+	}
+
+	GetSceneResource()->CreateAnimationSequence("ChargerMoveUp", "ChargerMoveUp", TEXT("Monster/Enemy/Charger/Charger.bmp"));
+	GetSceneResource()->SetTextureColorKey("ChargerMoveUp");
+
+	for (int i = 0; i < 4; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("ChargerMoveUp", Vector2(128.f * i, 128.f * 2), Vector2(128.f, 128.f));
+	}
+
+	GetSceneResource()->CreateAnimationSequence("ChargerMoveDown", "ChargerMoveDown", TEXT("Monster/Enemy/Charger/Charger.bmp"));
+	GetSceneResource()->SetTextureColorKey("ChargerMoveDown");
+
+	for (int i = 0; i < 4; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("ChargerMoveDown", Vector2(128.f * i, 128.f * 3), Vector2(128.f, 128.f));
+	}
+
+	// -------------- Attack --------------
+	GetSceneResource()->CreateAnimationSequence("ChargerAttackRight", "ChargerAttackRight", TEXT("Monster/Enemy/Charger/Charger.bmp"));
+	GetSceneResource()->SetTextureColorKey("ChargerAttackRight");
+	GetSceneResource()->AddAnimationFrameData("ChargerAttackRight", Vector2(0.f, 128.f * 4), Vector2(128.f, 128.f));
+
+	GetSceneResource()->CreateAnimationSequence("ChargerAttackLeft", "ChargerAttackLeft", TEXT("Monster/Enemy/Charger/Charger.bmp"));
+	GetSceneResource()->SetTextureColorKey("ChargerAttackLeft");
+	GetSceneResource()->AddAnimationFrameData("ChargerAttackLeft", Vector2(128.f, 128.f * 4), Vector2(128.f, 128.f));
+
+	GetSceneResource()->CreateAnimationSequence("ChargerAttackUp", "ChargerAttackUp", TEXT("Monster/Enemy/Charger/Charger.bmp"));
+	GetSceneResource()->SetTextureColorKey("ChargerAttackUp");
+	GetSceneResource()->AddAnimationFrameData("ChargerAttackUp", Vector2(128.f * 2, 128.f * 4), Vector2(128.f, 128.f));
+
+	GetSceneResource()->CreateAnimationSequence("ChargerAttackDown", "ChargerAttackDown", TEXT("Monster/Enemy/Charger/Charger.bmp"));
+	GetSceneResource()->SetTextureColorKey("ChargerAttackDown");
+	GetSceneResource()->AddAnimationFrameData("ChargerAttackDown", Vector2(128.f * 3, 128.f * 4), Vector2(128.f, 128.f));
+
+	// -------------- Die --------------
+	GetSceneResource()->CreateAnimationSequence("Die1", "Die1", TEXT("Monster/Enemy/Die_1.bmp"));
+	GetSceneResource()->SetTextureColorKey("Die1");
+
+	for (int i = 0; i < 3; ++i)
+	{
+		for (int j = 0; j < 4; ++j)
+		{
+			GetSceneResource()->AddAnimationFrameData("Die1", Vector2(192.f * j, 192.f * i), Vector2(192.f, 192.f));
+		}
+	}
 }
 
 void CStage::BossAnimation()

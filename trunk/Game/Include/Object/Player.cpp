@@ -118,8 +118,6 @@ CPlayer::CPlayer() :
 	m_tInfo.fAttack = 3.f;
 	m_tInfo.fHP = PLAYER_HP_MAX;
 	m_tInfo.fHPMax = PLAYER_HP_MAX;
-	m_tInfo.iBomb = 3;
-	m_tInfo.iBombMax = 99;
 	m_tInfo.fTearTimer = 0.5f;
 	m_tInfo.fShotSpeed = 400.f;
 	m_tInfo.fTearDistance = 500.f;

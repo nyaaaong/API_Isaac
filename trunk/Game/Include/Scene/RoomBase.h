@@ -9,12 +9,21 @@ class CRoomBase :
 
 protected:
 	std::vector<std::vector<class CDoor*>>	m_vecDoor;
-	bool	m_bClearRoom;
+	int		m_iMonsterCount;
 
 public:
-	bool IsClearRoom()	const
+	int GetMonsterCount()	const
 	{
-		return m_bClearRoom;
+		return m_iMonsterCount;
+	}
+
+public:
+	void SubMonsterCount(int iCount)
+	{
+		m_iMonsterCount -= iCount;
+
+		if (m_iMonsterCount < 0)
+			m_iMonsterCount = 0;
 	}
 
 public:

@@ -33,6 +33,7 @@ enum ECollision_Channel
 	Channel_MonsterAttack,
 	Channel_Bomb,
 	Channel_BombExplosion,
+	Channel_Effect,
 	Channel_Max
 };
 

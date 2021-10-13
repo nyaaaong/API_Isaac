@@ -3,6 +3,7 @@
 #include "SceneResource.h"
 #include "../GameManager.h"
 #include "../Object/Door.h"
+#include "../Map/MapManager.h"
 
 bool CRoomBase::Init()
 {
@@ -28,6 +29,23 @@ void CRoomBase::Start()
 bool CRoomBase::Update(float fTime)
 {
 	CStage::Update(fTime);
+
+	int iNum = GetCurMapNumber();
+	ESpecial_RoomType	eType = GetCurMapType();
+
+	if (iNum != -1)
+	{
+		if (!CMapManager::GetInst()->GetClearMap(iNum) && m_iMonsterCount == 0)
+			CMapManager::GetInst()->SetClearMap(iNum);
+	}
+
+	else if (eType != ESpecial_RoomType::None)
+	{
+		if (CMapManager::GetInst()->GetClearSpecialMap(GetCurMapType()))
+			CMapManager::GetInst()->SetSpecialClearMap(GetCurMapType());
+
+		CMapManager::GetInst()->SetSpecialClearMap(eType);
+	}
 
 	return true;
 }
@@ -110,7 +128,7 @@ void CRoomBase::DoorFunc(EDoorDir eDoorDir)
 }
 
 CRoomBase::CRoomBase()	:
-	m_bClearRoom(false)
+	m_iMonsterCount(0)
 {
 	m_vecDoor.resize(DT_MAX);
 

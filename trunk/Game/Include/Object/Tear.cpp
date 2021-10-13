@@ -79,15 +79,22 @@ void CTear::Start()
 
 void CTear::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 {
+	CObj* pDestObj = pDest->GetOwner();
+
 	if (pDest->GetName() == "Monster")
 	{
-		pDest->GetOwner()->SetDamage(m_fDamage);
+		pDestObj->SetDamage(m_fDamage);
+
+		Vector2	tDir = m_tDir;
+		tDir.Normalize();
+
+		pDestObj->SetKnockBack(tDir, dynamic_cast<CPlayer*>(m_pScene->GetPlayer())->GetInfo().fShotSpeed * 0.1f);
 		TearDestroy();
 	}
 
 	else if (pDest->GetName() == "MapObject")
 	{
-		CBlock* pBlock = dynamic_cast<CBlock*>(pDest->GetOwner());
+		CBlock* pBlock = dynamic_cast<CBlock*>(pDestObj);
 
 		switch (pBlock->GetType())
 		{

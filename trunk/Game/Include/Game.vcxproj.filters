@@ -195,6 +195,15 @@
     <Filter Include="02. Object\07. Bomb">
       <UniqueIdentifier>{879c225f-a7b3-460e-8d07-0ded1694fafa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Object\00. Character\01. Monster\01. Enemy">
+      <UniqueIdentifier>{30590fb3-ae00-4e45-8412-975803565e22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\00. Character\01. Monster\01. Enemy\00. Charger">
+      <UniqueIdentifier>{174238c1-c405-492a-9e1e-eb8969e32747}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\02. Effect\02. Enemy">
+      <UniqueIdentifier>{f2e631be-3a46-4467-8e12-7708b024024b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -449,6 +458,15 @@
     <ClCompile Include="Object\ItemRock.cpp">
       <Filter>02. Object\05. Item</Filter>
     </ClCompile>
+    <ClCompile Include="Object\Charger.cpp">
+      <Filter>02. Object\00. Character\01. Monster\01. Enemy\00. Charger</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\MonsterSpawner.cpp">
+      <Filter>02. Object\00. Character\01. Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\EnemyDie.cpp">
+      <Filter>02. Object\02. Effect\02. Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameInfo.h">
@@ -657,6 +675,15 @@
     </ClInclude>
     <ClInclude Include="Object\ItemRock.h">
       <Filter>02. Object\05. Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Charger.h">
+      <Filter>02. Object\00. Character\01. Monster\01. Enemy\00. Charger</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\MonsterSpawner.h">
+      <Filter>02. Object\00. Character\01. Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\EnemyDie.h">
+      <Filter>02. Object\02. Effect\02. Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

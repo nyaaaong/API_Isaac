@@ -5,7 +5,8 @@ CMapManager* CMapManager::m_pInst = nullptr;
 
 CMapManager::CMapManager()	:
 	m_bRoomShuffle(true),
-	m_bIsEditor(false)
+	m_bIsEditor(false),
+	m_bIsClear(false)
 {
 	m_mapSpecialRoomMap.reserve(3);
 	m_vecRoomMap.reserve(10);
@@ -91,6 +92,21 @@ void CMapManager::RoomUpdater()
 	}
 }
 
+bool CMapManager::GetClearMap(int iIdx) const
+{
+	return m_vecRoomMap[iIdx - 1]->m_bIsClear;
+}
+
+bool CMapManager::GetClearSpecialMap(ESpecial_RoomType eType) const
+{
+	std::unordered_map<ESpecial_RoomType, CRoomMap*>::const_iterator	iter = m_mapSpecialRoomMap.find(eType);
+
+	if (iter == m_mapSpecialRoomMap.end())
+		return false;
+
+	return iter->second->m_bIsClear;
+}
+
 void CMapManager::SetMap(CScene* pCurScene, int iIdx)
 {
 	size_t iSize = m_vecRoomMap.size();
@@ -101,11 +117,17 @@ void CMapManager::SetMap(CScene* pCurScene, int iIdx)
 
 		if (i == iIdx - 1)
 		{
+			m_vecRoomMap[i]->m_bEnable = true;
+			m_vecRoomMap[i]->SetScene(pCurScene);
+
 			pCurScene->m_pCurMap = m_vecRoomMap[i];
-			pCurScene->m_pCurMap->m_bEnable = true;
-			pCurScene->m_pCurMap->SetScene(pCurScene);
 		}
 	}
+}
+
+void CMapManager::SetClearMap(int iIdx)
+{
+	m_vecRoomMap[iIdx - 1]->m_bIsClear = true;
 }
 
 void CMapManager::SetSpecialMap(CScene* pCurScene, ESpecial_RoomType eType)
@@ -126,6 +148,16 @@ void CMapManager::SetSpecialMap(CScene* pCurScene, ESpecial_RoomType eType)
 	pCurScene->m_pCurMap = iter->second;
 	pCurScene->m_pCurMap->m_bEnable = true;
 	pCurScene->m_pCurMap->SetScene(pCurScene);
+}
+
+void CMapManager::SetSpecialClearMap(ESpecial_RoomType eType)
+{
+	std::unordered_map<ESpecial_RoomType, CRoomMap*>::iterator	iter = m_mapSpecialRoomMap.find(eType);
+
+	if (iter == m_mapSpecialRoomMap.end())
+		return;
+
+	iter->second->m_bIsClear = true;
 }
 
 void CMapManager::SaveFullPath(const char* cFullPath)

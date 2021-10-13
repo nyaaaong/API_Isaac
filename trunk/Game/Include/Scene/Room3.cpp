@@ -6,23 +6,23 @@
 #include "../Input.h"
 #include "../Map/RoomMap.h"
 #include "../Map/MapManager.h"
+#include "../Object/MonsterSpawner.h"
 
 bool CRoom3::Init()
 {
 	if (!CRoomBase::Init())
 		return false;
 
-	CMapManager::GetInst()->SetMap(this, 3);
+	SetCurMapNumber(3);
+
+	CMapManager::GetInst()->SetMap(this, GetCurMapNumber());
 	LoadMapObject();
 
 	CreatePlayer(Vector2::DOWN);
+	CMonsterSpawner::GetInst()->SetMonsterSpawnLocation(Vector2::UP);
 
 	SetDoor(DD_TOP, DT_NORMAL);
 	SetDoor(DD_LEFT, DT_NORMAL);
-
-#ifdef _DEBUG
-	m_bClearRoom = true;
-#endif // _DEBUG
 
 	return true;
 }
@@ -30,6 +30,9 @@ bool CRoom3::Init()
 void CRoom3::Start()
 {
 	CRoomBase::Start();
+
+	m_iMonsterCount = 4;
+	CMonsterSpawner::GetInst()->CreateMonster();
 }
 
 bool CRoom3::Update(float fTime)

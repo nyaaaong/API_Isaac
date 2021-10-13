@@ -42,6 +42,7 @@ CUIWidget::CUIWidget()	:
 CUIWidget::CUIWidget(const CUIWidget& widget)
 {
 	*this = widget;
+	m_iRefCount = 0;
 }
 
 CUIWidget::~CUIWidget()

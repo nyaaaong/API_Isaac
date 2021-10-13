@@ -80,4 +80,9 @@ void CBombExplosionEffect::CollisionBegin(CCollider* pSrc, CCollider* pDest, flo
 			break;
 		}
 	}
+
+	else if (pDest->GetProfile()->strName == "Monster")
+	{
+		pDest->GetOwner()->SetDamage(10.f);
+	}
 }

@@ -7,6 +7,7 @@
 #include "../Map/RoomMap.h"
 #include "../Map/MapManager.h"
 #include "../Object/BossMonstro.h"
+#include "../Object/MonsterSpawner.h"
 #include "../UI/PlayerHUD.h"
 
 bool CBossRoom::Init()
@@ -14,16 +15,17 @@ bool CBossRoom::Init()
 	if (!CRoomBase::Init())
 		return false;
 
+	m_iMonsterCount = 1;
+
 	CMapManager::GetInst()->CreateSpecialRoomMap(this, ESpecial_RoomType::Boss);
 	CMapManager::GetInst()->SetSpecialMap(this, ESpecial_RoomType::Boss);
+
+	SetCurMapType(ESpecial_RoomType::Boss);
 
 	SetDoor(EDoorDir::DD_RIGHT, DT_BOSS);
 
 	CreatePlayer(Vector2::RIGHT);
-
-#ifdef _DEBUG
-	m_bClearRoom = true;
-#endif // _DEBUG
+	//CMonsterSpawner::GetInst()->SetMonsterSpawnLocation(Vector2::LEFT);
 
 	return true;
 }

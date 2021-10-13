@@ -210,14 +210,14 @@ bool CScene::CheckFieldPos(CObj* pCharacter)
 	return false;
 }
 
-bool CScene::IsObj(const Vector2& tPos)
+bool CScene::IsObj(const Vector2& tPos, EMapObject_Type eType)
 {
-	return m_pCurMap->IsObj(tPos);
+	return m_pCurMap->IsObj(tPos, eType);
 }
 
-bool CScene::IsObj(float x, float y)
+bool CScene::IsObj(float x, float y, EMapObject_Type eType)
 {
-	return m_pCurMap->IsObj(x, y);
+	return m_pCurMap->IsObj(x, y, eType);
 }
 
 CObj* CScene::FindPrototype(const std::string& strName)

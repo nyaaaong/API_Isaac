@@ -3,16 +3,30 @@
 #include "../Scene/RoomBase.h"
 #include "../Resource/ResourceManager.h"
 #include "../Collision/ColliderBox.h"
+#include "../Map/MapManager.h"
 
 void CDoor::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 {
-	CRoomBase* pRoom = dynamic_cast<CRoomBase*>(m_pScene);
+	int iNum = m_pScene->GetCurMapNumber();
+	ESpecial_RoomType	eType = m_pScene->GetCurMapType();
 
-	if (!pRoom->IsClearRoom())
-		return;
+	if (iNum != -1)
+	{
+		if (!CMapManager::GetInst()->GetClearMap(m_pScene->GetCurMapNumber()))
+			return;
 
-	if (pDest->GetName() == "PlayerBody")
-		pRoom->DoorFunc(m_eDoorDir);
+		if (pDest->GetName() == "PlayerBody")
+			dynamic_cast<CRoomBase*>(m_pScene)->DoorFunc(m_eDoorDir);
+	}
+
+	else if (eType != ESpecial_RoomType::None)
+	{
+		if (!CMapManager::GetInst()->GetClearSpecialMap(m_pScene->GetCurMapType()))
+			return;
+
+		if (pDest->GetName() == "PlayerBody")
+			dynamic_cast<CRoomBase*>(m_pScene)->DoorFunc(m_eDoorDir);
+	}
 }
 
 void CDoor::Start()
@@ -44,11 +58,27 @@ void CDoor::Update(float fTime)
 {
 	CObj::Update(fTime);
 
-	if (!m_bOpenStart && dynamic_cast<CRoomBase*>(m_pScene)->IsClearRoom())
-	{
-		m_bOpenStart = true;
+	int iNum = m_pScene->GetCurMapNumber();
+	ESpecial_RoomType	eType = m_pScene->GetCurMapType();
 
-		SetDoor(true);
+	if (iNum != -1)
+	{
+		if (!m_bOpenStart && CMapManager::GetInst()->GetClearMap(m_pScene->GetCurMapNumber()))
+		{
+			m_bOpenStart = true;
+
+			SetDoor(true);
+		}
+	}
+
+	else if (eType != ESpecial_RoomType::None)
+	{
+		if (!m_bOpenStart && CMapManager::GetInst()->GetClearSpecialMap(m_pScene->GetCurMapType()))
+		{
+			m_bOpenStart = true;
+
+			SetDoor(true);
+		}
 	}
 }
 

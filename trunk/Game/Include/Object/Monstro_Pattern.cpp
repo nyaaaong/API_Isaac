@@ -42,7 +42,7 @@ void CBossMonstro::PatternDefault()
 
 void CBossMonstro::AddBossPattern()
 {
-	//AddMonsterPattern<CBossMonstro>(this, &CBossMonstro::PatternMove);
-	//AddMonsterPattern<CBossMonstro>(this, &CBossMonstro::PatternJump);
+	AddMonsterPattern<CBossMonstro>(this, &CBossMonstro::PatternMove);
+	AddMonsterPattern<CBossMonstro>(this, &CBossMonstro::PatternJump);
 	AddMonsterPattern<CBossMonstro>(this, &CBossMonstro::PatternFire);
 }

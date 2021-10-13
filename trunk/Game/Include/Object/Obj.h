@@ -26,6 +26,7 @@ protected:
 	Vector2					m_tVelocity;
 	Vector2					m_tImgStart;
 	Vector2					m_tOffset;
+	Vector2					m_tKnockBackDir;	// 밀려나는 방향
 	int						m_iZOrder;
 	float					m_fMoveSpeed;
 	float					m_fTimeScale;
@@ -34,6 +35,7 @@ protected:
 	float					m_fFallStartY;
 	float					m_fFallEndY;
 	float					m_fJumpVelocity;
+	float					m_fKnockBack;
 	bool					m_bCameraCull;
 	bool					m_bStart;
 	bool					m_bEnableDamage;
@@ -43,6 +45,11 @@ protected:
 	bool					m_bIsJump;
 
 public:
+	float GetKnockBack()	const
+	{
+		return m_fKnockBack;
+	}
+
 	bool IsCull()	const
 	{
 		return m_bCameraCull;
@@ -53,7 +60,6 @@ public:
 		return m_bInvisible;
 	}
 
-public:
 	bool IsEnableDamage()	const
 	{
 		return m_bEnableDamage;
@@ -105,6 +111,12 @@ public:
 	}
 
 public:
+	void SetKnockBack(const Vector2& tKnockBackDir, float fKnockBack)
+	{
+		m_tKnockBackDir = tKnockBackDir;
+		m_fKnockBack = fKnockBack;
+	}
+
 	void SetVelocity(const Vector2& tVelocity)
 	{
 		m_tVelocity = tVelocity;

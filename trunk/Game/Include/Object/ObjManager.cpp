@@ -31,8 +31,6 @@ void CObjManager::PullPlayerInfo(CharacterInfo& tInfo)
 	tInfo.fAttack = m_tPlayerInfo.fAttack;
 	tInfo.fHP = m_tPlayerInfo.fHP;
 	tInfo.fHPMax = m_tPlayerInfo.fHPMax;
-	tInfo.iBomb = m_tPlayerInfo.iBomb;
-	tInfo.iBombMax = m_tPlayerInfo.iBombMax;
 	tInfo.fTearTimer = m_tPlayerInfo.fTearTimer;
 	tInfo.fShotSpeed = m_tPlayerInfo.fShotSpeed;
 	tInfo.fTearDistance = m_tPlayerInfo.fTearDistance;

@@ -348,7 +348,8 @@ CObj::CObj() :
 	m_fFallStartY(0.f),
 	m_fFallEndY(0.f),
 	m_fJumpVelocity(0.f),
-	m_fGravityAcc(10.f)
+	m_fGravityAcc(10.f),
+	m_fKnockBack(0.f)
 {
 }
 
@@ -403,6 +404,7 @@ CObj::CObj(const CObj& obj)	:
 	m_fFallEndY = obj.m_fFallEndY;
 	m_bIsJump = obj.m_bIsJump;
 	m_fJumpVelocity = obj.m_fJumpVelocity;
+	m_fKnockBack = 0.f;
 
 	if (obj.m_pColliderBox)
 	{

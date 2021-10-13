@@ -278,12 +278,12 @@ public:
 		return *this;
 	}
 
-	bool operator == (const Vector2& v)
+	bool operator == (const Vector2& v)	const
 	{
 		return x == v.x && y == v.y;
 	}
 
-	bool operator != (const Vector2& v)
+	bool operator != (const Vector2& v)	const
 	{
 		return x != v.x || y != v.y;
 	}

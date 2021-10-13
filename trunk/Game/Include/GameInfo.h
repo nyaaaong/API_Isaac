@@ -11,6 +11,7 @@
 #include <list>
 #include <vector>
 #include <string>
+#include <map>
 #include <unordered_map>
 #include <crtdbg.h>
 #include <functional>
@@ -92,8 +93,6 @@ struct CharacterInfo
 	float	fAttack;
 	float	fHP;
 	float	fHPMax;
-	int		iBomb;
-	int		iBombMax;
 	float	fTearTimer;
 	float	fShotSpeed;
 	float	fTearDistance;

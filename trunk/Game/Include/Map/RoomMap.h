@@ -25,6 +25,7 @@ protected:
 	int		m_iRoomNum;
 	std::list<CRoomObj*>	m_RoomObjList;
 	ESpecial_RoomType	m_eSpecialRoomType;
+	bool	m_bIsClear;
 
 public:
 	ESpecial_RoomType GetSpecialRoomType()	const

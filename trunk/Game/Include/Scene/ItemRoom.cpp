@@ -18,6 +18,8 @@ bool CItemRoom::Init()
 	if (!CRoomBase::Init())
 		return false;
 
+	m_iMonsterCount = 0;
+
 	CMapManager::GetInst()->CreateSpecialRoomMap(this, ESpecial_RoomType::Item);
 	CMapManager::GetInst()->SetSpecialMap(this, ESpecial_RoomType::Item);
 
@@ -29,9 +31,8 @@ bool CItemRoom::Init()
 
 	CreatePlayer(Vector2::RIGHT);
 
-#ifdef _DEBUG
-	m_bClearRoom = true;
-#endif // _DEBUG
+	SetCurMapType(ESpecial_RoomType::Item);
+	CMapManager::GetInst()->SetSpecialClearMap(GetCurMapType());
 
 	return true;
 }

@@ -7,6 +7,7 @@
 #include "../Object/BombExplosionEffect.h"
 #include "../Object/BossMonstro.h"
 #include "../Object/Door.h"
+#include "../Object/MonsterSpawner.h"
 
 void CStage::CreatePrototypes()
 {
@@ -24,4 +25,6 @@ void CStage::CreatePrototypes()
 
 	CBomb* pBomb = CreatePrototype<CBomb>("Bomb");
 	CBombExplosionEffect*	pExplosion = CreatePrototype<CBombExplosionEffect>("BombExplosion");
+
+	CMonsterSpawner::GetInst()->CreateMonsterPrototype();
 }

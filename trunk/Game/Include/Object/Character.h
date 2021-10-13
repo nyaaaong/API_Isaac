@@ -39,16 +39,6 @@ public:
 		return m_tInfo.fHPMax;
 	}
 
-	int GetBomb()	const
-	{
-		return m_tInfo.iBomb;
-	}
-
-	int GetBombMax()	const
-	{
-		return m_tInfo.iBombMax;
-	}
-
 	float GetTearTimer()	const
 	{
 		return m_tInfo.fTearTimer;

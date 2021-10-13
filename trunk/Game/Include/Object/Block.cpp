@@ -95,44 +95,17 @@ CBlock::~CBlock()
 
 void CBlock::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 {
+}
+
+void CBlock::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
+{
 	switch (m_eType)
 	{
-	case MT_ROCK:
-		break;
-	case MT_IRON:
-		break;
-	case MT_POOP:
-		break;
 	case MT_SPIKE:
 		if (pDest->GetName() == "PlayerBody")
 			pDest->GetOwner()->SetDamage(1.f);
 		break;
 	}
-}
-
-void CBlock::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
-{
-	//switch (m_eType)
-	//{
-	//case MT_ROCK:
-	//case MT_IRON:
-	//case MT_POOP:
-	//	if (pDest->GetName() == "PlayerBody")
-	//	{
-	//		const RectInfo& tSrcRC = dynamic_cast<CColliderBox*>(pSrc)->GetInfo();
-	//		const RectInfo& tDestRC = dynamic_cast<CColliderBox*>(pDest)->GetInfo();
-
-	//		CPlayerBody* pDestObj = dynamic_cast<CPlayerBody*>(pDest->GetOwner());
-
-	//		Vector2	tDestPos = pDestObj->GetPos();
-	//		Vector2	tDestDir = pDestObj->GetMoveDir();
-
-	//		if (tSrcRC.fL < tDestRC.fR && tSrcRC.fR > tDestRC.fL &&
-	//			tSrcRC.fT < tDestRC.fB && tSrcRC.fB > tDestRC.fT) // 충돌한 경우
-	//			m_pScene->SetPlayerPos(tDestPos + (tDestDir * -1.5f));
-	//	}
-	//	break;
-	//}
 }
 
 float CBlock::SetDamage(float fDamage)

@@ -10,6 +10,8 @@ bool CBossMonstro::Init()
 	if (!CMonsterBase::Init())
 		return false;
 
+	m_bUseKnockBack = false;
+
 	SetSize(256.f, 256.f);
 	SetPivot(0.5f, 0.5f);
 
@@ -52,44 +54,9 @@ void CBossMonstro::PostUpdate(float fTime)
 		Destroy();
 }
 
-void CBossMonstro::Collision(float fTime)
-{
-	if (m_bInvisible)
-		return;
-
-	CMonsterBase::Collision(fTime);
-}
-
-void CBossMonstro::Render(HDC hDC)
-{
-	if (m_bInvisible)
-		return;
-
-	CMonsterBase::Render(hDC);
-}
-
 CBossMonstro* CBossMonstro::Clone()
 {
 	return new CBossMonstro(*this);
-}
-
-void CBossMonstro::Move(const Vector2& tDir, bool bUseField)
-{
-	Move(tDir, m_tInfo.fMoveSpeed, bUseField);
-}
-
-void CBossMonstro::Move(const Vector2& tDir, float fSpeed, bool bUseField)
-{
-	Vector2	tCurMove = tDir * fSpeed * CGameManager::GetInst()->GetDeltaTime() * m_fTimeScale;
-	m_tVelocity += tCurMove;
-	m_tPrevPos = m_tPos;
-	m_tPos += tCurMove;
-
-	if (bUseField)
-	{
-		if (m_pScene->CheckFieldPos(this))
-			m_tM2PDir.x *= -1.f;
-	}
 }
 
 void CBossMonstro::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
@@ -105,8 +72,6 @@ CBossMonstro::CBossMonstro()	:
 	m_tInfo.fAttack = 1.f;
 	m_tInfo.fHP = 100.f;
 	m_tInfo.fHPMax = 100.f;
-	m_tInfo.iBomb = 0;
-	m_tInfo.iBombMax = 0;
 	m_tInfo.fTearTimer = 1.f;
 	m_tInfo.fShotSpeed = 300.f;
 	m_tInfo.fTearDistance = 500.f;

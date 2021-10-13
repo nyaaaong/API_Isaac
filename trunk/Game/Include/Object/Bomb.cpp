@@ -12,7 +12,6 @@ CBomb::CBomb()	:
 	m_fTimer(0.f),
 	m_fTimerMax(2.f)
 {
-	m_fMoveSpeed = 0.f;
 }
 
 CBomb::CBomb(const CBomb& obj)	:
@@ -60,18 +59,18 @@ void CBomb::Update(float fTime)
 	if (m_fTimer >= m_fTimerMax)
 		BombDestroy();
 
-	if (m_fMoveSpeed != 0.f)
+	if (m_fKnockBack != 0.f)
 	{
-		Move(m_tDir, true);
+		Move(m_tDir, m_fKnockBack, true);
 
 		m_fDistance -= GetMoveSpeedFrame();
-		m_fMoveSpeed -= GetMoveSpeedFrame();
+		m_fKnockBack -= GetMoveSpeedFrame();
 
 		if (m_fDistance < 0.f)
 			m_fDistance = 0.f;
 
-		if (m_fMoveSpeed < 0.f)
-			m_fMoveSpeed = 0.f;
+		if (m_fKnockBack < 0.f)
+			m_fKnockBack = 0.f;
 	}
 }
 
@@ -109,7 +108,7 @@ void CBomb::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 
 		m_tDir = pDestDir;
 		m_fDistance = 300.f;
-		m_fMoveSpeed = pDestObj->GetMoveSpeed();
+		m_fKnockBack = pDestObj->GetMoveSpeed();
 
 		pDestObj->TearDestroy();
 	}

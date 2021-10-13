@@ -12,7 +12,6 @@ private:
 	void AddBossAnimation();
 	void AddBossNotify();
 	void AddBossPattern();
-	void AddCallback();
 	void ChangeDirAnimation(const std::string& strAnimType);
 	void DirCheck();
 	void PatternMove(float fTime);
@@ -23,8 +22,6 @@ private:
 	void PatternDefault();
 
 public:
-	virtual void Move(const Vector2& tDir, bool bUseField);
-	virtual void Move(const Vector2& tDir, float fSpeed, bool bUseField);
 	virtual void CollisionBegin(class CCollider* pSrc, class CCollider* pDest, float fTime);
 
 public:
@@ -32,8 +29,6 @@ public:
 	virtual bool Init();
 	virtual void Update(float fTime);
 	virtual void PostUpdate(float fTime);
-	virtual void Collision(float fTime);
-	virtual void Render(HDC hDC);
 	virtual CBossMonstro* Clone();
 
 protected:

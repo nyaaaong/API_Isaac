@@ -13,10 +13,13 @@ bool CStartRoom::Init()
 	if (!CRoomBase::Init())
 		return false;
 
+	m_iMonsterCount = 0;
+
 	CMapManager::GetInst()->CreateSpecialRoomMap(this, ESpecial_RoomType::Start);
 	CMapManager::GetInst()->SetSpecialMap(this, ESpecial_RoomType::Start);
 
-	m_bClearRoom = true;
+	SetCurMapType(ESpecial_RoomType::Start);
+	CMapManager::GetInst()->SetSpecialClearMap(GetCurMapType());
 
 	SetDoor(DD_RIGHT, DT_NORMAL);
 	SetDoor(DD_TOP, DT_NORMAL);

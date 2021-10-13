@@ -19,6 +19,7 @@ void CStage::PlayerSound()
 
 void CStage::EnemySound()
 {
+	GetSceneResource()->LoadSound("Effect", false, "EnemyDie", "Effect/Enemy_Die.wav");
 }
 
 void CStage::BossSound()

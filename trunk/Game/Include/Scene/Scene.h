@@ -27,11 +27,23 @@ private:
 	int		m_iUICount;
 	int		m_iUICapacity;
 	bool	m_bStart;
+	int		m_iCurMapNum;
+	ESpecial_RoomType	m_eCurMapType;
 
 protected:
 	const int		m_iMaxRoomCount = 10;
 
 public:
+	void SetCurMapType(ESpecial_RoomType eType)
+	{
+		m_eCurMapType = eType;
+	}
+
+	void SetCurMapNumber(int iNum)
+	{
+		m_iCurMapNum = iNum;
+	}
+
 	void SetFieldLT(const Vector2& tPos)
 	{
 		m_tFieldLT = tPos;
@@ -43,6 +55,16 @@ public:
 	}
 
 public:
+	ESpecial_RoomType GetCurMapType()	const
+	{
+		return m_eCurMapType;
+	}
+
+	int GetCurMapNumber()	const
+	{
+		return m_iCurMapNum;
+	}
+
 	bool IsStart()	const
 	{
 		return m_bStart;
@@ -107,8 +129,8 @@ public:
 	void SetPlayerMoveX(float x);
 	void SetPlayerMoveY(float y);
 	bool CheckFieldPos(CObj* pCharacter);
-	bool IsObj(const Vector2& tPos);
-	bool IsObj(float x, float y);
+	bool IsObj(const Vector2& tPos, EMapObject_Type eType = MT_MAX);
+	bool IsObj(float x, float y, EMapObject_Type eType = MT_MAX);
 
 public:
 	static int SortY(const void* pSrc, const void* pDest);

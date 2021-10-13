@@ -6,6 +6,7 @@
 #include "Scene/SceneManager.h"
 #include "Scene/MainMenu.h"
 #include "Object/ObjManager.h"
+#include "Object/MonsterSpawner.h"
 #include "Resource/ResourceManager.h"
 #include "Collision/CollisionManager.h"
 #include "Map/MapManager.h"
@@ -36,6 +37,7 @@ CGameManager::CGameManager()	:
 
 CGameManager::~CGameManager()
 {
+	CMonsterSpawner::DestroyInst();
 	CObjManager::DestroyInst();
 	CSceneManager::DestroyInst();
 	CMapManager::DestroyInst();
@@ -92,6 +94,9 @@ bool CGameManager::Init(HINSTANCE hInst)
 		return false;
 
 	if (!CObjManager::GetInst()->Init())
+		return false;
+
+	if (!CMonsterSpawner::GetInst()->Init())
 		return false;
 
 	if (!CMapManager::GetInst()->Init())
