@@ -1,5 +1,6 @@
 #include "MapManager.h"
 #include "../Scene/Scene.h"
+#include "../Scene/SceneManager.h"
 
 CMapManager* CMapManager::m_pInst = nullptr;
 
@@ -118,7 +119,6 @@ void CMapManager::SetMap(CScene* pCurScene, int iIdx)
 		if (i == iIdx - 1)
 		{
 			m_vecRoomMap[i]->m_bEnable = true;
-			m_vecRoomMap[i]->SetScene(pCurScene);
 
 			pCurScene->m_pCurMap = m_vecRoomMap[i];
 		}
@@ -147,7 +147,6 @@ void CMapManager::SetSpecialMap(CScene* pCurScene, ESpecial_RoomType eType)
 
 	pCurScene->m_pCurMap = iter->second;
 	pCurScene->m_pCurMap->m_bEnable = true;
-	pCurScene->m_pCurMap->SetScene(pCurScene);
 }
 
 void CMapManager::SetSpecialClearMap(ESpecial_RoomType eType)
@@ -196,8 +195,7 @@ void CMapManager::LoadFullPath(CScene* pCurScene, const char* cFullPath)
 	{
 		CRoomMap* pMap = new CRoomMap;
 
-		pMap->SetScene(pCurScene);
-		pMap->Load(pFile);
+		pMap->Load(pCurScene, pFile);
 
 		if (!pMap->Init())
 		{
@@ -241,7 +239,6 @@ void CMapManager::CreateRoomMap(CScene* pCurScene, const std::string& strName, i
 {
 	CRoomMap* pMap = new CRoomMap;
 
-	pMap->SetScene(pCurScene);
 	pMap->SetRoomNumber(iRoomNum);
 	pMap->SetPos(tPos);
 	pMap->SetSize(tSize);
@@ -265,7 +262,6 @@ void CMapManager::CreateSpecialRoomMap(CScene* pCurScene, ESpecial_RoomType eTyp
 
 	CRoomMap* pMap = new CRoomMap;
 
-	pMap->SetScene(pCurScene);
 	pMap->SetPos(tPos);
 	pMap->SetSize(tSize);
 	pMap->SetSpecialRoomMap(true);

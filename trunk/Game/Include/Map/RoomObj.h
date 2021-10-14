@@ -18,7 +18,6 @@ private:
 	Vector2	m_tSize;
 	CSharedPtr<CTexture>	m_pTexture;
 	EMapObject_Type	m_eType;
-	class CScene* m_pScene;
 	int		m_iZOrder;
 	float		m_fLife; // 0이 되면 씬에서의 오브젝트 제거. RoomObj 자체를 제거하지는 않는다.
 	float		m_fMaxLife;
@@ -39,29 +38,12 @@ public:
 		return m_eType;
 	}
 
-	bool IsObj(const Vector2& tPos)
+	bool IsObj(class CScene* pCurScene, const Vector2& tPos)
 	{
-		return IsObj(tPos, m_tSize);
+		return IsObj(pCurScene, tPos, m_tSize);
 	}
 
-	bool IsObj(const Vector2& tPos, const Vector2& tSize) 
-	{
-		if (m_eType != MT_SPAWN)
-		{
-			if (m_fLife != 0.f && (m_tPos.x < tPos.x + tSize.x && m_tPos.x + m_tSize.x > tPos.x &&
-				m_tPos.y < tPos.y + tSize.y && m_tPos.y + m_tSize.y > tPos.y))
-				return true;
-		}
-
-		else
-		{
-			if (m_tPos.x < tPos.x && tPos.x < m_tPos.x + m_tSize.x &&
-				m_tPos.y < tPos.y && tPos.y < m_tPos.y + m_tSize.y)
-				return true;
-		}
-
-		return false;
-	}
+	bool IsObj(class CScene* pCurScene, const Vector2& tPos, const Vector2& tSize);
 
 	int GetZOrder()	const
 	{
@@ -89,11 +71,6 @@ public:
 		m_tSize = tSize;
 	}
 
-	void SetScene(class CScene* pScene)
-	{
-		m_pScene = pScene;
-	}
-
 public:
 	bool Init();
 	void Update(float fTime);
@@ -102,7 +79,7 @@ public:
 
 public:
 	void Save(FILE* pFile);
-	void Load(FILE* pFile);
+	void Load(class CScene* pCurScene, FILE* pFile);
 
 private:
 	void RockUpdater();

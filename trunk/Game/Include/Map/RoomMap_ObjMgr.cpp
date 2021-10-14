@@ -3,38 +3,57 @@
 #include "RoomObj.h"
 #include "../Scene/Scene.h"
 
-bool CRoomMap::IsObj(const Vector2& tPos, EMapObject_Type eType)
+bool CRoomMap::IsObj(CScene* pCurScene, const Vector2& tPos, EMapObject_Type eType)
 {
 	std::list<CRoomObj*>::const_iterator	iter = m_RoomObjList.begin();
 	std::list<CRoomObj*>::const_iterator	iterEnd = m_RoomObjList.end();
 
 	for (; iter != iterEnd; ++iter)
 	{
-		if (eType != MT_MAX && (*iter)->GetType() == eType)
+		if ((*iter)->GetType() == eType)
 		{
-			if ((*iter)->IsObj(tPos))
-				return true;
-		}
-
-		else
-		{
-			if ((*iter)->IsObj(tPos))
+			if ((*iter)->IsObj(pCurScene, tPos))
 				return true;
 		}
 	}
-		
-    return false;
+
+	return false;
 }
 
-bool CRoomMap::IsObj(float x, float y, EMapObject_Type eType)
+bool CRoomMap::IsObj(CScene* pCurScene, const Vector2& tStartPos, const Vector2& tEndPos, EMapObject_Type eType)
 {
-    return IsObj(Vector2(x, y), eType);
+	std::list<CRoomObj*>::const_iterator	iter = m_RoomObjList.begin();
+	std::list<CRoomObj*>::const_iterator	iterEnd = m_RoomObjList.end();
+
+	Vector2	tPos = tStartPos;
+
+	for (; iter != iterEnd; ++iter)
+	{
+		if ((*iter)->GetType() == eType)
+		{
+			do
+			{
+				if ((*iter)->IsObj(pCurScene, tPos))
+					return true;
+
+				tPos += tEndPos * 0.1f;
+
+			} while (tPos == tEndPos);
+		}
+	}
+
+	return false;
 }
 
-bool CRoomMap::IsSetObj(const Vector2& tPos, const Vector2& tObjSize)
+bool CRoomMap::IsObj(CScene* pCurScene, float x, float y, EMapObject_Type eType)
 {
-	Vector2	tActLT = m_pScene->GetFieldLT();
-	Vector2	tActRB = m_pScene->GetFieldRB();
+    return IsObj(pCurScene, Vector2(x, y), eType);
+}
+
+bool CRoomMap::IsSetObj(CScene* pCurScene, const Vector2& tPos, const Vector2& tObjSize)
+{
+	Vector2	tActLT = pCurScene->GetFieldLT();
+	Vector2	tActRB = pCurScene->GetFieldRB();
 
 	if ((tActLT.x <= tPos.x && tPos.x <= tActRB.x) &&	// 실제 플레이할 공간에서만 설치 가능하게
 		(tActLT.y <= tPos.y && tPos.y <= tActRB.y) &&
@@ -46,7 +65,7 @@ bool CRoomMap::IsSetObj(const Vector2& tPos, const Vector2& tObjSize)
 
 		for (; iter != iterEnd; ++iter)
 		{
-			if ((*iter)->IsObj(tPos, tObjSize)) // 설치한 자리에 다른 오브젝트가 있는 지
+			if ((*iter)->IsObj(pCurScene, tPos, tObjSize)) // 설치한 자리에 다른 오브젝트가 있는 지
 				return false;
 		}
 
@@ -56,13 +75,12 @@ bool CRoomMap::IsSetObj(const Vector2& tPos, const Vector2& tObjSize)
 	return false;
 }
 
-void CRoomMap::Create(EMapObject_Type eObj, const Vector2& tPos, const Vector2& tObjSize)
+void CRoomMap::Create(CScene* pCurScene, EMapObject_Type eObj, const Vector2& tPos, const Vector2& tObjSize)
 {
-	if (eObj == MT_SPAWN || IsSetObj(tPos, tObjSize)) // 설치 가능한 구역이라면
+	if (eObj == MT_SPAWN || IsSetObj(pCurScene, tPos, tObjSize)) // 설치 가능한 구역이라면
 	{
 		CRoomObj* pRoomObj = new CRoomObj;
 
-		pRoomObj->SetScene(m_pScene);
 		pRoomObj->SetObject(eObj);
 		pRoomObj->SetPos(tPos);
 		pRoomObj->SetSize(tObjSize);
@@ -77,14 +95,14 @@ void CRoomMap::Create(EMapObject_Type eObj, const Vector2& tPos, const Vector2& 
 	}
 }
 
-void CRoomMap::Delete(const Vector2& tPos)
+void CRoomMap::Delete(CScene* pCurScene, const Vector2& tPos)
 {
 	std::list<CRoomObj*>::iterator	iter = m_RoomObjList.begin();
 	std::list<CRoomObj*>::iterator	iterEnd = m_RoomObjList.end();
 
 	for (; iter != iterEnd; ++iter)
 	{
-		if ((*iter)->IsObj(tPos)) // 설치한 자리에 다른 오브젝트가 있는 지
+		if ((*iter)->IsObj(pCurScene, tPos) && (*iter)->GetType() != MT_SPAWN) // 설치한 자리에 다른 오브젝트가 있는 지
 		{
 			SAFE_DELETE((*iter));
 			m_RoomObjList.erase(iter);
@@ -93,14 +111,14 @@ void CRoomMap::Delete(const Vector2& tPos)
 	}
 }
 
-void CRoomMap::DeleteSpawn(const Vector2& tPos)
+void CRoomMap::DeleteSpawn(CScene* pCurScene, const Vector2& tPos)
 {
 	std::list<CRoomObj*>::iterator	iter = m_RoomObjList.begin();
 	std::list<CRoomObj*>::iterator	iterEnd = m_RoomObjList.end();
 
 	for (; iter != iterEnd; ++iter)
 	{
-		if ((*iter)->IsObj(tPos) && (*iter)->GetType() == MT_SPAWN) // 설치한 자리에 다른 오브젝트가 있는 지
+		if ((*iter)->IsObj(pCurScene, tPos) && (*iter)->GetType() == MT_SPAWN) // 설치한 자리에 다른 오브젝트가 있는 지
 		{
 			SAFE_DELETE((*iter));
 			m_RoomObjList.erase(iter);
@@ -111,9 +129,6 @@ void CRoomMap::DeleteSpawn(const Vector2& tPos)
 
 void CRoomMap::Clear()
 {
-	if (!m_pScene)
-		return;
-
 	std::list<CRoomObj*>::iterator	iter = m_RoomObjList.begin();
 	std::list<CRoomObj*>::iterator	iterEnd = m_RoomObjList.end();
 
@@ -125,14 +140,14 @@ void CRoomMap::Clear()
 	m_RoomObjList.clear();
 }
 
-CRoomObj* CRoomMap::GetRoomObj(const Vector2& tPos) const
+CRoomObj* CRoomMap::GetRoomObj(CScene* pCurScene, const Vector2& tPos) const
 {
 	std::list<CRoomObj*>::const_iterator	iter = m_RoomObjList.begin();
 	std::list<CRoomObj*>::const_iterator	iterEnd = m_RoomObjList.end();
 
 	for (; iter != iterEnd; ++iter)
 	{
-		if ((*iter)->IsObj(tPos))
+		if ((*iter)->IsObj(pCurScene, tPos))
 			return *iter;
 	}
 

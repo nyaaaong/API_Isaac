@@ -1,14 +1,14 @@
 
 #include "RoomObj.h"
 #include "RoomMap.h"
+#include "MapManager.h"
 #include "../GameManager.h"
 #include "../Scene/Scene.h"
 #include "../Scene/Camera.h"
 #include "../Resource/ResourceManager.h"
 
 CRoomObj::CRoomObj()	:
-	m_eType(MT_ROCK),
-	m_pScene(nullptr),
+	m_eType(MT_MAX),
 	m_iZOrder(static_cast<int>(EZOrder::RoomObject)),
 	m_fMaxLife(4.f),
 	m_fLife(4.f)
@@ -17,6 +17,33 @@ CRoomObj::CRoomObj()	:
 
 CRoomObj::~CRoomObj()
 {
+}
+
+bool CRoomObj::IsObj(CScene* pCurScene, const Vector2& tPos, const Vector2& tSize)
+{
+	// tPos는 검사할 오브젝트의 위치이며, tSize는 이 블럭의 사이즈이다.
+	Vector2	tFieldLT = pCurScene->GetFieldLT();
+	Vector2	tFieldRB = pCurScene->GetFieldRB();
+
+	if (tPos.x < tFieldLT.x || tPos.y < tFieldLT.y ||
+		tPos.y > tFieldRB.x || tPos.y > tFieldRB.y)
+		return true;
+	
+	else if (m_eType != MT_SPAWN)
+	{
+		if (m_fLife != 0.f && (m_tPos.x < tPos.x + tSize.x && m_tPos.x + m_tSize.x > tPos.x &&
+			m_tPos.y < tPos.y + tSize.y && m_tPos.y + m_tSize.y > tPos.y))
+			return true;
+	}
+
+	else if (m_eType == MT_SPAWN)
+	{
+		if ((m_tPos.x < tPos.x + tSize.x && m_tPos.x + m_tSize.x > tPos.x &&
+			m_tPos.y < tPos.y + tSize.y && m_tPos.y + m_tSize.y > tPos.y))
+			return true;
+	}
+
+	return false;
 }
 
 bool CRoomObj::Init()
@@ -68,7 +95,7 @@ void CRoomObj::Render(HDC hDC)
 		m_pTexture->Render(hDC, m_tPos, Vector2(0.f, 0.f), m_tSize);
 	}
 
-	if (m_pScene->IsEditor() && m_eType == MT_SPAWN)
+	if (CMapManager::GetInst()->IsEditorScene() && m_eType == MT_SPAWN)
 	{
 		RECT	rc = { static_cast<LONG>(m_tPos.x), static_cast<LONG>(m_tPos.y), static_cast<LONG>(m_tPos.x + m_tSize.x), static_cast<LONG>(m_tPos.y + m_tSize.y) };
 		FrameRect(hDC, &rc, CGameManager::GetInst()->GetGreenBrush());

@@ -51,8 +51,8 @@ void CPlayerBody::PostUpdate(float fTime)
 
 void CPlayerBody::Collision(float fTime)
 {
-	if (m_bInvisible)
-		return;
+	//if (m_bInvisible)
+	//	return;
 
 	CObj::Collision(fTime);
 }
@@ -68,6 +68,40 @@ void CPlayerBody::Render(HDC hDC)
 CPlayerBody* CPlayerBody::Clone()
 {
 	return nullptr;
+}
+
+void CPlayerBody::AddPos(float x, float y)
+{
+	m_tPrevPos = m_tPos;
+
+	m_tPos.x += x;
+	m_tPos.y += y;
+
+	m_tVelocity.x += x;
+	m_tVelocity.y += y;
+
+	m_pPlayer->m_tPrevPos = m_pPlayer->m_tPos;
+	m_pPlayer->m_tPos = m_tPos;
+	m_pPlayer->m_tVelocity = m_tVelocity;
+
+	if (m_pScene->CheckFieldPos(this))
+		m_pPlayer->m_tPos = m_tPos;
+}
+
+void CPlayerBody::AddPos(const Vector2& tPos)
+{
+	m_tPrevPos = m_tPos;
+
+	m_tPos += tPos;
+
+	m_tVelocity += tPos;
+
+	m_pPlayer->m_tPrevPos = m_pPlayer->m_tPos;
+	m_pPlayer->m_tPos = m_tPos;
+	m_pPlayer->m_tVelocity = m_tVelocity;
+
+	if (m_pScene->CheckFieldPos(this))
+		m_pPlayer->m_tPos = m_tPos;
 }
 
 CPlayerBody::CPlayerBody()	:
@@ -99,14 +133,6 @@ void CPlayerBody::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 	Vector2	tBlock = tBlockSize * tBlockPivot;
 
 	CRoomMap* pCurMap = m_pScene->GetCurrentMap();
-
-	if (pCurMap)
-	{
-		if (pCurMap->IsObj(m_tPos.x - tBlock.x + tCurMove.x, m_tPos.y + tCurMove.y, MT_ROCK) ||
-			pCurMap->IsObj(m_tPos.x - tBlock.x + tCurMove.x, m_tPos.y + tCurMove.y, MT_IRON) ||
-			pCurMap->IsObj(m_tPos.x - tBlock.x + tCurMove.x, m_tPos.y + tCurMove.y, MT_POOP))
-			return;
-	}
 
 	m_tVelocity += tCurMove;
 	m_pPlayer->m_tVelocity = tCurMove;

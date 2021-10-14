@@ -173,7 +173,8 @@ void CCharger::ChagerPattern()
 
 void CCharger::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 {
-	Vector2	tCurMove = tDir * fSpeed * CGameManager::GetInst()->GetDeltaTime() * m_fTimeScale;
+	CMonsterBase::Move(tDir, fSpeed, bUseField);
+	/*Vector2	tCurMove = tDir * fSpeed * CGameManager::GetInst()->GetDeltaTime() * m_fTimeScale;
 	Vector2	tBlockSize = CMapManager::GetInst()->GetBlockSize();
 	Vector2	tBlockPivot = CMapManager::GetInst()->GetBlockPivot();
 	Vector2	tBlock = tBlockSize * tBlockPivot;
@@ -182,9 +183,9 @@ void CCharger::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 
 	if (pCurMap)
 	{
-		if (pCurMap->IsObj(m_tPos.x - tBlock.x + tCurMove.x, m_tPos.y - tBlock.x + tCurMove.y, MT_ROCK) ||
-			pCurMap->IsObj(m_tPos.x - tBlock.x + tCurMove.x, m_tPos.y - tBlock.x + tCurMove.y, MT_IRON) ||
-			pCurMap->IsObj(m_tPos.x - tBlock.x + tCurMove.x, m_tPos.y - tBlock.x + tCurMove.y, MT_POOP))
+		if (pCurMap->IsObj(m_pScene, m_tPos.x - tBlock.x + tCurMove.x, m_tPos.y - tBlock.x + tCurMove.y, MT_ROCK) ||
+			pCurMap->IsObj(m_pScene, m_tPos.x - tBlock.x + tCurMove.x, m_tPos.y - tBlock.x + tCurMove.y, MT_IRON) ||
+			pCurMap->IsObj(m_pScene, m_tPos.x - tBlock.x + tCurMove.x, m_tPos.y - tBlock.x + tCurMove.y, MT_POOP))
 		{
 			m_bChangeDir = false;
 			return;
@@ -202,7 +203,7 @@ void CCharger::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 			m_tM2PDir *= -1.f;
 			m_bChangeDir = false;
 		}
-	}
+	}*/
 }
 
 void CCharger::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)

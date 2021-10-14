@@ -59,7 +59,6 @@ CRoomMap::CRoomMap()	:
 	m_bEnable(true),
 	m_bActive(true),
 	m_iRoomNum(0),
-	m_pScene(nullptr),
 	m_bIsSpecial(false),
 	m_bIsClear(false),
 	m_eSpecialRoomType(ESpecial_RoomType::None)

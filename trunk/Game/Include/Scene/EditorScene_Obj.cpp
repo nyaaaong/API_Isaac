@@ -61,9 +61,9 @@ void CEditorScene::CreateObject(float fTime)
 		return;
 
 	if (m_eCurType != MT_SPAWN)
-		GetCurrentMap()->Create(m_eCurType, CInput::GetInst()->GetMousePos());
+		GetCurrentMap()->Create(this, m_eCurType, CInput::GetInst()->GetMousePos());
 
-	else
+	else if (m_eCurType == MT_SPAWN)
 	{
 		RECT tRC = {};
 
@@ -102,8 +102,8 @@ void CEditorScene::DeleteObject(float fTime)
 		return;
 
 	if (m_eCurType != MT_SPAWN)
-		GetCurrentMap()->Delete(CInput::GetInst()->GetMousePos());
+		GetCurrentMap()->Delete(this, CInput::GetInst()->GetMousePos());
 
-	else
-		GetCurrentMap()->DeleteSpawn(CInput::GetInst()->GetMousePos());
+	else if (m_eCurType == MT_SPAWN)
+		GetCurrentMap()->DeleteSpawn(this, CInput::GetInst()->GetMousePos());
 }

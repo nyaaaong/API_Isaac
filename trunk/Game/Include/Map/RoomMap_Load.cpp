@@ -3,7 +3,7 @@
 #include "RoomObj.h"
 #include "../PathManager.h"
 
-void CRoomMap::Load(FILE* pFile)
+void CRoomMap::Load(CScene* pCurScene, FILE* pFile)
 {
 	int	iLength = 0;
 	fread(&iLength, sizeof(int), 1, pFile);
@@ -27,8 +27,7 @@ void CRoomMap::Load(FILE* pFile)
 	{
 		CRoomObj* pRoomObj = new CRoomObj;
 
-		pRoomObj->SetScene(m_pScene);
-		pRoomObj->Load(pFile);
+		pRoomObj->Load(pCurScene, pFile);
 
 		if (!pRoomObj->Init())
 		{
@@ -40,7 +39,7 @@ void CRoomMap::Load(FILE* pFile)
 	}
 }
 
-void CRoomMap::LoadFile(const char* cFileName, const std::string& strPath)
+void CRoomMap::LoadFile(CScene* pCurScene, const char* cFileName, const std::string& strPath)
 {
 	char	cFullPath[MAX_PATH] = {};
 
@@ -51,10 +50,10 @@ void CRoomMap::LoadFile(const char* cFileName, const std::string& strPath)
 
 	strcat_s(cFullPath, cFileName);
 
-	LoadFullPath(cFullPath);
+	LoadFullPath(pCurScene, cFullPath);
 }
 
-void CRoomMap::LoadFullPath(const char* cFullPath)
+void CRoomMap::LoadFullPath(CScene* pCurScene, const char* cFullPath)
 {
 	FILE* pFile = nullptr;
 
@@ -63,7 +62,7 @@ void CRoomMap::LoadFullPath(const char* cFullPath)
 	if (!pFile)
 		return;
 
-	Load(pFile);
+	Load(pCurScene, pFile);
 
 	fclose(pFile);
 }

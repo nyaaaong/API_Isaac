@@ -1,7 +1,7 @@
 
 #include "RoomObj.h"
 
-void CRoomObj::Load(FILE* pFile)
+void CRoomObj::Load(CScene* pCurScene, FILE* pFile)
 {
 	fread(&m_tPos, sizeof(Vector2), 1, pFile);
 	fread(&m_tSize, sizeof(Vector2), 1, pFile);
@@ -14,5 +14,5 @@ void CRoomObj::Load(FILE* pFile)
 	fread(&bTexture, sizeof(bool), 1, pFile);
 
 	if (bTexture)
-		m_pTexture = CTexture::LoadStatic(pFile, m_pScene);
+		m_pTexture = CTexture::LoadStatic(pFile, pCurScene);
 }

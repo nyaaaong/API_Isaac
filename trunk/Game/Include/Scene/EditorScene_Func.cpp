@@ -61,7 +61,7 @@ void CEditorScene::MouseSetBox()
 	Vector2	tMousePos = CInput::GetInst()->GetMousePos();
 	Vector2	tObjSize = Vector2(75.f, 75.f);
 
-	bool bSetPossible = GetCurrentMap()->IsSetObj(tMousePos);
+	bool bSetPossible = GetCurrentMap()->IsSetObj(this, tMousePos);
 
 	HBRUSH	hBrush = 0;
 	RECT tRC = { static_cast<long>(tMousePos.x), static_cast<long>(tMousePos.y), static_cast<long>(tMousePos.x + tObjSize.x), static_cast<long>(tMousePos.y + tObjSize.y) };

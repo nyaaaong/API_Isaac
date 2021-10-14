@@ -81,12 +81,7 @@ public:
 
 public:
 	bool Init();
-	//void Start();
 	void RoomUpdater();
-	//void Update(float fTime);
-	//void PostUpdate(float fTime);
-	//void Collision(float fTime);
-	//void Render(HDC hDC);
 
 public:
 	bool GetClearMap(int iIdx)	const;

@@ -4,7 +4,7 @@
 
 void CScene::Init_CreateTextureObject()
 {
-	for (int i = MT_ROCK; i < MT_MAX; ++i)
+	for (int i = MT_ROCK; i < MT_SPAWN; ++i)
 	{
 		// °æ·Î
 		TCHAR	cPath[MAX_PATH] = {};

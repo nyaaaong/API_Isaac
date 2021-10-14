@@ -106,110 +106,6 @@ void CMonsterSpawner::CreateMonster()
 	}
 }
 
-void CMonsterSpawner::SetMonsterSpawnLocation(const Vector2& tLocation)
-{
-	int iNum = m_pScene->GetCurMapNumber();
-	ESpecial_RoomType	eType = m_pScene->GetCurMapType();
-
-	if (iNum != -1)
-	{
-		if (CMapManager::GetInst()->GetClearMap(m_pScene->GetCurMapNumber()))
-			return;
-
-		const Vector2	tFieldLT = m_pScene->GetFieldLT();
-		const Vector2	tFieldRB = m_pScene->GetFieldRB();
-
-		// 좌측 영역
-		const Vector2	tLeftLT = tFieldLT;
-		const Vector2	tLeftRB = Vector2(tFieldLT.x + 200.f, tFieldRB.y);
-
-		// 우측 영역
-		const Vector2	tRightLT = Vector2(tFieldRB.x - 200.f, tFieldLT.y);
-		const Vector2	tRightRB = tFieldRB;
-
-		// 상단 영역
-		const Vector2	tTopLT = tFieldLT;
-		const Vector2	tTopRB = Vector2(tFieldRB.x, tFieldLT.y + 200.f);
-
-		// 하단 영역
-		const Vector2	tBottomLT = Vector2(tFieldRB.x, tFieldLT.y - 200.f);
-		const Vector2	tBottomRB = tFieldRB;
-
-		if (tLocation == Vector2::LEFT)
-		{
-			m_tSpawnLocationLT = tRightLT;
-			m_tSpawnLocationRB = tRightRB;
-		}
-
-		else if (tLocation == Vector2::RIGHT)
-		{
-			m_tSpawnLocationLT = tLeftLT;
-			m_tSpawnLocationRB = tLeftRB;
-		}
-
-		else if (tLocation == Vector2::UP)
-		{
-			m_tSpawnLocationLT = tBottomLT;
-			m_tSpawnLocationRB = tBottomRB;
-		}
-
-		else if (tLocation == Vector2::DOWN)
-		{
-			m_tSpawnLocationLT = tTopLT;
-			m_tSpawnLocationRB = tTopRB;
-		}
-	}
-
-	else if (eType != ESpecial_RoomType::None)
-	{
-		if (CMapManager::GetInst()->GetClearSpecialMap(m_pScene->GetCurMapType()))
-			return;
-
-		const Vector2	tFieldLT = m_pScene->GetFieldLT();
-		const Vector2	tFieldRB = m_pScene->GetFieldRB();
-
-		// 좌측 영역
-		const Vector2	tLeftLT = tFieldLT;
-		const Vector2	tLeftRB = Vector2(tFieldLT.x + 200.f, tFieldRB.y);
-
-		// 우측 영역
-		const Vector2	tRightLT = Vector2(tFieldRB.x - 200.f, tFieldLT.y);
-		const Vector2	tRightRB = tFieldRB;
-
-		// 상단 영역
-		const Vector2	tTopLT = tFieldLT;
-		const Vector2	tTopRB = Vector2(tFieldRB.x, tFieldLT.y + 200.f);
-
-		// 하단 영역
-		const Vector2	tBottomLT = Vector2(tFieldRB.x, tFieldLT.y - 200.f);
-		const Vector2	tBottomRB = tFieldRB;
-
-		if (tLocation == Vector2::LEFT)
-		{
-			m_tSpawnLocationLT = tRightLT;
-			m_tSpawnLocationRB = tRightRB;
-		}
-
-		else if (tLocation == Vector2::RIGHT)
-		{
-			m_tSpawnLocationLT = tLeftLT;
-			m_tSpawnLocationRB = tLeftRB;
-		}
-
-		else if (tLocation == Vector2::UP)
-		{
-			m_tSpawnLocationLT = tBottomLT;
-			m_tSpawnLocationRB = tBottomRB;
-		}
-
-		else if (tLocation == Vector2::DOWN)
-		{
-			m_tSpawnLocationLT = tTopLT;
-			m_tSpawnLocationRB = tTopRB;
-		}
-	}
-}
-
 void CMonsterSpawner::EnemyDie1(const Vector2& tPos)
 {
 	int iNum = m_pScene->GetCurMapNumber();
@@ -238,6 +134,11 @@ void CMonsterSpawner::EnemyDie1(const Vector2& tPos)
 
 void CMonsterSpawner::CreateSpawnLocation(const Vector2& tSize, const Vector2& tPivot, const Vector2& tOffset)
 {
+	int iSpawnCount = static_cast<int>(m_vecSpawnStartPos.size());
+
+	if (iSpawnCount == 0)
+		return;
+
 	int iNum = m_pScene->GetCurMapNumber();
 	ESpecial_RoomType	eType = m_pScene->GetCurMapType();
 
@@ -248,84 +149,81 @@ void CMonsterSpawner::CreateSpawnLocation(const Vector2& tSize, const Vector2& t
 
 		Vector2	tPosLT;
 		Vector2	tPosRB;
+		int	iIdx = 0;
 
 		do
 		{
-			int	iLTX = static_cast<int>(m_tSpawnLocationLT.x);
-			int	iLTY = static_cast<int>(m_tSpawnLocationLT.y);
+			if (iSpawnCount > 1)
+				iIdx = rand() % iSpawnCount;
 
-			int	iRBX = static_cast<int>(m_tSpawnLocationRB.x);
-			int	iRBY = static_cast<int>(m_tSpawnLocationRB.y);
+			int	iStartPosX = static_cast<int>(m_vecSpawnStartPos[iIdx].x);
+			int	iStartPosY = static_cast<int>(m_vecSpawnStartPos[iIdx].y);
 
-			int iX = 0;
-			int iY = 0;
+			int	iEndPosX = static_cast<int>(m_vecSpawnEndPos[iIdx].x);
+			int	iEndPosY = static_cast<int>(m_vecSpawnEndPos[iIdx].y);
 
-			if (iRBX != 0)
-				int iX = rand() % iRBX - iLTX + 1 + iLTX;
+			int iRandX = rand() % iEndPosX - iStartPosX + iStartPosX;
+			int iRandY = rand() % iEndPosY - iStartPosY + iStartPosY;
 
-			if (iRBY != 0)
-				int iY = rand() % iRBY - iLTY + 1 + iLTY;
+			m_tSpawnPos.x = static_cast<float>(iRandX);
+			m_tSpawnPos.y = static_cast<float>(iRandY);
 
-			m_tSpawnLocation.x = static_cast<float>(iX);
-			m_tSpawnLocation.y = static_cast<float>(iY);
-
-			tPosLT = m_tSpawnLocation - tSize * tPivot + tOffset;
-			tPosRB = m_tSpawnLocation + tSize * tPivot + tOffset;
-
-		} while (m_pScene->GetCurrentMap()->IsObj(tPosLT, MT_IRON) ||
-			m_pScene->GetCurrentMap()->IsObj(tPosRB, MT_IRON) ||
-			m_pScene->GetCurrentMap()->IsObj(tPosLT, MT_ROCK) ||
-			m_pScene->GetCurrentMap()->IsObj(tPosRB, MT_ROCK) ||
-			m_pScene->GetCurrentMap()->IsObj(tPosLT, MT_POOP) ||
-			m_pScene->GetCurrentMap()->IsObj(tPosRB, MT_POOP) ||
-			m_pScene->GetCurrentMap()->IsObj(tPosLT, MT_SPIKE) ||
-			m_pScene->GetCurrentMap()->IsObj(tPosRB, MT_SPIKE));
-	}
-
-	else if (eType != ESpecial_RoomType::None)
-	{
-		if (CMapManager::GetInst()->GetClearSpecialMap(m_pScene->GetCurMapType()))
-			return;
-
-		Vector2	tPosLT;
-		Vector2	tPosRB;
-
-		do
-		{
-			int	iLTX = static_cast<int>(m_tSpawnLocationLT.x);
-			int	iLTY = static_cast<int>(m_tSpawnLocationLT.y);
-
-			int	iRBX = static_cast<int>(m_tSpawnLocationRB.x);
-			int	iRBY = static_cast<int>(m_tSpawnLocationRB.y);
-
-			int iX = 0;
-			int iY = 0;
-
-			if (iRBX != 0)
-				int iX = rand() % iRBX - iLTX + 1 + iLTX;
-
-			if (iRBY != 0)
-				int iY = rand() % iRBY - iLTY + 1 + iLTY;
-
-			m_tSpawnLocation.x = static_cast<float>(iX);
-			m_tSpawnLocation.y = static_cast<float>(iY);
-
-			tPosLT = m_tSpawnLocation - tSize * tPivot + tOffset;
-			tPosRB = m_tSpawnLocation + tSize * tPivot + tOffset;
-
-		} while (m_pScene->GetCurrentMap()->IsObj(tPosLT, MT_IRON) ||
-			m_pScene->GetCurrentMap()->IsObj(tPosRB, MT_IRON) ||
-			m_pScene->GetCurrentMap()->IsObj(tPosLT, MT_ROCK) ||
-			m_pScene->GetCurrentMap()->IsObj(tPosRB, MT_ROCK) ||
-			m_pScene->GetCurrentMap()->IsObj(tPosLT, MT_POOP) ||
-			m_pScene->GetCurrentMap()->IsObj(tPosRB, MT_POOP) ||
-			m_pScene->GetCurrentMap()->IsObj(tPosLT, MT_SPIKE) ||
-			m_pScene->GetCurrentMap()->IsObj(tPosRB, MT_SPIKE));
+		} while (!CheckSpawnPossible(tSize, tPivot, tOffset)); // 스폰 배치가 불가능한 지역이면 루프 실행.
 	}
 }
 
 void CMonsterSpawner::CreateMonster(const std::string& strName)
 {
-	if (strName == "Charger")
-		m_pScene->CreateObject<CCharger>(strName, strName, m_tSpawnLocation);
+	if (m_tSpawnPos == Vector2())
+		return;
+
+	else if (strName == "Charger")
+		m_pScene->CreateObject<CCharger>(strName, strName, m_tSpawnPos);
+}
+
+void CMonsterSpawner::AddSpawnLocation()
+{
+	int iNum = m_pScene->GetCurMapNumber();
+
+	if (iNum != -1)
+	{
+		if (CMapManager::GetInst()->GetClearMap(m_pScene->GetCurMapNumber()))
+			return;
+	}
+
+	m_vecSpawnStartPos.clear();
+	m_vecSpawnEndPos.clear();
+
+	CRoomMap* pCurMap = m_pScene->GetCurrentMap();
+	
+	std::list<CRoomObj*>::iterator	iter = pCurMap->m_RoomObjList.begin();
+	std::list<CRoomObj*>::iterator	iterEnd = pCurMap->m_RoomObjList.end();
+
+	for (; iter != iterEnd; ++iter)
+	{
+		if ((*iter)->GetType() == MT_SPAWN)
+		{
+			m_vecSpawnStartPos.push_back((*iter)->GetPos());
+			m_vecSpawnEndPos.push_back((*iter)->GetPos() + (*iter)->GetSize());
+		}
+	}
+}
+
+bool CMonsterSpawner::CheckSpawnPossible(const Vector2& tSize, const Vector2& tPivot, const Vector2& tOffset)
+{
+	if (m_tSpawnPos == Vector2())
+		return false;
+
+	CRoomMap* pCurMap = m_pScene->GetCurrentMap();
+
+	Vector2	tMonsterLT = m_tSpawnPos - tSize * tPivot + tOffset;
+	Vector2	tMonsterRB = m_tSpawnPos + tSize * tPivot + tOffset;
+
+	if (pCurMap->IsObj(m_pScene, tMonsterLT, tMonsterRB, MT_ROCK) ||
+		pCurMap->IsObj(m_pScene, tMonsterLT, tMonsterRB, MT_IRON) ||
+		pCurMap->IsObj(m_pScene, tMonsterLT, tMonsterRB, MT_SPIKE) ||
+		pCurMap->IsObj(m_pScene, tMonsterLT, tMonsterRB, MT_POOP))
+		return false;
+
+	return true;
 }

@@ -30,6 +30,10 @@ public:
 	virtual void Render(HDC hDC);
 	virtual CPlayerBody* Clone();
 
+public:
+	virtual void AddPos(float x, float y);
+	virtual void AddPos(const Vector2& tPos);
+
 protected:
 	CPlayerBody();
 	CPlayerBody(const CPlayerBody& obj);

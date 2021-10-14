@@ -17,9 +17,13 @@ void CScene::LoadMapObject()
 
 	for (; iter != iterEnd; ++iter)
 	{
+		eObjType = (*iter)->GetType();
+
+		if (eObjType == MT_SPAWN)
+			continue;
+
 		tObjPos = (*iter)->GetPos();
 		tObjSize = (*iter)->GetSize();
-		eObjType = (*iter)->GetType();
 
 		CBlock* pBlock = CreateObject<CBlock>("MapObject", tObjPos, tObjSize);
 

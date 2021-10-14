@@ -17,9 +17,8 @@ bool CRoom3::Init()
 
 	CMapManager::GetInst()->SetMap(this, GetCurMapNumber());
 	LoadMapObject();
-
 	CreatePlayer(Vector2::DOWN);
-	CMonsterSpawner::GetInst()->SetMonsterSpawnLocation(Vector2::UP);
+	CMonsterSpawner::GetInst()->AddSpawnLocation();
 
 	SetDoor(DD_TOP, DT_NORMAL);
 	SetDoor(DD_LEFT, DT_NORMAL);

@@ -29,17 +29,11 @@ private:
 	bool	m_bStart;
 	int		m_iCurMapNum;
 	ESpecial_RoomType	m_eCurMapType;
-	bool	m_bIsEditor;
 
 protected:
 	const int		m_iMaxRoomCount = 10;
 
 public:
-	void SetEditor(bool bIsEditor)
-	{
-		m_bIsEditor = true;
-	}
-
 	void SetCurMapType(ESpecial_RoomType eType)
 	{
 		m_eCurMapType = eType;
@@ -61,11 +55,6 @@ public:
 	}
 
 public:
-	bool IsEditor()	const
-	{
-		return m_bIsEditor;
-	}
-
 	ESpecial_RoomType GetCurMapType()	const
 	{
 		return m_eCurMapType;

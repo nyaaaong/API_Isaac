@@ -249,6 +249,10 @@ public:
 	}
 
 public:
+	virtual void AddPos(float x, float y);
+	virtual void AddPos(const Vector2& tPos);
+
+public:
 	CCollider* FindCollider(const std::string& strName);
 
 public:

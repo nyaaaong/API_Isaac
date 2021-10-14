@@ -26,6 +26,11 @@ public:
 		return m_pScene;
 	}
 
+	CScene* GetNextScene()	const
+	{
+		return m_pNextScene;
+	}
+
 public:
 	void InputAnimFrameData()
 	{

@@ -63,8 +63,8 @@ void CPlayer::PostUpdate(float fTime)
 
 void CPlayer::Collision(float fTime)
 {
-	if (m_bInvisible)
-		return;
+	//if (m_bInvisible)
+	//	return;
 
 	CCharacter::Collision(fTime);
 }

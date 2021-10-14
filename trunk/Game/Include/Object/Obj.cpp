@@ -438,6 +438,40 @@ CObj::~CObj()
 	m_ColliderList.clear();
 }
 
+void CObj::AddPos(float x, float y)
+{
+	if (x && !y)
+		m_tPrevPos.x = m_tPos.x;
+
+	else if (!x && y)
+		m_tPrevPos.y = m_tPos.y;
+
+	m_tPos.x += x;
+	m_tPos.y += y;
+
+	m_tVelocity.x += x;
+	m_tVelocity.y += y;
+
+	m_pScene->CheckFieldPos(this);
+}
+
+void CObj::AddPos(const Vector2& tPos)
+{
+	if (tPos.x && !tPos.y)
+		m_tPrevPos.x = m_tPos.x;
+
+	else if (!tPos.x && tPos.y)
+		m_tPrevPos.y = m_tPos.y;
+
+	m_tPrevPos = m_tPos;
+
+	m_tPos += tPos;
+
+	m_tVelocity += tPos;
+
+	m_pScene->CheckFieldPos(this);
+}
+
 CCollider* CObj::FindCollider(const std::string& strName)
 {
 	std::list<CSharedPtr<CCollider>>::iterator iter = m_ColliderList.begin();

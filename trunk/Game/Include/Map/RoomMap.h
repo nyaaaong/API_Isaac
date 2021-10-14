@@ -8,13 +8,13 @@ class CRoomMap
 {
 	friend class CScene;
 	friend class CMapManager;
+	friend class CMonsterSpawner;
 
 protected:
 	CRoomMap();
 	virtual ~CRoomMap();
 
 protected:
-	class CScene* m_pScene;
 	CSharedPtr<CTexture>	m_pBackGround;
 	std::string	m_strName;
 	Vector2	m_tPos;
@@ -84,11 +84,6 @@ public:
 		m_iRoomNum = iNum;
 	}
 
-	void SetScene(class CScene* pScene)
-	{
-		m_pScene = pScene;
-	}
-
 	void SetName(const std::string& strName)
 	{
 		m_strName = strName;
@@ -121,21 +116,22 @@ public:
 	virtual void Render(HDC hDC);
 
 public:
-	bool IsObj(const Vector2& tPos, EMapObject_Type eType = MT_MAX); // 위치에 오브젝트가 있는지
-	bool IsObj(float x, float y, EMapObject_Type eType = MT_MAX);
-	bool IsSetObj(const Vector2& tPos, const Vector2& tObjSize = Vector2(75.f, 75.f)); // 설치가 가능한 구역인지
-	void Create(EMapObject_Type eObj, const Vector2& tPos, const Vector2& tObjSize = Vector2(75.f, 75.f));
-	void Delete(const Vector2& tPos);
-	void DeleteSpawn(const Vector2& tPos);
+	bool IsObj(class CScene* pCurScene, const Vector2& tPos, EMapObject_Type eType = MT_MAX); // 위치에 오브젝트가 있는지
+	bool IsObj(class CScene* pCurScene, const Vector2& tStartPos, const Vector2& tEndPos, EMapObject_Type eType = MT_MAX); // StartPos ~ EndPos 모두 체크를 한다.
+	bool IsObj(class CScene* pCurScene, float x, float y, EMapObject_Type eType = MT_MAX);
+	bool IsSetObj(class CScene* pCurScene, const Vector2& tPos, const Vector2& tObjSize = Vector2(75.f, 75.f)); // 설치가 가능한 구역인지
+	void Create(class CScene* pCurScene, EMapObject_Type eObj, const Vector2& tPos, const Vector2& tObjSize = Vector2(75.f, 75.f));
+	void Delete(class CScene* pCurScene, const Vector2& tPos);
+	void DeleteSpawn(class CScene* pCurScene, const Vector2& tPos);
 	void Clear();
 	void Save(FILE* pFile);
-	void Load(FILE* pFile);
-	CRoomObj* GetRoomObj(const Vector2& tPos)	const;
+	void Load(class CScene* pCurScene, FILE* pFile);
+	CRoomObj* GetRoomObj(class CScene* pCurScene, const Vector2& tPos)	const;
 
 protected:
 	void SaveFile(const char* cFileName, const std::string& strPath = MAP_PATH);
 	void SaveFullPath(const char* cFullPath);
-	void LoadFile(const char* cFileName, const std::string& strPath = MAP_PATH);
-	void LoadFullPath(const char* cFullPath);
+	void LoadFile(class CScene* pCurScene, const char* cFileName, const std::string& strPath = MAP_PATH);
+	void LoadFullPath(class CScene* pCurScene, const char* cFullPath);
 };
 

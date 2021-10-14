@@ -17,9 +17,6 @@ CEditorScene::CEditorScene()	:
 	m_cMousePosText{}
 {
 	m_vecMouse.resize(MT_SPAWN - 1);
-
-	CMapManager::GetInst()->SetEditorScene(true);
-	SetEditor(true);
 }
 
 CEditorScene::~CEditorScene()
@@ -39,6 +36,8 @@ bool CEditorScene::Init()
 	}
 
 	CMapManager::GetInst()->SetMap(this, 1);
+
+	CMapManager::GetInst()->SetEditorScene(true);
 
 	CreateMouseCursor();
 
@@ -93,7 +92,7 @@ bool CEditorScene::PostUpdate(float fTime)
 {
 	CScene::PostUpdate(fTime);
 
-	if (CInput::GetInst()->GetKeyUp("EditorLeftClick"))
+	if (CInput::GetInst()->GetMouseUp())
 	{
 		m_tMouseEndPos = CInput::GetInst()->GetMousePos();
 
@@ -109,7 +108,7 @@ bool CEditorScene::PostUpdate(float fTime)
 		{
 			FrameRect(CGameManager::GetInst()->GetWindowDC(), &tRC, CGameManager::GetInst()->GetGreenBrush());
 
-			GetCurrentMap()->Create(m_eCurType, m_tMouseStartPos, m_tMouseEndPos - m_tMouseStartPos);
+			GetCurrentMap()->Create(this, m_eCurType, m_tMouseStartPos, m_tMouseEndPos - m_tMouseStartPos);
 		}
 	}
 

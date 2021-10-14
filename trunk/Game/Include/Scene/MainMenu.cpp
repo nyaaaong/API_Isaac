@@ -11,8 +11,6 @@ bool CMainMenu::Init()
 	if (!CScene::Init())
 		return false;
 
-	CMapManager::GetInst()->SetEditorScene(false);
-
 	LoadAnimationSequence();
 
 	GetSceneResource()->SetVolume("BGM", 10);
@@ -40,7 +38,6 @@ bool CMainMenu::Update(float fTime)
 
 CMainMenu::CMainMenu()
 {
-	SetEditor(false);
 }
 
 CMainMenu::~CMainMenu()
