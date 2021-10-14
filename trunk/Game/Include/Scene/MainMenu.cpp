@@ -40,6 +40,7 @@ bool CMainMenu::Update(float fTime)
 
 CMainMenu::CMainMenu()
 {
+	SetEditor(false);
 }
 
 CMainMenu::~CMainMenu()

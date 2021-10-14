@@ -23,7 +23,9 @@ private:
 	bool	m_bCoolDown; // 파일 로드와 동시에 오브젝트를 생성하는 것을 방지한다.
 	char	m_cTitleText[256];
 	char	m_cStateText[32];
-	char	m_cFPSText[64];
+	char	m_cMousePosText[64];
+	Vector2	m_tMouseStartPos;
+	Vector2	m_tMouseEndPos;
 
 public:
 	virtual bool Init();
@@ -49,6 +51,7 @@ private:
 	void SelectObject2(float fTime);
 	void SelectObject3(float fTime);
 	void SelectObject4(float fTime);
+	void SelectObject5(float fTime);
 
 	void CreateObject(float fTime);
 	void DeleteObject(float fTime);

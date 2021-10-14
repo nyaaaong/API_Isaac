@@ -3,6 +3,7 @@
 #include "SceneResource.h"
 #include "../GameManager.h"
 #include "../Object/Door.h"
+#include "../Object/MonsterSpawner.h"
 #include "../Map/MapManager.h"
 
 bool CRoomBase::Init()
@@ -11,6 +12,8 @@ bool CRoomBase::Init()
 		return false;
 
 	CreateDoor();
+
+	CMonsterSpawner::GetInst()->SetScene(this);
 
 	return true;
 }

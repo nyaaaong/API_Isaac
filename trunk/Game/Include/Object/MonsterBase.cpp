@@ -89,22 +89,6 @@ void CMonsterBase::Update(float fTime)
 void CMonsterBase::PostUpdate(float fTime)
 {
 	CCharacter::PostUpdate(fTime);
-
-	m_fBugFindTimer += fTime;
-
-	if (m_fBugFindTimer >= m_fBugFindTimerMax)
-	{
-		if (m_tPos == m_tPrevPos) // 멈춰있다면 (오브젝트에 끼어있는 경우)
-		{
-			if (m_tPos.x < m_pScene->GetFieldRB().x * 0.5f) // 왼쪽에 있는 경우
-				m_tPos.x += 5.f;
-
-			else
-				m_tPos.x -= 5.f;
-
-			m_pScene->CheckFieldPos(this);
-		}
-	}
 }
 
 CMonsterBase* CMonsterBase::Clone()
@@ -133,10 +117,6 @@ void CMonsterBase::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 
 void CMonsterBase::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 {
-	if (m_bUseKnockBack)
-	{
-
-	}
 }
 
 CMonsterBase::CMonsterBase() :
@@ -149,9 +129,7 @@ CMonsterBase::CMonsterBase() :
 	m_bDelayCheck(false),
 	m_fM4PDist(static_cast<float>(INT_MAX)),
 	m_fMaxDist(-1.f),
-	m_bUseKnockBack(true),
-	m_fBugFindTimer(0.f),
-	m_fBugFindTimerMax(5.f)
+	m_bUseKnockBack(true)
 {
 	m_vecPattern.reserve(4);
 
@@ -177,8 +155,6 @@ CMonsterBase::CMonsterBase(const CMonsterBase& obj)	:
 	m_fM4PDist = obj.m_fM4PDist;
 	m_fMaxDist = obj.m_fMaxDist;
 	m_bUseKnockBack = obj.m_bUseKnockBack;
-	m_fBugFindTimer = 0.f;
-	m_fBugFindTimerMax = obj.m_fBugFindTimerMax;
 
 	memcpy_s(m_arrDir, sizeof(Vector2) * 4, obj.m_arrDir, sizeof(Vector2) * 4);
 }

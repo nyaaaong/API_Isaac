@@ -369,6 +369,7 @@ bool CScene::Render(HDC hDC)
 CScene::CScene()	:
 	m_pCurMap(nullptr),
 	m_bStart(false),
+	m_bIsEditor(false),
 	m_iCurMapNum(-1),
 	m_eCurMapType(ESpecial_RoomType::None)
 {

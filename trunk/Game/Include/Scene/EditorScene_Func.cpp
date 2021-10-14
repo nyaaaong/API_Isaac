@@ -21,7 +21,6 @@ void CEditorScene::GameMenu(float fTime)
 		return;
 
 	CGameManager::GetInst()->SetTitleUpdate(true);
-
 	CSceneManager::GetInst()->CreateScene<CMainMenu>();
 }
 
@@ -86,7 +85,7 @@ void CEditorScene::EditorTextOut()
 {
 	memset(m_cTitleText, 0, sizeof(char) * 256);
 	memset(m_cStateText, 0, sizeof(char) * 32);
-	memset(m_cFPSText, 0, sizeof(char) * 64);
+	memset(m_cMousePosText, 0, sizeof(char) * 64);
 
 	switch (m_eState)
 	{
@@ -104,8 +103,8 @@ void CEditorScene::EditorTextOut()
 	sprintf_s(m_cTitleText, "The Binding of Isaac　[에디터 모드]　방 : %d / %d　상태 : ", m_iCurRoom, m_iMaxRoomCount);
 	strcat_s(m_cTitleText, m_cStateText);
 
-	sprintf_s(m_cFPSText, "　FPS : %.f", CGameManager::GetInst()->GetFPS());
-	strcat_s(m_cTitleText, m_cFPSText);
+	sprintf_s(m_cMousePosText, "　마우스 위치 - X : %.2f　Y : %.2f", CInput::GetInst()->GetMousePos().x, CInput::GetInst()->GetMousePos().y);
+	strcat_s(m_cTitleText, m_cMousePosText);
 
 	SetWindowTextA(CGameManager::GetInst()->GetWindowHandle(), m_cTitleText);
 }

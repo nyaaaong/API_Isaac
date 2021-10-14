@@ -1,6 +1,7 @@
 
 #include "RoomObj.h"
 #include "RoomMap.h"
+#include "../GameManager.h"
 #include "../Scene/Scene.h"
 #include "../Scene/Camera.h"
 #include "../Resource/ResourceManager.h"
@@ -64,9 +65,13 @@ void CRoomObj::Render(HDC hDC)
 {
 	if (m_pTexture)
 	{
-		//Vector2	tCamPos = m_pScene->GetCamera()->GetPos();
-		//m_pTexture->Render(hDC, m_tPos - tCamPos, Vector2(0.f, 0.f), m_tSize);
 		m_pTexture->Render(hDC, m_tPos, Vector2(0.f, 0.f), m_tSize);
+	}
+
+	if (m_pScene->IsEditor() && m_eType == MT_SPAWN)
+	{
+		RECT	rc = { static_cast<LONG>(m_tPos.x), static_cast<LONG>(m_tPos.y), static_cast<LONG>(m_tPos.x + m_tSize.x), static_cast<LONG>(m_tPos.y + m_tSize.y) };
+		FrameRect(hDC, &rc, CGameManager::GetInst()->GetGreenBrush());
 	}
 }
 

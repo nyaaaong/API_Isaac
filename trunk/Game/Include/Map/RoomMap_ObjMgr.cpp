@@ -10,7 +10,13 @@ bool CRoomMap::IsObj(const Vector2& tPos, EMapObject_Type eType)
 
 	for (; iter != iterEnd; ++iter)
 	{
-		if ((*iter)->GetType() == eType)
+		if (eType != MT_MAX && (*iter)->GetType() == eType)
+		{
+			if ((*iter)->IsObj(tPos))
+				return true;
+		}
+
+		else
 		{
 			if ((*iter)->IsObj(tPos))
 				return true;
@@ -52,7 +58,7 @@ bool CRoomMap::IsSetObj(const Vector2& tPos, const Vector2& tObjSize)
 
 void CRoomMap::Create(EMapObject_Type eObj, const Vector2& tPos, const Vector2& tObjSize)
 {
-	if (IsSetObj(tPos, tObjSize)) // 설치 가능한 구역이라면
+	if (eObj == MT_SPAWN || IsSetObj(tPos, tObjSize)) // 설치 가능한 구역이라면
 	{
 		CRoomObj* pRoomObj = new CRoomObj;
 
@@ -79,6 +85,22 @@ void CRoomMap::Delete(const Vector2& tPos)
 	for (; iter != iterEnd; ++iter)
 	{
 		if ((*iter)->IsObj(tPos)) // 설치한 자리에 다른 오브젝트가 있는 지
+		{
+			SAFE_DELETE((*iter));
+			m_RoomObjList.erase(iter);
+			return;
+		}
+	}
+}
+
+void CRoomMap::DeleteSpawn(const Vector2& tPos)
+{
+	std::list<CRoomObj*>::iterator	iter = m_RoomObjList.begin();
+	std::list<CRoomObj*>::iterator	iterEnd = m_RoomObjList.end();
+
+	for (; iter != iterEnd; ++iter)
+	{
+		if ((*iter)->IsObj(tPos) && (*iter)->GetType() == MT_SPAWN) // 설치한 자리에 다른 오브젝트가 있는 지
 		{
 			SAFE_DELETE((*iter));
 			m_RoomObjList.erase(iter);

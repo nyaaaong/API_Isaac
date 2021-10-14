@@ -9,7 +9,7 @@ void CEditorScene::CreateMouseCursor()
 {
 	CMapManager::GetInst()->SetRoomShuffle(false);
 
-	for (int i = MT_ROCK; i < MT_MAX; ++i)
+	for (int i = MT_ROCK; i < MT_SPAWN; ++i)
 	{
 		// 텍스쳐명
 		char	cTextureName[32] = "Object";
@@ -44,9 +44,10 @@ void CEditorScene::Start()
 	CInput::GetInst()->SetCallback<CEditorScene>("EditorNextObject", KS_DOWN, this, &CEditorScene::NextObject);
 	CInput::GetInst()->SetCallback<CEditorScene>("EditorPrevObject", KS_DOWN, this, &CEditorScene::PrevObject);
 	CInput::GetInst()->SetCallback<CEditorScene>("EditorSelectObject1", KS_DOWN, this, &CEditorScene::SelectObject1);
-	CInput::GetInst()->SetCallback<CEditorScene>("EditorSelectObject2", KS_DOWN, this, &CEditorScene::SelectObject1);
-	CInput::GetInst()->SetCallback<CEditorScene>("EditorSelectObject3", KS_DOWN, this, &CEditorScene::SelectObject1);
-	CInput::GetInst()->SetCallback<CEditorScene>("EditorSelectObject4", KS_DOWN, this, &CEditorScene::SelectObject1);
+	CInput::GetInst()->SetCallback<CEditorScene>("EditorSelectObject2", KS_DOWN, this, &CEditorScene::SelectObject2);
+	CInput::GetInst()->SetCallback<CEditorScene>("EditorSelectObject3", KS_DOWN, this, &CEditorScene::SelectObject3);
+	CInput::GetInst()->SetCallback<CEditorScene>("EditorSelectObject4", KS_DOWN, this, &CEditorScene::SelectObject4);
+	CInput::GetInst()->SetCallback<CEditorScene>("EditorSelectObject5", KS_DOWN, this, &CEditorScene::SelectObject5);
 
 	CInput::GetInst()->SetCallback<CEditorScene>("EditorSaveRoom", KS_DOWN, this, &CEditorScene::SaveRoom);
 	CInput::GetInst()->SetCallback<CEditorScene>("EditorLoadRoom", KS_DOWN, this, &CEditorScene::LoadRoom);

@@ -1,6 +1,7 @@
 
 #include "EditorScene.h"
 #include "../Input.h"
+#include "../GameManager.h"
 #include "../Map/RoomMap.h"
 #include "../Map/MapManager.h"
 
@@ -13,11 +14,12 @@ CEditorScene::CEditorScene()	:
 	m_bCoolDown(false),
 	m_cTitleText{},
 	m_cStateText{},
-	m_cFPSText{}
+	m_cMousePosText{}
 {
-	m_vecMouse.resize(MT_MAX - 1);
+	m_vecMouse.resize(MT_SPAWN - 1);
 
 	CMapManager::GetInst()->SetEditorScene(true);
+	SetEditor(true);
 }
 
 CEditorScene::~CEditorScene()
@@ -64,9 +66,20 @@ bool CEditorScene::Update(float fTime)
 		}
 	}
 
-	MouseWindowCheck();
-	MouseObjectView();
-	MouseSetBox();
+	if (m_eCurType != MT_SPAWN)
+	{
+		MouseWindowCheck();
+		MouseObjectView();
+		MouseSetBox();
+	}
+
+	else if (m_eCurType == MT_SPAWN)
+	{
+		if (!CInput::GetInst()->IsShowCursor())
+			CInput::GetInst()->SetShowCursor(true);
+
+		m_pCurMouse = nullptr;
+	}
 
 	EditorTextOut();
 
@@ -79,6 +92,26 @@ bool CEditorScene::Update(float fTime)
 bool CEditorScene::PostUpdate(float fTime)
 {
 	CScene::PostUpdate(fTime);
+
+	if (CInput::GetInst()->GetKeyUp("EditorLeftClick"))
+	{
+		m_tMouseEndPos = CInput::GetInst()->GetMousePos();
+
+		if (m_tMouseEndPos.x > GetFieldRB().x)
+			m_tMouseEndPos.x = GetFieldRB().x;
+
+		if (m_tMouseEndPos.y > GetFieldRB().y)
+			m_tMouseEndPos.y = GetFieldRB().y;
+
+		RECT tRC = { static_cast<long>(m_tMouseStartPos.x), static_cast<long>(m_tMouseStartPos.y), static_cast<long>(m_tMouseEndPos.x), static_cast<long>(m_tMouseEndPos.y) };
+
+		if (m_tMouseStartPos.x < m_tMouseEndPos.x && m_tMouseStartPos.y < m_tMouseEndPos.y && m_tMouseStartPos != m_tMouseEndPos)
+		{
+			FrameRect(CGameManager::GetInst()->GetWindowDC(), &tRC, CGameManager::GetInst()->GetGreenBrush());
+
+			GetCurrentMap()->Create(m_eCurType, m_tMouseStartPos, m_tMouseEndPos - m_tMouseStartPos);
+		}
+	}
 
 	return true;
 }

@@ -25,6 +25,7 @@ bool CInput::Init(HWND hWnd)
 	CreateKey("EditorSelectObject2", '2'); 
 	CreateKey("EditorSelectObject3", '3'); 
 	CreateKey("EditorSelectObject4", '4');
+	CreateKey("EditorSelectObject5", '5');
 
 	CreateKey("EditorSaveRoom", 'S');
 	SetCtrlKey("EditorSaveRoom", true);

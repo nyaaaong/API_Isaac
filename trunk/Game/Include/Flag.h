@@ -89,6 +89,7 @@ enum EMapObject_Type
 	MT_IRON,
 	MT_SPIKE,
 	MT_POOP,
+	MT_SPAWN,
 	MT_MAX
 };
 

@@ -2,6 +2,7 @@
 
 #include "../GameInfo.h"
 #include "../Resource/Texture.h"
+#include "../Input.h"
 
 class CRoomObj
 {
@@ -45,9 +46,19 @@ public:
 
 	bool IsObj(const Vector2& tPos, const Vector2& tSize) 
 	{
-		if (m_fLife != 0.f && (m_tPos.x < tPos.x + tSize.x && m_tPos.x + m_tSize.x > tPos.x &&
-			m_tPos.y < tPos.y + tSize.y && m_tPos.y + m_tSize.y > tPos.y))
-			return true;
+		if (m_eType != MT_SPAWN)
+		{
+			if (m_fLife != 0.f && (m_tPos.x < tPos.x + tSize.x && m_tPos.x + m_tSize.x > tPos.x &&
+				m_tPos.y < tPos.y + tSize.y && m_tPos.y + m_tSize.y > tPos.y))
+				return true;
+		}
+
+		else
+		{
+			if (m_tPos.x < tPos.x && tPos.x < m_tPos.x + m_tSize.x &&
+				m_tPos.y < tPos.y && tPos.y < m_tPos.y + m_tSize.y)
+				return true;
+		}
 
 		return false;
 	}

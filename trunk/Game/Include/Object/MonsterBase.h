@@ -22,8 +22,6 @@ protected:
 	float	m_fMaxDist;		// 몬스터의 플레이어 감지 거리
 	Vector2	m_arrDir[4];	// 랜덤으로 뽑기 위한 방향 배열
 	bool	m_bUseKnockBack;
-	float	m_fBugFindTimer;	// 버그를 찾기 위한 시간
-	float	m_fBugFindTimerMax;	// 버그를 찾기 위한 최대시간
 
 private:
 	void ShufflePattern();	// 패턴이 1개 이상인 경우 무작위로 섞는다.
