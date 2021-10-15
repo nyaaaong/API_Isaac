@@ -155,20 +155,18 @@ void CBlock::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
 					}
 				}
 
-				tDestVelocity.Normalize();
-
 				if (fInterX > fInterY)
 				{
 					tDestVelocity.y *= -1.f;
 
-					pDestObj->AddPos(0.f, tDestVelocity.y * fInterY);
+					pDestObj->AddPos(0.f, tDestVelocity.y);
 				}
 
 				else
 				{
 					tDestVelocity.x *= -1.f;
 
-					pDestObj->AddPos(tDestVelocity.x * fInterX, 0.f);
+					pDestObj->AddPos(tDestVelocity.x, 0.f);
 				}
 			}
 
