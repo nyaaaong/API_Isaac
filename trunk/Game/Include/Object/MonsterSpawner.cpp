@@ -68,6 +68,12 @@ void CMonsterSpawner::CreateMonsterPrototype()
 
 void CMonsterSpawner::CreateMonster()
 {
+	CRoomBase* pRoom = dynamic_cast<CRoomBase*>(m_pScene);
+	int iMonsterCount = pRoom->GetMonsterCount();
+
+	if (!iMonsterCount)
+		return;
+
 	int iNum = m_pScene->GetCurMapNumber();
 	ESpecial_RoomType	eType = m_pScene->GetCurMapType();
 
@@ -76,10 +82,9 @@ void CMonsterSpawner::CreateMonster()
 		if (CMapManager::GetInst()->GetClearMap(m_pScene->GetCurMapNumber()))
 			return;
 
-		CRoomBase* pRoom = dynamic_cast<CRoomBase*>(m_pScene);
 		size_t iSize = m_vecName.size();
 
-		for (int i = 0; i < pRoom->GetMonsterCount(); ++i)
+		for (int i = 0; i < iMonsterCount; ++i)
 		{
 			int iIdx = rand() % iSize;
 
@@ -96,7 +101,7 @@ void CMonsterSpawner::CreateMonster()
 		CRoomBase* pRoom = dynamic_cast<CRoomBase*>(m_pScene);
 		size_t iSize = m_vecName.size();
 
-		for (int i = 0; i < pRoom->GetMonsterCount(); ++i)
+		for (int i = 0; i < iMonsterCount; ++i)
 		{
 			int iIdx = rand() % iSize;
 

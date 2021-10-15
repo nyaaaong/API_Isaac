@@ -118,114 +118,112 @@ void CBlock::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
 			bool	bCheckRight = tDestVelocity.x <= 1.f && tDestVelocity.x > 0.f;
 			bool	bCheckTop = tDestVelocity.y < 0.f && tDestVelocity.y >= -1.f;
 			bool	bCheckBottom = tDestVelocity.y <= 1.f && tDestVelocity.y > 0.f;
+			bool	bCheckCross = tDestVelocity.x != 0.f && tDestVelocity.y != 0.f;
 
-			// Pos 더할게 아니라 Velocity에 더해줘서 Move와 호환되도록 한다.
-			if (bCheckRight)
+			float	fInterX = 0.f;
+			float	fInterY = 0.f;
+
+			if (bCheckCross)
 			{
-				if (bCheckBottom)
+				if (bCheckLeft)
 				{
-					if (fT <= fDestB)
+					fInterX = abs(fR - fDestL);
+
+					if (bCheckTop)
 					{
-						tMove = fDestB - fT + 0.1f;
-						pDestObj->AddPos(0.f, -tMove * fTime);
+						fInterY = abs(fB - fDestT);
+					}
+
+					else if (bCheckBottom)
+					{
+						fInterY = abs(fDestB - fT);
 					}
 				}
 
-				else if (bCheckTop)
+				else if (bCheckRight)
 				{
-					if (fDestT <= fB)
+					fInterX = abs(fDestR - fL);
+
+					if (bCheckTop)
 					{
-						tMove = fB - fDestT + 0.1f;
-						pDestObj->AddPos(0.f, tMove);
+						fInterY = abs(fB - fDestT);
+					}
+
+					else if (bCheckBottom)
+					{
+						fInterY = abs(fDestB - fT);
 					}
 				}
 
-				if (fL <= fDestR)
+				tDestVelocity.Normalize();
+
+				if (fInterX > fInterY)
 				{
-					tMove = fDestR - fL + 0.1f;
-					pDestObj->AddPos(-tMove, 0.f);
+					tDestVelocity.y *= -1.f;
+
+					pDestObj->AddPos(0.f, tDestVelocity.y * fInterY);
+				}
+
+				else
+				{
+					tDestVelocity.x *= -1.f;
+
+					pDestObj->AddPos(tDestVelocity.x * fInterX, 0.f);
 				}
 			}
 
-			if (bCheckLeft)
+			else if (bCheckLeft)
 			{
-				if (bCheckBottom)
-				{
-					if (fT <= fDestB)
-					{
-						tMove = fDestB - fT + 0.1f;
-						pDestObj->AddPos(0.f, -tMove * fTime);
-					}
-				}
+				tDestVelocity.x *= -1.f;
 
-				else if (bCheckTop)
-				{
-					if (fDestT <= fB)
-					{
-						tMove = fB - fDestT + 0.1f;
-						pDestObj->AddPos(0.f, tMove);
-					}
-				}
-
-				if (fDestL <= fR)
-				{
-					tMove = fR - fDestL + 0.1f;
-					pDestObj->AddPos(tMove, 0.f);
-				}
+				pDestObj->AddPos(tDestVelocity);
 			}
 
-			if (bCheckBottom)
+			else if (bCheckRight)
 			{
-				if (bCheckRight)
-				{
-					if (fL <= fDestR)
-					{
-						tMove = fDestR - fL + 0.1f;
-						pDestObj->AddPos(-tMove * fTime, 0.f);
-					}
-				}
+				tDestVelocity.x *= -1.f;
 
-				else if (bCheckLeft)
-				{
-					if (fDestL <= fR)
-					{
-						tMove = fR - fDestL + 0.1f;
-						pDestObj->AddPos(tMove, 0.f);
-					}
-				}
-
-				if (fT <= fDestB)
-				{
-					tMove = fDestB - fT + 0.1f;
-					pDestObj->AddPos(0.f, -tMove);
-				}
+				pDestObj->AddPos(tDestVelocity);
 			}
 
-			if (bCheckTop)
+			else if (bCheckTop)
 			{
-				if (bCheckRight)
-				{
-					if (fL <= fDestR)
-					{
-						tMove = fDestR - fL + 0.1f;
-						pDestObj->AddPos(-tMove, 0.f);
-					}
-				}
+				tDestVelocity.y *= -1.f;
 
-				else if (bCheckLeft)
-				{
-					if (fDestL <= fR)
-					{
-						tMove = fR - fDestL + 0.1f;
-						pDestObj->AddPos(tMove, 0.f);
-					}
-				}
+				pDestObj->AddPos(tDestVelocity);
+			}
 
-				if (fDestT <= fB)
-				{
-					tMove = fB - fDestT + 0.1f;
-					pDestObj->AddPos(0.f, tMove* fTime);
-				}
+			else if (bCheckBottom)
+			{
+				tDestVelocity.y *= -1.f;
+
+				pDestObj->AddPos(tDestVelocity);
+			}
+
+			// 자신이 벽 안으로 들어간 경우
+			if (fL <= fDestL && fR >= fDestR && fT <= fDestT && fB >= fDestB)
+			{
+				float fInterL = abs(fDestL - fL);
+				float fInterR = abs(fR - fDestR);
+				float fInterT = abs(fDestT - fT);
+				float fInterB = abs(fB - fDestB);
+				float fResult = 0.f;
+
+				fResult = fInterL <= fInterR ? fInterL : fInterR;
+				fResult = fResult <= fInterT ? fResult : fInterT;
+				fResult = fResult <= fInterB ? fResult : fInterB;
+
+				if (fResult == fInterL)
+					pDestObj->AddPos(-fResult, 0.f);
+
+				else if (fResult == fInterR)
+					pDestObj->AddPos(fResult, 0.f);
+
+				else if (fResult == fInterT)
+					pDestObj->AddPos(0.f, -fResult);
+
+				else if (fResult == fInterB)
+					pDestObj->AddPos(0.f, fResult);
 			}
 		}
 	}
