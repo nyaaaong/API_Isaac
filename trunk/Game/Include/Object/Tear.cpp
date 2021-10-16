@@ -88,7 +88,7 @@ void CTear::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 		Vector2	tDir = m_tDir;
 		tDir.Normalize();
 
-		pDestObj->SetKnockBack(tDir, dynamic_cast<CPlayer*>(m_pScene->GetPlayer())->GetInfo().fShotSpeed * 0.1f);
+		pDestObj->SetKnockBack(tDir, dynamic_cast<CPlayer*>(m_pScene->GetPlayer())->GetInfo().fShotSpeed * 0.4f);
 		TearDestroy();
 	}
 

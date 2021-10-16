@@ -43,8 +43,20 @@ protected:
 	bool					m_bPhysics;
 	bool					m_bIsGround;
 	bool					m_bIsJump;
+	bool					m_bCheckFieldPosX;
+	bool					m_bCheckFieldPosY;
 
 public:
+	bool GetCheckFieldPosX()	const
+	{
+		return m_bCheckFieldPosX;
+	}
+
+	bool GetCheckFieldPosY()	const
+	{
+		return m_bCheckFieldPosY;
+	}
+
 	float GetKnockBack()	const
 	{
 		return m_fKnockBack;
@@ -111,6 +123,16 @@ public:
 	}
 
 public:
+	void CheckFieldPosX(bool bCheck)
+	{
+		m_bCheckFieldPosX = bCheck;
+	}
+
+	void CheckFieldPosY(bool bCheck)
+	{
+		m_bCheckFieldPosY = bCheck;
+	}
+
 	void SetKnockBack(const Vector2& tKnockBackDir, float fKnockBack)
 	{
 		m_tKnockBackDir = tKnockBackDir;
@@ -248,6 +270,9 @@ public:
 		m_fTimeScale = fScale;
 	}
 
+protected:
+	void PushCollider(CCollider* pSrc, CCollider* pDest);
+
 public:
 	virtual void AddPos(float x, float y);
 	virtual void AddPos(const Vector2& tPos);
@@ -273,6 +298,7 @@ public:
 	virtual float SetDamage(float fDamage);
 	virtual void CollisionBegin(class CCollider* pSrc, class CCollider* pDest, float fTime);
 	virtual void CollisionColliding(class CCollider* pSrc, class CCollider* pDest, float fTime);
+	virtual void CollisionEnd(class CCollider* pSrc, class CCollider* pDest, float fTime);
 
 public:
 	void SetTexture(const std::string& strName);

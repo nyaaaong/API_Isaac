@@ -119,16 +119,7 @@ private:
 public:
 	CObj* FindObject(const std::string& strName);
 	void SetPlayer(CObj* pPlayerHead, CObj* pPlayerBody);
-	void SetPlayerPrevPos();
-	void SetPlayerPos(const Vector2& tPos);
-	void SetPlayerPos(float x, float y);
-	void SetPlayerPosX(float x);
-	void SetPlayerPosY(float y);
-	void SetPlayerMove(const Vector2& tPos);
-	void SetPlayerMove(float x, float y);
-	void SetPlayerMoveX(float x);
-	void SetPlayerMoveY(float y);
-	bool CheckFieldPos(CObj* pCharacter);
+	void CheckFieldPos(CObj* pCharacter);
 	bool IsObj(const Vector2& tPos, EMapObject_Type eType = MT_MAX);
 	bool IsObj(float x, float y, EMapObject_Type eType = MT_MAX);
 

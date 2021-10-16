@@ -14,7 +14,8 @@ protected:
 	virtual ~CCharger();
 
 private:
-	bool	m_bChangeDir;
+	float	m_fSpikeDelay;
+	float	m_fPatternTimer;
 
 public:
 	virtual void Start();
@@ -24,9 +25,10 @@ public:
 	virtual CCharger* Clone();
 
 private:
+	void RandomDir();
 	void AddChargerAnimation();
-	void DetectPlayer();
-	void ChagerPattern();
+	void DetectPlayer(float fTime);
+	void ChagerPattern(float fTime);
 
 public:
 	virtual void Move(const Vector2& tDir, float fSpeed, bool bUseField);

@@ -2,6 +2,7 @@
 #include "Charger.h"
 #include "Block.h"
 #include "EnemyDie.h"
+#include "Tear.h"
 #include "MonsterSpawner.h"
 #include "../GameManager.h"
 #include "../Scene/Scene.h"
@@ -10,9 +11,10 @@
 #include "../Collision/ColliderBox.h"
 
 CCharger::CCharger()	:
-	m_bChangeDir(false)
+	m_fSpikeDelay(1.f),
+	m_fPatternTimer(0.f)
 {
-	m_fMaxDist = 300.f;
+	m_fMaxDist = 200.f;
 
 	m_tInfo.fAttack = 1.f;
 	m_tInfo.fHP = 10.f;
@@ -24,9 +26,10 @@ CCharger::CCharger()	:
 }
 
 CCharger::CCharger(const CCharger& obj):
-	CMonsterBase(obj)
+	CMonsterBase(obj),
+	m_fSpikeDelay(0.f),
+	m_fPatternTimer(0.f)
 {
-	m_bChangeDir = false;
 }
 
 CCharger::~CCharger()
@@ -42,6 +45,8 @@ void CCharger::Start()
 	m_pColliderBox->SetCollisionProfile("Monster");
 	m_pColliderBox->SetCollisionBeginFunc<CCharger>(this, &CCharger::CollisionBegin);
 	m_pColliderBox->SetCollisionCollidingFunc<CCharger>(this, &CCharger::CollisionColliding);
+
+	RandomDir();	
 }
 
 bool CCharger::Init()
@@ -72,13 +77,13 @@ void CCharger::Update(float fTime)
 		m_fM4PDist = (tMonsterPos - tPlayerPos).Length();
 	}
 
-	DetectPlayer();
+	DetectPlayer(fTime);
 
 	if (m_fKnockBack != 0.f)
 	{
 		Move(m_tKnockBackDir, m_fKnockBack, true);
 
-		m_fKnockBack -= GetMoveSpeedFrame();
+		m_fKnockBack -= GetMoveSpeedFrame() * 2.f;
 
 		if (m_fKnockBack < 0.f)
 			m_fKnockBack = 0.f;
@@ -102,6 +107,13 @@ CCharger* CCharger::Clone()
 	return new CCharger(*this);
 }
 
+void CCharger::RandomDir()
+{
+	int	iIdx = rand() % 4;
+
+	m_tDir = m_arrDir[iIdx];
+}
+
 void CCharger::AddChargerAnimation()
 {
 	AddAnimation("ChargerMoveRight", true);
@@ -115,15 +127,18 @@ void CCharger::AddChargerAnimation()
 	AddAnimation("ChargerAttackDown", true);
 }
 
-void CCharger::DetectPlayer()
+void CCharger::DetectPlayer(float fTime)
 {
 	if (m_fM4PDist <= m_fMaxDist)
 	{
 		GetM2PDir();
 
-		Move(m_tM2PDir, m_tInfo.fMoveSpeed + 50.f - m_fKnockBack, true);
+		Move(m_tM2PDir, m_tInfo.fMoveSpeed + 30.f - m_fKnockBack, true);
 
-		if (abs(m_tM2PDir.x) > abs(m_tM2PDir.y))
+		float	fX = abs(m_tM2PDir.x);
+		float	fY = abs(m_tM2PDir.y);
+
+		if (fX > fY)
 		{
 			if (m_tM2PDir.x >= -1.f && m_tM2PDir.x < 0.f)
 				ChangeAnimation("ChargerAttackLeft");
@@ -143,17 +158,35 @@ void CCharger::DetectPlayer()
 	}
 
 	else
-		ChagerPattern();
+		ChagerPattern(fTime);
 }
 
-void CCharger::ChagerPattern()
+void CCharger::ChagerPattern(float fTime)
 {
-	if (!m_bChangeDir)
-	{
-		int	iIdx = rand() % 4;
+	m_fPatternTimer += fTime;
 
-		m_tDir = m_arrDir[iIdx];
-		m_bChangeDir = true;
+	if (m_fPatternTimer >= 3.f)
+	{
+		m_fPatternTimer = 0.f;
+		RandomDir();
+	}
+
+	if (m_bBlockCollision)
+	{
+		m_tDir *= -1.f;
+		m_bBlockCollision = false;
+	}
+
+	if (GetCheckFieldPosX())
+	{
+		CheckFieldPosX(false);
+		m_tDir.x *= -1.f;
+	}
+
+	if (GetCheckFieldPosY())
+	{
+		CheckFieldPosY(false);
+		m_tDir.y *= -1.f;
 	}
 
 	if (m_tDir == Vector2::LEFT)
@@ -173,37 +206,27 @@ void CCharger::ChagerPattern()
 
 void CCharger::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 {
-	CMonsterBase::Move(tDir, fSpeed, bUseField);
-	/*Vector2	tCurMove = tDir * fSpeed * CGameManager::GetInst()->GetDeltaTime() * m_fTimeScale;
-	Vector2	tBlockSize = CMapManager::GetInst()->GetBlockSize();
-	Vector2	tBlockPivot = CMapManager::GetInst()->GetBlockPivot();
-	Vector2	tBlock = tBlockSize * tBlockPivot;
-
-	CRoomMap* pCurMap = m_pScene->GetCurrentMap();
-
-	if (pCurMap)
-	{
-		if (pCurMap->IsObj(m_pScene, m_tPos.x - tBlock.x + tCurMove.x, m_tPos.y - tBlock.x + tCurMove.y, MT_ROCK) ||
-			pCurMap->IsObj(m_pScene, m_tPos.x - tBlock.x + tCurMove.x, m_tPos.y - tBlock.x + tCurMove.y, MT_IRON) ||
-			pCurMap->IsObj(m_pScene, m_tPos.x - tBlock.x + tCurMove.x, m_tPos.y - tBlock.x + tCurMove.y, MT_POOP))
-		{
-			m_bChangeDir = false;
-			return;
-		}
-	}
-
+	Vector2	tCurMove = tDir * fSpeed * CGameManager::GetInst()->GetDeltaTime() * m_fTimeScale;
 	m_tVelocity += tCurMove;
 	m_tPrevPos = m_tPos;
 	m_tPos += tCurMove;
 
 	if (bUseField)
 	{
-		if (m_pScene->CheckFieldPos(this))
+		m_pScene->CheckFieldPos(this);
+
+		if (GetCheckFieldPosX())
 		{
-			m_tM2PDir *= -1.f;
-			m_bChangeDir = false;
+			CheckFieldPosX(false);
+			m_tDir.x *= -1.f;
 		}
-	}*/
+
+		if (GetCheckFieldPosY())
+		{
+			CheckFieldPosY(false);
+			m_tDir.y *= -1.f;
+		}
+	}
 }
 
 void CCharger::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
@@ -216,7 +239,15 @@ void CCharger::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime
 	else if (strDestName == "MapObject")
 	{
 		if (dynamic_cast<CBlock*>(pDest->GetOwner())->GetType() == MT_SPIKE)
-			SetDamage(1.f);
+		{
+			m_fSpikeDelay += fTime;
+
+			if (m_fSpikeDelay >= 1.f)
+			{
+				m_fSpikeDelay = 0.f;
+				SetDamage(1.f);
+			}
+		}
 	}
 }
 

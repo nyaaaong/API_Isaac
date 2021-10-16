@@ -120,6 +120,10 @@ void CObj::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
 {
 }
 
+void CObj::CollisionEnd(CCollider* pSrc, CCollider* pDest, float fTime)
+{
+}
+
 void CObj::Start()
 {
 	m_bStart = true;
@@ -349,14 +353,18 @@ CObj::CObj() :
 	m_fFallEndY(0.f),
 	m_fJumpVelocity(0.f),
 	m_fGravityAcc(10.f),
-	m_fKnockBack(0.f)
+	m_fKnockBack(0.f),
+	m_bCheckFieldPosX(false),
+	m_bCheckFieldPosY(false)
 {
 }
 
 CObj::CObj(const CObj& obj)	:
 	m_pColliderBox(nullptr),
 	m_pColliderSphere(nullptr),
-	m_pAnimation(nullptr)
+	m_pAnimation(nullptr),
+	m_bCheckFieldPosX(false),
+	m_bCheckFieldPosY(false)
 {
 	m_pScene = obj.m_pScene;
 
@@ -436,6 +444,213 @@ CObj::~CObj()
 	}
 
 	m_ColliderList.clear();
+}
+
+void CObj::PushCollider(CCollider* pSrc, CCollider* pDest)
+{
+	ECollider_Type	tSrcType = pSrc->GetColliderType();
+	ECollider_Type	tDestType = pDest->GetColliderType();
+
+	CObj* pDestObj = pDest->GetOwner();
+	Vector2	tDestVelocity = pDestObj->GetVelocity();
+
+	bool	bCheckLeft = tDestVelocity.x < 0.f && tDestVelocity.x >= -1.f;
+	bool	bCheckRight = tDestVelocity.x <= 1.f && tDestVelocity.x > 0.f;
+	bool	bCheckTop = tDestVelocity.y < 0.f && tDestVelocity.y >= -1.f;
+	bool	bCheckBottom = tDestVelocity.y <= 1.f && tDestVelocity.y > 0.f;
+	bool	bCheckCross = tDestVelocity.x != 0.f && tDestVelocity.y != 0.f;
+
+	float	fInterX = 0.f;
+	float	fInterY = 0.f;
+
+	if (bCheckCross)
+	{
+		if (tSrcType == ECollider_Type::Box)
+		{
+			switch (tDestType)
+			{
+			case ECollider_Type::Box:
+			{
+				float	fL = m_pColliderBox->GetInfo().fL;
+				float	fT = m_pColliderBox->GetInfo().fT;
+				float	fR = m_pColliderBox->GetInfo().fR;
+				float	fB = m_pColliderBox->GetInfo().fB;
+
+				float	fDestL = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fL;
+				float	fDestT = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fT;
+				float	fDestR = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fR;
+				float	fDestB = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fB;
+
+				if (bCheckLeft)
+				{
+					fInterX = abs(fR - fDestL);
+
+					if (bCheckTop)
+					{
+						fInterY = abs(fB - fDestT);
+					}
+
+					else if (bCheckBottom)
+					{
+						fInterY = abs(fDestB - fT);
+					}
+				}
+
+				else if (bCheckRight)
+				{
+					fInterX = abs(fDestR - fL);
+
+					if (bCheckTop)
+					{
+						fInterY = abs(fB - fDestT);
+					}
+
+					else if (bCheckBottom)
+					{
+						fInterY = abs(fDestB - fT);
+					}
+				}
+
+				if (fInterX > fInterY)
+				{
+					tDestVelocity.y *= -1.f;
+
+					if (tDestVelocity.y < 0.f)
+						tDestVelocity.y -= 0.1f;
+
+					else
+						tDestVelocity.y += 0.1f;
+
+					pDestObj->AddPos(0.f, tDestVelocity.y);
+				}
+
+				else
+				{
+					tDestVelocity.x *= -1.f;
+
+					if (tDestVelocity.x < 0.f)
+						tDestVelocity.x -= 0.1f;
+
+					else
+						tDestVelocity.x += 0.1f;
+
+					pDestObj->AddPos(tDestVelocity.x, 0.f);
+				}
+			}
+			break;
+			case ECollider_Type::Sphere:
+				break;
+			}
+		}
+
+		else if (tSrcType == ECollider_Type::Sphere)
+		{
+		}
+	}
+
+	else if (bCheckLeft)
+	{
+		tDestVelocity.x *= -1.f;
+
+		if (tDestVelocity.x < 0.f)
+			tDestVelocity.x -= 0.1f;
+
+		else
+			tDestVelocity.x += 0.1f;
+
+		pDestObj->AddPos(tDestVelocity);
+	}
+
+	else if (bCheckRight)
+	{
+		tDestVelocity.x *= -1.f;
+
+		if (tDestVelocity.x < 0.f)
+			tDestVelocity.x -= 0.1f;
+
+		else
+			tDestVelocity.x += 0.1f;
+
+		pDestObj->AddPos(tDestVelocity);
+	}
+
+	else if (bCheckTop)
+	{
+		tDestVelocity.y *= -1.f;
+
+		if (tDestVelocity.y < 0.f)
+			tDestVelocity.y -= 0.1f;
+
+		else
+			tDestVelocity.y += 0.1f;
+
+		pDestObj->AddPos(tDestVelocity);
+	}
+
+	else if (bCheckBottom)
+	{
+		tDestVelocity.y *= -1.f;
+
+		if (tDestVelocity.y < 0.f)
+			tDestVelocity.y -= 0.1f;
+
+		else
+			tDestVelocity.y += 0.1f;
+
+		pDestObj->AddPos(tDestVelocity);
+	}
+
+	if (tSrcType == ECollider_Type::Box)
+	{
+		switch (tDestType)
+		{
+		case ECollider_Type::Box:
+		{
+			float	fL = m_pColliderBox->GetInfo().fL;
+			float	fT = m_pColliderBox->GetInfo().fT;
+			float	fR = m_pColliderBox->GetInfo().fR;
+			float	fB = m_pColliderBox->GetInfo().fB;
+
+			float	fDestL = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fL;
+			float	fDestT = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fT;
+			float	fDestR = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fR;
+			float	fDestB = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fB;
+
+			// 속도가 0이거나 자신이 벽 안으로 들어간 경우
+			if (tDestVelocity == Vector2() || fL <= fDestL && fR >= fDestR && fT <= fDestT && fB >= fDestB)
+			{
+				float fInterL = abs(fDestL - fL);
+				float fInterR = abs(fR - fDestR);
+				float fInterT = abs(fDestT - fT);
+				float fInterB = abs(fB - fDestB);
+				float fResult = 0.f;
+
+				fResult = fInterL <= fInterR ? fInterL : fInterR;
+				fResult = fResult <= fInterT ? fResult : fInterT;
+				fResult = fResult <= fInterB ? fResult : fInterB;
+
+				if (fResult == fInterL)
+					pDestObj->AddPos(-fResult, 0.f);
+
+				else if (fResult == fInterR)
+					pDestObj->AddPos(fResult, 0.f);
+
+				else if (fResult == fInterT)
+					pDestObj->AddPos(0.f, -fResult);
+
+				else if (fResult == fInterB)
+					pDestObj->AddPos(0.f, fResult);
+			}
+		}
+		break;
+		case ECollider_Type::Sphere:
+			break;
+		}
+	}
+
+	else if (tSrcType == ECollider_Type::Box)
+	{
+	}
 }
 
 void CObj::AddPos(float x, float y)

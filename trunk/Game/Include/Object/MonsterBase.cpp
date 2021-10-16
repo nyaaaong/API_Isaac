@@ -110,8 +110,19 @@ void CMonsterBase::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 
 	if (bUseField)
 	{
-		if (m_pScene->CheckFieldPos(this))
-			m_tM2PDir *= -1.f;
+		m_pScene->CheckFieldPos(this);
+
+		if (GetCheckFieldPosX())
+		{
+			CheckFieldPosX(false);
+			m_tM2PDir.x *= -1.f;
+		}
+
+		if (GetCheckFieldPosY())
+		{
+			CheckFieldPosY(false);
+			m_tM2PDir.y *= -1.f;
+		}
 	}
 }
 
@@ -129,7 +140,8 @@ CMonsterBase::CMonsterBase() :
 	m_bDelayCheck(false),
 	m_fM4PDist(static_cast<float>(INT_MAX)),
 	m_fMaxDist(-1.f),
-	m_bUseKnockBack(true)
+	m_bUseKnockBack(true),
+	m_bBlockCollision(false)
 {
 	m_vecPattern.reserve(4);
 
@@ -155,6 +167,7 @@ CMonsterBase::CMonsterBase(const CMonsterBase& obj)	:
 	m_fM4PDist = obj.m_fM4PDist;
 	m_fMaxDist = obj.m_fMaxDist;
 	m_bUseKnockBack = obj.m_bUseKnockBack;
+	m_bBlockCollision = false;
 
 	memcpy_s(m_arrDir, sizeof(Vector2) * 4, obj.m_arrDir, sizeof(Vector2) * 4);
 }

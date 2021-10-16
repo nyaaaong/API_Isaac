@@ -84,8 +84,19 @@ void CPlayerBody::AddPos(float x, float y)
 	m_pPlayer->m_tPos = m_tPos;
 	m_pPlayer->m_tVelocity = m_tVelocity;
 
-	if (m_pScene->CheckFieldPos(this))
-		m_pPlayer->m_tPos = m_tPos;
+	m_pScene->CheckFieldPos(this);
+
+	if (GetCheckFieldPosX())
+	{
+		CheckFieldPosX(false);
+		m_pPlayer->m_tPos.x = m_tPos.x;
+	}
+
+	if (GetCheckFieldPosY())
+	{
+		CheckFieldPosY(false);
+		m_pPlayer->m_tPos.y = m_tPos.y;
+	}
 }
 
 void CPlayerBody::AddPos(const Vector2& tPos)
@@ -100,8 +111,19 @@ void CPlayerBody::AddPos(const Vector2& tPos)
 	m_pPlayer->m_tPos = m_tPos;
 	m_pPlayer->m_tVelocity = m_tVelocity;
 
-	if (m_pScene->CheckFieldPos(this))
-		m_pPlayer->m_tPos = m_tPos;
+	m_pScene->CheckFieldPos(this);
+
+	if (GetCheckFieldPosX())
+	{
+		CheckFieldPosX(false);
+		m_pPlayer->m_tPos.x = m_tPos.x;
+	}
+
+	if (GetCheckFieldPosY())
+	{
+		CheckFieldPosY(false);
+		m_pPlayer->m_tPos.y = m_tPos.y;
+	}
 }
 
 CPlayerBody::CPlayerBody()	:
@@ -145,8 +167,19 @@ void CPlayerBody::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 
 	if (bUseField)
 	{
-		if (m_pScene->CheckFieldPos(this))
-			m_pPlayer->m_tPos = m_tPos;
+		m_pScene->CheckFieldPos(this);
+
+		if (GetCheckFieldPosX())
+		{
+			CheckFieldPosX(false);
+			m_pPlayer->m_tPos.x = m_tPos.x;
+		}
+
+		if (GetCheckFieldPosY())
+		{
+			CheckFieldPosY(false);
+			m_pPlayer->m_tPos.y = m_tPos.y;
+		}
 	}
 }
 
