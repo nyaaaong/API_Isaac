@@ -130,6 +130,15 @@ void CMonsterBase::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime
 {
 }
 
+void CMonsterBase::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
+{
+	std::string	strName = pDest->GetName();
+	CObj* pPlayer = pDest->GetOwner();
+
+	if (strName == "PlayerHead" || strName == "PlayerBody")
+		pPlayer->SetDamage(1.f);
+}
+
 CMonsterBase::CMonsterBase() :
 	m_fFireTime(0.f),
 	m_fFireTimeMax(1.f),

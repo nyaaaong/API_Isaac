@@ -6,7 +6,6 @@
 #include "../GameManager.h"
 #include "../Scene/Scene.h"
 #include "../Collision/ColliderBox.h"
-#include "../Collision/ColliderSphere.h"
 
 bool CPlayer::Init()
 {
@@ -18,9 +17,9 @@ bool CPlayer::Init()
 
 	AddPlayerAnimation();
 
-	m_pColliderSphere = AddCollider<CColliderSphere>("PlayerHead");
-	m_pColliderSphere->SetRadius(40.f);
-	m_pColliderSphere->SetCollisionProfile("PlayerHead");
+	m_pColliderBox = AddCollider<CColliderBox>("PlayerHead");
+	m_pColliderBox->SetExtent(m_tSize);
+	m_pColliderBox->SetCollisionProfile("PlayerHead");
 
 	CObjManager::GetInst()->PullPlayerInfo(m_tInfo);
 
@@ -37,7 +36,7 @@ void CPlayer::Start()
 	m_pPlayerBody->Start();
 	m_pPlayerBody->SetPos(m_tPos);
 
-	m_pColliderSphere->SetCollisionBeginFunc<CPlayer>(this, &CPlayer::CollisionBegin);
+	m_pColliderBox->SetCollisionBeginFunc<CPlayer>(this, &CPlayer::CollisionBegin);
 }
 
 void CPlayer::Update(float fTime)

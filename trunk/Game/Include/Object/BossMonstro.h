@@ -23,6 +23,7 @@ private:
 
 public:
 	virtual void CollisionBegin(class CCollider* pSrc, class CCollider* pDest, float fTime);
+	virtual void CollisionColliding(class CCollider* pSrc, class CCollider* pDest, float fTime);
 
 public:
 	virtual void Start();

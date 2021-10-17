@@ -44,7 +44,6 @@ bool CCollisionManager::Init()
 	SetCollisionState("PlayerBody", Channel_PlayerAttack, ECollision_State::Ignore);
 
 	SetCollisionState("Monster", Channel_Door, ECollision_State::Ignore);
-	SetCollisionState("Monster", Channel_Monster, ECollision_State::Ignore);
 	SetCollisionState("Monster", Channel_MonsterAttack, ECollision_State::Ignore);
 	SetCollisionState("Monster", Channel_Bomb, ECollision_State::Ignore);
 

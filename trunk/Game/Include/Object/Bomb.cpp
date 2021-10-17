@@ -2,11 +2,12 @@
 #include "Bomb.h"
 #include "BombExplosionEffect.h"
 #include "Block.h"
+#include "MonsterBase.h"
 #include "Tear.h"
 #include "Player.h"
 #include "../Scene/Scene.h"
 #include "../Scene/SceneResource.h"
-#include "../Collision/ColliderSphere.h"
+#include "../Collision/ColliderBox.h"
 
 CBomb::CBomb()	:
 	m_fTimer(0.f),
@@ -47,12 +48,12 @@ void CBomb::Start()
 {
 	CObj::Start();
 
-	m_pColliderSphere = AddCollider<CColliderSphere>("Bomb");
-	m_pColliderSphere->SetRadius(30.f);
-	m_pColliderSphere->SetCollisionProfile("Bomb");
-	m_pColliderSphere->SetCollisionBeginFunc<CBomb>(this, &CBomb::CollisionBegin);
-	m_pColliderSphere->SetCollisionCollidingFunc<CBomb>(this, &CBomb::CollisionColliding);
-	m_pColliderSphere->SetCollisionEndFunc<CBomb>(this, &CBomb::CollisionEnd);
+	m_pColliderBox = AddCollider<CColliderBox>("Bomb");
+	m_pColliderBox->SetExtent(m_tSize * 0.5f);
+	m_pColliderBox->SetCollisionProfile("Bomb");
+	m_pColliderBox->SetCollisionBeginFunc<CBomb>(this, &CBomb::CollisionBegin);
+	m_pColliderBox->SetCollisionCollidingFunc<CBomb>(this, &CBomb::CollisionColliding);
+	m_pColliderBox->SetCollisionEndFunc<CBomb>(this, &CBomb::CollisionEnd);
 
 	if (m_pScene->GetPlayer()->GetVelocity() != Vector2())
 	{
@@ -167,6 +168,7 @@ void CBomb::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
 
 	else if (strName == "Monster")
 	{
+		PushCollider(pSrc, pDest);
 	}
 
 	else if (strName == "PlayerBody")

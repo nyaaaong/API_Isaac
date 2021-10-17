@@ -1,7 +1,6 @@
 
 #include "BossMonstro.h"
 #include "../Collision/ColliderBox.h"
-#include "../Collision/ColliderSphere.h"
 #include "../GameManager.h"
 #include "../Scene/Scene.h"
 
@@ -21,10 +20,9 @@ bool CBossMonstro::Init()
 	AddBossAnimation();
 	AddBossPattern();
 
-	m_pColliderSphere = AddCollider<CColliderSphere>("Monster");
-	m_pColliderSphere->SetRadius(m_tSize.x * 0.4f);
-	m_pColliderSphere->SetOffset(0.f, 50.f);
-	m_pColliderSphere->SetCollisionProfile("Monster");
+	m_pColliderBox = AddCollider<CColliderBox>("Monster");
+	m_pColliderBox->SetExtent(m_tSize);
+	m_pColliderBox->SetCollisionProfile("Monster");
 
 	return true;
 }
@@ -33,7 +31,7 @@ void CBossMonstro::Start()
 {
 	CMonsterBase::Start();
 
-	m_pColliderSphere->SetCollisionBeginFunc<CBossMonstro>(this, &CBossMonstro::CollisionBegin);
+	m_pColliderBox->SetCollisionBeginFunc<CBossMonstro>(this, &CBossMonstro::CollisionBegin);
 }
 
 void CBossMonstro::Update(float fTime)
@@ -61,9 +59,11 @@ CBossMonstro* CBossMonstro::Clone()
 
 void CBossMonstro::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 {
-	if (pDest->GetProfile()->strName == "PlayerHead" ||
-		pDest->GetProfile()->strName == "PlayerBody")
-		pDest->GetOwner()->SetDamage(m_tInfo.fAttack);
+}
+
+void CBossMonstro::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
+{
+	CMonsterBase::CollisionColliding(pSrc, pDest, fTime);
 }
 
 CBossMonstro::CBossMonstro()	:

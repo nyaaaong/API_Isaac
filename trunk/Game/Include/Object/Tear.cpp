@@ -2,7 +2,7 @@
 #include "Tear.h"
 #include "Player.h"
 #include "Block.h"
-#include "../Collision/ColliderSphere.h"
+#include "../Collision/ColliderBox.h"
 #include "../Scene/Scene.h"
 #include "../Scene/SceneResource.h"
 #include "PlayerTearEffect.h"
@@ -27,7 +27,7 @@ void CTear::Start()
 {
 	CObj::Start();
 
-	m_pColliderSphere = nullptr;
+	m_pColliderBox = nullptr;
 
 	switch (m_eTearType)
 	{
@@ -46,9 +46,9 @@ void CTear::Start()
 
 		ChangeAnimation("PlayerTear");
 
-		m_pColliderSphere = AddCollider<CColliderSphere>("PlayerTear");
-		m_pColliderSphere->SetRadius(18.f);
-		m_pColliderSphere->SetCollisionProfile("PlayerTear");
+		m_pColliderBox = AddCollider<CColliderBox>("PlayerTear");
+		m_pColliderBox->SetExtent(m_tSize * 0.5f);
+		m_pColliderBox->SetCollisionProfile("PlayerTear");
 	}
 	break;
 	case ETearType::Monster:
@@ -66,15 +66,15 @@ void CTear::Start()
 
 		ChangeAnimation("MonsterTear");
 
-		m_pColliderSphere = AddCollider<CColliderSphere>("MonsterTear");
-		m_pColliderSphere->SetRadius(18.f);
-		m_pColliderSphere->SetCollisionProfile("MonsterTear");
+		m_pColliderBox = AddCollider<CColliderBox>("MonsterTear");
+		m_pColliderBox->SetExtent(m_tSize * 0.5f);
+		m_pColliderBox->SetCollisionProfile("MonsterTear");
 	}
 	break;
 	}
 
-	if (m_pColliderSphere)
-		m_pColliderSphere->SetCollisionBeginFunc<CTear>(this, &CTear::CollisionBegin);
+	if (m_pColliderBox)
+		m_pColliderBox->SetCollisionBeginFunc<CTear>(this, &CTear::CollisionBegin);
 }
 
 void CTear::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)

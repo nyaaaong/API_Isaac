@@ -14,7 +14,7 @@ class CObj :
 protected:
 	class CScene*			m_pScene;
 	class CColliderBox*		m_pColliderBox;
-	class CColliderSphere*	m_pColliderSphere;
+	//class CColliderSphere*	m_pColliderSphere;
 	CAnimation*				m_pAnimation;
 	CSharedPtr<CTexture>	m_pTexture;
 	std::list<CSharedPtr<CCollider>>	m_ColliderList;

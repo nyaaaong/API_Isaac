@@ -343,7 +343,7 @@ CObj::CObj() :
 	m_iZOrder(0),
 	m_bEnableDamage(true),
 	m_pColliderBox(nullptr),
-	m_pColliderSphere(nullptr),
+	//m_pColliderSphere(nullptr),
 	m_bInvisible(false),
 	m_bIsGround(true),
 	m_bPhysics(false),
@@ -361,7 +361,7 @@ CObj::CObj() :
 
 CObj::CObj(const CObj& obj)	:
 	m_pColliderBox(nullptr),
-	m_pColliderSphere(nullptr),
+	//m_pColliderSphere(nullptr),
 	m_pAnimation(nullptr),
 	m_bCheckFieldPosX(false),
 	m_bCheckFieldPosY(false)
@@ -422,13 +422,13 @@ CObj::CObj(const CObj& obj)	:
 		m_pColliderBox->SetCollisionProfile(obj.m_pColliderBox->GetProfile()->strName);
 	}
 
-	if (obj.m_pColliderSphere)
+	/*if (obj.m_pColliderSphere)
 	{
 		m_pColliderSphere = AddCollider<CColliderSphere>(obj.m_pColliderSphere->GetName());
 		m_pColliderSphere->SetRadius(obj.m_pColliderSphere->GetRadius());
 		m_pColliderSphere->SetOffset(obj.m_pColliderSphere->GetOffset());
 		m_pColliderSphere->SetCollisionProfile(obj.m_pColliderSphere->GetProfile()->strName);
-	}
+	}*/
 }
 
 CObj::~CObj()
@@ -465,86 +465,70 @@ void CObj::PushCollider(CCollider* pSrc, CCollider* pDest)
 
 	if (bCheckCross)
 	{
-		if (tSrcType == ECollider_Type::Box)
+		float	fL = m_pColliderBox->GetInfo().fL;
+		float	fT = m_pColliderBox->GetInfo().fT;
+		float	fR = m_pColliderBox->GetInfo().fR;
+		float	fB = m_pColliderBox->GetInfo().fB;
+
+		float	fDestL = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fL;
+		float	fDestT = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fT;
+		float	fDestR = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fR;
+		float	fDestB = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fB;
+
+		if (bCheckLeft)
 		{
-			switch (tDestType)
+			fInterX = abs(fR - fDestL);
+
+			if (bCheckTop)
 			{
-			case ECollider_Type::Box:
-			{
-				float	fL = m_pColliderBox->GetInfo().fL;
-				float	fT = m_pColliderBox->GetInfo().fT;
-				float	fR = m_pColliderBox->GetInfo().fR;
-				float	fB = m_pColliderBox->GetInfo().fB;
-
-				float	fDestL = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fL;
-				float	fDestT = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fT;
-				float	fDestR = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fR;
-				float	fDestB = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fB;
-
-				if (bCheckLeft)
-				{
-					fInterX = abs(fR - fDestL);
-
-					if (bCheckTop)
-					{
-						fInterY = abs(fB - fDestT);
-					}
-
-					else if (bCheckBottom)
-					{
-						fInterY = abs(fDestB - fT);
-					}
-				}
-
-				else if (bCheckRight)
-				{
-					fInterX = abs(fDestR - fL);
-
-					if (bCheckTop)
-					{
-						fInterY = abs(fB - fDestT);
-					}
-
-					else if (bCheckBottom)
-					{
-						fInterY = abs(fDestB - fT);
-					}
-				}
-
-				if (fInterX > fInterY)
-				{
-					tDestVelocity.y *= -1.f;
-
-					if (tDestVelocity.y < 0.f)
-						tDestVelocity.y -= 0.1f;
-
-					else
-						tDestVelocity.y += 0.1f;
-
-					pDestObj->AddPos(0.f, tDestVelocity.y);
-				}
-
-				else
-				{
-					tDestVelocity.x *= -1.f;
-
-					if (tDestVelocity.x < 0.f)
-						tDestVelocity.x -= 0.1f;
-
-					else
-						tDestVelocity.x += 0.1f;
-
-					pDestObj->AddPos(tDestVelocity.x, 0.f);
-				}
+				fInterY = abs(fB - fDestT);
 			}
-			break;
-			case ECollider_Type::Sphere:
-				break;
+
+			else if (bCheckBottom)
+			{
+				fInterY = abs(fDestB - fT);
 			}
 		}
 
-		else if (tSrcType == ECollider_Type::Sphere)
+		else if (bCheckRight)
 		{
+			fInterX = abs(fDestR - fL);
+
+			if (bCheckTop)
+			{
+				fInterY = abs(fB - fDestT);
+			}
+
+			else if (bCheckBottom)
+			{
+				fInterY = abs(fDestB - fT);
+			}
+		}
+
+		if (fInterX > fInterY)
+		{
+			tDestVelocity.y *= -1.f;
+
+			if (tDestVelocity.y < 0.f)
+				tDestVelocity.y -= 0.1f;
+
+			else
+				tDestVelocity.y += 0.1f;
+
+			pDestObj->AddPos(0.f, tDestVelocity.y);
+		}
+
+		else
+		{
+			tDestVelocity.x *= -1.f;
+
+			if (tDestVelocity.x < 0.f)
+				tDestVelocity.x -= 0.1f;
+
+			else
+				tDestVelocity.x += 0.1f;
+
+			pDestObj->AddPos(tDestVelocity.x, 0.f);
 		}
 	}
 
@@ -600,56 +584,41 @@ void CObj::PushCollider(CCollider* pSrc, CCollider* pDest)
 		pDestObj->AddPos(tDestVelocity);
 	}
 
-	if (tSrcType == ECollider_Type::Box)
+
+	float	fL = m_pColliderBox->GetInfo().fL;
+	float	fT = m_pColliderBox->GetInfo().fT;
+	float	fR = m_pColliderBox->GetInfo().fR;
+	float	fB = m_pColliderBox->GetInfo().fB;
+
+	float	fDestL = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fL;
+	float	fDestT = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fT;
+	float	fDestR = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fR;
+	float	fDestB = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fB;
+
+	// 속도가 0이거나 자신이 벽 안으로 들어간 경우
+	if (tDestVelocity == Vector2() || fL <= fDestL && fR >= fDestR && fT <= fDestT && fB >= fDestB)
 	{
-		switch (tDestType)
-		{
-		case ECollider_Type::Box:
-		{
-			float	fL = m_pColliderBox->GetInfo().fL;
-			float	fT = m_pColliderBox->GetInfo().fT;
-			float	fR = m_pColliderBox->GetInfo().fR;
-			float	fB = m_pColliderBox->GetInfo().fB;
+		float fInterL = abs(fDestL - fL);
+		float fInterR = abs(fR - fDestR);
+		float fInterT = abs(fDestT - fT);
+		float fInterB = abs(fB - fDestB);
+		float fResult = 0.f;
 
-			float	fDestL = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fL;
-			float	fDestT = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fT;
-			float	fDestR = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fR;
-			float	fDestB = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fB;
+		fResult = fInterL <= fInterR ? fInterL : fInterR;
+		fResult = fResult <= fInterT ? fResult : fInterT;
+		fResult = fResult <= fInterB ? fResult : fInterB;
 
-			// 속도가 0이거나 자신이 벽 안으로 들어간 경우
-			if (tDestVelocity == Vector2() || fL <= fDestL && fR >= fDestR && fT <= fDestT && fB >= fDestB)
-			{
-				float fInterL = abs(fDestL - fL);
-				float fInterR = abs(fR - fDestR);
-				float fInterT = abs(fDestT - fT);
-				float fInterB = abs(fB - fDestB);
-				float fResult = 0.f;
+		if (fResult == fInterL)
+			pDestObj->AddPos(-fResult, 0.f);
 
-				fResult = fInterL <= fInterR ? fInterL : fInterR;
-				fResult = fResult <= fInterT ? fResult : fInterT;
-				fResult = fResult <= fInterB ? fResult : fInterB;
+		else if (fResult == fInterR)
+			pDestObj->AddPos(fResult, 0.f);
 
-				if (fResult == fInterL)
-					pDestObj->AddPos(-fResult, 0.f);
+		else if (fResult == fInterT)
+			pDestObj->AddPos(0.f, -fResult);
 
-				else if (fResult == fInterR)
-					pDestObj->AddPos(fResult, 0.f);
-
-				else if (fResult == fInterT)
-					pDestObj->AddPos(0.f, -fResult);
-
-				else if (fResult == fInterB)
-					pDestObj->AddPos(0.f, fResult);
-			}
-		}
-		break;
-		case ECollider_Type::Sphere:
-			break;
-		}
-	}
-
-	else if (tSrcType == ECollider_Type::Box)
-	{
+		else if (fResult == fInterB)
+			pDestObj->AddPos(0.f, fResult);
 	}
 }
 

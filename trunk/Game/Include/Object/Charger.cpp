@@ -231,12 +231,11 @@ void CCharger::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 
 void CCharger::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
 {
+	CMonsterBase::CollisionColliding(pSrc, pDest, fTime);
+
 	std::string	strDestName = pDest->GetName();
 
-	if (strDestName == "PlayerBody")
-		pDest->GetOwner()->SetDamage(1.f);
-
-	else if (strDestName == "MapObject")
+	if (strDestName == "MapObject")
 	{
 		if (dynamic_cast<CBlock*>(pDest->GetOwner())->GetType() == MT_SPIKE)
 		{
