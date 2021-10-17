@@ -107,3 +107,9 @@ enum class ESpecial_RoomType
 	Item,
 	Boss
 };
+
+enum class EEnemy_Type
+{
+	Normal,
+	Fly
+};

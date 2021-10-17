@@ -17,6 +17,15 @@ public:
 	virtual void Start();
 	virtual CEnemyDie* Clone();
 
+private:
+	EEnemy_Type	m_eType;
+
+public:
+	void SetEnemyType(EEnemy_Type eType)
+	{
+		m_eType = eType;
+	}
+
 public:
 	void AnimationFinish();
 };

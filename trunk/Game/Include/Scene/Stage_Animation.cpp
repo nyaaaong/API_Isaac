@@ -182,14 +182,31 @@ void CStage::EnemyAnimation()
 	GetSceneResource()->AddAnimationFrameData("ChargerAttackDown", Vector2(128.f * 3, 128.f * 4), Vector2(128.f, 128.f));
 
 	// -------------- Die --------------
-	GetSceneResource()->CreateAnimationSequence("Die1", "Die1", TEXT("Monster/Enemy/Die_1.bmp"));
-	GetSceneResource()->SetTextureColorKey("Die1");
+	GetSceneResource()->CreateAnimationSequence("DieNormal", "DieNormal", TEXT("Monster/Enemy/Die_Normal.bmp"));
+	GetSceneResource()->SetTextureColorKey("DieNormal");
 
 	for (int i = 0; i < 3; ++i)
 	{
 		for (int j = 0; j < 4; ++j)
 		{
-			GetSceneResource()->AddAnimationFrameData("Die1", Vector2(192.f * j, 192.f * i), Vector2(192.f, 192.f));
+			if (i == 2 && j == 3)
+				break;
+
+			GetSceneResource()->AddAnimationFrameData("DieNormal", Vector2(192.f * j, 192.f * i), Vector2(192.f, 192.f));
+		}
+	}
+
+	GetSceneResource()->CreateAnimationSequence("DieFly", "DieFly", TEXT("Monster/Enemy/Die_Fly.bmp"));
+	GetSceneResource()->SetTextureColorKey("DieFly");
+
+	for (int i = 0; i < 3; ++i)
+	{
+		for (int j = 0; j < 4; ++j)
+		{
+			if (i == 2 && j == 3)
+				break;
+
+			GetSceneResource()->AddAnimationFrameData("DieFly", Vector2(192.f * j, 192.f * i), Vector2(192.f, 192.f));
 		}
 	}
 

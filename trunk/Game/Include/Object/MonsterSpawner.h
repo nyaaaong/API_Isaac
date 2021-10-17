@@ -42,7 +42,8 @@ public:
 	void SetScene(class CScene* pCurScene);
 	void CreateMonsterPrototype();
 	void CreateMonster();
-	void EnemyDie1(const Vector2& tPos);
+	void EnemyDieNormal(const Vector2& tPos);
+	void EnemyDieFly(const Vector2& tPos);
 	void AddSpawnLocation();
 	
 private:

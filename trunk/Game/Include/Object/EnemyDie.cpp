@@ -2,13 +2,15 @@
 #include "EnemyDie.h"
 #include "../Collision/ColliderBox.h"
 
-CEnemyDie::CEnemyDie()
+CEnemyDie::CEnemyDie()	:
+	m_eType(EEnemy_Type::Normal)
 {
 }
 
 CEnemyDie::CEnemyDie(const CEnemyDie& obj)	:
 	CObj(obj)
 {
+	m_eType = obj.m_eType;
 }
 
 CEnemyDie::~CEnemyDie()
@@ -26,7 +28,8 @@ bool CEnemyDie::Init()
 	//SetOffset(0.f, -50.f);
 
 	CreateAnimation();
-	AddAnimation("Die1", false, 0.3f);
+	AddAnimation("DieNormal", false, 0.3f);
+	AddAnimation("DieFly", false, 0.3f);
 
 	return true;
 }
@@ -35,7 +38,18 @@ void CEnemyDie::Start()
 {
 	CObj::Start();
 
-	SetAnimationEndNotify<CEnemyDie>("Die1", this, &CEnemyDie::AnimationFinish);
+	switch (m_eType)
+	{
+	case EEnemy_Type::Normal:
+		ChangeAnimation("DieNormal");
+		break;
+	case EEnemy_Type::Fly:
+		ChangeAnimation("DieFly");
+		break;
+	}
+
+	SetAnimationEndNotify<CEnemyDie>("DieNormal", this, &CEnemyDie::AnimationFinish);
+	SetAnimationEndNotify<CEnemyDie>("DieFly", this, &CEnemyDie::AnimationFinish);
 }
 
 CEnemyDie* CEnemyDie::Clone()

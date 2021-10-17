@@ -9,14 +9,14 @@
 
 CPooter::CPooter()	:
 	m_fPatternTimer(0.f),
-	m_fTearSpeedTimer(1.f)
+	m_fTearSpeedTimer(1.5f)
 {
 	m_fMaxDist = 600.f;
 
 	m_tInfo.fAttack = 1.f;
 	m_tInfo.fHP = 7.f;
 	m_tInfo.fHPMax = 7.f;
-	m_tInfo.fTearSpeed = 2.f;
+	m_tInfo.fTearSpeed = 1.5f;
 	m_tInfo.fShotSpeed = 200.f;
 	m_tInfo.fTearDistance = 300.f;
 	m_tInfo.fMoveSpeed = 10.f;
@@ -96,7 +96,7 @@ void CPooter::PostUpdate(float fTime)
 	{
 		Destroy();
 
-		CMonsterSpawner::GetInst()->EnemyDie1(m_tPos);
+		CMonsterSpawner::GetInst()->EnemyDieFly(m_tPos);
 	}
 }
 

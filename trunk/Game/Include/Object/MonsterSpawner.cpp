@@ -47,7 +47,8 @@ void CMonsterSpawner::CreateMonsterPrototype()
 			return;
 	}
 
-	m_pScene->CreatePrototype<CEnemyDie>("EnemyDie1");
+	m_pScene->CreatePrototype<CEnemyDie>("EnemyDieNormal");
+	m_pScene->CreatePrototype<CEnemyDie>("EnemyDieFly");
 
 	CCharger* pCharger = m_pScene->CreatePrototype<CCharger>("Charger");
 
@@ -98,7 +99,7 @@ void CMonsterSpawner::CreateMonster()
 	}
 }
 
-void CMonsterSpawner::EnemyDie1(const Vector2& tPos)
+void CMonsterSpawner::EnemyDieNormal(const Vector2& tPos)
 {
 	int iNum = m_pScene->GetCurMapNumber();
 	ESpecial_RoomType	eType = m_pScene->GetCurMapType();
@@ -107,21 +108,40 @@ void CMonsterSpawner::EnemyDie1(const Vector2& tPos)
 	{
 		if (CMapManager::GetInst()->GetClearMap(m_pScene->GetCurMapNumber()))
 			return;
-
-		m_pScene->CreateObject<CEnemyDie>("EnemyDie1", "EnemyDie1", tPos, Vector2(192.f, 192.f));
-		m_pScene->GetSceneResource()->SoundPlay("EnemyDie");
-		dynamic_cast<CRoomBase*>(m_pScene)->SubMonsterCount(1);
 	}
 
 	else if (eType != ESpecial_RoomType::None)
 	{
 		if (CMapManager::GetInst()->GetClearSpecialMap(m_pScene->GetCurMapType()))
 			return;
-
-		m_pScene->CreateObject<CEnemyDie>("EnemyDie1", "EnemyDie1", tPos, Vector2(192.f, 192.f));
-		m_pScene->GetSceneResource()->SoundPlay("EnemyDie");
-		dynamic_cast<CRoomBase*>(m_pScene)->SubMonsterCount(1);
 	}
+
+	m_pScene->CreateObject<CEnemyDie>("EnemyDieNormal", "EnemyDieNormal", tPos, Vector2(192.f, 192.f));
+	m_pScene->GetSceneResource()->SoundPlay("EnemyDie");
+	dynamic_cast<CRoomBase*>(m_pScene)->SubMonsterCount(1);
+}
+
+void CMonsterSpawner::EnemyDieFly(const Vector2& tPos)
+{
+	int iNum = m_pScene->GetCurMapNumber();
+	ESpecial_RoomType	eType = m_pScene->GetCurMapType();
+
+	if (iNum != -1)
+	{
+		if (CMapManager::GetInst()->GetClearMap(m_pScene->GetCurMapNumber()))
+			return;
+	}
+
+	else if (eType != ESpecial_RoomType::None)
+	{
+		if (CMapManager::GetInst()->GetClearSpecialMap(m_pScene->GetCurMapType()))
+			return;
+	}
+
+	CEnemyDie* pDieEffect = m_pScene->CreateObject<CEnemyDie>("EnemyDieFly", "EnemyDieFly", tPos, Vector2(192.f, 192.f));
+	pDieEffect->SetEnemyType(EEnemy_Type::Fly);
+	m_pScene->GetSceneResource()->SoundPlay("EnemyDie");
+	dynamic_cast<CRoomBase*>(m_pScene)->SubMonsterCount(1);
 }
 
 void CMonsterSpawner::CreateSpawnLocation(const Vector2& tSize, const Vector2& tPivot, const Vector2& tOffset)

@@ -98,7 +98,7 @@ void CCharger::PostUpdate(float fTime)
 	{
 		Destroy();
 
-		CMonsterSpawner::GetInst()->EnemyDie1(m_tPos);
+		CMonsterSpawner::GetInst()->EnemyDieNormal(m_tPos);
 	}
 }
 
