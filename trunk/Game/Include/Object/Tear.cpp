@@ -33,16 +33,14 @@ void CTear::Start()
 	{
 	case ETearType::Player:
 	{
-		CCharacter* pPlayer = dynamic_cast<CCharacter*>(m_pScene->GetPlayer());
-
-		if (!pPlayer)
-			break;
+		if (!m_pOwner)
+			m_pOwner = dynamic_cast<CCharacter*>(m_pScene->GetPlayer());
 
 		AddAnimation("PlayerTear", false);
 
-		m_fMoveSpeed = pPlayer->GetShotSpeed();
-		m_fDistance = pPlayer->GetTearDistance();
-		m_fDamage = pPlayer->GetAttack();
+		m_fMoveSpeed = m_pOwner->GetShotSpeed();
+		m_fDistance = m_pOwner->GetTearDistance();
+		m_fDamage = m_pOwner->GetAttack();
 
 		ChangeAnimation("PlayerTear");
 
@@ -53,16 +51,14 @@ void CTear::Start()
 	break;
 	case ETearType::Monster:
 	{
-		CCharacter* pMonster = dynamic_cast<CCharacter*>(m_pScene->FindObject("Monster"));
-
-		if (!pMonster)
-			break;
+		if (!m_pOwner)
+			return;
 
 		AddAnimation("MonsterTear", false);
 
-		m_fMoveSpeed = pMonster->GetShotSpeed();
-		m_fDistance = pMonster->GetTearDistance();
-		m_fDamage = pMonster->GetAttack();
+		m_fMoveSpeed = m_pOwner->GetShotSpeed();
+		m_fDistance = m_pOwner->GetTearDistance();
+		m_fDamage = m_pOwner->GetAttack();
 
 		ChangeAnimation("MonsterTear");
 
@@ -88,7 +84,18 @@ void CTear::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 		Vector2	tDir = m_tDir;
 		tDir.Normalize();
 
-		pDestObj->SetKnockBack(tDir, dynamic_cast<CPlayer*>(m_pScene->GetPlayer())->GetInfo().fShotSpeed * 0.4f);
+		pDestObj->SetKnockBack(tDir, m_pOwner->GetInfo().fShotSpeed * 0.4f);
+		TearDestroy();
+	}
+
+	else if (pDest->GetName() == "PlayerHead" ||
+			 pDest->GetName() == "PlayerBody")
+	{
+		pDestObj->SetDamage(m_fDamage);
+
+		Vector2	tDir = m_tDir;
+		tDir.Normalize();
+
 		TearDestroy();
 	}
 
@@ -169,7 +176,8 @@ CTear* CTear::Clone()
 CTear::CTear() :
 	m_fDistance(600.f),
 	m_fDamage(0),
-	m_eTearType(ETearType::None)
+	m_eTearType(ETearType::None),
+	m_pOwner(nullptr)
 {
 }
 
@@ -181,6 +189,7 @@ CTear::CTear(const CTear& obj)	:
 	m_eTearType = obj.m_eTearType;
 	m_iZOrder = obj.m_iZOrder;
 	m_fDamage = obj.m_fDamage;
+	m_pOwner = obj.m_pOwner;
 }
 
 CTear::~CTear()

@@ -25,7 +25,6 @@ public:
 	virtual CCharger* Clone();
 
 private:
-	void RandomDir();
 	void AddChargerAnimation();
 	void DetectPlayer(float fTime);
 	void ChagerPattern(float fTime);

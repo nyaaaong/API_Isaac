@@ -204,6 +204,9 @@
     <Filter Include="02. Object\02. Effect\02. Enemy">
       <UniqueIdentifier>{f2e631be-3a46-4467-8e12-7708b024024b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Object\00. Character\01. Monster\01. Enemy\01. Pooter">
+      <UniqueIdentifier>{679b1be1-bde4-41fe-80e6-b06b763a690f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -467,6 +470,9 @@
     <ClCompile Include="Object\EnemyDie.cpp">
       <Filter>02. Object\02. Effect\02. Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Object\Pooter.cpp">
+      <Filter>02. Object\00. Character\01. Monster\01. Enemy\01. Pooter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameInfo.h">
@@ -684,6 +690,9 @@
     </ClInclude>
     <ClInclude Include="Object\EnemyDie.h">
       <Filter>02. Object\02. Effect\02. Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Pooter.h">
+      <Filter>02. Object\00. Character\01. Monster\01. Enemy\01. Pooter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

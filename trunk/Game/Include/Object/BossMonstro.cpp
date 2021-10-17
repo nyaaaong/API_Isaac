@@ -72,7 +72,7 @@ CBossMonstro::CBossMonstro()	:
 	m_tInfo.fAttack = 1.f;
 	m_tInfo.fHP = 100.f;
 	m_tInfo.fHPMax = 100.f;
-	m_tInfo.fTearTimer = 1.f;
+	m_tInfo.fTearSpeed = 1.f;
 	m_tInfo.fShotSpeed = 300.f;
 	m_tInfo.fTearDistance = 500.f;
 	m_tInfo.fMoveSpeed = 500.f;
@@ -84,7 +84,6 @@ CBossMonstro::CBossMonstro(const CBossMonstro& obj)	:
 	m_bMove = obj.m_bMove;
 
 	m_tBulletStartDir = obj.m_tBulletStartDir;
-	m_fTearTimer = obj.m_fTearTimer;
 
 	AddBossNotify();
 	AddBossPattern();

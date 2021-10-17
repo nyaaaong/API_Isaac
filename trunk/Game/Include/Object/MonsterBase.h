@@ -35,6 +35,7 @@ private:
 
 protected:
 	void GetM2PDir();	// Monster To Player : 몬스터 기준 플레이어의 방향을 구해준다
+	void RandomDir();
 
 public:
 	virtual bool Init();

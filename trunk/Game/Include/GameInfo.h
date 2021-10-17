@@ -93,7 +93,7 @@ struct CharacterInfo
 	float	fAttack;
 	float	fHP;
 	float	fHPMax;
-	float	fTearTimer;
+	float	fTearSpeed;
 	float	fShotSpeed;
 	float	fTearDistance;
 	float	fMoveSpeed;

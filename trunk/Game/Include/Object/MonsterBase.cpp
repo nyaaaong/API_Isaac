@@ -40,6 +40,13 @@ void CMonsterBase::GetM2PDir()
 	m_tM2PDir.y = sinf(DegreeToRadian(fAngle));
 }
 
+void CMonsterBase::RandomDir()
+{
+	int	iIdx = rand() % 4;
+
+	m_tDir = m_arrDir[iIdx];
+}
+
 bool CMonsterBase::Init()
 {
 	if (!CCharacter::Init())

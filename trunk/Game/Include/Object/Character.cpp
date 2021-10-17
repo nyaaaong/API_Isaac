@@ -3,15 +3,13 @@
 
 CCharacter::CCharacter()	:
 	m_tInfo{},
-	m_tBulletStartDir(Vector2::DOWN),
-	m_fTearTimer(0.f)
+	m_tBulletStartDir(Vector2::DOWN)
 {
 }
 
 CCharacter::CCharacter(const CCharacter& obj)	:
 	CObj(obj),
-	m_tBulletStartDir(Vector2::DOWN),
-	m_fTearTimer(0.f)
+	m_tBulletStartDir(Vector2::DOWN)
 {
 	m_tInfo = obj.m_tInfo;
 }

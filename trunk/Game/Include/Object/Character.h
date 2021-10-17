@@ -10,7 +10,6 @@ class CCharacter :
 protected:
 	CharacterInfo	m_tInfo;
 	Vector2			m_tBulletStartDir;
-	float			m_fTearTimer;
 
 public:
 	bool IsDead()	const
@@ -39,9 +38,9 @@ public:
 		return m_tInfo.fHPMax;
 	}
 
-	float GetTearTimer()	const
+	float GetTearSpeed()	const
 	{
-		return m_tInfo.fTearTimer;
+		return m_tInfo.fTearSpeed;
 	}
 
 	float GetShotSpeed()	const

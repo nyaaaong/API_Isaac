@@ -12,8 +12,14 @@ protected:
 	float		m_fDistance;
 	ETearType	m_eTearType;
 	float		m_fDamage;
+	class CCharacter* m_pOwner;
 
 public:
+	void SetOwner(class CCharacter* pOwner)
+	{
+		m_pOwner = pOwner;
+	}
+
 	void SetTearType(ETearType eTearType)
 	{
 		m_eTearType = eTearType;

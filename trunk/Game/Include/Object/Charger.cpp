@@ -19,7 +19,7 @@ CCharger::CCharger()	:
 	m_tInfo.fAttack = 1.f;
 	m_tInfo.fHP = 10.f;
 	m_tInfo.fHPMax = 10.f;
-	m_tInfo.fTearTimer = 1.f;
+	m_tInfo.fTearSpeed = 1.f;
 	m_tInfo.fShotSpeed = 200.f;
 	m_tInfo.fTearDistance = 300.f;
 	m_tInfo.fMoveSpeed = 100.f;
@@ -46,7 +46,7 @@ void CCharger::Start()
 	m_pColliderBox->SetCollisionBeginFunc<CCharger>(this, &CCharger::CollisionBegin);
 	m_pColliderBox->SetCollisionCollidingFunc<CCharger>(this, &CCharger::CollisionColliding);
 
-	RandomDir();	
+	RandomDir();
 }
 
 bool CCharger::Init()
@@ -105,13 +105,6 @@ void CCharger::PostUpdate(float fTime)
 CCharger* CCharger::Clone()
 {
 	return new CCharger(*this);
-}
-
-void CCharger::RandomDir()
-{
-	int	iIdx = rand() % 4;
-
-	m_tDir = m_arrDir[iIdx];
 }
 
 void CCharger::AddChargerAnimation()

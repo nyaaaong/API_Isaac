@@ -1,6 +1,7 @@
 
 #include "MonsterSpawner.h"
 #include "Charger.h"
+#include "Pooter.h"
 #include "EnemyDie.h"
 #include "MonsterBase.h"
 #include "../Scene/Scene.h"
@@ -39,31 +40,28 @@ void CMonsterSpawner::CreateMonsterPrototype()
 	{
 		if (CMapManager::GetInst()->GetClearMap(m_pScene->GetCurMapNumber()))
 			return;
-
-		m_pScene->CreatePrototype<CEnemyDie>("EnemyDie1");
-
-		CCharger* pCharger = m_pScene->CreatePrototype<CCharger>("Charger");
-
-		m_vecSize.push_back(pCharger->GetSize());
-		m_vecPivot.push_back(pCharger->GetPivot());
-		m_vecOffset.push_back(pCharger->GetPivot());
-		m_vecName.push_back(pCharger->GetName());
 	}
-
 	else if (eType != ESpecial_RoomType::None)
 	{
 		if (CMapManager::GetInst()->GetClearSpecialMap(m_pScene->GetCurMapType()))
 			return;
-
-		m_pScene->CreatePrototype<CEnemyDie>("EnemyDie1");
-
-		CCharger* pCharger = m_pScene->CreatePrototype<CCharger>("Charger");
-
-		m_vecSize.push_back(pCharger->GetSize());
-		m_vecPivot.push_back(pCharger->GetPivot());
-		m_vecOffset.push_back(pCharger->GetPivot());
-		m_vecName.push_back(pCharger->GetName());
 	}
+
+	m_pScene->CreatePrototype<CEnemyDie>("EnemyDie1");
+
+	CCharger* pCharger = m_pScene->CreatePrototype<CCharger>("Charger");
+
+	m_vecSize.push_back(pCharger->GetSize());
+	m_vecPivot.push_back(pCharger->GetPivot());
+	m_vecOffset.push_back(pCharger->GetPivot());
+	m_vecName.push_back(pCharger->GetName());
+
+	CPooter* pPooter = m_pScene->CreatePrototype<CPooter>("Pooter");
+
+	m_vecSize.push_back(pPooter->GetSize());
+	m_vecPivot.push_back(pPooter->GetPivot());
+	m_vecOffset.push_back(pPooter->GetPivot());
+	m_vecName.push_back(pPooter->GetName());
 }
 
 void CMonsterSpawner::CreateMonster()
@@ -81,33 +79,22 @@ void CMonsterSpawner::CreateMonster()
 	{
 		if (CMapManager::GetInst()->GetClearMap(m_pScene->GetCurMapNumber()))
 			return;
-
-		size_t iSize = m_vecName.size();
-
-		for (int i = 0; i < iMonsterCount; ++i)
-		{
-			int iIdx = rand() % iSize;
-
-			CreateSpawnLocation(m_vecSize[iIdx], m_vecPivot[iIdx], m_vecOffset[iIdx]); // ·£´ýÀ¸·Î ½ºÆù ÁÂÇ¥ »ý¼º
-			CreateMonster(m_vecName[iIdx]);
-		}
 	}
 
 	else if (eType != ESpecial_RoomType::None)
 	{
 		if (CMapManager::GetInst()->GetClearSpecialMap(m_pScene->GetCurMapType()))
 			return;
+	}
 
-		CRoomBase* pRoom = dynamic_cast<CRoomBase*>(m_pScene);
-		size_t iSize = m_vecName.size();
+	size_t iSize = m_vecName.size();
 
-		for (int i = 0; i < iMonsterCount; ++i)
-		{
-			int iIdx = rand() % iSize;
+	for (int i = 0; i < iMonsterCount; ++i)
+	{
+		int iIdx = rand() % iSize;
 
-			CreateSpawnLocation(m_vecSize[iIdx], m_vecPivot[iIdx], m_vecOffset[iIdx]); // ·£´ýÀ¸·Î ½ºÆù ÁÂÇ¥ »ý¼º
-			CreateMonster(m_vecName[iIdx]);
-		}
+		CreateSpawnLocation(m_vecSize[iIdx], m_vecPivot[iIdx], m_vecOffset[iIdx]); // ·£´ýÀ¸·Î ½ºÆù ÁÂÇ¥ »ý¼º
+		CreateMonster(m_vecName[iIdx]);
 	}
 }
 
@@ -184,6 +171,9 @@ void CMonsterSpawner::CreateMonster(const std::string& strName)
 
 	else if (strName == "Charger")
 		m_pScene->CreateObject<CCharger>(strName, strName, m_tSpawnPos);
+
+	else if (strName == "Pooter")
+		m_pScene->CreateObject<CPooter>(strName, strName, m_tSpawnPos);
 }
 
 void CMonsterSpawner::AddSpawnLocation()

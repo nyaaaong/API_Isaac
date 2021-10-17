@@ -192,6 +192,41 @@ void CStage::EnemyAnimation()
 			GetSceneResource()->AddAnimationFrameData("Die1", Vector2(192.f * j, 192.f * i), Vector2(192.f, 192.f));
 		}
 	}
+
+	// ============== Pooter ==============
+	// -------------- Idle --------------
+	GetSceneResource()->CreateAnimationSequence("PooterIdleRight", "PooterIdleRight", TEXT("Monster/Enemy/Pooter/Pooter_Idle_R.bmp"));
+	GetSceneResource()->SetTextureColorKey("PooterIdleRight");
+
+	for (int i = 0; i < 2; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("PooterIdleRight", Vector2(96.f * i, 0.f), Vector2(96.f, 96.f));
+	}
+
+	GetSceneResource()->CreateAnimationSequence("PooterIdleLeft", "PooterIdleLeft", TEXT("Monster/Enemy/Pooter/Pooter_Idle_L.bmp"));
+	GetSceneResource()->SetTextureColorKey("PooterIdleLeft");
+
+	for (int i = 0; i < 2; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("PooterIdleLeft", Vector2(96.f * i, 0.f), Vector2(96.f, 96.f));
+	}
+
+	// -------------- Fire --------------
+	GetSceneResource()->CreateAnimationSequence("PooterFireRight", "PooterFireRight", TEXT("Monster/Enemy/Pooter/Pooter_Fire_R.bmp"));
+	GetSceneResource()->SetTextureColorKey("PooterFireRight");
+
+	for (int i = 0; i < 2; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("PooterFireRight", Vector2(96.f * i, 0.f), Vector2(96.f, 96.f));
+	}
+
+	GetSceneResource()->CreateAnimationSequence("PooterFireLeft", "PooterFireLeft", TEXT("Monster/Enemy/Pooter/Pooter_Fire_L.bmp"));
+	GetSceneResource()->SetTextureColorKey("PooterFireLeft");
+
+	for (int i = 0; i < 2; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("PooterFireLeft", Vector2(96.f * i, 0.f), Vector2(96.f, 96.f));
+	}
 }
 
 void CStage::BossAnimation()

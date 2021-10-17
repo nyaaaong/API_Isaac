@@ -59,6 +59,7 @@ void CPlayer::SetFireStart()
 	CSharedPtr<CTear>	pTear = m_pScene->CreateObject<CTear>("PlayerTear", "PlayerTear", m_tPos + m_tBulletStartDir * 50.f, Vector2(80.f, 80.f));
 	pTear->SetDir(m_tBulletStartDir);
 	pTear->SetMoveSpeed(m_tInfo.fShotSpeed);
+	pTear->SetOwner(this);
 
 	m_pScene->GetSceneResource()->SoundPlay("Tear");
 }
