@@ -79,6 +79,10 @@ void CTear::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 
 	if (pDest->GetName() == "Monster")
 	{
+		if (m_bHit)
+			return;
+
+		m_bHit = true;
 		pDestObj->SetDamage(m_fDamage);
 
 		Vector2	tDir = m_tDir;
@@ -89,8 +93,12 @@ void CTear::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 	}
 
 	else if (pDest->GetName() == "PlayerHead" ||
-			 pDest->GetName() == "PlayerBody")
+		pDest->GetName() == "PlayerBody")
 	{
+		if (m_bHit)
+			return;
+
+		m_bHit = true;
 		pDestObj->SetDamage(m_fDamage);
 
 		Vector2	tDir = m_tDir;
@@ -103,20 +111,16 @@ void CTear::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 	{
 		CBlock* pBlock = dynamic_cast<CBlock*>(pDestObj);
 
-		switch (pBlock->GetType())
+		if (pBlock->GetType() == MT_POOP)
 		{
-		case MT_ROCK:
-			break;
-		case MT_IRON:
-			break;
-		case MT_SPIKE:
-			return;
-		case MT_POOP:
-			pBlock->SetDamage(1.f);
-			break;
-		}
+			if (m_bHit)
+				return;
 
-		TearDestroy();
+			m_bHit = true;
+			pBlock->SetDamage(1.f);
+
+			TearDestroy();
+		}
 	}
 }
 
@@ -177,7 +181,8 @@ CTear::CTear() :
 	m_fDistance(600.f),
 	m_fDamage(0),
 	m_eTearType(ETearType::None),
-	m_pOwner(nullptr)
+	m_pOwner(nullptr),
+	m_bHit(false)
 {
 }
 
@@ -190,6 +195,7 @@ CTear::CTear(const CTear& obj)	:
 	m_iZOrder = obj.m_iZOrder;
 	m_fDamage = obj.m_fDamage;
 	m_pOwner = obj.m_pOwner;
+	m_bHit = false;
 }
 
 CTear::~CTear()

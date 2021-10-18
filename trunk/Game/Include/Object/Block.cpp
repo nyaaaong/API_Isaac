@@ -86,6 +86,7 @@ void CBlock::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
 {
 	std::string	strName = pDest->GetName();
 	CObj* pDestObj = pDest->GetOwner();
+	std::string strObjName = pDestObj->GetName();
 
 	if (strName == "PlayerHead")
 		return;
@@ -100,10 +101,12 @@ void CBlock::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
 
 	else if (m_eType == MT_ROCK || m_eType == MT_IRON || m_eType == MT_POOP)
 	{
-		if (pDestObj->GetName() == "Charger")
+		if (strObjName == "Charger")
+		{
 			dynamic_cast<CMonsterBase*>(pDestObj)->BlockCollision();
 
-		PushCollider(pSrc, pDest);
+			PushCollider(pSrc, pDest);
+		}
 	}
 }
 

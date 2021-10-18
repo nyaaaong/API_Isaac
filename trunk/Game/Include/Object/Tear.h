@@ -13,6 +13,7 @@ protected:
 	ETearType	m_eTearType;
 	float		m_fDamage;
 	class CCharacter* m_pOwner;
+	bool		m_bHit;
 
 public:
 	void SetOwner(class CCharacter* pOwner)

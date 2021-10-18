@@ -16,14 +16,11 @@ CCharger::CCharger()	:
 	m_fPatternTimer(2.f),
 	m_bSound(false)
 {
-	m_fMaxDist = 200.f;
+	m_fMaxDist = 300.f;
 
 	m_tInfo.fAttack = 1.f;
 	m_tInfo.fHP = 10.f;
 	m_tInfo.fHPMax = 10.f;
-	m_tInfo.fTearSpeed = 1.f;
-	m_tInfo.fShotSpeed = 200.f;
-	m_tInfo.fTearDistance = 300.f;
 	m_tInfo.fMoveSpeed = 100.f;
 }
 
@@ -132,7 +129,7 @@ void CCharger::DetectPlayer(float fTime)
 
 		GetM2PDir();
 
-		Move(m_tM2PDir, m_tInfo.fMoveSpeed + 30.f - m_fKnockBack, true);
+		Move(m_tM2PDir, m_tInfo.fMoveSpeed + 100.f, true);
 
 		float	fX = abs(m_tM2PDir.x);
 		float	fY = abs(m_tM2PDir.y);

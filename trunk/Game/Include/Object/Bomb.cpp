@@ -152,6 +152,7 @@ void CBomb::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
 {
 	std::string	strName = pDest->GetName();
 	CObj* pDestObj = pDest->GetOwner();
+	std::string strObjName = pDestObj->GetName();
 	ECollider_Type	eDestType = pDest->GetColliderType();
 
 	if (strName == "PlayerHead")
@@ -166,7 +167,7 @@ void CBomb::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
 		m_fInitialSpeed = 0.f;
 	}
 
-	else if (strName == "Monster")
+	else if (strObjName == "Charger")
 	{
 		PushCollider(pSrc, pDest);
 	}

@@ -21,7 +21,7 @@ bool CRoom3::Init()
 	CMonsterSpawner::GetInst()->AddSpawnLocation();
 
 	SetDoor(DD_TOP, DT_NORMAL);
-	SetDoor(DD_LEFT, DT_NORMAL);
+	SetDoor(DD_LEFT, DT_BOSS);
 
 	return true;
 }

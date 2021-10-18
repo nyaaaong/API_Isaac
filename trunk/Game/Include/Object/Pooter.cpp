@@ -11,7 +11,7 @@ CPooter::CPooter()	:
 	m_fPatternTimer(2.f),
 	m_fTearSpeedTimer(1.5f)
 {
-	m_fMaxDist = 600.f;
+	m_fMaxDist = 400.f;
 
 	m_tInfo.fAttack = 1.f;
 	m_tInfo.fHP = 7.f;
