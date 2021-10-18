@@ -38,8 +38,8 @@ bool CRoomObj::IsObj(CScene* pCurScene, const Vector2& tPos, const Vector2& tSiz
 
 	else if (m_eType == MT_SPAWN)
 	{
-		if ((m_tPos.x < tPos.x + tSize.x && m_tPos.x + m_tSize.x > tPos.x &&
-			m_tPos.y < tPos.y + tSize.y && m_tPos.y + m_tSize.y > tPos.y))
+		if ((m_tPos.x < tPos.x && m_tPos.x + m_tSize.x > tPos.x &&
+			m_tPos.y < tPos.y && m_tPos.y + m_tSize.y > tPos.y))
 			return true;
 	}
 

@@ -421,14 +421,6 @@ CObj::CObj(const CObj& obj)	:
 		m_pColliderBox->SetOffset(obj.m_pColliderBox->GetOffset());
 		m_pColliderBox->SetCollisionProfile(obj.m_pColliderBox->GetProfile()->strName);
 	}
-
-	/*if (obj.m_pColliderSphere)
-	{
-		m_pColliderSphere = AddCollider<CColliderSphere>(obj.m_pColliderSphere->GetName());
-		m_pColliderSphere->SetRadius(obj.m_pColliderSphere->GetRadius());
-		m_pColliderSphere->SetOffset(obj.m_pColliderSphere->GetOffset());
-		m_pColliderSphere->SetCollisionProfile(obj.m_pColliderSphere->GetProfile()->strName);
-	}*/
 }
 
 CObj::~CObj()
@@ -448,6 +440,9 @@ CObj::~CObj()
 
 void CObj::PushCollider(CCollider* pSrc, CCollider* pDest)
 {
+	if (pDest->GetName() == "BombExplosion")
+		return;
+
 	ECollider_Type	tSrcType = pSrc->GetColliderType();
 	ECollider_Type	tDestType = pDest->GetColliderType();
 
@@ -463,18 +458,44 @@ void CObj::PushCollider(CCollider* pSrc, CCollider* pDest)
 	float	fInterX = 0.f;
 	float	fInterY = 0.f;
 
+	float	fL = m_pColliderBox->GetInfo().fL;
+	float	fT = m_pColliderBox->GetInfo().fT;
+	float	fR = m_pColliderBox->GetInfo().fR;
+	float	fB = m_pColliderBox->GetInfo().fB;
+
+	float	fDestL = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fL;
+	float	fDestT = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fT;
+	float	fDestR = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fR;
+	float	fDestB = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fB;
+
+	// 속도가 0이거나 자신이 벽 안으로 들어간 경우
+	if (tDestVelocity == Vector2() || fL <= fDestL && fR >= fDestR && fT <= fDestT && fB >= fDestB)
+	{
+		float fInterL = abs(fDestL - fL);
+		float fInterR = abs(fR - fDestR);
+		float fInterT = abs(fDestT - fT);
+		float fInterB = abs(fB - fDestB);
+		float fResult = 0.f;
+
+		fResult = fInterL <= fInterR ? fInterL : fInterR;
+		fResult = fResult <= fInterT ? fResult : fInterT;
+		fResult = fResult <= fInterB ? fResult : fInterB;
+
+		if (fResult == fInterL)
+			pDestObj->AddPos(-fResult, 0.f);
+
+		else if (fResult == fInterR)
+			pDestObj->AddPos(fResult, 0.f);
+
+		else if (fResult == fInterT)
+			pDestObj->AddPos(0.f, -fResult);
+
+		else if (fResult == fInterB)
+			pDestObj->AddPos(0.f, fResult);
+	}
+
 	if (bCheckCross)
 	{
-		float	fL = m_pColliderBox->GetInfo().fL;
-		float	fT = m_pColliderBox->GetInfo().fT;
-		float	fR = m_pColliderBox->GetInfo().fR;
-		float	fB = m_pColliderBox->GetInfo().fB;
-
-		float	fDestL = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fL;
-		float	fDestT = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fT;
-		float	fDestR = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fR;
-		float	fDestB = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fB;
-
 		if (bCheckLeft)
 		{
 			fInterX = abs(fR - fDestL);
@@ -582,43 +603,6 @@ void CObj::PushCollider(CCollider* pSrc, CCollider* pDest)
 			tDestVelocity.y += 0.1f;
 
 		pDestObj->AddPos(tDestVelocity);
-	}
-
-
-	float	fL = m_pColliderBox->GetInfo().fL;
-	float	fT = m_pColliderBox->GetInfo().fT;
-	float	fR = m_pColliderBox->GetInfo().fR;
-	float	fB = m_pColliderBox->GetInfo().fB;
-
-	float	fDestL = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fL;
-	float	fDestT = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fT;
-	float	fDestR = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fR;
-	float	fDestB = dynamic_cast<CColliderBox*>(pDest)->GetInfo().fB;
-
-	// 속도가 0이거나 자신이 벽 안으로 들어간 경우
-	if (tDestVelocity == Vector2() || fL <= fDestL && fR >= fDestR && fT <= fDestT && fB >= fDestB)
-	{
-		float fInterL = abs(fDestL - fL);
-		float fInterR = abs(fR - fDestR);
-		float fInterT = abs(fDestT - fT);
-		float fInterB = abs(fB - fDestB);
-		float fResult = 0.f;
-
-		fResult = fInterL <= fInterR ? fInterL : fInterR;
-		fResult = fResult <= fInterT ? fResult : fInterT;
-		fResult = fResult <= fInterB ? fResult : fInterB;
-
-		if (fResult == fInterL)
-			pDestObj->AddPos(-fResult, 0.f);
-
-		else if (fResult == fInterR)
-			pDestObj->AddPos(fResult, 0.f);
-
-		else if (fResult == fInterT)
-			pDestObj->AddPos(0.f, -fResult);
-
-		else if (fResult == fInterB)
-			pDestObj->AddPos(0.f, fResult);
 	}
 }
 

@@ -84,36 +84,26 @@ void CBlock::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 
 void CBlock::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
 {
-
 	std::string	strName = pDest->GetName();
 	CObj* pDestObj = pDest->GetOwner();
 
 	if (strName == "PlayerHead")
 		return;
 
-	switch (pDest->GetColliderType())
+	float	tMove = 0.f;
+
+	if (m_eType == MT_SPIKE)
 	{
-	case ECollider_Type::Box:
-	{
-		float	tMove = 0.f;
-
-		if (m_eType == MT_SPIKE)
-		{
-			if (strName == "PlayerBody")
-				pDestObj->SetDamage(1.f);
-		}
-
-		else if (m_eType == MT_ROCK || m_eType == MT_IRON || m_eType == MT_POOP)
-		{
-			if (strName == "Monster")
-				dynamic_cast<CMonsterBase*>(pDestObj)->BlockCollision();
-
-			PushCollider(pSrc, pDest);			
-		}
+		if (strName == "PlayerBody")
+			pDestObj->SetDamage(1.f);
 	}
-		break;
-	case ECollider_Type::Sphere:
-		break;
+
+	else if (m_eType == MT_ROCK || m_eType == MT_IRON || m_eType == MT_POOP)
+	{
+		if (pDestObj->GetName() == "Charger")
+			dynamic_cast<CMonsterBase*>(pDestObj)->BlockCollision();
+
+		PushCollider(pSrc, pDest);
 	}
 }
 

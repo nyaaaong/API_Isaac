@@ -18,9 +18,9 @@ public:
 	}
 
 public:
-	void SubMonsterCount(int iCount)
+	void SubMonsterCount()
 	{
-		m_iMonsterCount -= iCount;
+		--m_iMonsterCount;
 
 		if (m_iMonsterCount < 0)
 			m_iMonsterCount = 0;

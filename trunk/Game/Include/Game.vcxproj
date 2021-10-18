@@ -184,6 +184,7 @@
     <ClCompile Include="Object\Charger.cpp" />
     <ClCompile Include="Object\Door.cpp" />
     <ClCompile Include="Object\EnemyDie.cpp" />
+    <ClCompile Include="Object\Fly.cpp" />
     <ClCompile Include="Object\Item.cpp" />
     <ClCompile Include="Object\ItemRock.cpp" />
     <ClCompile Include="Object\Menu.cpp" />
@@ -209,6 +210,7 @@
     <ClCompile Include="Object\Player_Func.cpp" />
     <ClCompile Include="Object\Player_Move.cpp" />
     <ClCompile Include="Object\Pooter.cpp" />
+    <ClCompile Include="Object\RedFly.cpp" />
     <ClCompile Include="Object\Tear.cpp" />
     <ClCompile Include="PathManager.cpp" />
     <ClCompile Include="Ref.cpp" />
@@ -284,6 +286,7 @@
     <ClInclude Include="Object\Charger.h" />
     <ClInclude Include="Object\Door.h" />
     <ClInclude Include="Object\EnemyDie.h" />
+    <ClInclude Include="Object\Fly.h" />
     <ClInclude Include="Object\Item.h" />
     <ClInclude Include="Object\ItemRock.h" />
     <ClInclude Include="Object\Menu.h" />
@@ -301,6 +304,7 @@
     </ClInclude>
     <ClInclude Include="Object\PlayerTearEffect.h" />
     <ClInclude Include="Object\Pooter.h" />
+    <ClInclude Include="Object\RedFly.h" />
     <ClInclude Include="Object\Tear.h" />
     <ClInclude Include="PathManager.h" />
     <ClInclude Include="Ref.h" />

@@ -8,7 +8,7 @@
 #include "../Collision/ColliderBox.h"
 
 CPooter::CPooter()	:
-	m_fPatternTimer(0.f),
+	m_fPatternTimer(2.f),
 	m_fTearSpeedTimer(1.5f)
 {
 	m_fMaxDist = 600.f;
@@ -19,12 +19,12 @@ CPooter::CPooter()	:
 	m_tInfo.fTearSpeed = 1.5f;
 	m_tInfo.fShotSpeed = 200.f;
 	m_tInfo.fTearDistance = 300.f;
-	m_tInfo.fMoveSpeed = 10.f;
+	m_tInfo.fMoveSpeed = 30.f;
 }
 
 CPooter::CPooter(const CPooter& obj)	:
 	CMonsterBase(obj),
-	m_fPatternTimer(0.f),
+	m_fPatternTimer(2.f),
 	m_fTearSpeedTimer(1.f)
 {
 }
@@ -140,7 +140,7 @@ void CPooter::PooterPattern(float fTime)
 {
 	m_fPatternTimer += fTime;
 
-	if (m_fPatternTimer >= 3.f)
+	if (m_fPatternTimer >= 2.f)
 	{
 		m_fPatternTimer = 0.f;
 		RandomDir();
@@ -226,8 +226,4 @@ void CPooter::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 void CPooter::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
 {
 	CMonsterBase::CollisionColliding(pSrc, pDest, fTime);
-}
-
-void CPooter::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
-{
 }

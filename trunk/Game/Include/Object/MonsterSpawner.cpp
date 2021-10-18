@@ -2,6 +2,8 @@
 #include "MonsterSpawner.h"
 #include "Charger.h"
 #include "Pooter.h"
+#include "Fly.h"
+#include "RedFly.h"
 #include "EnemyDie.h"
 #include "MonsterBase.h"
 #include "../Scene/Scene.h"
@@ -63,6 +65,20 @@ void CMonsterSpawner::CreateMonsterPrototype()
 	m_vecPivot.push_back(pPooter->GetPivot());
 	m_vecOffset.push_back(pPooter->GetPivot());
 	m_vecName.push_back(pPooter->GetName());
+
+	CFly* pFly = m_pScene->CreatePrototype<CFly>("Fly");
+
+	m_vecSize.push_back(pFly->GetSize());
+	m_vecPivot.push_back(pFly->GetPivot());
+	m_vecOffset.push_back(pFly->GetPivot());
+	m_vecName.push_back(pFly->GetName());
+
+	CRedFly* pRedFly = m_pScene->CreatePrototype<CRedFly>("RedFly");
+
+	m_vecSize.push_back(pRedFly->GetSize());
+	m_vecPivot.push_back(pRedFly->GetPivot());
+	m_vecOffset.push_back(pRedFly->GetPivot());
+	m_vecName.push_back(pRedFly->GetName());
 }
 
 void CMonsterSpawner::CreateMonster()
@@ -118,7 +134,7 @@ void CMonsterSpawner::EnemyDieNormal(const Vector2& tPos)
 
 	m_pScene->CreateObject<CEnemyDie>("EnemyDieNormal", "EnemyDieNormal", tPos, Vector2(192.f, 192.f));
 	m_pScene->GetSceneResource()->SoundPlay("EnemyDie");
-	dynamic_cast<CRoomBase*>(m_pScene)->SubMonsterCount(1);
+	dynamic_cast<CRoomBase*>(m_pScene)->SubMonsterCount();
 }
 
 void CMonsterSpawner::EnemyDieFly(const Vector2& tPos)
@@ -141,7 +157,7 @@ void CMonsterSpawner::EnemyDieFly(const Vector2& tPos)
 	CEnemyDie* pDieEffect = m_pScene->CreateObject<CEnemyDie>("EnemyDieFly", "EnemyDieFly", tPos, Vector2(192.f, 192.f));
 	pDieEffect->SetEnemyType(EEnemy_Type::Fly);
 	m_pScene->GetSceneResource()->SoundPlay("EnemyDie");
-	dynamic_cast<CRoomBase*>(m_pScene)->SubMonsterCount(1);
+	dynamic_cast<CRoomBase*>(m_pScene)->SubMonsterCount();
 }
 
 void CMonsterSpawner::CreateSpawnLocation(const Vector2& tSize, const Vector2& tPivot, const Vector2& tOffset)
@@ -174,8 +190,8 @@ void CMonsterSpawner::CreateSpawnLocation(const Vector2& tSize, const Vector2& t
 			int	iEndPosX = static_cast<int>(m_vecSpawnEndPos[iIdx].x);
 			int	iEndPosY = static_cast<int>(m_vecSpawnEndPos[iIdx].y);
 
-			int iRandX = rand() % iEndPosX - iStartPosX + iStartPosX;
-			int iRandY = rand() % iEndPosY - iStartPosY + iStartPosY;
+			int iRandX = rand() % (iEndPosX - iStartPosX + 1) + iStartPosX;
+			int iRandY = rand() % (iEndPosY - iStartPosY + 1) + iStartPosY;
 
 			m_tSpawnPos.x = static_cast<float>(iRandX);
 			m_tSpawnPos.y = static_cast<float>(iRandY);
@@ -194,6 +210,12 @@ void CMonsterSpawner::CreateMonster(const std::string& strName)
 
 	else if (strName == "Pooter")
 		m_pScene->CreateObject<CPooter>(strName, strName, m_tSpawnPos);
+
+	else if (strName == "Fly")
+		m_pScene->CreateObject<CFly>(strName, strName, m_tSpawnPos);
+
+	else if (strName == "RedFly")
+		m_pScene->CreateObject<CFly>(strName, strName, m_tSpawnPos);
 }
 
 void CMonsterSpawner::AddSpawnLocation()

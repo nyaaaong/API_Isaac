@@ -16,6 +16,7 @@ protected:
 private:
 	float	m_fSpikeDelay;
 	float	m_fPatternTimer;
+	bool	m_bSound;
 
 public:
 	virtual void Start();

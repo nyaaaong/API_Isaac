@@ -30,7 +30,6 @@ void CRoom2::Start()
 {
 	CRoomBase::Start();
 
-	m_iMonsterCount = 2;
 	CMonsterSpawner::GetInst()->CreateMonster();
 }
 

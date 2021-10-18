@@ -244,6 +244,26 @@ void CStage::EnemyAnimation()
 	{
 		GetSceneResource()->AddAnimationFrameData("PooterFireLeft", Vector2(96.f * i, 0.f), Vector2(96.f, 96.f));
 	}
+
+	// ============== Fly ==============
+	// -------------- Idle --------------
+	GetSceneResource()->CreateAnimationSequence("FlyIdle", "FlyIdle", TEXT("Monster/Enemy/Fly/Fly_Idle.bmp"));
+	GetSceneResource()->SetTextureColorKey("FlyIdle");
+
+	for (int i = 0; i < 2; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("FlyIdle", Vector2(96.f * i, 0.f), Vector2(96.f, 96.f));
+	}
+
+	// ============== RedFly ==============
+	// -------------- Idle --------------
+	GetSceneResource()->CreateAnimationSequence("RedFlyIdle", "RedFlyIdle", TEXT("Monster/Enemy/RedFly/RedFly_Idle.bmp"));
+	GetSceneResource()->SetTextureColorKey("RedFlyIdle");
+
+	for (int i = 0; i < 2; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("RedFlyIdle", Vector2(96.f * i, 0.f), Vector2(96.f, 96.f));
+	}
 }
 
 void CStage::BossAnimation()

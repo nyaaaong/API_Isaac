@@ -35,6 +35,5 @@ private:
 public:
 	virtual void Move(const Vector2& tDir, float fSpeed, bool bUseField);
 	virtual void CollisionColliding(class CCollider* pSrc, class CCollider* pDest, float fTime);
-	virtual void CollisionBegin(class CCollider* pSrc, class CCollider* pDest, float fTime);
 };
 

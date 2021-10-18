@@ -207,6 +207,12 @@
     <Filter Include="02. Object\00. Character\01. Monster\01. Enemy\01. Pooter">
       <UniqueIdentifier>{679b1be1-bde4-41fe-80e6-b06b763a690f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Object\00. Character\01. Monster\01. Enemy\02. Fly">
+      <UniqueIdentifier>{4afa008c-69c1-4be1-b2b6-454f81e3b836}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\00. Character\01. Monster\01. Enemy\03. RedFly">
+      <UniqueIdentifier>{902f9a93-2ac2-4bd3-bf76-c2232ccad4a4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -473,6 +479,12 @@
     <ClCompile Include="Object\Pooter.cpp">
       <Filter>02. Object\00. Character\01. Monster\01. Enemy\01. Pooter</Filter>
     </ClCompile>
+    <ClCompile Include="Object\Fly.cpp">
+      <Filter>02. Object\00. Character\01. Monster\01. Enemy\02. Fly</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\RedFly.cpp">
+      <Filter>02. Object\00. Character\01. Monster\01. Enemy\03. RedFly</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameInfo.h">
@@ -693,6 +705,12 @@
     </ClInclude>
     <ClInclude Include="Object\Pooter.h">
       <Filter>02. Object\00. Character\01. Monster\01. Enemy\01. Pooter</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Fly.h">
+      <Filter>02. Object\00. Character\01. Monster\01. Enemy\02. Fly</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\RedFly.h">
+      <Filter>02. Object\00. Character\01. Monster\01. Enemy\03. RedFly</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
