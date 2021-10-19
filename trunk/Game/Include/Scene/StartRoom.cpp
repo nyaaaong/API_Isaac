@@ -2,6 +2,7 @@
 #include "StartRoom.h"
 #include "Room1.h"
 #include "Room2.h"
+#include "Room8.h"
 #include "SceneManager.h"
 #include "SceneResource.h"
 #include "../Input.h"
@@ -23,6 +24,7 @@ bool CStartRoom::Init()
 
 	SetDoor(DD_RIGHT, DT_NORMAL);
 	SetDoor(DD_TOP, DT_NORMAL);
+	SetDoor(DD_LEFT, DT_NORMAL);
 
 	CreatePlayer(Vector2::LEFT);
 
@@ -67,6 +69,9 @@ void CStartRoom::DoorFunc(EDoorDir eDoorDir)
 	{
 	case DD_TOP:
 		MoveRoom<CRoom1>(Vector2::UP);
+		break;
+	case DD_LEFT:
+		MoveRoom<CRoom8>(Vector2::LEFT);
 		break;
 	case DD_RIGHT:
 		MoveRoom<CRoom2>(Vector2::RIGHT);

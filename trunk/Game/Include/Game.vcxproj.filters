@@ -494,6 +494,24 @@
     <ClCompile Include="Object\Player_Cheat.cpp">
       <Filter>02. Object\00. Character\00. Player\01. Input</Filter>
     </ClCompile>
+    <ClCompile Include="Scene\Room8.cpp">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Room9.cpp">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Room7.cpp">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Room6.cpp">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Room5.cpp">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Room4.cpp">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameInfo.h">
@@ -723,6 +741,24 @@
     </ClInclude>
     <ClInclude Include="Object\Heart.h">
       <Filter>02. Object\05. Item\00. PickUp</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Room9.h">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Room4.h">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Room5.h">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Room6.h">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Room7.h">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Room8.h">
+      <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

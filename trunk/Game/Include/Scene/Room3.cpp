@@ -33,34 +33,6 @@ void CRoom3::Start()
 	CMonsterSpawner::GetInst()->CreateMonster();
 }
 
-bool CRoom3::Update(float fTime)
-{
-	CRoomBase::Update(fTime);
-
-	return true;
-}
-
-bool CRoom3::PostUpdate(float fTime)
-{
-	CRoomBase::PostUpdate(fTime);
-
-	return true;
-}
-
-bool CRoom3::Collision(float fTime)
-{
-	CRoomBase::Collision(fTime);
-
-	return true;
-}
-
-bool CRoom3::Render(HDC hDC)
-{
-	CRoomBase::Render(hDC);
-
-	return true;
-}
-
 void CRoom3::DoorFunc(EDoorDir eDoorDir)
 {
 	switch (eDoorDir)

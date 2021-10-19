@@ -20,7 +20,7 @@ bool CRoomBase::Init()
 
 void CRoomBase::CreateMonster()
 {
-	m_iMonsterCount = rand() % (10 - 5 + 1) + 5;
+	m_iMonsterCount = rand() % (7 - 2 + 1) + 7;
 }
 
 void CRoomBase::Start()

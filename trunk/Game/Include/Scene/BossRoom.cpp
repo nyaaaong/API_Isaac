@@ -23,6 +23,7 @@ bool CBossRoom::Init()
 	SetCurMapType(ESpecial_RoomType::Boss);
 
 	SetDoor(EDoorDir::DD_RIGHT, DT_BOSS);
+	SetDoor(EDoorDir::DD_BOTTOM, DT_BOSS);
 
 	CreatePlayer(Vector2::RIGHT);
 	//CMonsterSpawner::GetInst()->SetMonsterSpawnLocation(Vector2::LEFT);
@@ -57,6 +58,9 @@ void CBossRoom::DoorFunc(EDoorDir eDoorDir)
 	{
 	case DD_RIGHT:
 		MoveRoom<CRoom3>(Vector2::RIGHT);
+		break;
+	case DD_BOTTOM:
+		//MoveRoom<CRoom3>(Vector2::RIGHT);
 		break;
 	}
 }
