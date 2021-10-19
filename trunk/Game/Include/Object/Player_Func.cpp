@@ -1,7 +1,10 @@
 
 #include "Player.h"
 #include "PlayerBody.h"
+#include "ObjManager.h"
 #include "../Scene/Scene.h"
+#include "../Scene/Stage.h"
+#include "../Scene/StartRoom.h"
 #include "../Scene/SceneResource.h"
 
 void CPlayer::NoDamageTime(float fTime)
@@ -43,4 +46,22 @@ void CPlayer::NoDamageTime(float fTime)
 			}
 		}
 	}
+}
+
+void CPlayer::IsaacDeath(float fTime)
+{
+	m_bDie = true;
+
+	m_pPlayerBody->Invisible(true);
+
+	ChangeAnimation("IsaacDeath");
+
+	m_pScene->GetSceneResource()->SoundPlay("PlayerDie");
+}
+
+void CPlayer::IsaacDeathEnd()
+{
+	m_tInfo.fHP = m_tInfo.fHPMax;
+	CObjManager::GetInst()->ResetPlayerHP();
+	dynamic_cast<CStage*>(m_pScene)->MoveRoom<CStartRoom>(Vector2::RIGHT);
 }

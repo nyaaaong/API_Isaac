@@ -139,6 +139,7 @@ void CRedFly::RedFlyPattern(float fTime)
 void CRedFly::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 {
 	Vector2	tCurMove = tDir * fSpeed * CGameManager::GetInst()->GetDeltaTime() * m_fTimeScale;
+
 	m_tVelocity += tCurMove;
 	m_tPrevPos = m_tPos;
 	m_tPos += tCurMove;

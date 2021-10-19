@@ -36,8 +36,16 @@ void CMonsterBase::GetM2PDir()
 	if (pPlayer)
 		fAngle = GetAngle(m_tPos, pPlayer->GetPos());
 
-	m_tM2PDir.x = cosf(DegreeToRadian(fAngle));
-	m_tM2PDir.y = sinf(DegreeToRadian(fAngle));
+	if (isnan<float>(fAngle))
+		return;
+
+	float	fDegree = DegreeToRadian(fAngle);
+
+	if (!fDegree)
+		return;
+
+	m_tM2PDir.x = cosf(fDegree);
+	m_tM2PDir.y = sinf(fDegree);
 }
 
 void CMonsterBase::RandomDir()

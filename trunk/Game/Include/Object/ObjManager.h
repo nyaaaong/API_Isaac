@@ -52,5 +52,6 @@ public:
 public:
 	void PushPlayerInfo(const CharacterInfo& tInfo);
 	void PullPlayerInfo(CharacterInfo& tInfo);
+	void ResetPlayerHP();
 };
 

@@ -58,6 +58,9 @@ void CPlayer::PostUpdate(float fTime)
 		!CInput::GetInst()->GetKeyPush("PlayerMoveLeft") &&
 		!CInput::GetInst()->GetKeyPush("PlayerMoveRight"))
 		DefaultAnimation();
+
+	if (!m_bDie && m_tInfo.fHP <= 0.f)
+		IsaacDeath(fTime);
 }
 
 void CPlayer::Collision(float fTime)
@@ -112,7 +115,8 @@ CPlayer::CPlayer() :
 	m_fNoDmgTimerMax(3.f),
 	m_bHit(false),
 	m_fBlinkTimer(0.f),
-	m_fBlinkSpeed(0.2f)
+	m_fBlinkSpeed(0.2f),
+	m_bDie(false)
 {
 	m_tInfo.fAttack = 3.f;
 	m_tInfo.fHP = PLAYER_HP_MAX;
@@ -129,7 +133,8 @@ CPlayer::CPlayer(const CPlayer& obj) :
 	m_bIsMove(false),
 	m_bMoveDown(false),
 	m_bMoveUp(false),
-	m_pPlayerBody(obj.m_pPlayerBody)
+	m_pPlayerBody(obj.m_pPlayerBody),
+	m_bDie(false)
 {
 	m_fSkill1Time = obj.m_fSkill1Time;
 	m_tInfo = obj.m_tInfo;

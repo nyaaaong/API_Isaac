@@ -87,7 +87,7 @@ void CStage::PlayerAnimation()
 			if (i == 1 && j == 2)	// 8 프레임일 시 반복문 종료
 				break;
 
-			GetSceneResource()->AddAnimationFrameData("BodyMoveUp", Vector2(static_cast<float>(56.f * j), static_cast<float>(45.f * i)), Vector2(56.f, 45.f));
+			GetSceneResource()->AddAnimationFrameData("BodyMoveUp", Vector2(56.f * j, 45.f * i), Vector2(56.f, 45.f));
 		}
 	}
 
@@ -98,7 +98,7 @@ void CStage::PlayerAnimation()
 	{
 		for (int j = 0; j < 5; ++j)
 		{
-			GetSceneResource()->AddAnimationFrameData("BodyMoveLeft", Vector2(static_cast<float>(56.f * j), static_cast<float>(42.f * i)), Vector2(56.f, 42.f));
+			GetSceneResource()->AddAnimationFrameData("BodyMoveLeft", Vector2(56.f * j, 42.f * i), Vector2(56.f, 42.f));
 		}
 	}
 
@@ -112,7 +112,7 @@ void CStage::PlayerAnimation()
 			if (i == 1 && j == 4)	// 9 프레임일 시 반복문 종료
 				break;
 
-			GetSceneResource()->AddAnimationFrameData("BodyMoveDown", Vector2(static_cast<float>(56.f * j), static_cast<float>(45.f * i)), Vector2(56.f, 45.f));
+			GetSceneResource()->AddAnimationFrameData("BodyMoveDown", Vector2(56.f * j, 45.f * i), Vector2(56.f, 45.f));
 		}
 	}
 
@@ -123,8 +123,19 @@ void CStage::PlayerAnimation()
 	{
 		for (int j = 0; j < 5; ++j)
 		{
-			GetSceneResource()->AddAnimationFrameData("BodyMoveRight", Vector2(static_cast<float>(56.f * j), static_cast<float>(42.f * i)), Vector2(56.f, 42.f));
+			GetSceneResource()->AddAnimationFrameData("BodyMoveRight", Vector2(56.f * j, 42.f * i), Vector2(56.f, 42.f));
 		}
+	}
+
+	// ============== Isaac ==============
+	// -------------- Death --------------
+
+	GetSceneResource()->CreateAnimationSequence("IsaacDeath", "IsaacDeath", TEXT("Player/Hit_Death.bmp"));
+	GetSceneResource()->SetTextureColorKey("IsaacDeath");
+
+	for (int i = 0; i < 3; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("IsaacDeath", Vector2(128.f * i, 0.f), Vector2(128.f, 128.f));
 	}
 }
 

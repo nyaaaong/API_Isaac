@@ -38,3 +38,9 @@ void CObjManager::PullPlayerInfo(CharacterInfo& tInfo)
 
 	m_bChangedInfo = false;
 }
+
+void CObjManager::ResetPlayerHP()
+{
+	m_tPlayerInfo.fHP = PLAYER_HP_MAX;
+	m_tPlayerInfo.fHPMax = PLAYER_HP_MAX;
+}

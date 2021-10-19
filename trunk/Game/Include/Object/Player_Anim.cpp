@@ -14,6 +14,8 @@ void CPlayer::AddPlayerAnimation()
 	AddAnimation("HeadFireLeft", false, m_tInfo.fTearSpeed);
 	AddAnimation("HeadFireRight", false, m_tInfo.fTearSpeed);
 
+	AddAnimation("IsaacDeath", false, 2.f);
+
 	AddAnimationNotify("HeadFireUp", 2, this, &CPlayer::SetFireStart);
 	AddAnimationNotify("HeadFireLeft", 2, this, &CPlayer::SetFireStart);
 	AddAnimationNotify("HeadFireDown", 2, this, &CPlayer::SetFireStart);
@@ -23,6 +25,8 @@ void CPlayer::AddPlayerAnimation()
 	SetAnimationEndNotify<CPlayer>("HeadFireLeft", this, &CPlayer::FireEnd);
 	SetAnimationEndNotify<CPlayer>("HeadFireDown", this, &CPlayer::FireEnd);
 	SetAnimationEndNotify<CPlayer>("HeadFireRight", this, &CPlayer::FireEnd);
+
+	SetAnimationEndNotify<CPlayer>("IsaacDeath", this, &CPlayer::IsaacDeathEnd);
 }
 
 void CPlayer::ChangeDirAnimation(const std::string& strAnimType)

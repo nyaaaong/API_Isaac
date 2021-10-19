@@ -23,6 +23,7 @@ private:
 	float	m_fBlinkSpeed;	// 피격 시 깜빡이는 속도
 	class CPlayerBody* m_pPlayerBody;
 	Vector2	m_tMoveDir;
+	bool	m_bDie;	// 중복되서 들어오지 않도록
 
 public:
 	const Vector2& GetMoveDir()	const
@@ -61,6 +62,8 @@ private:
 	void FireRight(float fTime);
 	void FireEnd();
 	void Bomb(float fTime);
+	void IsaacDeath(float fTime);
+	void IsaacDeathEnd();
 
 public:
 	virtual void Move(const Vector2& tDir, bool bUseField);

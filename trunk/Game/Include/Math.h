@@ -290,12 +290,21 @@ public:
 
 	float Length()	const
 	{
+		float	fResult = (x * x + y * y);
+
+		if (!fResult)
+			return 0;
+
 		return sqrtf(x * x + y * y);
 	}
 
 	void Normalize()
 	{
 		float	length = Length();
+
+		if (length == 0.f)
+			return;
+
 		x /= length;
 		y /= length;
 	}

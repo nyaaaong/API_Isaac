@@ -213,6 +213,9 @@
     <Filter Include="02. Object\00. Character\01. Monster\01. Enemy\03. RedFly">
       <UniqueIdentifier>{902f9a93-2ac2-4bd3-bf76-c2232ccad4a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Object\05. Item\00. PickUp">
+      <UniqueIdentifier>{2241ab4e-fc9a-450b-988a-561092fecf4a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -485,6 +488,9 @@
     <ClCompile Include="Object\RedFly.cpp">
       <Filter>02. Object\00. Character\01. Monster\01. Enemy\03. RedFly</Filter>
     </ClCompile>
+    <ClCompile Include="Object\Heart.cpp">
+      <Filter>02. Object\05. Item\00. PickUp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameInfo.h">
@@ -711,6 +717,9 @@
     </ClInclude>
     <ClInclude Include="Object\RedFly.h">
       <Filter>02. Object\00. Character\01. Monster\01. Enemy\03. RedFly</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Heart.h">
+      <Filter>02. Object\05. Item\00. PickUp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

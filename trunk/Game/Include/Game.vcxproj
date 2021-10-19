@@ -185,6 +185,7 @@
     <ClCompile Include="Object\Door.cpp" />
     <ClCompile Include="Object\EnemyDie.cpp" />
     <ClCompile Include="Object\Fly.cpp" />
+    <ClCompile Include="Object\Heart.cpp" />
     <ClCompile Include="Object\Item.cpp" />
     <ClCompile Include="Object\ItemRock.cpp" />
     <ClCompile Include="Object\Menu.cpp" />
@@ -287,6 +288,7 @@
     <ClInclude Include="Object\Door.h" />
     <ClInclude Include="Object\EnemyDie.h" />
     <ClInclude Include="Object\Fly.h" />
+    <ClInclude Include="Object\Heart.h" />
     <ClInclude Include="Object\Item.h" />
     <ClInclude Include="Object\ItemRock.h" />
     <ClInclude Include="Object\Menu.h" />
