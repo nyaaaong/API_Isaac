@@ -112,6 +112,7 @@ public:
 
 public:
 	void LoadMapObject();
+	void SetDebugMode(float fTime);
 
 private:
 	CObj* FindPrototype(const std::string& strName);

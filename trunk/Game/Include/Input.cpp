@@ -6,6 +6,10 @@ bool CInput::Init(HWND hWnd)
 {
 	m_hWnd = hWnd;
 
+	// ----------- Debug ----------- 
+
+	CreateKey("Debug", VK_F1);
+
 	// ----------- MainMenu ----------- 
 
 	CreateKey("MenuGameStart1", VK_RETURN);

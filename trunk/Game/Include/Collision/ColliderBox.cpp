@@ -6,6 +6,7 @@
 #include "ColliderSphere.h"
 #include "../Scene/Scene.h"
 #include "../Scene/Camera.h"
+#include "../Scene/SceneManager.h"
 
 bool CColliderBox::Init()
 {
@@ -37,6 +38,9 @@ void CColliderBox::Render(HDC hDC)
 	CCollider::Render(hDC);
 
 #ifdef _DEBUG
+	if (!CSceneManager::GetInst()->IsDebug())
+		return;
+
 	HBRUSH	hBrush = CGameManager::GetInst()->GetGreenBrush();
 
 	if (!m_CollisionList.empty())

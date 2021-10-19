@@ -1,5 +1,6 @@
 
 #include "Scene.h"
+#include "SceneManager.h"
 #include "../Object/ObjManager.h"
 #include "../GameManager.h"
 #include "../Map/RoomMap.h"
@@ -108,4 +109,9 @@ CObj* CScene::FindObject(const std::string& strName)
 	}
 
 	return nullptr;
+}
+
+void CScene::SetDebugMode(float fTime)
+{
+	CSceneManager::GetInst()->SetDebug();
 }

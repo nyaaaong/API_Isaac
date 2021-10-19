@@ -25,6 +25,8 @@ bool CScene::Init()
 void CScene::Start()
 {
 	m_bStart = true;
+
+	CInput::GetInst()->SetCallback<CScene>("Debug", KS_DOWN, this, &CScene::SetDebugMode);
 }
 
 bool CScene::Update(float fTime)

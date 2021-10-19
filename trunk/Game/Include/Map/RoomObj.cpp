@@ -98,6 +98,7 @@ void CRoomObj::Render(HDC hDC)
 	if (CMapManager::GetInst()->IsEditorScene() && m_eType == MT_SPAWN)
 	{
 		RECT	rc = { static_cast<LONG>(m_tPos.x), static_cast<LONG>(m_tPos.y), static_cast<LONG>(m_tPos.x + m_tSize.x), static_cast<LONG>(m_tPos.y + m_tSize.y) };
+
 		FrameRect(hDC, &rc, CGameManager::GetInst()->GetGreenBrush());
 	}
 }
