@@ -207,6 +207,7 @@
     <ClCompile Include="Object\Player_Anim.cpp" />
     <ClCompile Include="Object\Player_Bomb.cpp" />
     <ClCompile Include="Object\Player_Callback.cpp" />
+    <ClCompile Include="Object\Player_Cheat.cpp" />
     <ClCompile Include="Object\Player_Fire.cpp" />
     <ClCompile Include="Object\Player_Func.cpp" />
     <ClCompile Include="Object\Player_Move.cpp" />

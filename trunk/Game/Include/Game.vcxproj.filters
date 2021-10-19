@@ -491,6 +491,9 @@
     <ClCompile Include="Object\Heart.cpp">
       <Filter>02. Object\05. Item\00. PickUp</Filter>
     </ClCompile>
+    <ClCompile Include="Object\Player_Cheat.cpp">
+      <Filter>02. Object\00. Character\00. Player\01. Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameInfo.h">

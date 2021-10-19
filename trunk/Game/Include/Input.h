@@ -46,6 +46,7 @@ private:
 	bool	m_bMousePush;
 	bool	m_bMouseUp;
 	bool	m_bShowCursor;
+	bool	m_bLockInput;
 
 public:
 	bool IsShowCursor()	const
@@ -79,6 +80,11 @@ public:
 	}
 
 public:
+	void LockInput(bool bLock)
+	{
+		m_bLockInput = bLock;
+	}
+
 	void SetShowCursor(bool bCursor)
 	{
 		if (bCursor)

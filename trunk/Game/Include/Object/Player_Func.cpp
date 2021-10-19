@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "PlayerBody.h"
 #include "ObjManager.h"
+#include "../Input.h"
 #include "../Scene/Scene.h"
 #include "../Scene/Stage.h"
 #include "../Scene/StartRoom.h"
@@ -9,6 +10,9 @@
 
 void CPlayer::NoDamageTime(float fTime)
 {
+	if (m_bDie)
+		return;
+
 	if (m_bHit || !m_bEnableDamage)	// 피격이 됐거나 무적 시간인 경우
 	{
 		if (m_bEnableDamage)	// 피격된 직후
@@ -51,8 +55,15 @@ void CPlayer::NoDamageTime(float fTime)
 void CPlayer::IsaacDeath(float fTime)
 {
 	m_bDie = true;
+	m_bEnableDamage = false;
+	m_bInvisible = false;
+
+	CInput::GetInst()->LockInput(true);
+
+	SetOffset(0.f, 0.f);
 
 	m_pPlayerBody->Invisible(true);
+	m_pPlayerBody->EnableDamage(false);
 
 	ChangeAnimation("IsaacDeath");
 
@@ -61,7 +72,15 @@ void CPlayer::IsaacDeath(float fTime)
 
 void CPlayer::IsaacDeathEnd()
 {
+	CInput::GetInst()->LockInput(false);
+	m_bEnableDamage = true;
+
+	m_pPlayerBody->Invisible(false);
+	m_pPlayerBody->EnableDamage(true);
+
 	m_tInfo.fHP = m_tInfo.fHPMax;
+
 	CObjManager::GetInst()->ResetPlayerHP();
+
 	dynamic_cast<CStage*>(m_pScene)->MoveRoom<CStartRoom>(Vector2::RIGHT);
 }

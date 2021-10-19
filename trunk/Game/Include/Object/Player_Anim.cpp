@@ -14,7 +14,7 @@ void CPlayer::AddPlayerAnimation()
 	AddAnimation("HeadFireLeft", false, m_tInfo.fTearSpeed);
 	AddAnimation("HeadFireRight", false, m_tInfo.fTearSpeed);
 
-	AddAnimation("IsaacDeath", false, 2.f);
+	AddAnimation("IsaacDeath", false, 1.f);
 
 	AddAnimationNotify("HeadFireUp", 2, this, &CPlayer::SetFireStart);
 	AddAnimationNotify("HeadFireLeft", 2, this, &CPlayer::SetFireStart);
@@ -48,7 +48,9 @@ void CPlayer::ChangeDirAnimation(const std::string& strAnimType)
 
 void CPlayer::DefaultAnimation()
 {
-	//m_bBlockCollision = false;
+	if (m_bDie)
+		return;
+
 	m_bIsMove = false;
 	m_bMoveDown = false;
 	m_bMoveUp = false;

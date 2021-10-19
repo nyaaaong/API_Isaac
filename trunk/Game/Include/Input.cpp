@@ -53,14 +53,17 @@ bool CInput::Init(HWND hWnd)
 
 	CreateKey("PlayerBomb", 'E');
 
-	CreateKey("PlayerNextRoom", 'O');
+	CreateKey("CheatDie", 'Q');
+	SetShiftKey("CheatDie", true);
 
 	return true;
 }
 
 void CInput::Update(float fTime)
 {
-	UpdateKeyState();
+	if (!m_bLockInput)
+		UpdateKeyState();
+
 	UpdateMouse(fTime);
 	UpdateKeyInfo(fTime);
 }
@@ -324,7 +327,8 @@ CInput::CInput()	:
 	m_bMouseDown(false),
 	m_bMousePush(false),
 	m_bMouseUp(false),
-	m_bShowCursor(true)
+	m_bShowCursor(true),
+	m_bLockInput(false)
 {
 	m_vecKeyState.resize(KEY_COUNT_MAX);
 

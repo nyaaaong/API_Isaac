@@ -26,6 +26,11 @@ private:
 	bool	m_bDie;	// 중복되서 들어오지 않도록
 
 public:
+	bool IsMove()	const
+	{
+		return m_bIsMove;
+	}
+
 	const Vector2& GetMoveDir()	const
 	{
 		return m_tMoveDir;
@@ -64,6 +69,9 @@ private:
 	void Bomb(float fTime);
 	void IsaacDeath(float fTime);
 	void IsaacDeathEnd();
+
+private:
+	void CheatDie(float fTime);
 
 public:
 	virtual void Move(const Vector2& tDir, bool bUseField);
