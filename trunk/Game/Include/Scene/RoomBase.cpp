@@ -6,12 +6,24 @@
 #include "../Object/MonsterSpawner.h"
 #include "../Map/MapManager.h"
 
+void CRoomBase::SubMonsterCount()
+{
+	--m_iMonsterCount;
+
+	if (m_iMonsterCount <= 0)
+	{
+		m_iMonsterCount = 0;
+		GetSceneResource()->SoundPlay("DoorOpen");
+	}
+}
+
 bool CRoomBase::Init()
 {
 	if (!CStage::Init())
 		return false;
 
 	CreateDoor();
+	CreateMonster();
 
 	CMonsterSpawner::GetInst()->SetScene(this);
 
@@ -20,13 +32,12 @@ bool CRoomBase::Init()
 
 void CRoomBase::CreateMonster()
 {
-	m_iMonsterCount = rand() % (7 - 2 + 1) + 7;
+	m_iMonsterCount = rand() % (7 - 2 + 1) + 2;
 }
 
 void CRoomBase::Start()
 {
-	CStage::Start(); 
-	CreateMonster();
+	CStage::Start();
 }
 
 bool CRoomBase::Update(float fTime)
@@ -49,27 +60,6 @@ bool CRoomBase::Update(float fTime)
 
 		CMapManager::GetInst()->SetSpecialClearMap(eType);
 	}
-
-	return true;
-}
-
-bool CRoomBase::PostUpdate(float fTime)
-{
-	CStage::PostUpdate(fTime);
-
-	return true;
-}
-
-bool CRoomBase::Collision(float fTime)
-{
-	CStage::Collision(fTime);
-
-	return true;
-}
-
-bool CRoomBase::Render(HDC hDC)
-{
-	CStage::Render(hDC);
 
 	return true;
 }

@@ -18,21 +18,12 @@ public:
 	}
 
 public:
-	void SubMonsterCount()
-	{
-		--m_iMonsterCount;
-
-		if (m_iMonsterCount < 0)
-			m_iMonsterCount = 0;
-	}
+	void SubMonsterCount();
 
 public:
 	virtual bool Init();
 	virtual void Start();
 	virtual bool Update(float fTime);
-	virtual bool PostUpdate(float fTime);
-	virtual bool Collision(float fTime);
-	virtual bool Render(HDC hDC);
 
 protected:
 	void SetDoor(EDoorDir eDoorDir, EDoorType eDoorType);

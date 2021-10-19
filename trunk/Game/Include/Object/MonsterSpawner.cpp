@@ -113,6 +113,8 @@ void CMonsterSpawner::CreateMonster()
 		CreateSpawnLocation(m_vecSize[iIdx], m_vecPivot[iIdx], m_vecOffset[iIdx]); // ·£´ýÀ¸·Î ½ºÆù ÁÂÇ¥ »ý¼º
 		CreateMonster(m_vecName[iIdx]);
 	}
+
+	m_pScene->GetSceneResource()->SoundPlay("DoorClose");
 }
 
 void CMonsterSpawner::EnemyDieNormal(const Vector2& tPos)

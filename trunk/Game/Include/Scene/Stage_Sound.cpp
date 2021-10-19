@@ -19,7 +19,10 @@ void CStage::PlayerSound()
 
 void CStage::EnemySound()
 {
+	// Á×À½
 	GetSceneResource()->LoadSound("Effect", false, "EnemyDie", "Effect/Enemy_Die.wav");
+
+	// Charger °ø°Ý»ç¿îµå
 	GetSceneResource()->LoadSound("Effect", false, "ChargerAttack", "Effect/Enemy_Charger.wav");
 }
 
@@ -35,4 +38,8 @@ void CStage::EffectSound()
 
 	// ÆøÅº
 	GetSceneResource()->LoadSound("Effect", false, "BombExplosion", "Effect/Bomb_Explosion.mp3");
+
+	// ¹æ ´ÝÈû, ¿­¸²
+	GetSceneResource()->LoadSound("Effect", false, "DoorClose", "Effect/Door_Close.wav");
+	GetSceneResource()->LoadSound("Effect", false, "DoorOpen", "Effect/Door_Open.wav");
 }

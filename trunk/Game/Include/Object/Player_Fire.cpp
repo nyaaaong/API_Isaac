@@ -7,6 +7,9 @@
 
 void CPlayer::FireUp(float fTime)
 {
+	if (m_bDie)
+		return;
+
 	m_bIsFire = true;
 
 	SetBulletStartDir(Vector2::UP);
@@ -17,6 +20,9 @@ void CPlayer::FireUp(float fTime)
 
 void CPlayer::FireLeft(float fTime)
 {
+	if (m_bDie)
+		return;
+
 	m_bIsFire = true;
 
 	SetBulletStartDir(Vector2::LEFT);
@@ -27,6 +33,9 @@ void CPlayer::FireLeft(float fTime)
 
 void CPlayer::FireDown(float fTime)
 {
+	if (m_bDie)
+		return;
+
 	m_bIsFire = true;
 
 	SetBulletStartDir(Vector2::DOWN);
@@ -37,6 +46,9 @@ void CPlayer::FireDown(float fTime)
 
 void CPlayer::FireRight(float fTime)
 {
+	if (m_bDie)
+		return;
+
 	m_bIsFire = true;
 
 	SetBulletStartDir(Vector2::RIGHT);
@@ -47,6 +59,9 @@ void CPlayer::FireRight(float fTime)
 
 void CPlayer::FireEnd()
 {
+	if (m_bDie)
+		return;
+
 	m_bIsFire = false;
 
 	DefaultAnimation();
@@ -56,6 +71,9 @@ void CPlayer::FireEnd()
 
 void CPlayer::SetFireStart()
 {
+	if (m_bDie)
+		return;
+
 	CSharedPtr<CTear>	pTear = m_pScene->CreateObject<CTear>("PlayerTear", "PlayerTear", m_tPos + m_tBulletStartDir * 50.f, Vector2(80.f, 80.f));
 	pTear->SetDir(m_tBulletStartDir);
 	pTear->SetMoveSpeed(m_tInfo.fShotSpeed);

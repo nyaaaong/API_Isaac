@@ -22,6 +22,9 @@ void CPlayer::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 
 void CPlayer::MoveUp(float fTime)
 {
+	if (m_bDie)
+		return;
+
 	m_bIsMove = true;
 	m_bMoveUp = true;
 
@@ -39,6 +42,9 @@ void CPlayer::MoveUp(float fTime)
 
 void CPlayer::MoveDown(float fTime)
 {
+	if (m_bDie)
+		return;
+
 	m_bIsMove = true;
 	m_bMoveDown = true;
 
@@ -56,6 +62,9 @@ void CPlayer::MoveDown(float fTime)
 
 void CPlayer::MoveLeft(float fTime)
 {
+	if (m_bDie)
+		return;
+
 	m_bIsMove = true;
 
 	Move(Vector2::LEFT, m_tInfo.fMoveSpeed, true);
@@ -77,6 +86,9 @@ void CPlayer::MoveLeft(float fTime)
 
 void CPlayer::MoveRight(float fTime)
 {
+	if (m_bDie)
+		return;
+
 	m_bIsMove = true;
 
 	Move(Vector2::RIGHT, m_tInfo.fMoveSpeed, true);

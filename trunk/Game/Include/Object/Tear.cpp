@@ -121,6 +121,17 @@ void CTear::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 
 			TearDestroy();
 		}
+
+		else if (pBlock->GetType() == MT_IRON ||
+			pBlock->GetType() == MT_ROCK)
+		{
+			if (m_bHit)
+				return;
+
+			m_bHit = true;
+
+			TearDestroy();
+		}
 	}
 }
 

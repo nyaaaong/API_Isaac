@@ -54,6 +54,8 @@ void CPlayer::NoDamageTime(float fTime)
 
 void CPlayer::IsaacDeath(float fTime)
 {
+	DefaultAnimation();
+
 	m_bDie = true;
 	m_bEnableDamage = false;
 	m_bInvisible = false;
