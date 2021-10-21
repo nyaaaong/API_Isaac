@@ -54,7 +54,7 @@ public:
 		return m_bEnable;
 	}
 
-	std::string GetName()	const
+	const std::string& GetName()	const
 	{
 		return m_strName;
 	}

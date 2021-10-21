@@ -216,6 +216,12 @@
     <Filter Include="02. Object\05. Item\00. PickUp">
       <UniqueIdentifier>{2241ab4e-fc9a-450b-988a-561092fecf4a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Object\02. Effect\02. Enemy\00. Die">
+      <UniqueIdentifier>{ea885e4e-0fe2-4214-a5a5-80a92707257a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\02. Effect\02. Enemy\01. Smoke">
+      <UniqueIdentifier>{00157927-ef76-4fa4-b141-8ab215b84717}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -476,9 +482,6 @@
     <ClCompile Include="Object\MonsterSpawner.cpp">
       <Filter>02. Object\00. Character\01. Monster</Filter>
     </ClCompile>
-    <ClCompile Include="Object\EnemyDie.cpp">
-      <Filter>02. Object\02. Effect\02. Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="Object\Pooter.cpp">
       <Filter>02. Object\00. Character\01. Monster\01. Enemy\01. Pooter</Filter>
     </ClCompile>
@@ -511,6 +514,15 @@
     </ClCompile>
     <ClCompile Include="Scene\Room4.cpp">
       <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Mother.cpp">
+      <Filter>02. Object\00. Character\01. Monster\00. Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\EnemyDie.cpp">
+      <Filter>02. Object\02. Effect\02. Enemy\00. Die</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\EnemySmoke.cpp">
+      <Filter>02. Object\02. Effect\02. Enemy\01. Smoke</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -727,9 +739,6 @@
     <ClInclude Include="Object\MonsterSpawner.h">
       <Filter>02. Object\00. Character\01. Monster</Filter>
     </ClInclude>
-    <ClInclude Include="Object\EnemyDie.h">
-      <Filter>02. Object\02. Effect\02. Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="Object\Pooter.h">
       <Filter>02. Object\00. Character\01. Monster\01. Enemy\01. Pooter</Filter>
     </ClInclude>
@@ -759,6 +768,15 @@
     </ClInclude>
     <ClInclude Include="Scene\Room8.h">
       <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Mother.h">
+      <Filter>02. Object\00. Character\01. Monster\00. Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\EnemyDie.h">
+      <Filter>02. Object\02. Effect\02. Enemy\00. Die</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\EnemySmoke.h">
+      <Filter>02. Object\02. Effect\02. Enemy\01. Smoke</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -37,7 +37,6 @@ void CColliderBox::Render(HDC hDC)
 {
 	CCollider::Render(hDC);
 
-#ifdef _DEBUG
 	if (!CSceneManager::GetInst()->IsDebug())
 		return;
 
@@ -58,7 +57,6 @@ void CColliderBox::Render(HDC hDC)
 	RECT tRC = { static_cast<long>(tRectInfo.fL), static_cast<long>(tRectInfo.fT), static_cast<long>(tRectInfo.fR), static_cast<long>(tRectInfo.fB) };
 
 	FrameRect(hDC, &tRC, hBrush);
-#endif // _DEBUG
 
 }
 

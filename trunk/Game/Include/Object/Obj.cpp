@@ -88,6 +88,14 @@ void CObj::SetScene(CScene* pScene)
 		m_pAnimation->m_pScene = pScene;
 }
 
+const std::string CObj::GetCurrentAnimationName() const
+{
+	if (m_pAnimation)
+		return m_pAnimation->GetCurrentAnimationName();
+
+	return "";
+}
+
 void CObj::Move(const Vector2& tDir, bool bUseField)
 {
 	Move(tDir, m_fMoveSpeed, bUseField);
@@ -343,7 +351,6 @@ CObj::CObj() :
 	m_iZOrder(0),
 	m_bEnableDamage(true),
 	m_pColliderBox(nullptr),
-	//m_pColliderSphere(nullptr),
 	m_bInvisible(false),
 	m_bIsGround(true),
 	m_bPhysics(false),

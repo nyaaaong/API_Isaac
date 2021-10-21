@@ -42,6 +42,10 @@ void CBossMonstro::AddBossNotify()
 	SetAnimationEndNotify<CBossMonstro>("MonstroFireRight", this, &CBossMonstro::PatternDefault);
 }
 
+void CBossMonstro::AddBossPattern()
+{
+}
+
 void CBossMonstro::ChangeDirAnimation(const std::string& strAnimType)
 {
 	if (m_tDir == Vector2::LEFT)

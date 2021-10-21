@@ -291,6 +291,7 @@ public:
 	void ChangeAnimation(const std::string& strName);
 	bool CheckCurrentAnimation(const std::string& strName);
 	void SetScene(class CScene* pScene);
+	const std::string GetCurrentAnimationName()	const;
 
 public:
 	virtual void Move(const Vector2& tDir, bool bUseField);	// bUseField = true는 활동 범위 내부에서만 움직이게 할 것인지를 뜻한다.

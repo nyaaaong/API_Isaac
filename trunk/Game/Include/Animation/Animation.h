@@ -21,6 +21,8 @@ public:
 	void SetCurrentAnimation(const std::string& strName);
 	void ChangeAnimation(const std::string& strName);
 	bool CheckCurrentAnimation(const std::string& strName);
+	const std::string GetCurrentAnimationName()	const;
+	
 
 private:
 	AnimationInfo* FindInfo(const std::string& strName);

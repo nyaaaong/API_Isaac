@@ -158,6 +158,14 @@ bool CAnimation::CheckCurrentAnimation(const std::string& strName)
     return m_pCurrentAnimation->pSequence->GetName() == strName;
 }
 
+const std::string CAnimation::GetCurrentAnimationName() const
+{
+	if (!m_pCurrentAnimation)
+		return "";
+
+	return m_pCurrentAnimation->pSequence->GetName();
+}
+
 AnimationInfo* CAnimation::FindInfo(const std::string& strName)
 {
 	std::unordered_map<std::string, AnimationInfo*>::iterator	iter = m_mapAnimation.find(strName);

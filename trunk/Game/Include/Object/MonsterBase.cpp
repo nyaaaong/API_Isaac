@@ -8,9 +8,6 @@
 
 void CMonsterBase::ShufflePattern()
 {
-	if (!m_bUsePattern)
-		return;
-
 	size_t	iSize = m_vecPattern.size();
 
 	if (iSize <= 1)
@@ -68,44 +65,6 @@ bool CMonsterBase::Init()
 	return true;
 }
 
-void CMonsterBase::Update(float fTime)
-{
-	CCharacter::Update(fTime);
-
-	if (1 <= m_vecPattern.size())
-	{
-		if (m_bDelayCheck)
-		{
-			m_fAccTime += fTime;
-
-			if (m_fAccTime >= m_fPatternDelay)
-			{
-				ShufflePattern();
-
-				m_fAccTime = 0.f;
-
-				if (m_vecPattern[0])
-					m_vecPattern[0](fTime);
-			}
-		}
-
-		else
-		{
-			ShufflePattern();
-
-			if (m_vecPattern[0])
-				m_vecPattern[0](fTime);
-
-			m_bDelayCheck = true;
-		}
-	}
-}
-
-void CMonsterBase::PostUpdate(float fTime)
-{
-	CCharacter::PostUpdate(fTime);
-}
-
 CMonsterBase* CMonsterBase::Clone()
 {
 	return new CMonsterBase(*this);
@@ -158,14 +117,11 @@ CMonsterBase::CMonsterBase() :
 	m_fFireTime(0.f),
 	m_fFireTimeMax(1.f),
 	m_iCount(0),
-	m_fAccTime(0.f),
-	m_fPatternDelay(2.f),
-	m_bUsePattern(false),
-	m_bDelayCheck(false),
 	m_fM4PDist(static_cast<float>(INT_MAX)),
 	m_fMaxDist(-1.f),
 	m_bUseKnockBack(true),
-	m_bBlockCollision(false)
+	m_bBlockCollision(false),
+	m_bSmokeEnd(false)
 {
 	m_vecPattern.reserve(4);
 
@@ -183,15 +139,13 @@ CMonsterBase::CMonsterBase(const CMonsterBase& obj)	:
 	m_fFireTimeMax = obj.m_fFireTimeMax;
 	m_iCount = obj.m_iCount;
 	m_iZOrder = obj.m_iZOrder;
-	m_fAccTime = obj.m_fAccTime;
-	m_fPatternDelay = obj.m_fPatternDelay;
-	m_bUsePattern = obj.m_bUsePattern;
-	m_bDelayCheck = obj.m_bDelayCheck;
 	m_tM2PDir = obj.m_tM2PDir;
 	m_fM4PDist = obj.m_fM4PDist;
 	m_fMaxDist = obj.m_fMaxDist;
 	m_bUseKnockBack = obj.m_bUseKnockBack;
 	m_bBlockCollision = false;
+	m_strCurAnim = obj.m_strCurAnim;
+	m_bSmokeEnd = false;
 
 	memcpy_s(m_arrDir, sizeof(Vector2) * 4, obj.m_arrDir, sizeof(Vector2) * 4);
 }

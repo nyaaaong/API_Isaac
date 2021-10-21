@@ -33,7 +33,7 @@ private:
 	void CreateDoor();
 
 public:
-	virtual void CreateMonster();
+	void CreateMonster();
 	virtual void DoorFunc(EDoorDir eDoorDir);
 
 protected:

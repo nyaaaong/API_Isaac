@@ -4,7 +4,9 @@
 #include "Pooter.h"
 #include "Fly.h"
 #include "RedFly.h"
+#include "BossMonstro.h"
 #include "EnemyDie.h"
+#include "EnemySmoke.h"
 #include "MonsterBase.h"
 #include "../Scene/Scene.h"
 #include "../Scene/RoomBase.h"
@@ -52,6 +54,8 @@ void CMonsterSpawner::CreateMonsterPrototype()
 	m_pScene->CreatePrototype<CEnemyDie>("EnemyDieNormal");
 	m_pScene->CreatePrototype<CEnemyDie>("EnemyDieFly");
 
+	m_pScene->CreatePrototype<CEnemySmoke>("Smoke1");
+
 	CCharger* pCharger = m_pScene->CreatePrototype<CCharger>("Charger");
 
 	m_vecSize.push_back(pCharger->GetSize());
@@ -79,6 +83,33 @@ void CMonsterSpawner::CreateMonsterPrototype()
 	m_vecPivot.push_back(pRedFly->GetPivot());
 	m_vecOffset.push_back(pRedFly->GetPivot());
 	m_vecName.push_back(pRedFly->GetName());
+}
+
+void CMonsterSpawner::CreateBossMonsterPrototype()
+{
+	int iNum = m_pScene->GetCurMapNumber();
+	ESpecial_RoomType	eType = m_pScene->GetCurMapType();
+
+	if (iNum != -1)
+	{
+		if (CMapManager::GetInst()->GetClearMap(m_pScene->GetCurMapNumber()))
+			return;
+	}
+	else if (eType != ESpecial_RoomType::None)
+	{
+		if (CMapManager::GetInst()->GetClearSpecialMap(m_pScene->GetCurMapType()))
+			return;
+	}
+
+	//CBossDie* pDie = m_pScene->CreatePrototype<CBossDie>("BossDieMonstro");
+	//pDie->SetType(EMonster_Type::Monstro);
+
+	/*CBossMonstro* pMonstro = m_pScene->CreatePrototype<CBossMonstro>("Monstro");
+
+	m_vecBossSize.push_back(pMonstro->GetSize());
+	m_vecBossPivot.push_back(pMonstro->GetPivot());
+	m_vecBossOffset.push_back(pMonstro->GetPivot());
+	m_vecBossName.push_back(pMonstro->GetName());*/
 }
 
 void CMonsterSpawner::CreateMonster()
@@ -113,6 +144,54 @@ void CMonsterSpawner::CreateMonster()
 		CreateSpawnLocation(m_vecSize[iIdx], m_vecPivot[iIdx], m_vecOffset[iIdx]); // ·£´ýÀ¸·Î ½ºÆù ÁÂÇ¥ »ý¼º
 		CreateMonster(m_vecName[iIdx]);
 	}
+
+	m_pScene->GetSceneResource()->SoundPlay("DoorClose");
+}
+
+void CMonsterSpawner::CreateBossMonster(EBoss_Type eMonsterType)
+{
+	CRoomBase* pRoom = dynamic_cast<CRoomBase*>(m_pScene);
+	int iMonsterCount = pRoom->GetMonsterCount();
+
+	if (!iMonsterCount)
+		return;
+
+	int iNum = m_pScene->GetCurMapNumber();
+	ESpecial_RoomType	eType = m_pScene->GetCurMapType();
+
+	if (iNum != -1)
+	{
+		if (CMapManager::GetInst()->GetClearMap(m_pScene->GetCurMapNumber()))
+			return;
+	}
+
+	else if (eType != ESpecial_RoomType::None)
+	{
+		if (CMapManager::GetInst()->GetClearSpecialMap(m_pScene->GetCurMapType()))
+			return;
+	}
+
+	size_t iSize = m_vecBossName.size();
+	int iIdx = 0;
+
+	std::string	strMonsterName;
+
+	switch (eMonsterType)
+	{
+	case EBoss_Type::Monstro:
+		strMonsterName = "Monstro";
+		break;
+	case EBoss_Type::Mother:
+		break;
+	}
+
+	for (; iIdx < iSize; ++iIdx)
+	{
+		if (m_vecBossName[iIdx] == strMonsterName)
+			break;
+	}
+
+	CreateMonster(m_vecBossName[iIdx]);
 
 	m_pScene->GetSceneResource()->SoundPlay("DoorClose");
 }
@@ -217,7 +296,18 @@ void CMonsterSpawner::CreateMonster(const std::string& strName)
 		m_pScene->CreateObject<CFly>(strName, strName, m_tSpawnPos);
 
 	else if (strName == "RedFly")
-		m_pScene->CreateObject<CFly>(strName, strName, m_tSpawnPos);
+		m_pScene->CreateObject<CRedFly>(strName, strName, m_tSpawnPos);
+
+	m_pScene->CreateObject<CEnemySmoke>("Smoke1", "Smoke1", m_tSpawnPos, Vector2(144.f, 144.f));
+}
+
+void CMonsterSpawner::CreateBossMonster(const std::string& strName)
+{
+	if (m_tSpawnPos == Vector2())
+		return;
+
+	else if (strName == "Monstro")
+		m_pScene->CreateObject<CBossMonstro>(strName, strName, m_tSpawnPos);
 }
 
 void CMonsterSpawner::AddSpawnLocation()
@@ -245,6 +335,28 @@ void CMonsterSpawner::AddSpawnLocation()
 			m_vecSpawnStartPos.push_back((*iter)->GetPos());
 			m_vecSpawnEndPos.push_back((*iter)->GetPos() + (*iter)->GetSize());
 		}
+	}
+}
+
+void CMonsterSpawner::AddBossSpawnLocation(EBoss_Type eType)
+{
+	int iNum = m_pScene->GetCurMapNumber();
+
+	if (iNum != -1)
+	{
+		if (CMapManager::GetInst()->GetClearMap(m_pScene->GetCurMapNumber()))
+			return;
+	}
+
+	CRoomMap* pCurMap = m_pScene->GetCurrentMap();
+
+	switch (eType)
+	{
+	case EBoss_Type::Monstro:
+		m_tSpawnPos = Vector2(m_pScene->GetFieldLT().x + 150.f, pCurMap->GetSize().y);
+		break;
+	case EBoss_Type::Mother:
+		break;
 	}
 }
 

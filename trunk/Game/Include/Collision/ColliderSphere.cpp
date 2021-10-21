@@ -6,6 +6,7 @@
 #include "Collision.h"
 #include "../Scene/Scene.h"
 #include "../Scene/Camera.h"
+#include "../Scene/SceneManager.h"
 
 bool CColliderSphere::Init()
 {
@@ -31,7 +32,9 @@ void CColliderSphere::Render(HDC hDC)
 {
 	CCollider::Render(hDC);
 
-#ifdef _DEBUG
+	if (!CSceneManager::GetInst()->IsDebug())
+		return;
+
 	HPEN	hPen = CGameManager::GetInst()->GetGreenPen();
 
 	if (!m_CollisionList.empty())
@@ -58,7 +61,6 @@ void CColliderSphere::Render(HDC hDC)
 	}
 
 	SelectObject(hDC, hPrev);
-#endif // _DEBUG
 
 }
 

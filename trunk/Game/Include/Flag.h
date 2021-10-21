@@ -113,3 +113,9 @@ enum class EEnemy_Type
 	Normal,
 	Fly
 };
+
+enum class EBoss_Type
+{
+	Monstro,
+	Mother
+};

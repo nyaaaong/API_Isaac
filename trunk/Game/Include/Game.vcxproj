@@ -184,6 +184,7 @@
     <ClCompile Include="Object\Charger.cpp" />
     <ClCompile Include="Object\Door.cpp" />
     <ClCompile Include="Object\EnemyDie.cpp" />
+    <ClCompile Include="Object\EnemySmoke.cpp" />
     <ClCompile Include="Object\Fly.cpp" />
     <ClCompile Include="Object\Heart.cpp" />
     <ClCompile Include="Object\Item.cpp" />
@@ -194,6 +195,7 @@
     <ClCompile Include="Object\MonsterTearEffect.cpp" />
     <ClCompile Include="Object\Monstro_Anim.cpp" />
     <ClCompile Include="Object\Monstro_Pattern.cpp" />
+    <ClCompile Include="Object\Mother.cpp" />
     <ClCompile Include="Object\Obj.cpp" />
     <ClCompile Include="Object\ObjManager.cpp" />
     <ClCompile Include="Object\Player.cpp" />
@@ -294,6 +296,7 @@
     <ClInclude Include="Object\Charger.h" />
     <ClInclude Include="Object\Door.h" />
     <ClInclude Include="Object\EnemyDie.h" />
+    <ClInclude Include="Object\EnemySmoke.h" />
     <ClInclude Include="Object\Fly.h" />
     <ClInclude Include="Object\Heart.h" />
     <ClInclude Include="Object\Item.h" />
@@ -302,6 +305,7 @@
     <ClInclude Include="Object\MonsterBase.h" />
     <ClInclude Include="Object\MonsterSpawner.h" />
     <ClInclude Include="Object\MonsterTearEffect.h" />
+    <ClInclude Include="Object\Mother.h" />
     <ClInclude Include="Object\Obj.h" />
     <ClInclude Include="Object\ObjManager.h" />
     <ClInclude Include="Object\Player.h" />

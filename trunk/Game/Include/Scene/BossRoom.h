@@ -7,15 +7,11 @@ class CBossRoom :
 {
 	friend class CSceneManager;
 
-private:
-	void Next(float fTime);
-
 public:
 	virtual bool Init();
 	virtual void Start();
 
 protected:
-	virtual void CreateMonster();
 	virtual void DoorFunc(EDoorDir eDoorDir);
 
 protected:
