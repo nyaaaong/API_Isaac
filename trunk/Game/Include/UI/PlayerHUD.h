@@ -17,6 +17,7 @@ private:
 	CSharedPtr<CCharacter> m_pPlayer;
 	CSharedPtr<CCharacter> m_pBossMonster;
 	float		m_fPrevHP;
+	float		m_fBossHPTimer; // 보스가 죽고 HP바가 떠있을 시간
 
 public:
 	void SetHP(float fHP)

@@ -20,6 +20,7 @@ public:
 	virtual void PostUpdate(float fTime);
 	virtual CMotherLeg* Clone();
 	virtual void EnableTask();
+	virtual void DisableTask();
 	virtual float SetDamage(float fDamage);
 
 private:
@@ -27,6 +28,7 @@ private:
 	Vector2	m_tPlayerPos;
 	bool	m_bAttack;
 	bool	m_bAttackEnd;
+	bool	m_bAttackRelease; // 다시 공격하기 위해 발을 올리는 중
 	float	m_fAttackDelay;
 	float	m_fIdleTime;
 	bool	m_bAttackPossible;

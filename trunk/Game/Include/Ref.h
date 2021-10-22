@@ -46,6 +46,9 @@ public:
 
 	void Enable()
 	{
+		if (m_bEnable)
+			return;
+
 		m_bEnable = true;
 
 		EnableTask();
@@ -53,6 +56,9 @@ public:
 
 	void Disable()
 	{
+		if (!m_bEnable)
+			return;
+
 		m_bEnable = false;
 
 		DisableTask();
@@ -60,24 +66,44 @@ public:
 
 	void Enable(bool bEnable)
 	{
-		m_bEnable = bEnable;
-
 		if (bEnable)
+		{
+			if (m_bEnable)
+				return;
+
 			EnableTask();
+		}
 
 		else
+		{
+			if (!m_bEnable)
+				return;
+
 			DisableTask();
+		}
+
+		m_bEnable = bEnable;
 	}
 
 	void Enable(bool bEnable, float fTime)
 	{
-		m_bEnable = bEnable;
-
 		if (bEnable)
+		{
+			if (m_bEnable)
+				return;
+
 			EnableTask(fTime);
+		}
 
 		else
+		{
+			if (!m_bEnable)
+				return;
+
 			DisableTask(fTime);
+		}
+
+		m_bEnable = bEnable;
 	}
 
 	bool IsEnable()	const

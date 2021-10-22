@@ -60,14 +60,20 @@ void CPlayerHUD::Update(float fTime)
 		{
 			m_pBossHPEmptyBar->SetVisibility(true);
 			m_pBossHPBar->SetVisibility(true);
-
-			/*float fCurHP = m_pBossMonster->GetHP();
-
-			if (m_fPrevHP != fCurHP)
-				m_pBossHPBar->SetHP(fCurHP);
-
-			m_fPrevHP = fCurHP;*/
 			return;
+		}
+
+		else
+		{
+			m_fBossHPTimer += fTime;
+
+			if (m_fBossHPTimer >= 2.f)
+			{
+				m_pBossHPEmptyBar->SetVisibility(false);
+				m_pBossHPBar->SetVisibility(false);
+
+				m_pBossMonster = nullptr;
+			}
 		}
 	}
 }
@@ -85,7 +91,8 @@ void CPlayerHUD::SetBossMonster(CCharacter* pBossMonster)
 }
 
 CPlayerHUD::CPlayerHUD()	:
-	m_fPrevHP(100.f)
+	m_fPrevHP(100.f),
+	m_fBossHPTimer(0.f)
 {
 }
 
