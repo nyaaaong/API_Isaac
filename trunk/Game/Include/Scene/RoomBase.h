@@ -25,9 +25,11 @@ public:
 	virtual void Start();
 	virtual bool Update(float fTime);
 
+public:
+	const Vector2& GetDoorPos(EDoorDir eDoorDir, EDoorType eDoorType);
+
 protected:
 	void SetDoor(EDoorDir eDoorDir, EDoorType eDoorType);
-	const Vector2& GetDoorPos(EDoorDir eDoorDir, EDoorType eDoorType);
 
 private:
 	void CreateDoor();

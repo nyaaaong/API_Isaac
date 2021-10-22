@@ -72,6 +72,7 @@ private:
 
 private:
 	void CheatDie(float fTime);
+	void CheatBossRoom(float fTime);
 
 public:
 	virtual void Move(const Vector2& tDir, bool bUseField);

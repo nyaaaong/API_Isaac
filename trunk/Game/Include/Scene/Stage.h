@@ -19,6 +19,11 @@ public:
 	}
 
 public:
+	class CPlayerHUD* GetPlayerHUD()	const
+	{
+		return m_pPlayerHUD;
+	}
+
 	int GetStage()	const
 	{
 		return m_iStage;

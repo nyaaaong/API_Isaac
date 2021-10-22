@@ -1,5 +1,6 @@
 
 #include "BossHPBar.h"
+#include "../Object/Character.h"
 #include "../Scene/Scene.h"
 #include "../Scene/SceneResource.h"
 
@@ -72,17 +73,11 @@ void CBossHPBar::Update(float fTime)
 	CUIWidget::Update(fTime);
 
 	if (!m_bBackGroundBar)
-		m_fPercent = m_fHP / m_fHPMax;
-}
+	{
+		CharacterInfo	tInfo = m_pBoss->GetInfo();
 
-void CBossHPBar::PostUpdate(float fTime)
-{
-	CUIWidget::PostUpdate(fTime);
-}
-
-void CBossHPBar::Collision(float fTime)
-{
-	CUIWidget::Collision(fTime);
+		m_fPercent = tInfo.fHP / tInfo.fHPMax;
+	}
 }
 
 void CBossHPBar::Render(HDC hDC)
@@ -124,7 +119,8 @@ CBossHPBar::CBossHPBar()	:
 	m_fHP(100.f),
 	m_fHPMax(100.f),
 	m_fPercent(1.f),
-	m_bBackGroundBar(false)
+	m_bBackGroundBar(false),
+	m_pBoss(nullptr)
 {
 }
 
@@ -135,6 +131,7 @@ CBossHPBar::CBossHPBar(const CBossHPBar& widget)	:
 	m_fHPMax = widget.m_fHPMax;
 	m_fPercent = widget.m_fPercent;
 	m_bBackGroundBar = widget.m_bBackGroundBar;
+	m_pBoss = widget.m_pBoss;
 }
 
 CBossHPBar::~CBossHPBar()

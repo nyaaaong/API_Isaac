@@ -17,7 +17,7 @@ private:
 	bool				m_bLoop;
 
 public:
-	bool IsPlay()	const
+	bool IsPlaying()	const
 	{
 		return m_bPlay;
 	}

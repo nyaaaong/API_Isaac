@@ -13,7 +13,6 @@ protected:
 	float	m_fFireTime;
 	float	m_fFireTimeMax;
 	int		m_iCount;
-	std::vector<std::function<void(float)>>	m_vecPattern;
 	float	m_fM4PDist;		// 몬스터와 플레이어 사이 거리
 	float	m_fMaxDist;		// 몬스터의 플레이어 감지 거리
 	Vector2	m_arrDir[4];	// 랜덤으로 뽑기 위한 방향 배열
@@ -27,9 +26,6 @@ public:
 	{
 		m_bBlockCollision = true;
 	}
-
-private:
-	void ShufflePattern();	// 패턴이 1개 이상인 경우 무작위로 섞는다.
 
 protected:
 	void GetM2PDir();	// Monster To Player : 몬스터 기준 플레이어의 방향을 구해준다

@@ -114,6 +114,16 @@ bool CResourceManager::SoundResume(const std::string& strName)
 	return true;
 }
 
+bool CResourceManager::IsPlaying(const std::string& strName)
+{
+	CSound* pSound = FindSound(strName);
+
+	if (!pSound)
+		return false;
+
+	return pSound->IsPlaying();
+}
+
 void CResourceManager::ReleaseSound(const std::string& strName)
 {
 	std::unordered_map<std::string, CSharedPtr<CSound>>::iterator	iter = m_mapSound.find(strName);

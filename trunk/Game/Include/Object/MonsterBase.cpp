@@ -6,24 +6,6 @@
 #include "../Scene/Scene.h"
 #include "../Object/Player.h"
 
-void CMonsterBase::ShufflePattern()
-{
-	size_t	iSize = m_vecPattern.size();
-
-	if (iSize <= 1)
-		return;
-
-	for (int i = 0; i < 10; ++i)
-	{
-		int	idx1 = rand() % iSize;
-		int	idx2 = rand() % iSize;
-
-		std::function<void(float)> pTemp = m_vecPattern[idx1];
-		m_vecPattern[idx1] = m_vecPattern[idx2];
-		m_vecPattern[idx2] = pTemp;
-	}
-}
-
 void CMonsterBase::GetM2PDir()
 {
 	CObj* pPlayer = m_pScene->GetPlayer();
@@ -59,8 +41,6 @@ bool CMonsterBase::Init()
 
 	SetZOrder(EZOrder::Monster);
 	SetPivot(0.5f, 1.f);
-
-	CreateAnimation();
 
 	return true;
 }
@@ -123,8 +103,6 @@ CMonsterBase::CMonsterBase() :
 	m_bBlockCollision(false),
 	m_bSmokeEnd(false)
 {
-	m_vecPattern.reserve(4);
-
 	m_arrDir[0] = Vector2::LEFT;
 	m_arrDir[1] = Vector2::UP;
 	m_arrDir[2] = Vector2::RIGHT;

@@ -291,72 +291,66 @@ void CStage::EnemyAnimation()
 
 void CStage::BossAnimation()
 {
-	// ============== Monstro ==============
-	// -------------- Idle --------------
-	GetSceneResource()->CreateAnimationSequence("MonstroIdleLeft", "MonstroIdleLeft", TEXT("Monster/Boss/Monstro/Monstro_Left.bmp"));
-	GetSceneResource()->SetTextureColorKey("MonstroIdleLeft");
-	GetSceneResource()->AddAnimationFrameData("MonstroIdleLeft", Vector2(0.f, 0.f), Vector2(256.f, 256.f));
+	// ============== Mother ==============
+	// -------------- Leg --------------
+	GetSceneResource()->CreateAnimationSequence("MotherLeg", "MotherLeg", TEXT("Monster/Boss/Mother_Leg.bmp"));
+	GetSceneResource()->SetTextureColorKey("MotherLeg");
+	GetSceneResource()->AddAnimationFrameData("MotherLeg", Vector2(0.f, 0.f), Vector2(387.f, 754.f));
 
-	GetSceneResource()->CreateAnimationSequence("MonstroIdleRight", "MonstroIdleRight", TEXT("Monster/Boss/Monstro/Monstro_Right.bmp"));
-	GetSceneResource()->SetTextureColorKey("MonstroIdleRight");
-	GetSceneResource()->AddAnimationFrameData("MonstroIdleRight", Vector2(0.f, 0.f), Vector2(256.f, 256.f));
+	// -------------- Hand --------------
+	GetSceneResource()->CreateAnimationSequence("MotherHandTop", "MotherHandTop", TEXT("Monster/Boss/Mother_Hand_Top.bmp"));
+	GetSceneResource()->SetTextureColorKey("MotherHandTop");
+	GetSceneResource()->AddAnimationFrameData("MotherHandTop", Vector2(0.f, 0.f), Vector2(127.f, 110.f));
+	GetSceneResource()->AddAnimationFrameData("MotherHandTop", Vector2(127.f, 0.f), Vector2(236.f, 255.f));
 
-	// -------------- Move --------------
-	GetSceneResource()->CreateAnimationSequence("MonstroMoveLeft", "MonstroMoveLeft", TEXT("Monster/Boss/Monstro/Monstro_Left.bmp"));
-	GetSceneResource()->SetTextureColorKey("MonstroMoveLeft");
+	GetSceneResource()->CreateAnimationSequence("MotherHandBottom", "MotherHandBottom", TEXT("Monster/Boss/Mother_Hand_Bottom.bmp"));
+	GetSceneResource()->SetTextureColorKey("MotherHandBottom");
+	GetSceneResource()->AddAnimationFrameData("MotherHandBottom", Vector2(0.f, 0.f), Vector2(127.f, 110.f));
+	GetSceneResource()->AddAnimationFrameData("MotherHandBottom", Vector2(127.f, 0.f), Vector2(236.f, 255.f));
 
-	for (int i = 0; i < 6; ++i)
-	{
-		GetSceneResource()->AddAnimationFrameData("MonstroMoveLeft", Vector2(i * 256.f, 256.f), Vector2(256.f, 256.f));
-	}
+	GetSceneResource()->CreateAnimationSequence("MotherHandLeft", "MotherHandLeft", TEXT("Monster/Boss/Mother_Hand_Left.bmp"));
+	GetSceneResource()->SetTextureColorKey("MotherHandLeft");
+	GetSceneResource()->AddAnimationFrameData("MotherHandLeft", Vector2(0.f, 0.f), Vector2(110.f, 127.f));
+	GetSceneResource()->AddAnimationFrameData("MotherHandLeft", Vector2(0.f, 127.f), Vector2(255.f, 236.f));
 
-	GetSceneResource()->CreateAnimationSequence("MonstroMoveRight", "MonstroMoveRight", TEXT("Monster/Boss/Monstro/Monstro_Right.bmp"));
-	GetSceneResource()->SetTextureColorKey("MonstroMoveRight");
+	GetSceneResource()->CreateAnimationSequence("MotherHandRight", "MotherHandRight", TEXT("Monster/Boss/Mother_Hand_Right.bmp"));
+	GetSceneResource()->SetTextureColorKey("MotherHandRight");
+	GetSceneResource()->AddAnimationFrameData("MotherHandRight", Vector2(0.f, 0.f), Vector2(110.f, 127.f));
+	GetSceneResource()->AddAnimationFrameData("MotherHandRight", Vector2(0.f, 127.f), Vector2(255.f, 236.f));
 
-	for (int i = 0; i < 6; ++i)
-	{
-		GetSceneResource()->AddAnimationFrameData("MonstroMoveRight", Vector2(i * 256.f, 256.f), Vector2(256.f, 256.f));
-	}
+	// -------------- Skin --------------
+	GetSceneResource()->CreateAnimationSequence("MotherSkinTop", "MotherSkinTop", TEXT("Monster/Boss/Mother_Skin_Top.bmp"));
+	GetSceneResource()->SetTextureColorKey("MotherSkinTop");
+	GetSceneResource()->AddAnimationFrameData("MotherSkinTop", Vector2(0.f, 0.f), Vector2(142.f, 121.f));
 
-	// -------------- Attack --------------
-	GetSceneResource()->CreateAnimationSequence("MonstroFireLeft", "MonstroFireLeft", TEXT("Monster/Boss/Monstro/Monstro_Left.bmp"));
-	GetSceneResource()->SetTextureColorKey("MonstroFireLeft");
+	GetSceneResource()->CreateAnimationSequence("MotherSkinBottom", "MotherSkinBottom", TEXT("Monster/Boss/Mother_Skin_Bottom.bmp"));
+	GetSceneResource()->SetTextureColorKey("MotherSkinBottom");
+	GetSceneResource()->AddAnimationFrameData("MotherSkinBottom", Vector2(0.f, 0.f), Vector2(142.f, 121.f));
 
-	for (int i = 1; i <= 2; ++i)
-	{
-		GetSceneResource()->AddAnimationFrameData("MonstroFireLeft", Vector2(i * 256.f, 0.f), Vector2(256.f, 256.f));
-	}
+	GetSceneResource()->CreateAnimationSequence("MotherSkinLeft", "MotherSkinLeft", TEXT("Monster/Boss/Mother_Skin_Left.bmp"));
+	GetSceneResource()->SetTextureColorKey("MotherSkinLeft");
+	GetSceneResource()->AddAnimationFrameData("MotherSkinLeft", Vector2(0.f, 0.f), Vector2(121.f, 142.f));
 
-	GetSceneResource()->CreateAnimationSequence("MonstroFireRight", "MonstroFireRight", TEXT("Monster/Boss/Monstro/Monstro_Right.bmp"));
-	GetSceneResource()->SetTextureColorKey("MonstroFireRight");
+	GetSceneResource()->CreateAnimationSequence("MotherSkinRight", "MotherSkinRight", TEXT("Monster/Boss/Mother_Skin_Right.bmp"));
+	GetSceneResource()->SetTextureColorKey("MotherSkinRight");
+	GetSceneResource()->AddAnimationFrameData("MotherSkinRight", Vector2(0.f, 0.f), Vector2(121.f, 142.f));
 
-	for (int i = 1; i <= 2; ++i)
-	{
-		GetSceneResource()->AddAnimationFrameData("MonstroFireRight", Vector2(i * 256.f, 0.f), Vector2(256.f, 256.f));
-	}
+	// -------------- Eye --------------
+	GetSceneResource()->CreateAnimationSequence("MotherEyeTop", "MotherEyeTop", TEXT("Monster/Boss/Mother_Eye_Top.bmp"));
+	GetSceneResource()->SetTextureColorKey("MotherEyeTop");
+	GetSceneResource()->AddAnimationFrameData("MotherEyeTop", Vector2(0.f, 0.f), Vector2(126.f, 132.f));
 
-	// -------------- Jump --------------
-	GetSceneResource()->CreateAnimationSequence("MonstroJumpLeft", "MonstroJumpLeft", TEXT("Monster/Boss/Monstro/Monstro_Left.bmp"));
-	GetSceneResource()->SetTextureColorKey("MonstroJumpLeft");
+	GetSceneResource()->CreateAnimationSequence("MotherEyeBottom", "MotherEyeBottom", TEXT("Monster/Boss/Mother_Eye_Bottom.bmp"));
+	GetSceneResource()->SetTextureColorKey("MotherEyeBottom");
+	GetSceneResource()->AddAnimationFrameData("MotherEyeBottom", Vector2(0.f, 0.f), Vector2(126.f, 132.f));
 
-	for (int i = 0; i < 6; ++i)
-	{
-		if (i == 4)
-			continue;
+	GetSceneResource()->CreateAnimationSequence("MotherEyeLeft", "MotherEyeLeft", TEXT("Monster/Boss/Mother_Eye_Left.bmp"));
+	GetSceneResource()->SetTextureColorKey("MotherEyeLeft");
+	GetSceneResource()->AddAnimationFrameData("MotherEyeLeft", Vector2(0.f, 0.f), Vector2(132.f, 126.f));
 
-		GetSceneResource()->AddAnimationFrameData("MonstroJumpLeft", Vector2(i * 256.f, 256.f), Vector2(256.f, 256.f));
-	}
-
-	GetSceneResource()->CreateAnimationSequence("MonstroJumpRight", "MonstroJumpRight", TEXT("Monster/Boss/Monstro/Monstro_Right.bmp"));
-	GetSceneResource()->SetTextureColorKey("MonstroJumpRight");
-
-	for (int i = 0; i < 6; ++i)
-	{
-		if (i == 4)
-			continue;
-
-		GetSceneResource()->AddAnimationFrameData("MonstroJumpRight", Vector2(i * 256.f, 256.f), Vector2(256.f, 256.f));
-	}
+	GetSceneResource()->CreateAnimationSequence("MotherEyeRight", "MotherEyeRight", TEXT("Monster/Boss/Mother_Eye_Right.bmp"));
+	GetSceneResource()->SetTextureColorKey("MotherEyeRight");
+	GetSceneResource()->AddAnimationFrameData("MotherEyeRight", Vector2(0.f, 0.f), Vector2(132.f, 126.f));
 }
 
 void CStage::TearAnimation()

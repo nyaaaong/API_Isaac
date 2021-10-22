@@ -8,6 +8,7 @@ class CBossHPBar :
 {
 protected:
 	CSharedPtr<CTexture>	m_pTexture;
+	class CCharacter* m_pBoss;
 	float		m_fHP;
 	float		m_fHPMax;
 	float		m_fPercent;
@@ -19,15 +20,9 @@ public:
 		m_bBackGroundBar = bBackGroundBar;
 	}
 
-	void SetHP(float fHP)
+	void SetBoss(class CCharacter* pBoss)
 	{
-		m_fHP = fHP;
-
-		if (m_fHP < 0)
-			m_fHP = 0;
-
-		else if (m_fHP > m_fHPMax)
-			m_fHP = m_fHPMax;
+		m_pBoss = pBoss;
 	}
 
 	void SetTexture(CTexture* pTexture)
@@ -51,8 +46,6 @@ public:
 public:
 	virtual bool Init();
 	virtual void Update(float fTime);
-	virtual void PostUpdate(float fTime);
-	virtual void Collision(float fTime);
 	virtual void Render(HDC hDC);
 	virtual void Render(const Vector2& tPos, HDC hDC);
 	virtual CBossHPBar* Clone();

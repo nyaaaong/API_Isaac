@@ -10,6 +10,7 @@ class CBossRoom :
 public:
 	virtual bool Init();
 	virtual void Start();
+	virtual bool Update(float fTime);
 
 protected:
 	virtual void DoorFunc(EDoorDir eDoorDir);

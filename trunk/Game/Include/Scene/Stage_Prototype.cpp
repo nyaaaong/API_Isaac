@@ -5,7 +5,6 @@
 #include "../Object/MonsterTearEffect.h"
 #include "../Object/Bomb.h"
 #include "../Object/BombExplosionEffect.h"
-#include "../Object/BossMonstro.h"
 #include "../Object/Door.h"
 #include "../Object/MonsterSpawner.h"
 
@@ -21,10 +20,9 @@ void CStage::CreatePrototypes()
 
 	CMonsterTearEffect* pMonsterTearEffect = CreatePrototype<CMonsterTearEffect>("MonsterTearEffect");
 
-	CBossMonstro* pMonstro = CreatePrototype<CBossMonstro>("Monstro");
-
 	CBomb* pBomb = CreatePrototype<CBomb>("Bomb");
 	CBombExplosionEffect*	pExplosion = CreatePrototype<CBombExplosionEffect>("BombExplosion");
 
 	CMonsterSpawner::GetInst()->CreateMonsterPrototype();
+	CMonsterSpawner::GetInst()->CreateBossMonsterPrototype();
 }

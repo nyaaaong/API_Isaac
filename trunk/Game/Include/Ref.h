@@ -44,9 +44,40 @@ public:
 		return m_bActive;
 	}
 
+	void Enable()
+	{
+		m_bEnable = true;
+
+		EnableTask();
+	}
+
+	void Disable()
+	{
+		m_bEnable = false;
+
+		DisableTask();
+	}
+
 	void Enable(bool bEnable)
 	{
 		m_bEnable = bEnable;
+
+		if (bEnable)
+			EnableTask();
+
+		else
+			DisableTask();
+	}
+
+	void Enable(bool bEnable, float fTime)
+	{
+		m_bEnable = bEnable;
+
+		if (bEnable)
+			EnableTask(fTime);
+
+		else
+			DisableTask(fTime);
 	}
 
 	bool IsEnable()	const
@@ -62,6 +93,25 @@ public:
 	void SetName(const std::string& strName)
 	{
 		m_strName = strName;
+	}
+
+public:
+	virtual void EnableTask()
+	{
+	}
+
+	virtual void EnableTask(float fTime)
+	{
+		EnableTask();
+	}
+
+	virtual void DisableTask()
+	{
+	}
+
+	virtual void DisableTask(float fTime)
+	{
+		DisableTask();
 	}
 
 public:

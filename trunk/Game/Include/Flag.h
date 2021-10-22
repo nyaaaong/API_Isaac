@@ -50,6 +50,7 @@ enum class EZOrder
 	BackGroundBar = -900,
 	Effect = -900,
 	Item = -100,
+	MotherLeg = -80,
 	Monster = -30,
 	Player = -20,
 	PlayerBody = -19,
@@ -114,8 +115,15 @@ enum class EEnemy_Type
 	Fly
 };
 
-enum class EBoss_Type
+enum class EMusic_Type
 {
-	Monstro,
-	Mother
+	Boss,
+	BossClear
+};
+
+enum class EMotherDoor_Type
+{
+	Hand,
+	Eye,
+	Skin
 };

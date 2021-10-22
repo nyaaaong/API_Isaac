@@ -126,15 +126,6 @@
     <Filter Include="02. Object\00. Character\01. Monster\00. Boss">
       <UniqueIdentifier>{555d67c4-1d06-4c72-a151-dba51495d9bf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. Object\00. Character\01. Monster\00. Boss\00. Monstro">
-      <UniqueIdentifier>{dd09ce52-9cdc-4ba2-bc96-6a0807835059}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Object\00. Character\01. Monster\00. Boss\00. Monstro\00. Animation">
-      <UniqueIdentifier>{777478db-38f0-4014-8692-d4827c3bfd9b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Object\00. Character\01. Monster\00. Boss\00. Monstro\01. Pattern">
-      <UniqueIdentifier>{252528ce-9649-444a-9804-ca0cf5033a68}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. Object\00. Character\00. Player\02. Func">
       <UniqueIdentifier>{5862a8c0-7422-4bbf-a8fd-4f5a14e707d4}</UniqueIdentifier>
     </Filter>
@@ -221,6 +212,9 @@
     </Filter>
     <Filter Include="02. Object\02. Effect\02. Enemy\01. Smoke">
       <UniqueIdentifier>{00157927-ef76-4fa4-b141-8ab215b84717}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\00. Character\01. Monster\00. Boss\00. Part">
+      <UniqueIdentifier>{78a8b2b0-42d8-4419-9d78-8c3955a49c9f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -352,15 +346,6 @@
     </ClCompile>
     <ClCompile Include="Object\Player_Callback.cpp">
       <Filter>02. Object\00. Character\00. Player\01. Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\BossMonstro.cpp">
-      <Filter>02. Object\00. Character\01. Monster\00. Boss\00. Monstro</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\Monstro_Anim.cpp">
-      <Filter>02. Object\00. Character\01. Monster\00. Boss\00. Monstro\00. Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\Monstro_Pattern.cpp">
-      <Filter>02. Object\00. Character\01. Monster\00. Boss\00. Monstro\01. Pattern</Filter>
     </ClCompile>
     <ClCompile Include="Object\Player_Func.cpp">
       <Filter>02. Object\00. Character\00. Player\02. Func</Filter>
@@ -524,6 +509,12 @@
     <ClCompile Include="Object\EnemySmoke.cpp">
       <Filter>02. Object\02. Effect\02. Enemy\01. Smoke</Filter>
     </ClCompile>
+    <ClCompile Include="Object\MotherLeg.cpp">
+      <Filter>02. Object\00. Character\01. Monster\00. Boss\00. Part</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\MotherDoor.cpp">
+      <Filter>02. Object\00. Character\01. Monster\00. Boss\00. Part</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameInfo.h">
@@ -673,9 +664,6 @@
     <ClInclude Include="UI\HPBar.h">
       <Filter>06. UI\00. Widget\00. Character\00. Player</Filter>
     </ClInclude>
-    <ClInclude Include="Object\BossMonstro.h">
-      <Filter>02. Object\00. Character\01. Monster\00. Boss\00. Monstro</Filter>
-    </ClInclude>
     <ClInclude Include="Object\Door.h">
       <Filter>02. Object\04. Door</Filter>
     </ClInclude>
@@ -777,6 +765,12 @@
     </ClInclude>
     <ClInclude Include="Object\EnemySmoke.h">
       <Filter>02. Object\02. Effect\02. Enemy\01. Smoke</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\MotherLeg.h">
+      <Filter>02. Object\00. Character\01. Monster\00. Boss\00. Part</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\MotherDoor.h">
+      <Filter>02. Object\00. Character\01. Monster\00. Boss\00. Part</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

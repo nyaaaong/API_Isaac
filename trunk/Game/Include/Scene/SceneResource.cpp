@@ -253,6 +253,11 @@ bool CSceneResource::SoundResume(const std::string& strName)
 	return CResourceManager::GetInst()->SoundResume(strName);
 }
 
+bool CSceneResource::IsPlaying(const std::string& strName)
+{
+	return CResourceManager::GetInst()->IsPlaying(strName);
+}
+
 CSound* CSceneResource::FindSound(const std::string& strName)
 {
 	std::unordered_map<std::string, CSharedPtr<CSound>>::iterator	iter = m_mapSound.find(strName);

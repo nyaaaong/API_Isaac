@@ -4,7 +4,6 @@
 #include "../Scene/Stage.h"
 #include "../Scene/SceneManager.h"
 #include "../Object/Player.h"
-#include "../Object/BossMonstro.h"
 
 bool CPlayerHUD::Init()
 {
@@ -62,12 +61,12 @@ void CPlayerHUD::Update(float fTime)
 			m_pBossHPEmptyBar->SetVisibility(true);
 			m_pBossHPBar->SetVisibility(true);
 
-			float fCurHP = m_pBossMonster->GetHP();
+			/*float fCurHP = m_pBossMonster->GetHP();
 
 			if (m_fPrevHP != fCurHP)
 				m_pBossHPBar->SetHP(fCurHP);
 
-			m_fPrevHP = fCurHP;
+			m_fPrevHP = fCurHP;*/
 			return;
 		}
 	}
@@ -82,7 +81,7 @@ void CPlayerHUD::SetPlayer(CCharacter* pPlayer)
 void CPlayerHUD::SetBossMonster(CCharacter* pBossMonster)
 {
 	m_pBossMonster = pBossMonster;
-	m_pBossHPBar->SetHP(m_pBossMonster->GetHP());
+	m_pBossHPBar->SetBoss(m_pBossMonster);
 }
 
 CPlayerHUD::CPlayerHUD()	:

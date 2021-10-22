@@ -1,6 +1,7 @@
 
 #include "Stage.h"
 #include "SceneManager.h"
+#include "../GameManager.h"
 #include "../Object/Player.h"
 #include "../Object/PlayerBody.h"
 #include "../Object/ObjManager.h"
@@ -9,6 +10,8 @@
 void CStage::CreatePlayer(const Vector2& tStartPos)
 {
 	Vector2 tPos;
+	Resolution	tRS = CGameManager::GetInst()->GetResolution();
+	const Vector2	tCenterPos = Vector2((float)tRS.iW * 0.5f, (float)tRS.iH * 0.5f);
 	const Vector2	tPrevPos = CSceneManager::GetInst()->GetPrevScenePlayerPos();
 	const Vector2	tFieldLT = GetFieldLT();
 	const Vector2	tFieldRB = GetFieldRB();
@@ -37,7 +40,10 @@ void CStage::CreatePlayer(const Vector2& tStartPos)
 	{
 		tPos = tStartPos;
 
-		if (tPos == Vector2::LEFT)
+		if (tPos == Vector2())
+			tPos = tCenterPos;
+
+		else if (tPos == Vector2::LEFT)
 			tPos = tDirL;
 
 		else if (tPos == Vector2::RIGHT)

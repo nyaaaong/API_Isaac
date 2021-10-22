@@ -1,14 +1,8 @@
 
 #include "BossRoom.h"
-#include "Room3.h"
 #include "SceneManager.h"
-#include "SceneResource.h"
-#include "../Input.h"
-#include "../Map/RoomMap.h"
 #include "../Map/MapManager.h"
-#include "../Object/BossMonstro.h"
 #include "../Object/MonsterSpawner.h"
-#include "../UI/PlayerHUD.h"
 
 bool CBossRoom::Init()
 {
@@ -22,12 +16,13 @@ bool CBossRoom::Init()
 
 	SetCurMapType(ESpecial_RoomType::Boss);
 
+	SetDoor(EDoorDir::DD_LEFT, DT_BOSS);
+	SetDoor(EDoorDir::DD_TOP, DT_BOSS);
 	SetDoor(EDoorDir::DD_RIGHT, DT_BOSS);
 	SetDoor(EDoorDir::DD_BOTTOM, DT_BOSS);
 
-	CreatePlayer(Vector2::RIGHT);
-	CMonsterSpawner::GetInst()->AddSpawnLocation();
-	//CMonsterSpawner::GetInst()->SetMonsterSpawnLocation(Vector2::LEFT);
+	CreatePlayer(Vector2());
+	CMonsterSpawner::GetInst()->AddBossSpawnLocation();
 
 	return true;
 }
@@ -36,24 +31,28 @@ void CBossRoom::Start()
 {
 	CRoomBase::Start();
 
-	CMonsterSpawner::GetInst()->CreateMonster();
+	CMonsterSpawner::GetInst()->CreateBossMonster();
 
-	// º¸½º bgm
-	//GetSceneResource()->LoadSound("BGM", true, "Stage1BGM", "Music/Stage1.ogg");
-	//GetSceneResource()->SoundPlay("Stage1BGM");
+	CSceneManager::GetInst()->ChangeMusic(EMusic_Type::Boss);
+}
 
-	//CInput::GetInst()->SetCallback<CBossRoom>("PlayerNextRoom", KS_DOWN, this, &CBossRoom::Next);
+bool CBossRoom::Update(float fTime)
+{
+	if (!CRoomBase::Update(fTime))
+		return false;
+
+	return true;
 }
 
 void CBossRoom::DoorFunc(EDoorDir eDoorDir)
 {
 	switch (eDoorDir)
 	{
+	case DD_LEFT:
+	case DD_TOP:
 	case DD_RIGHT:
-		MoveRoom<CRoom3>(Vector2::RIGHT);
-		break;
 	case DD_BOTTOM:
-		//MoveRoom<CRoom3>(Vector2::RIGHT);
+		//MoveRoom<CEnding>(Vector2::RIGHT);
 		break;
 	}
 }

@@ -1,5 +1,6 @@
 
 #include "Player.h"
+#include "../Scene/BossRoom.h"
 
 void CPlayer::CheatDie(float fTime)
 {
@@ -7,4 +8,11 @@ void CPlayer::CheatDie(float fTime)
 		return;
 
 	m_tInfo.fHP = 0.f;
+}
+
+void CPlayer::CheatBossRoom(float fTime)
+{
+	CStage* pStage = dynamic_cast<CStage*>(m_pScene);
+
+	pStage->MoveRoom<CBossRoom>(Vector2());
 }

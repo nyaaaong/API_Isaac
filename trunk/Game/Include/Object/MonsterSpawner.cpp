@@ -4,15 +4,19 @@
 #include "Pooter.h"
 #include "Fly.h"
 #include "RedFly.h"
-#include "BossMonstro.h"
+#include "Mother.h"
+#include "MotherLeg.h"
+#include "MotherDoor.h"
 #include "EnemyDie.h"
 #include "EnemySmoke.h"
 #include "MonsterBase.h"
+#include "../GameManager.h"
 #include "../Scene/Scene.h"
 #include "../Scene/RoomBase.h"
 #include "../Scene/SceneResource.h"
 #include "../Map/RoomMap.h"
 #include "../Map/MapManager.h"
+#include "../UI/PlayerHUD.h"
 
 CMonsterSpawner* CMonsterSpawner::m_pInst = nullptr;
 
@@ -60,28 +64,28 @@ void CMonsterSpawner::CreateMonsterPrototype()
 
 	m_vecSize.push_back(pCharger->GetSize());
 	m_vecPivot.push_back(pCharger->GetPivot());
-	m_vecOffset.push_back(pCharger->GetPivot());
+	m_vecOffset.push_back(pCharger->GetOffset());
 	m_vecName.push_back(pCharger->GetName());
 
 	CPooter* pPooter = m_pScene->CreatePrototype<CPooter>("Pooter");
 
 	m_vecSize.push_back(pPooter->GetSize());
 	m_vecPivot.push_back(pPooter->GetPivot());
-	m_vecOffset.push_back(pPooter->GetPivot());
+	m_vecOffset.push_back(pPooter->GetOffset());
 	m_vecName.push_back(pPooter->GetName());
 
 	CFly* pFly = m_pScene->CreatePrototype<CFly>("Fly");
 
 	m_vecSize.push_back(pFly->GetSize());
 	m_vecPivot.push_back(pFly->GetPivot());
-	m_vecOffset.push_back(pFly->GetPivot());
+	m_vecOffset.push_back(pFly->GetOffset());
 	m_vecName.push_back(pFly->GetName());
 
 	CRedFly* pRedFly = m_pScene->CreatePrototype<CRedFly>("RedFly");
 
 	m_vecSize.push_back(pRedFly->GetSize());
 	m_vecPivot.push_back(pRedFly->GetPivot());
-	m_vecOffset.push_back(pRedFly->GetPivot());
+	m_vecOffset.push_back(pRedFly->GetOffset());
 	m_vecName.push_back(pRedFly->GetName());
 }
 
@@ -101,15 +105,11 @@ void CMonsterSpawner::CreateBossMonsterPrototype()
 			return;
 	}
 
-	//CBossDie* pDie = m_pScene->CreatePrototype<CBossDie>("BossDieMonstro");
-	//pDie->SetType(EMonster_Type::Monstro);
+	CMother* pMother = m_pScene->CreatePrototype<CMother>("Mother");
+	m_vecBossName.push_back(pMother->GetName());
 
-	/*CBossMonstro* pMonstro = m_pScene->CreatePrototype<CBossMonstro>("Monstro");
-
-	m_vecBossSize.push_back(pMonstro->GetSize());
-	m_vecBossPivot.push_back(pMonstro->GetPivot());
-	m_vecBossOffset.push_back(pMonstro->GetPivot());
-	m_vecBossName.push_back(pMonstro->GetName());*/
+	m_pScene->CreatePrototype<CMotherLeg>("MotherLeg");
+	m_pScene->CreatePrototype<CMotherDoor>("MotherDoor");
 }
 
 void CMonsterSpawner::CreateMonster()
@@ -148,7 +148,7 @@ void CMonsterSpawner::CreateMonster()
 	m_pScene->GetSceneResource()->SoundPlay("DoorClose");
 }
 
-void CMonsterSpawner::CreateBossMonster(EBoss_Type eMonsterType)
+void CMonsterSpawner::CreateBossMonster()
 {
 	CRoomBase* pRoom = dynamic_cast<CRoomBase*>(m_pScene);
 	int iMonsterCount = pRoom->GetMonsterCount();
@@ -174,24 +174,13 @@ void CMonsterSpawner::CreateBossMonster(EBoss_Type eMonsterType)
 	size_t iSize = m_vecBossName.size();
 	int iIdx = 0;
 
-	std::string	strMonsterName;
-
-	switch (eMonsterType)
-	{
-	case EBoss_Type::Monstro:
-		strMonsterName = "Monstro";
-		break;
-	case EBoss_Type::Mother:
-		break;
-	}
-
 	for (; iIdx < iSize; ++iIdx)
 	{
-		if (m_vecBossName[iIdx] == strMonsterName)
+		if (m_vecBossName[iIdx] == "Mother")
 			break;
 	}
 
-	CreateMonster(m_vecBossName[iIdx]);
+	CreateBossMonster(m_vecBossName[iIdx]);
 
 	m_pScene->GetSceneResource()->SoundPlay("DoorClose");
 }
@@ -303,11 +292,43 @@ void CMonsterSpawner::CreateMonster(const std::string& strName)
 
 void CMonsterSpawner::CreateBossMonster(const std::string& strName)
 {
+	CMother* pMother = nullptr;
+
 	if (m_tSpawnPos == Vector2())
 		return;
 
-	else if (strName == "Monstro")
-		m_pScene->CreateObject<CBossMonstro>(strName, strName, m_tSpawnPos);
+	else if (strName == "Mother")
+	{
+		pMother = m_pScene->CreateObject<CMother>(strName, strName, m_tSpawnPos);
+
+		CMotherLeg* pLeg = dynamic_cast<CMotherLeg*>(m_pScene->CreateObject<CMotherLeg>("MotherLeg", "MotherLeg", m_tSpawnPos));
+
+		CMotherDoor* pDoor[DD_MAX] = {};
+
+		pDoor[DD_LEFT] = dynamic_cast<CMotherDoor*>(m_pScene->CreateObject<CMotherDoor>("MotherDoor", "MotherDoor", m_tSpawnPos));
+		pDoor[DD_TOP] = dynamic_cast<CMotherDoor*>(m_pScene->CreateObject<CMotherDoor>("MotherDoor", "MotherDoor", m_tSpawnPos));
+		pDoor[DD_RIGHT] = dynamic_cast<CMotherDoor*>(m_pScene->CreateObject<CMotherDoor>("MotherDoor", "MotherDoor", m_tSpawnPos));
+		pDoor[DD_BOTTOM] = dynamic_cast<CMotherDoor*>(m_pScene->CreateObject<CMotherDoor>("MotherDoor", "MotherDoor", m_tSpawnPos));
+
+		pMother->SetPart(pLeg, pDoor);
+
+		pLeg->SetMother(pMother);
+
+		pDoor[DD_LEFT]->SetMother(pMother);
+		pDoor[DD_LEFT]->SetDoorDir(DD_LEFT);
+
+		pDoor[DD_TOP]->SetMother(pMother);
+		pDoor[DD_TOP]->SetDoorDir(DD_TOP);
+
+		pDoor[DD_RIGHT]->SetMother(pMother);
+		pDoor[DD_RIGHT]->SetDoorDir(DD_RIGHT);
+		
+		pDoor[DD_BOTTOM]->SetMother(pMother);
+		pDoor[DD_BOTTOM]->SetDoorDir(DD_BOTTOM);
+	}
+
+	CPlayerHUD* pHUD = dynamic_cast<CStage*>(m_pScene)->GetPlayerHUD();
+	pHUD->SetBossMonster(pMother);
 }
 
 void CMonsterSpawner::AddSpawnLocation()
@@ -338,7 +359,7 @@ void CMonsterSpawner::AddSpawnLocation()
 	}
 }
 
-void CMonsterSpawner::AddBossSpawnLocation(EBoss_Type eType)
+void CMonsterSpawner::AddBossSpawnLocation()
 {
 	int iNum = m_pScene->GetCurMapNumber();
 
@@ -348,16 +369,10 @@ void CMonsterSpawner::AddBossSpawnLocation(EBoss_Type eType)
 			return;
 	}
 
-	CRoomMap* pCurMap = m_pScene->GetCurrentMap();
+	float	fResX = static_cast<float>(CGameManager::GetInst()->GetResolution().iW);
+	float	fResY = static_cast<float>(CGameManager::GetInst()->GetResolution().iH);
 
-	switch (eType)
-	{
-	case EBoss_Type::Monstro:
-		m_tSpawnPos = Vector2(m_pScene->GetFieldLT().x + 150.f, pCurMap->GetSize().y);
-		break;
-	case EBoss_Type::Mother:
-		break;
-	}
+	m_tSpawnPos = Vector2(fResX * 0.5f, fResY * 0.5f);
 }
 
 bool CMonsterSpawner::CheckSpawnPossible(const Vector2& tSize, const Vector2& tPivot, const Vector2& tOffset)

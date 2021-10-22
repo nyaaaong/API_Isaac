@@ -53,12 +53,13 @@ bool CRoomBase::Update(float fTime)
 			CMapManager::GetInst()->SetClearMap(iNum);
 	}
 
-	else if (eType != ESpecial_RoomType::None)
-	{
-		if (CMapManager::GetInst()->GetClearSpecialMap(GetCurMapType()))
-			CMapManager::GetInst()->SetSpecialClearMap(GetCurMapType());
-
+	else if (eType != ESpecial_RoomType::None && eType != ESpecial_RoomType::Boss)
 		CMapManager::GetInst()->SetSpecialClearMap(eType);
+
+	else if (eType == ESpecial_RoomType::Boss)
+	{
+		if (!CMapManager::GetInst()->GetClearSpecialMap(GetCurMapType()) && m_iMonsterCount == 0)
+			CMapManager::GetInst()->SetSpecialClearMap(GetCurMapType());
 	}
 
 	return true;

@@ -29,6 +29,7 @@ public:
 	bool SoundStop(const std::string& strName);
 	bool SoundPause(const std::string& strName);
 	bool SoundResume(const std::string& strName);
+	bool IsPlaying(const std::string& strName);
 	CSound* FindSound(const std::string& strName);
 
 public:

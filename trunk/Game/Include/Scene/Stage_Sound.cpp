@@ -28,6 +28,25 @@ void CStage::EnemySound()
 
 void CStage::BossSound()
 {
+	// 죽음
+	GetSceneResource()->LoadSound("Effect", false, "MotherDie", "Effect/Mother/Dead.wav");
+
+	// 공격 패턴
+	GetSceneResource()->LoadSound("Effect", false, "MotherAttack", "Effect/Mother/Attack.wav");
+
+	// 바닥에 발을 찍을때 충격파음
+	GetSceneResource()->LoadSound("Effect", false, "MotherAttackEnd", "Effect/Mother/AttackEnd.wav");
+
+	// 아이작!
+	GetSceneResource()->LoadSound("Effect", false, "MotherCall1", "Effect/Mother/Call1.wav");
+	GetSceneResource()->LoadSound("Effect", false, "MotherCall2", "Effect/Mother/Call2.wav");
+	GetSceneResource()->LoadSound("Effect", false, "MotherCall3", "Effect/Mother/Call3.wav");
+
+	// 피부 패턴
+	GetSceneResource()->LoadSound("Effect", false, "MotherSummon", "Effect/Mother/Summon.wav");
+
+	// 아이작 피격
+	GetSceneResource()->LoadSound("Effect", false, "MotherIsaacHit", "Effect/Mother/Isaac_Hit.wav");
 }
 
 void CStage::EffectSound()

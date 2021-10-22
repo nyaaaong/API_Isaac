@@ -58,8 +58,6 @@ bool CCharacter::Init()
 	if (!CObj::Init())
 		return false;
 
-	CreateAnimation();
-
 	return true;
 }
 

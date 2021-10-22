@@ -15,6 +15,9 @@ protected:
 
 private:
 	float	m_fPatternTimer;
+	bool	m_bFirstPattern; // 처음엔 무조건 발동하는 패턴
+	class CMotherLeg* m_pLeg;
+	class CMotherDoor* m_pDoor[DD_MAX];
 
 public:
 	virtual void Start();
@@ -23,12 +26,9 @@ public:
 	virtual void PostUpdate(float fTime);
 	virtual CMother* Clone();
 
-private:
-	void AddMotherAnimation();
-	void DetectPlayer(float fTime);
-	void MotherPattern(float fTime);
-
 public:
-	virtual void Move(const Vector2& tDir, float fSpeed, bool bUseField);
-	virtual void CollisionColliding(class CCollider* pSrc, class CCollider* pDest, float fTime);
+	void SetPart(class CMotherLeg* pLeg, class CMotherDoor** pDoor);
+
+private:
+	void MotherPattern(float fTime);
 };

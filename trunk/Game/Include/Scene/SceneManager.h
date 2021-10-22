@@ -50,6 +50,7 @@ public:
 
 public:
 	void MusicStart();
+	void ChangeMusic(EMusic_Type eType);
 
 private:
 	bool ChangeScene();
