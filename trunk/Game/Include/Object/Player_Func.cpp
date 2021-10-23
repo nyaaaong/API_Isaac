@@ -2,7 +2,9 @@
 #include "Player.h"
 #include "PlayerBody.h"
 #include "ObjManager.h"
+#include "ItemAddEffect.h"
 #include "../Input.h"
+#include "../GameManager.h"
 #include "../Scene/Scene.h"
 #include "../Scene/Stage.h"
 #include "../Scene/StartRoom.h"
@@ -85,4 +87,31 @@ void CPlayer::IsaacDeathEnd()
 	CObjManager::GetInst()->ResetPlayerHP();
 
 	dynamic_cast<CStage*>(m_pScene)->MoveRoom<CStartRoom>(Vector2::RIGHT);
+}
+
+void CPlayer::IsaacAddItemUpdater(float fTime)
+{
+	if (!m_bIsItemAnim)
+		return;
+
+	m_fAnimDelay += fTime;
+
+	if (m_fAnimDelay >= 1.f)
+	{
+		m_bIsItemAnim = false;
+		m_fAnimDelay = 0.f;
+		m_pPlayerBody->Invisible(false);
+		DefaultAnimation();
+		m_ItemAddEffect->Destroy();
+	}
+}
+
+void CPlayer::AddItem()
+{
+	m_ItemAddEffect = m_pScene->CreateObject<CItemAddEffect>("ItemAddEffect", "ItemAddEffect", Vector2(m_tPos.x + 10.f, m_tPos.y - 40.f), Vector2(96.f, 96.f));
+	m_pScene->GetSceneResource()->SoundPlay("ItemAdd");
+	ChangeAnimation("IsaacAddItem");
+	m_pPlayerBody->Invisible(true);
+	m_bIsItem = true;
+	m_bIsItemAnim = true;
 }

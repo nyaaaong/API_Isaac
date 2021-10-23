@@ -85,6 +85,12 @@ void CSound::Resume()
 	m_bPlay = true;
 }
 
+void CSound::Update()
+{
+	if (m_pChannel)
+		m_pChannel->isPlaying(&m_bPlay);
+}
+
 CSound::CSound()	:
 	m_pSystem(nullptr),
 	m_pSound(nullptr),

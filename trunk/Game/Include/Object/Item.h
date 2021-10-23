@@ -10,6 +10,7 @@ class CItem :
 protected:
 	class CPlayer* m_pPlayer;
 	float	m_fValue;
+	
 
 public:
 	void SetPlayer(class CPlayer* pPlayer)

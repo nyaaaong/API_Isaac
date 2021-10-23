@@ -3,7 +3,7 @@
 
 #include "../GameInfo.h"
 #include "Scene.h"
-#include "../Object/Character.h"
+#include "../Object/Player.h"
 #include "../Object/ObjManager.h"
 
 class CSceneManager
@@ -99,10 +99,10 @@ public:
 	template <typename T>
 	bool CreateScene()
 	{
-		CCharacter* pPlayer = dynamic_cast<CCharacter*>(m_pScene->GetPlayer());
+		CPlayer* pPlayer = dynamic_cast<CPlayer*>(m_pScene->GetPlayer());
 
 		if (pPlayer)
-			CObjManager::GetInst()->PushPlayerInfo(pPlayer->GetInfo());
+			CObjManager::GetInst()->PushPlayerInfo(pPlayer);
 
 		m_pNextScene = new T;
 

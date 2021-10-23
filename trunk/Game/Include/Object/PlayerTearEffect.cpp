@@ -12,10 +12,7 @@ bool CPlayerTearEffect::Init()
 
 	SetPivot(0.5f, 0.5f);
 
-	CreateAnimation();
 	AddAnimation("PlayerTearDrop", false, 0.3f);
-
-	SetAnimationEndNotify<CPlayerTearEffect>("PlayerTearDrop", this, &CPlayerTearEffect::AnimationFinish);
 
 	return true;
 }

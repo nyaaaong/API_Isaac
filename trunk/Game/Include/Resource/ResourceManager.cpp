@@ -394,6 +394,15 @@ bool CResourceManager::Init()
 void CResourceManager::Update()
 {
 	m_pSystem->update();
+
+	std::unordered_map<std::string, CSharedPtr<CSound>>::iterator	iter = m_mapSound.begin();
+	std::unordered_map<std::string, CSharedPtr<CSound>>::iterator	iterEnd = m_mapSound.end();
+
+	for (; iter != iterEnd; ++iter)
+	{
+		if (iter->second)
+			iter->second->Update();
+	}
 }
 
 CResourceManager::CResourceManager()	:

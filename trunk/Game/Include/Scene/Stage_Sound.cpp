@@ -67,4 +67,7 @@ void CStage::EffectSound()
 	// ÇÏÆ® È¹µæ, µå¶ø
 	GetSceneResource()->LoadSound("Effect", false, "HeartAdd", "Effect/Item/Heart_Add.mp3");
 	GetSceneResource()->LoadSound("Effect", false, "HeartDrop", "Effect/Item/Heart_Drop.mp3");
+	
+	// ¾ÆÀÌÅÛ È¹µæ
+	GetSceneResource()->LoadSound("Effect", false, "ItemAdd", "Effect/Item/Item_Add.wav");
 }

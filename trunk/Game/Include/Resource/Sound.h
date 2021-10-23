@@ -33,6 +33,7 @@ public:
 	void Stop();
 	void Pause();
 	void Resume();
+	void Update();
 
 private:
 	CSound();

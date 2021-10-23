@@ -418,8 +418,7 @@ void CMonsterSpawner::CreateHeart(const Vector2& tPos)
 	if (fPercent > 20.f)
 		return;
 
-	if (!m_pScene->GetSceneResource()->IsPlaying("HeartDrop"))
-		m_pScene->GetSceneResource()->SoundPlay("HeartDrop");
+	m_pScene->GetSceneResource()->SoundPlay("HeartDrop");
 
 	CHeart*	pHeart = m_pScene->CreateObject<CHeart>("Heart", "Heart", tPos, Vector2(96.f, 96.f));
 	pHeart->SetPlayer(dynamic_cast<CPlayer*>(m_pScene->GetPlayer()));

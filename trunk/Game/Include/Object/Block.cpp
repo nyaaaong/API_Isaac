@@ -110,6 +110,9 @@ void CBlock::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
 
 			PushCollider(pSrc, pDest);
 		}
+
+		else if (strName == "PlayerBody")
+			PushCollider(pSrc, pDest);
 	}
 }
 

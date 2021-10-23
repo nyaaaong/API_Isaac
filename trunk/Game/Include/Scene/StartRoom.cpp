@@ -38,33 +38,6 @@ void CStartRoom::Start()
 	CSceneManager::GetInst()->MusicStart();
 }
 
-bool CStartRoom::Update(float fTime)
-{
-	CRoomBase::Update(fTime);
-
-	return true;
-}
-
-bool CStartRoom::PostUpdate(float fTime)
-{
-	CRoomBase::PostUpdate(fTime);
-
-	return true;
-}
-
-bool CStartRoom::Collision(float fTime)
-{
-	CRoomBase::Collision(fTime);
-
-	return true;}
-
-bool CStartRoom::Render(HDC hDC)
-{
-	CRoomBase::Render(hDC);
-
-	return true;
-}
-
 void CStartRoom::DoorFunc(EDoorDir eDoorDir)
 {
 	switch (eDoorDir)

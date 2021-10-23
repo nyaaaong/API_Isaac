@@ -24,9 +24,6 @@ public:
 public:
 	virtual void Start();
 	virtual bool Init();
-	virtual void Update(float fTime);
-	virtual void PostUpdate(float fTime);
-	virtual void Collision(float fTime);
 	virtual void Render(HDC hDC);
 	virtual CPlayerBody* Clone();
 

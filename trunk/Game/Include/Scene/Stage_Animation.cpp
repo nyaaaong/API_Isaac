@@ -10,6 +10,7 @@ void CStage::LoadAnimationSequence()
 	BossAnimation();
 	TearAnimation();
 	BombAnimation();
+	ItemAnimation();
 
 	CSceneManager::GetInst()->InputAnimFrameData();
 }
@@ -33,6 +34,23 @@ void CStage::PlayerAnimation()
 	GetSceneResource()->CreateAnimationSequence("HeadIdleRight", "HeadIdleRight", TEXT("Player/Head/Idle_Right.bmp"));
 	GetSceneResource()->SetTextureColorKey("HeadIdleRight");
 	GetSceneResource()->AddAnimationFrameData("HeadIdleRight", Vector2(0.f, 0.f), Vector2(84.f, 75.f));
+
+	// -------------- ItemIdle --------------
+	GetSceneResource()->CreateAnimationSequence("HeadItemIdleUp", "HeadItemIdleUp", TEXT("Player/Head/Item/Idle_Up.bmp"));
+	GetSceneResource()->SetTextureColorKey("HeadItemIdleUp");
+	GetSceneResource()->AddAnimationFrameData("HeadItemIdleUp", Vector2(0.f, 0.f), Vector2(84.f, 75.f));
+
+	GetSceneResource()->CreateAnimationSequence("HeadItemIdleLeft", "HeadItemIdleLeft", TEXT("Player/Head/Item/Idle_Left.bmp"));
+	GetSceneResource()->SetTextureColorKey("HeadItemIdleLeft");
+	GetSceneResource()->AddAnimationFrameData("HeadItemIdleLeft", Vector2(0.f, 0.f), Vector2(84.f, 75.f));
+
+	GetSceneResource()->CreateAnimationSequence("HeadItemIdleDown", "HeadItemIdleDown", TEXT("Player/Head/Item/Idle_Down.bmp"));
+	GetSceneResource()->SetTextureColorKey("HeadItemIdleDown");
+	GetSceneResource()->AddAnimationFrameData("HeadItemIdleDown", Vector2(0.f, 0.f), Vector2(84.f, 75.f));
+
+	GetSceneResource()->CreateAnimationSequence("HeadItemIdleRight", "HeadItemIdleRight", TEXT("Player/Head/Item/Idle_Right.bmp"));
+	GetSceneResource()->SetTextureColorKey("HeadItemIdleRight");
+	GetSceneResource()->AddAnimationFrameData("HeadItemIdleRight", Vector2(0.f, 0.f), Vector2(84.f, 75.f));
 
 	// -------------- Fire --------------
 
@@ -66,6 +84,40 @@ void CStage::PlayerAnimation()
 	for (int i = 0; i < 3; ++i)
 	{
 		GetSceneResource()->AddAnimationFrameData("HeadFireRight", Vector2(i * 84.f, 0.f), Vector2(84.f, 75.f));
+	}
+
+	// -------------- ItemFire --------------
+
+	GetSceneResource()->CreateAnimationSequence("HeadItemFireUp", "HeadItemFireUp", TEXT("Player/Head/Item/Fire_Up.bmp"));
+	GetSceneResource()->SetTextureColorKey("HeadItemFireUp");
+
+	for (int i = 0; i < 3; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("HeadItemFireUp", Vector2(i * 84.f, 0.f), Vector2(84.f, 75.f));
+	}
+
+	GetSceneResource()->CreateAnimationSequence("HeadItemFireLeft", "HeadItemFireLeft", TEXT("Player/Head/Item/Fire_Left.bmp"));
+	GetSceneResource()->SetTextureColorKey("HeadItemFireLeft");
+
+	for (int i = 0; i < 3; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("HeadItemFireLeft", Vector2(i * 84.f, 0.f), Vector2(84.f, 75.f));
+	}
+
+	GetSceneResource()->CreateAnimationSequence("HeadItemFireDown", "HeadItemFireDown", TEXT("Player/Head/Item/Fire_Down.bmp"));
+	GetSceneResource()->SetTextureColorKey("HeadItemFireDown");
+
+	for (int i = 0; i < 3; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("HeadItemFireDown", Vector2(i * 84.f, 0.f), Vector2(84.f, 75.f));
+	}
+
+	GetSceneResource()->CreateAnimationSequence("HeadItemFireRight", "HeadItemFireRight", TEXT("Player/Head/Item/Fire_Right.bmp"));
+	GetSceneResource()->SetTextureColorKey("HeadItemFireRight");
+
+	for (int i = 0; i < 3; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("HeadItemFireRight", Vector2(i * 84.f, 0.f), Vector2(84.f, 75.f));
 	}
 
 	// ============== Body ==============
@@ -137,6 +189,12 @@ void CStage::PlayerAnimation()
 	{
 		GetSceneResource()->AddAnimationFrameData("IsaacDeath", Vector2(128.f * i, 0.f), Vector2(128.f, 128.f));
 	}
+
+	// -------------- AddItem --------------
+
+	GetSceneResource()->CreateAnimationSequence("IsaacAddItem", "IsaacAddItem", TEXT("Player/Item/Player_AddItem.bmp"));
+	GetSceneResource()->SetTextureColorKey("IsaacAddItem");
+	GetSceneResource()->AddAnimationFrameData("IsaacAddItem", Vector2(0.f, 0.f), Vector2(84.f, 93.f));
 }
 
 void CStage::EnemyAnimation()
@@ -407,6 +465,20 @@ void CStage::BombAnimation()
 		for (int j = 0; j < 4; ++j)
 		{
 			GetSceneResource()->AddAnimationFrameData("BombExplosion", Vector2(j * 288.f, i * 288.f), Vector2(288.f, 288.f));
+		}
+	}
+}
+
+void CStage::ItemAnimation()
+{
+	GetSceneResource()->CreateAnimationSequence("ItemAddEffect", "ItemAddEffect", TEXT("Item/Item_Add_Animation.bmp"));
+	GetSceneResource()->SetTextureColorKey("ItemAddEffect");
+
+	for (int i = 0; i < 3; ++i)
+	{
+		for (int j = 0; j < 4; ++j)
+		{
+			GetSceneResource()->AddAnimationFrameData("ItemAddEffect", Vector2(j * 96.f, i * 96.f), Vector2(96.f, 96.f));
 		}
 	}
 }

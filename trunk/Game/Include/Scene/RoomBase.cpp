@@ -16,8 +16,7 @@ void CRoomBase::SubMonsterCount()
 
 		if (m_iBossMonsterCount <= 0)
 		{
-			if (!GetSceneResource()->IsPlaying("DoorOpen"))
-				GetSceneResource()->SoundPlay("DoorOpen");
+			GetSceneResource()->SoundPlay("DoorOpen");
 		}
 	}
 }
@@ -32,8 +31,7 @@ void CRoomBase::SubBossMonsterCount()
 
 		if (m_iMonsterCount <= 0)
 		{
-			if (!GetSceneResource()->IsPlaying("DoorOpen"))
-				GetSceneResource()->SoundPlay("DoorOpen");
+			GetSceneResource()->SoundPlay("DoorOpen");
 		}
 	}
 }

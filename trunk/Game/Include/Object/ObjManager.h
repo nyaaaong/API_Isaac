@@ -30,12 +30,14 @@ public:
 
 private:
 	CharacterInfo	m_tPlayerInfo;
+	bool	m_bIsItem;
 	bool	m_bChangedInfo;
 
 public:
-	void SetPlayerInfo(const CharacterInfo& pInfo)
+	void SetPlayerInfo(const CharacterInfo& pInfo, bool bIsItem)
 	{
 		m_tPlayerInfo = pInfo;
+		m_bIsItem = bIsItem;
 	}
 
 public:
@@ -44,14 +46,19 @@ public:
 		return m_bChangedInfo;
 	}
 
+	bool IsItem()	const
+	{
+		return m_bIsItem;
+	}
+
 	const CharacterInfo& GetPlayerInfo()	const
 	{
 		return m_tPlayerInfo;
 	}
 
 public:
-	void PushPlayerInfo(const CharacterInfo& tInfo);
-	void PullPlayerInfo(CharacterInfo& tInfo);
+	void PushPlayerInfo(class CPlayer* pPlayer);
+	void PullPlayerInfo(class CPlayer* pPlayer);
 	void ResetPlayerHP();
 };
 

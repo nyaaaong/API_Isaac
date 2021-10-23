@@ -2,12 +2,12 @@
 
 #include "Character.h"
 
-
 class CPlayer :
     public CCharacter
 {
 	friend class CScene;
 	friend class CPlayerBody;
+	friend class CObjManager;
 
 private:
 	bool	m_bIsFire;
@@ -25,8 +25,17 @@ private:
 	Vector2	m_tMoveDir;
 	bool	m_bDie;	// 중복되서 들어오지 않도록
 	class CMother* m_pMother;
+	float	m_fAnimDelay;
+	bool	m_bIsItem;
+	CObj* m_ItemAddEffect;
+	bool	m_bIsItemAnim;
 
 public:
+	bool IsItem()	const
+	{
+		return m_bIsItem;
+	}
+
 	bool IsMove()	const
 	{
 		return m_bIsMove;
@@ -53,9 +62,14 @@ private:
 
 protected:
 	virtual void SetFireStart();
+	virtual void SetItemFireStart();
+
+public:
+	void AddItem();
 
 private:
 	void AddPlayerAnimation();
+	void AddNotify();
 	void AddCallback();
 	void ChangeDirAnimation(const std::string& strAnimType);
 	void DefaultAnimation();
@@ -72,9 +86,11 @@ private:
 	void FireLeft(float fTime);
 	void FireRight(float fTime);
 	void FireEnd();
+	void ItemFireEnd();
 	void Bomb(float fTime);
 	void IsaacDeath(float fTime);
 	void IsaacDeathEnd();
+	void IsaacAddItemUpdater(float fTime);
 
 private:
 	void CheatDie(float fTime);

@@ -8,6 +8,7 @@
 #include "../Object/Door.h"
 #include "../Object/MonsterSpawner.h"
 #include "../Object/Heart.h"
+#include "../Object/ItemAddEffect.h"
 
 void CStage::CreatePrototypes()
 {
@@ -28,4 +29,6 @@ void CStage::CreatePrototypes()
 	CMonsterSpawner::GetInst()->CreateBossMonsterPrototype();
 
 	CHeart* pHeart = CreatePrototype<CHeart>("Heart");
+
+	CItemAddEffect* pItemAddEffect = CreatePrototype<CItemAddEffect>("ItemAddEffect");
 }

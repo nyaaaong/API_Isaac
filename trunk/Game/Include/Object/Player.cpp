@@ -17,7 +17,7 @@ bool CPlayer::Init()
 
 	AddPlayerAnimation();
 
-	CObjManager::GetInst()->PullPlayerInfo(m_tInfo);
+	CObjManager::GetInst()->PullPlayerInfo(this);
 
 	return true;
 }
@@ -26,6 +26,7 @@ void CPlayer::Start()
 {
 	CCharacter::Start();
 
+	AddNotify();
 	AddCallback();
 
 	m_pPlayerBody = dynamic_cast<CPlayerBody*>(m_pScene->GetPlayerBody());
@@ -45,6 +46,8 @@ void CPlayer::Update(float fTime)
 	NoDamageTime(fTime);
 
 	UpdateMoveUpDown();
+
+	IsaacAddItemUpdater(fTime);
 }
 
 void CPlayer::PostUpdate(float fTime)
@@ -55,7 +58,11 @@ void CPlayer::PostUpdate(float fTime)
 		!CInput::GetInst()->GetKeyPush("PlayerMoveUp") &&
 		!CInput::GetInst()->GetKeyPush("PlayerMoveDown") &&
 		!CInput::GetInst()->GetKeyPush("PlayerMoveLeft") &&
-		!CInput::GetInst()->GetKeyPush("PlayerMoveRight"))
+		!CInput::GetInst()->GetKeyPush("PlayerMoveRight")&&
+		!CInput::GetInst()->GetKeyPush("PlayerItemMoveUp") &&
+		!CInput::GetInst()->GetKeyPush("PlayerItemMoveDown") &&
+		!CInput::GetInst()->GetKeyPush("PlayerItemMoveLeft") &&
+		!CInput::GetInst()->GetKeyPush("PlayerItemMoveRight"))
 		DefaultAnimation();
 
 	if (!m_bDie && m_tInfo.fHP <= 0.f)
@@ -116,7 +123,11 @@ CPlayer::CPlayer() :
 	m_fBlinkTimer(0.f),
 	m_fBlinkSpeed(0.2f),
 	m_bDie(false),
-	m_pMother(nullptr)
+	m_pMother(nullptr),
+	m_fAnimDelay(0.f),
+	m_bIsItem(false),
+	m_ItemAddEffect(nullptr),
+	m_bIsItemAnim(false)
 {
 	m_tInfo.fAttack = 3.f;
 	m_tInfo.fHP = PLAYER_HP_MAX;
@@ -134,7 +145,9 @@ CPlayer::CPlayer(const CPlayer& obj) :
 	m_bMoveDown(false),
 	m_bMoveUp(false),
 	m_pPlayerBody(obj.m_pPlayerBody),
-	m_bDie(false)
+	m_bDie(false),
+	m_ItemAddEffect(nullptr),
+	m_bIsItemAnim(false)
 {
 	m_fSkill1Time = obj.m_fSkill1Time;
 	m_tInfo = obj.m_tInfo;
@@ -145,6 +158,8 @@ CPlayer::CPlayer(const CPlayer& obj) :
 	m_fBlinkTimer = obj.m_fBlinkTimer;
 	m_fBlinkSpeed = obj.m_fBlinkSpeed;
 	m_pMother = obj.m_pMother;
+	m_fAnimDelay = 0.f;
+	m_bIsItem = obj.m_bIsItem;
 }
 
 CPlayer::~CPlayer()

@@ -40,6 +40,7 @@ private:
 	void BossAnimation();
 	void TearAnimation();
 	void BombAnimation();
+	void ItemAnimation();
 
 private:
 	void PlayerSound();

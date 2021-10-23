@@ -39,24 +39,6 @@ void CPlayerBody::Start()
 	m_pColliderBox->SetCollisionProfile("PlayerBody");
 }
 
-void CPlayerBody::Update(float fTime)
-{
-	CObj::Update(fTime);
-}
-
-void CPlayerBody::PostUpdate(float fTime)
-{
-	CObj::PostUpdate(fTime);
-}
-
-void CPlayerBody::Collision(float fTime)
-{
-	//if (m_bInvisible)
-	//	return;
-
-	CObj::Collision(fTime);
-}
-
 void CPlayerBody::Render(HDC hDC)
 {
 	if (m_bInvisible)

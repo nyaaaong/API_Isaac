@@ -1,17 +1,22 @@
 
 #include "ItemRock.h"
 #include "Player.h"
+#include "ItemGlasses.h"
 #include "../Scene/Scene.h"
 #include "../Scene/SceneResource.h"
 #include "../Collision/ColliderBox.h"
 
-CItemRock::CItemRock()
+CItemRock::CItemRock()	:
+	m_pItemGlasses(nullptr),
+	m_bHasItem(true)
 {
 }
 
 CItemRock::CItemRock(const CItemRock& obj)	:
 	CObj(obj)
 {
+	m_pItemGlasses = obj.m_pItemGlasses;
+	m_bHasItem = obj.m_bHasItem;
 }
 
 CItemRock::~CItemRock()
@@ -39,12 +44,23 @@ void CItemRock::Start()
 	m_pColliderBox = AddCollider<CColliderBox>("ItemRock");
 	m_pColliderBox->SetExtent(m_tSize);
 	m_pColliderBox->SetCollisionProfile("Object");
+	m_pColliderBox->SetCollisionBeginFunc<CItemRock>(this, &CItemRock::CollisionBegin);
 	m_pColliderBox->SetCollisionCollidingFunc<CItemRock>(this, &CItemRock::CollisionColliding);
 }
 
-void CItemRock::Collision(float fTime)
+void CItemRock::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 {
-	CObj::Collision(fTime);
+	if (!m_bHasItem)
+		return;
+
+	if (pDest->GetName() == "PlayerBody")
+	{
+		CPlayer* pPlayer = dynamic_cast<CPlayer*>(m_pScene->GetPlayer());
+
+		pPlayer->AddItem();
+		m_pItemGlasses->Destroy();
+		m_bHasItem = false;
+	}
 }
 
 void CItemRock::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)

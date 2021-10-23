@@ -216,6 +216,9 @@
     <Filter Include="02. Object\00. Character\01. Monster\00. Boss\00. Part">
       <UniqueIdentifier>{78a8b2b0-42d8-4419-9d78-8c3955a49c9f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Object\02. Effect\03. Item">
+      <UniqueIdentifier>{623592cb-8933-48c8-acbb-760afa603338}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -518,6 +521,12 @@
     <ClCompile Include="Object\EnemySmokeNormal.cpp">
       <Filter>02. Object\02. Effect\02. Enemy\01. Smoke</Filter>
     </ClCompile>
+    <ClCompile Include="Object\ItemGlasses.cpp">
+      <Filter>02. Object\05. Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\ItemAddEffect.cpp">
+      <Filter>02. Object\02. Effect\03. Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameInfo.h">
@@ -777,6 +786,12 @@
     </ClInclude>
     <ClInclude Include="Object\EnemySmokeNormal.h">
       <Filter>02. Object\02. Effect\02. Enemy\01. Smoke</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\ItemGlasses.h">
+      <Filter>02. Object\05. Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\ItemAddEffect.h">
+      <Filter>02. Object\02. Effect\03. Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

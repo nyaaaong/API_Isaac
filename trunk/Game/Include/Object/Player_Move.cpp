@@ -22,7 +22,7 @@ void CPlayer::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 
 void CPlayer::MoveUp(float fTime)
 {
-	if (m_bDie)
+	if (m_bDie || m_bIsItemAnim)
 		return;
 
 	m_bIsMove = true;
@@ -33,7 +33,12 @@ void CPlayer::MoveUp(float fTime)
 	if (!m_bIsFire)
 	{
 		SetBulletStartDir(Vector2::UP);
-		ChangeDirAnimation("HeadIdle");
+
+		if (m_bIsItem)
+			ChangeDirAnimation("HeadItemIdle");
+
+		else
+			ChangeDirAnimation("HeadIdle");
 	}
 
 	m_pPlayerBody->ChangeAnimation("BodyMoveUp");
@@ -42,7 +47,7 @@ void CPlayer::MoveUp(float fTime)
 
 void CPlayer::MoveDown(float fTime)
 {
-	if (m_bDie)
+	if (m_bDie || m_bIsItemAnim)
 		return;
 
 	m_bIsMove = true;
@@ -53,7 +58,12 @@ void CPlayer::MoveDown(float fTime)
 	if (!m_bIsFire)
 	{
 		SetBulletStartDir(Vector2::DOWN);
-		ChangeDirAnimation("HeadIdle");
+
+		if (m_bIsItem)
+			ChangeDirAnimation("HeadItemIdle");
+
+		else
+			ChangeDirAnimation("HeadIdle");
 	}
 
 	m_pPlayerBody->ChangeAnimation("BodyMoveDown");
@@ -62,7 +72,7 @@ void CPlayer::MoveDown(float fTime)
 
 void CPlayer::MoveLeft(float fTime)
 {
-	if (m_bDie)
+	if (m_bDie || m_bIsItemAnim)
 		return;
 
 	m_bIsMove = true;
@@ -74,7 +84,13 @@ void CPlayer::MoveLeft(float fTime)
 		SetBulletStartDir(Vector2::LEFT);
 
 		if (!CheckMoveUpDown())
-			ChangeDirAnimation("HeadIdle");
+		{
+			if (m_bIsItem)
+				ChangeDirAnimation("HeadItemIdle");
+
+			else
+				ChangeDirAnimation("HeadIdle");
+		}
 	}
 
 	if (!CheckMoveUpDown())
@@ -86,7 +102,7 @@ void CPlayer::MoveLeft(float fTime)
 
 void CPlayer::MoveRight(float fTime)
 {
-	if (m_bDie)
+	if (m_bDie || m_bIsItemAnim)
 		return;
 
 	m_bIsMove = true;
@@ -98,7 +114,13 @@ void CPlayer::MoveRight(float fTime)
 		SetBulletStartDir(Vector2::RIGHT);
 
 		if (!CheckMoveUpDown())
-			ChangeDirAnimation("HeadIdle");
+		{
+			if (m_bIsItem)
+				ChangeDirAnimation("HeadItemIdle");
+
+			else
+				ChangeDirAnimation("HeadIdle");
+		}
 	}
 
 	if (!CheckMoveUpDown())

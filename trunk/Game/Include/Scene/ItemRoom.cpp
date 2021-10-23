@@ -3,6 +3,7 @@
 #include "Room1.h"
 #include "SceneResource.h"
 #include "../Object/ItemRock.h"
+#include "../Object/ItemGlasses.h"
 #include "../Map/MapManager.h"
 
 CItemRoom::CItemRoom()
@@ -27,6 +28,11 @@ bool CItemRoom::Init()
 
 	CItemRock* pItemRock = CreateObject<CItemRock>("ItemRock", Vector2(tFieldRB.x * 0.55f, tFieldRB.y * 0.6f), Vector2(81.f, 63.f));
 
+	Vector2	tRockPos = pItemRock->GetPos();
+	CItemGlasses* pItem = CreateObject<CItemGlasses>("ItemGlasses", Vector2(tRockPos.x - 5.f, tRockPos.y - 40.f), Vector2(96.f, 96.f));
+	
+	pItemRock->SetItem(pItem);
+
 	SetDoor(DD_RIGHT, DT_ITEM);
 
 	CreatePlayer(Vector2::RIGHT);
@@ -39,6 +45,7 @@ bool CItemRoom::Init()
 
 void CItemRoom::Start()
 {
+	CRoomBase::Start();
 }
 
 void CItemRoom::DoorFunc(EDoorDir eDoorDir)

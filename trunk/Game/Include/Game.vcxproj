@@ -188,6 +188,8 @@
     <ClCompile Include="Object\Fly.cpp" />
     <ClCompile Include="Object\Heart.cpp" />
     <ClCompile Include="Object\Item.cpp" />
+    <ClCompile Include="Object\ItemAddEffect.cpp" />
+    <ClCompile Include="Object\ItemGlasses.cpp" />
     <ClCompile Include="Object\ItemRock.cpp" />
     <ClCompile Include="Object\Menu.cpp" />
     <ClCompile Include="Object\MonsterBase.cpp" />
@@ -300,6 +302,8 @@
     <ClInclude Include="Object\Fly.h" />
     <ClInclude Include="Object\Heart.h" />
     <ClInclude Include="Object\Item.h" />
+    <ClInclude Include="Object\ItemAddEffect.h" />
+    <ClInclude Include="Object\ItemGlasses.h" />
     <ClInclude Include="Object\ItemRock.h" />
     <ClInclude Include="Object\Menu.h" />
     <ClInclude Include="Object\MonsterBase.h" />
