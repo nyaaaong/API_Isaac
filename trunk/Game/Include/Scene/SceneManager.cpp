@@ -9,10 +9,12 @@ CSceneManager* CSceneManager::m_pInst = nullptr;
 
 void CSceneManager::MusicStart()
 {
+	if (m_pResource->IsPlaying("Stage1BGM"))
+		return;
+
 	m_pResource->SetVolume("BGM", 10);
 	m_pResource->SetVolume("Effect", 30);
 
-	m_pResource->SoundStop("Stage1BGM");
 	m_pResource->SoundStop("BossBGM");
 	m_pResource->SoundStop("BossClearBGM");
 

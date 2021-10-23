@@ -101,7 +101,10 @@ void CBlock::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
 
 	else if (m_eType == MT_ROCK || m_eType == MT_IRON || m_eType == MT_POOP)
 	{
-		if (strObjName == "Charger")
+		if (strName == "Heart")
+			PushCollider(pSrc, pDest);
+
+		else if (strObjName == "Charger")
 		{
 			dynamic_cast<CMonsterBase*>(pDestObj)->BlockCollision();
 

@@ -13,8 +13,7 @@
 
 CCharger::CCharger()	:
 	m_fSpikeDelay(1.f),
-	m_fPatternTimer(2.f),
-	m_bSound(false)
+	m_fPatternTimer(2.f)
 {
 	m_fMaxDist = 300.f;
 
@@ -27,8 +26,7 @@ CCharger::CCharger()	:
 CCharger::CCharger(const CCharger& obj):
 	CMonsterBase(obj),
 	m_fSpikeDelay(1.f),
-	m_fPatternTimer(2.f),
-	m_bSound(false)
+	m_fPatternTimer(2.f)
 {
 }
 
@@ -124,8 +122,8 @@ void CCharger::DetectPlayer(float fTime)
 {
 	if (m_fM4PDist <= m_fMaxDist)
 	{
-		if (!m_bSound)
-			m_bSound = m_pScene->GetSceneResource()->SoundPlay("ChargerAttack");
+		if (!m_pScene->GetSceneResource()->IsPlaying("ChargerAttack"))
+			m_pScene->GetSceneResource()->SoundPlay("ChargerAttack");
 
 		GetM2PDir();
 
@@ -159,8 +157,6 @@ void CCharger::DetectPlayer(float fTime)
 
 void CCharger::ChagerPattern(float fTime)
 {
-	m_bSound = false;
-
 	m_fPatternTimer += fTime;
 
 	if (m_fPatternTimer >= 2.f)

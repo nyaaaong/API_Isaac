@@ -7,6 +7,16 @@ class CItem :
 {
 	friend class CScene;
 
+protected:
+	class CPlayer* m_pPlayer;
+	float	m_fValue;
+
+public:
+	void SetPlayer(class CPlayer* pPlayer)
+	{
+		m_pPlayer = pPlayer;
+	}
+
 public:
 	virtual void CollisionBegin(class CCollider* pSrc, class CCollider* pDest, float fTime);
 

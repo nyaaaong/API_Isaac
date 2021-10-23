@@ -57,5 +57,6 @@ private:
 	void CreateMonster(const std::string& strName);
 	void CreateBossMonster(const std::string& strName);
 	bool CheckSpawnPossible(const Vector2& tSize, const Vector2& tPivot, const Vector2& tOffset);
+	void CreateHeart(const Vector2& tPos);
 };
 

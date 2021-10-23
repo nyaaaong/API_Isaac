@@ -16,7 +16,6 @@ protected:
 private:
 	float	m_fSpikeDelay;
 	float	m_fPatternTimer;
-	bool	m_bSound;
 	Vector2	m_tPlayerPos;
 
 public:

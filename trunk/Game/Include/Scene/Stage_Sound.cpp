@@ -63,4 +63,8 @@ void CStage::EffectSound()
 	// ¹æ ´ÝÈû, ¿­¸²
 	GetSceneResource()->LoadSound("Effect", false, "DoorClose", "Effect/Door_Close.wav");
 	GetSceneResource()->LoadSound("Effect", false, "DoorOpen", "Effect/Door_Open.wav");
+
+	// ÇÏÆ® È¹µæ, µå¶ø
+	GetSceneResource()->LoadSound("Effect", false, "HeartAdd", "Effect/Item/Heart_Add.mp3");
+	GetSceneResource()->LoadSound("Effect", false, "HeartDrop", "Effect/Item/Heart_Drop.mp3");
 }

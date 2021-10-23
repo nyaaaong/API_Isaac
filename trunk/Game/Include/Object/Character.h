@@ -64,6 +64,14 @@ public:
 	}
 
 public:
+	void AddHP(float fHP)
+	{
+		m_tInfo.fHP += fHP;
+
+		if (m_tInfo.fHP > m_tInfo.fHPMax)
+			m_tInfo.fHP = m_tInfo.fHPMax;
+	}
+
 	void SetBulletStartDir(const Vector2& tDir)
 	{
 		m_tBulletStartDir = tDir;

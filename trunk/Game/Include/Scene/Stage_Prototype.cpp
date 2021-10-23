@@ -7,6 +7,7 @@
 #include "../Object/BombExplosionEffect.h"
 #include "../Object/Door.h"
 #include "../Object/MonsterSpawner.h"
+#include "../Object/Heart.h"
 
 void CStage::CreatePrototypes()
 {
@@ -25,4 +26,6 @@ void CStage::CreatePrototypes()
 
 	CMonsterSpawner::GetInst()->CreateMonsterPrototype();
 	CMonsterSpawner::GetInst()->CreateBossMonsterPrototype();
+
+	CHeart* pHeart = CreatePrototype<CHeart>("Heart");
 }

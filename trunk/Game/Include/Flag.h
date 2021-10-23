@@ -34,6 +34,7 @@ enum ECollision_Channel
 	Channel_Bomb,
 	Channel_BombExplosion,
 	Channel_Effect,
+	Channel_Item,
 	Channel_Max
 };
 
@@ -56,6 +57,7 @@ enum class EZOrder
 	Player = -20,
 	PlayerBody = -19,
 	Bomb = -18,
+	PickUpItem = -17,
 	RoomObject = -15,
 	BackGround = 0
 };
@@ -128,4 +130,11 @@ enum class EMotherDoor_Type
 	Eye,
 	Skin,
 	Max
+};
+
+enum class EHeart_Type
+{
+	Half,
+	Normal,
+	Double
 };

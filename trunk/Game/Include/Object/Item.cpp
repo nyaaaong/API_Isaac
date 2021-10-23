@@ -16,6 +16,7 @@ bool CItem::Init()
 		return false;
 
 	SetZOrder(EZOrder::Item);
+	SetPivot(0.5f, 0.5f);
 
 	return true;
 }
@@ -45,13 +46,17 @@ CItem* CItem::Clone()
 	return nullptr;
 }
 
-CItem::CItem()
+CItem::CItem()	:
+	m_pPlayer(nullptr),
+	m_fValue(0.f)
 {
 }
 
 CItem::CItem(const CItem& obj) :
 	CObj(obj)
 {
+	m_pPlayer = obj.m_pPlayer;
+	m_fValue = obj.m_fValue;
 }
 
 CItem::~CItem()

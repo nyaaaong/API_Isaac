@@ -12,6 +12,7 @@
 #include "EnemySmokeSmall.h"
 #include "EnemySmokeNormal.h"
 #include "MonsterBase.h"
+#include "Heart.h"
 #include "../GameManager.h"
 #include "../Scene/Scene.h"
 #include "../Scene/RoomBase.h"
@@ -214,6 +215,7 @@ void CMonsterSpawner::EnemyDieNormal(const Vector2& tPos)
 	m_pScene->CreateObject<CEnemyDie>("EnemyDieNormal", "EnemyDieNormal", tPos, Vector2(192.f, 192.f));
 	m_pScene->GetSceneResource()->SoundPlay("EnemyDie");
 	dynamic_cast<CRoomBase*>(m_pScene)->SubMonsterCount();
+	CreateHeart(tPos);
 }
 
 void CMonsterSpawner::EnemyDieFly(const Vector2& tPos)
@@ -237,6 +239,7 @@ void CMonsterSpawner::EnemyDieFly(const Vector2& tPos)
 	pDieEffect->SetEnemyType(EEnemy_Type::Fly);
 	m_pScene->GetSceneResource()->SoundPlay("EnemyDie");
 	dynamic_cast<CRoomBase*>(m_pScene)->SubMonsterCount();
+	CreateHeart(tPos);
 }
 
 void CMonsterSpawner::CreateSpawnLocation(const Vector2& tSize, const Vector2& tPivot, const Vector2& tOffset)
@@ -406,4 +409,26 @@ bool CMonsterSpawner::CheckSpawnPossible(const Vector2& tSize, const Vector2& tP
 		return false;
 
 	return true;
+}
+
+void CMonsterSpawner::CreateHeart(const Vector2& tPos)
+{
+	float	fPercent = rand() % 10000 / 100.f;
+
+	if (fPercent > 20.f)
+		return;
+
+	if (!m_pScene->GetSceneResource()->IsPlaying("HeartDrop"))
+		m_pScene->GetSceneResource()->SoundPlay("HeartDrop");
+
+	CHeart*	pHeart = m_pScene->CreateObject<CHeart>("Heart", "Heart", tPos, Vector2(96.f, 96.f));
+	pHeart->SetPlayer(dynamic_cast<CPlayer*>(m_pScene->GetPlayer()));
+
+	fPercent = rand() % 10000 * 100.f;
+
+	if (fPercent < 10.f)
+		pHeart->SetHeartType(EHeart_Type::Double);
+
+	else if (fPercent < 30.f)
+		pHeart->SetHeartType(EHeart_Type::Normal);
 }
