@@ -24,11 +24,6 @@ bool CPlayerBody::Init()
 	AddAnimation("BodyMoveLeft");
 	AddAnimation("BodyMoveRight");
 
-	m_pColliderBox = AddCollider<CColliderBox>("PlayerBody");
-	m_pColliderBox->SetExtent(m_tSize);
-	m_pColliderBox->SetOffset(0.f, PLAYER_BODY_OFFSET_Y);
-	m_pColliderBox->SetCollisionProfile("PlayerBody");
-
 	return true;
 }
 
@@ -37,6 +32,11 @@ void CPlayerBody::Start()
 	CObj::Start();
 
 	m_pPlayer = dynamic_cast<CPlayer*>(m_pScene->GetPlayer());
+
+	m_pColliderBox = AddCollider<CColliderBox>("PlayerBody");
+	m_pColliderBox->SetExtent(m_tSize);
+	m_pColliderBox->SetOffset(0.f, PLAYER_BODY_OFFSET_Y);
+	m_pColliderBox->SetCollisionProfile("PlayerBody");
 }
 
 void CPlayerBody::Update(float fTime)

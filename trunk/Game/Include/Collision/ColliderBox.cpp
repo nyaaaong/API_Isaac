@@ -83,8 +83,8 @@ bool CColliderBox::Collision(CCollider* pDest)
 }
 
 CColliderBox::CColliderBox()	:
-	m_fWidth(100.f),
-	m_fHeight(100.f)
+	m_fWidth(0.f),
+	m_fHeight(0.f)
 {
 	m_eType = ECollider_Type::Box;
 }

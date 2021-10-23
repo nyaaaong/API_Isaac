@@ -3,7 +3,7 @@
 #include "Obj.h"
 
 class CMotherDoor :
-    public CObj
+	public CObj
 {
 	friend class CScene;
 	friend class CMonsterSpawner;
@@ -25,7 +25,12 @@ private:
 	EDoorDir	m_eDoorDir;
 	EMotherDoor_Type	m_eDoorType;
 	float		m_fM4PDist;
-	float		m_fDetectDistance;
+	float		m_fM4PMaxDist;
+	bool		m_bAttackEnd;
+	float		m_fAttackEndDelay;
+	Vector2		m_tM2PDir;
+	Vector2		m_tBulletStartPos;
+	float		m_fStartFuncDelay;
 
 public:
 	void SetDoorDir(EDoorDir eDoorDir)
@@ -41,14 +46,18 @@ public:
 public:
 	void SetDoorType(EMotherDoor_Type eDoorType);
 
-
 private:
 	void AddDoorAnimation();
 	void DetectPlayer(float fTime);
 	void DoorTypeUpdater();
+	void StartFunc(float fTime);
+	void ResizeColliderBox();
+	void GetM2PDir();
 
 public:
-	virtual void Move(const Vector2& tDir, float fSpeed, bool bUseField);
 	virtual void CollisionColliding(class CCollider* pSrc, class CCollider* pDest, float fTime);
+	virtual float SetDamage(float fDamage);
+	virtual void EnableTask();
+	virtual void DisableTask();
 };
 

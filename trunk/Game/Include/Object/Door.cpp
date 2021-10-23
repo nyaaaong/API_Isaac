@@ -12,7 +12,7 @@ void CDoor::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 
 	if (iNum != -1)
 	{
-		if (!CMapManager::GetInst()->GetClearMap(m_pScene->GetCurMapNumber()))
+		if (!CMapManager::GetInst()->GetClearMap(iNum))
 			return;
 
 		if (pDest->GetName() == "PlayerBody")
@@ -21,7 +21,7 @@ void CDoor::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 
 	else if (eType != ESpecial_RoomType::None)
 	{
-		if (!CMapManager::GetInst()->GetClearSpecialMap(m_pScene->GetCurMapType()))
+		if (!CMapManager::GetInst()->GetClearSpecialMap(eType))
 			return;
 
 		if (pDest->GetName() == "PlayerBody")
@@ -33,7 +33,13 @@ void CDoor::Start()
 {
 	CObj::Start();
 
+	// 中宜 持失
+	m_pColliderBox = AddCollider<CColliderBox>("Door");
+	m_pColliderBox->SetExtent(m_tSize * 0.3f);
+	m_pColliderBox->SetCollisionProfile("Door");
+
 	SetDoor(false);
+
 	m_pColliderBox->SetCollisionBeginFunc<CDoor>(this, &CDoor::CollisionBegin);
 }
 
@@ -45,11 +51,6 @@ bool CDoor::Init()
 	SetPivot(0.5f, 0.5f);
 
 	SetZOrder(EZOrder::RoomObject);
-
-	// 中宜 持失
-	m_pColliderBox = AddCollider<CColliderBox>("Door");
-	m_pColliderBox->SetExtent(m_tSize * 0.3f);
-	m_pColliderBox->SetCollisionProfile("Door");
 
 	return true;
 }
@@ -63,7 +64,7 @@ void CDoor::Update(float fTime)
 
 	if (iNum != -1)
 	{
-		if (!m_bOpenStart && CMapManager::GetInst()->GetClearMap(m_pScene->GetCurMapNumber()))
+		if (!m_bOpenStart && CMapManager::GetInst()->GetClearMap(iNum))
 		{
 			m_bOpenStart = true;
 
@@ -73,7 +74,7 @@ void CDoor::Update(float fTime)
 
 	else if (eType != ESpecial_RoomType::None)
 	{
-		if (!m_bOpenStart && CMapManager::GetInst()->GetClearSpecialMap(m_pScene->GetCurMapType()))
+		if (!m_bOpenStart && CMapManager::GetInst()->GetClearSpecialMap(eType))
 		{
 			m_bOpenStart = true;
 

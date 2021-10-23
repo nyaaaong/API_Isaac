@@ -13,7 +13,28 @@ void CRoomBase::SubMonsterCount()
 	if (m_iMonsterCount <= 0)
 	{
 		m_iMonsterCount = 0;
-		GetSceneResource()->SoundPlay("DoorOpen");
+
+		if (m_iBossMonsterCount <= 0)
+		{
+			if (!GetSceneResource()->IsPlaying("DoorOpen"))
+				GetSceneResource()->SoundPlay("DoorOpen");
+		}
+	}
+}
+
+void CRoomBase::SubBossMonsterCount()
+{
+	--m_iBossMonsterCount;
+
+	if (m_iBossMonsterCount <= 0)
+	{
+		m_iBossMonsterCount = 0;
+
+		if (m_iMonsterCount <= 0)
+		{
+			if (!GetSceneResource()->IsPlaying("DoorOpen"))
+				GetSceneResource()->SoundPlay("DoorOpen");
+		}
 	}
 }
 
@@ -32,7 +53,8 @@ bool CRoomBase::Init()
 
 void CRoomBase::CreateMonster()
 {
-	m_iMonsterCount = rand() % (7 - 2 + 1) + 2;
+	if (!m_iBossMonsterCount)
+		m_iMonsterCount = rand() % (7 - 2 + 1) + 2;
 }
 
 void CRoomBase::Start()
@@ -58,7 +80,7 @@ bool CRoomBase::Update(float fTime)
 
 	else if (eType == ESpecial_RoomType::Boss)
 	{
-		if (!CMapManager::GetInst()->GetClearSpecialMap(GetCurMapType()) && m_iMonsterCount == 0)
+		if (!CMapManager::GetInst()->GetClearSpecialMap(GetCurMapType())&& m_iMonsterCount == 0 && m_iBossMonsterCount == 0)
 			CMapManager::GetInst()->SetSpecialClearMap(GetCurMapType());
 	}
 
@@ -122,7 +144,8 @@ void CRoomBase::DoorFunc(EDoorDir eDoorDir)
 }
 
 CRoomBase::CRoomBase()	:
-	m_iMonsterCount(0)
+	m_iMonsterCount(0),
+	m_iBossMonsterCount(0)
 {
 	m_vecDoor.resize(DT_MAX);
 

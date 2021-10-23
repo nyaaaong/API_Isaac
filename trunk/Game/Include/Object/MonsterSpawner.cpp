@@ -1,5 +1,6 @@
 
 #include "MonsterSpawner.h"
+#include "Player.h"
 #include "Charger.h"
 #include "Pooter.h"
 #include "Fly.h"
@@ -8,7 +9,8 @@
 #include "MotherLeg.h"
 #include "MotherDoor.h"
 #include "EnemyDie.h"
-#include "EnemySmoke.h"
+#include "EnemySmokeSmall.h"
+#include "EnemySmokeNormal.h"
 #include "MonsterBase.h"
 #include "../GameManager.h"
 #include "../Scene/Scene.h"
@@ -46,19 +48,20 @@ void CMonsterSpawner::CreateMonsterPrototype()
 
 	if (iNum != -1)
 	{
-		if (CMapManager::GetInst()->GetClearMap(m_pScene->GetCurMapNumber()))
+		if (CMapManager::GetInst()->GetClearMap(iNum))
 			return;
 	}
 	else if (eType != ESpecial_RoomType::None)
 	{
-		if (CMapManager::GetInst()->GetClearSpecialMap(m_pScene->GetCurMapType()))
+		if (CMapManager::GetInst()->GetClearSpecialMap(eType))
 			return;
 	}
 
 	m_pScene->CreatePrototype<CEnemyDie>("EnemyDieNormal");
 	m_pScene->CreatePrototype<CEnemyDie>("EnemyDieFly");
 
-	m_pScene->CreatePrototype<CEnemySmoke>("Smoke1");
+	m_pScene->CreatePrototype<CEnemySmokeSmall>("Smoke1");
+	m_pScene->CreatePrototype<CEnemySmokeNormal>("Smoke2");
 
 	CCharger* pCharger = m_pScene->CreatePrototype<CCharger>("Charger");
 
@@ -91,25 +94,19 @@ void CMonsterSpawner::CreateMonsterPrototype()
 
 void CMonsterSpawner::CreateBossMonsterPrototype()
 {
-	int iNum = m_pScene->GetCurMapNumber();
 	ESpecial_RoomType	eType = m_pScene->GetCurMapType();
 
-	if (iNum != -1)
+	if (eType == ESpecial_RoomType::Boss)
 	{
-		if (CMapManager::GetInst()->GetClearMap(m_pScene->GetCurMapNumber()))
+		if (CMapManager::GetInst()->GetClearSpecialMap(eType))
 			return;
-	}
-	else if (eType != ESpecial_RoomType::None)
-	{
-		if (CMapManager::GetInst()->GetClearSpecialMap(m_pScene->GetCurMapType()))
-			return;
-	}
 
-	CMother* pMother = m_pScene->CreatePrototype<CMother>("Mother");
-	m_vecBossName.push_back(pMother->GetName());
+		CMother* pMother = m_pScene->CreatePrototype<CMother>("Mother");
+		m_vecBossName.push_back(pMother->GetName());
 
-	m_pScene->CreatePrototype<CMotherLeg>("MotherLeg");
-	m_pScene->CreatePrototype<CMotherDoor>("MotherDoor");
+		m_pScene->CreatePrototype<CMotherLeg>("MotherLeg");
+		m_pScene->CreatePrototype<CMotherDoor>("MotherDoor");
+	}
 }
 
 void CMonsterSpawner::CreateMonster()
@@ -125,13 +122,13 @@ void CMonsterSpawner::CreateMonster()
 
 	if (iNum != -1)
 	{
-		if (CMapManager::GetInst()->GetClearMap(m_pScene->GetCurMapNumber()))
+		if (CMapManager::GetInst()->GetClearMap(iNum))
 			return;
 	}
 
 	else if (eType != ESpecial_RoomType::None)
 	{
-		if (CMapManager::GetInst()->GetClearSpecialMap(m_pScene->GetCurMapType()))
+		if (CMapManager::GetInst()->GetClearSpecialMap(eType))
 			return;
 	}
 
@@ -148,12 +145,24 @@ void CMonsterSpawner::CreateMonster()
 	m_pScene->GetSceneResource()->SoundPlay("DoorClose");
 }
 
+void CMonsterSpawner::CreateMonster(const Vector2& tPos)
+{
+	CRoomBase* pRoom = dynamic_cast<CRoomBase*>(m_pScene);
+
+	size_t iSize = m_vecName.size();
+
+	int iIdx = rand() % iSize;
+
+	m_tSpawnPos = tPos;
+	CreateMonster(m_vecName[iIdx]);
+}
+
 void CMonsterSpawner::CreateBossMonster()
 {
 	CRoomBase* pRoom = dynamic_cast<CRoomBase*>(m_pScene);
-	int iMonsterCount = pRoom->GetMonsterCount();
+	int iBossMonsterCount = pRoom->GetBossMonsterCount();
 
-	if (!iMonsterCount)
+	if (!iBossMonsterCount)
 		return;
 
 	int iNum = m_pScene->GetCurMapNumber();
@@ -161,13 +170,13 @@ void CMonsterSpawner::CreateBossMonster()
 
 	if (iNum != -1)
 	{
-		if (CMapManager::GetInst()->GetClearMap(m_pScene->GetCurMapNumber()))
+		if (CMapManager::GetInst()->GetClearMap(iNum))
 			return;
 	}
 
 	else if (eType != ESpecial_RoomType::None)
 	{
-		if (CMapManager::GetInst()->GetClearSpecialMap(m_pScene->GetCurMapType()))
+		if (CMapManager::GetInst()->GetClearSpecialMap(eType))
 			return;
 	}
 
@@ -192,13 +201,13 @@ void CMonsterSpawner::EnemyDieNormal(const Vector2& tPos)
 
 	if (iNum != -1)
 	{
-		if (CMapManager::GetInst()->GetClearMap(m_pScene->GetCurMapNumber()))
+		if (CMapManager::GetInst()->GetClearMap(iNum))
 			return;
 	}
 
 	else if (eType != ESpecial_RoomType::None)
 	{
-		if (CMapManager::GetInst()->GetClearSpecialMap(m_pScene->GetCurMapType()))
+		if (CMapManager::GetInst()->GetClearSpecialMap(eType))
 			return;
 	}
 
@@ -214,13 +223,13 @@ void CMonsterSpawner::EnemyDieFly(const Vector2& tPos)
 
 	if (iNum != -1)
 	{
-		if (CMapManager::GetInst()->GetClearMap(m_pScene->GetCurMapNumber()))
+		if (CMapManager::GetInst()->GetClearMap(iNum))
 			return;
 	}
 
 	else if (eType != ESpecial_RoomType::None)
 	{
-		if (CMapManager::GetInst()->GetClearSpecialMap(m_pScene->GetCurMapType()))
+		if (CMapManager::GetInst()->GetClearSpecialMap(eType))
 			return;
 	}
 
@@ -238,11 +247,10 @@ void CMonsterSpawner::CreateSpawnLocation(const Vector2& tSize, const Vector2& t
 		return;
 
 	int iNum = m_pScene->GetCurMapNumber();
-	ESpecial_RoomType	eType = m_pScene->GetCurMapType();
 
 	if (iNum != -1)
 	{
-		if (CMapManager::GetInst()->GetClearMap(m_pScene->GetCurMapNumber()))
+		if (CMapManager::GetInst()->GetClearMap(iNum))
 			return;
 
 		Vector2	tPosLT;
@@ -287,7 +295,7 @@ void CMonsterSpawner::CreateMonster(const std::string& strName)
 	else if (strName == "RedFly")
 		m_pScene->CreateObject<CRedFly>(strName, strName, m_tSpawnPos);
 
-	m_pScene->CreateObject<CEnemySmoke>("Smoke1", "Smoke1", m_tSpawnPos, Vector2(144.f, 144.f));
+	m_pScene->CreateObject<CEnemySmokeSmall>("Smoke1", "Smoke1", m_tSpawnPos, Vector2(144.f, 144.f));
 }
 
 void CMonsterSpawner::CreateBossMonster(const std::string& strName)
@@ -329,6 +337,7 @@ void CMonsterSpawner::CreateBossMonster(const std::string& strName)
 
 	CPlayerHUD* pHUD = dynamic_cast<CStage*>(m_pScene)->GetPlayerHUD();
 	pHUD->SetBossMonster(pMother);
+	dynamic_cast<CPlayer*>(m_pScene->GetPlayer())->SetBoss(pMother);
 }
 
 void CMonsterSpawner::AddSpawnLocation()
@@ -337,7 +346,7 @@ void CMonsterSpawner::AddSpawnLocation()
 
 	if (iNum != -1)
 	{
-		if (CMapManager::GetInst()->GetClearMap(m_pScene->GetCurMapNumber()))
+		if (CMapManager::GetInst()->GetClearMap(iNum))
 			return;
 	}
 
@@ -365,7 +374,7 @@ void CMonsterSpawner::AddBossSpawnLocation()
 
 	if (iNum != -1)
 	{
-		if (CMapManager::GetInst()->GetClearMap(m_pScene->GetCurMapNumber()))
+		if (CMapManager::GetInst()->GetClearMap(iNum))
 			return;
 	}
 
@@ -373,6 +382,11 @@ void CMonsterSpawner::AddBossSpawnLocation()
 	float	fResY = static_cast<float>(CGameManager::GetInst()->GetResolution().iH);
 
 	m_tSpawnPos = Vector2(fResX * 0.5f, fResY * 0.5f);
+}
+
+void CMonsterSpawner::CreateSmoke(const Vector2& tPos)
+{
+	m_pScene->CreateObject<CEnemySmokeNormal>("Smoke2", "Smoke2", tPos, Vector2(288.f, 288.f));
 }
 
 bool CMonsterSpawner::CheckSpawnPossible(const Vector2& tSize, const Vector2& tPivot, const Vector2& tOffset)

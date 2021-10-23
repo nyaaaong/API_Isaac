@@ -34,6 +34,8 @@ bool CStartRoom::Init()
 void CStartRoom::Start()
 {
 	CRoomBase::Start();
+
+	CSceneManager::GetInst()->MusicStart();
 }
 
 bool CStartRoom::Update(float fTime)

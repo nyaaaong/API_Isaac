@@ -12,6 +12,10 @@ void CSceneManager::MusicStart()
 	m_pResource->SetVolume("BGM", 10);
 	m_pResource->SetVolume("Effect", 30);
 
+	m_pResource->SoundStop("Stage1BGM");
+	m_pResource->SoundStop("BossBGM");
+	m_pResource->SoundStop("BossClearBGM");
+
 	m_pResource->LoadSound("BGM", true, "Stage1BGM", "Music/Stage1.ogg");
 	m_pResource->SoundPlay("Stage1BGM");
 

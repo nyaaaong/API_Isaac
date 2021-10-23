@@ -9,8 +9,6 @@ bool CBossRoom::Init()
 	if (!CRoomBase::Init())
 		return false;
 
-	m_iMonsterCount = 1;
-
 	CMapManager::GetInst()->CreateSpecialRoomMap(this, ESpecial_RoomType::Boss);
 	CMapManager::GetInst()->SetSpecialMap(this, ESpecial_RoomType::Boss);
 
@@ -59,6 +57,7 @@ void CBossRoom::DoorFunc(EDoorDir eDoorDir)
 
 CBossRoom::CBossRoom()
 {
+	m_iBossMonsterCount = 1;
 }
 
 CBossRoom::~CBossRoom()

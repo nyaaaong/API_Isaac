@@ -11,7 +11,6 @@
 void CMenu::GameStart(float fTime)
 {
 	CSceneManager::GetInst()->CreateScene<CStartRoom>();
-	CSceneManager::GetInst()->MusicStart();
 }
 
 void CMenu::GameEditor(float fTime)

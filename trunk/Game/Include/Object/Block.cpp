@@ -12,6 +12,10 @@ void CBlock::Start()
 
 	m_fLife = m_pRoomObj->m_fLife;
 
+	m_pColliderBox = AddCollider<CColliderBox>("MapObject");
+	m_pColliderBox->SetExtent(m_tSize);
+	m_pColliderBox->SetCollisionProfile("Object");
+
 	m_pColliderBox->SetCollisionBeginFunc<CBlock>(this, &CBlock::CollisionBegin);
 	m_pColliderBox->SetCollisionCollidingFunc<CBlock>(this, &CBlock::CollisionColliding);
 }
@@ -28,10 +32,6 @@ bool CBlock::Init()
 	CMapManager::GetInst()->SetBlockPivot(m_tPivot);
 
 	SetZOrder(EZOrder::RoomObject);
-
-	m_pColliderBox = AddCollider<CColliderBox>("MapObject");
-	m_pColliderBox->SetExtent(m_tSize);
-	m_pColliderBox->SetCollisionProfile("Object");
 
 	return true;
 }

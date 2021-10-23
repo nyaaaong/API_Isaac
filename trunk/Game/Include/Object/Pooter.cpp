@@ -171,7 +171,6 @@ void CPooter::Fire()
 {
 	CSharedPtr<CTear>	pTear = m_pScene->CreateObject<CTear>("MonsterTear", "MonsterTear", m_tPos + 10.f, Vector2(80.f, 80.f));
 	pTear->SetDir(m_tM2PDir);
-	pTear->SetMoveSpeed(m_tInfo.fShotSpeed);
 	pTear->SetOwner(this);
 
 	m_pScene->GetSceneResource()->SoundPlay("Tear");

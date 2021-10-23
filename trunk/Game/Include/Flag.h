@@ -52,6 +52,7 @@ enum class EZOrder
 	Item = -100,
 	MotherLeg = -80,
 	Monster = -30,
+	MonsterDoor = -22,
 	Player = -20,
 	PlayerBody = -19,
 	Bomb = -18,
@@ -125,5 +126,6 @@ enum class EMotherDoor_Type
 {
 	Hand,
 	Eye,
-	Skin
+	Skin,
+	Max
 };

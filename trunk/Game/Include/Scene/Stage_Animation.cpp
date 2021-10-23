@@ -153,6 +153,17 @@ void CStage::EnemyAnimation()
 		}
 	}
 
+	GetSceneResource()->CreateAnimationSequence("Smoke2", "Smoke2", TEXT("Monster/Smoke/Smoke_2.bmp"));
+	GetSceneResource()->SetTextureColorKey("Smoke2");
+
+	for (int i = 0; i < 3; ++i)
+	{
+		for (int j = 0; j < 5; ++j)
+		{
+			GetSceneResource()->AddAnimationFrameData("Smoke2", Vector2(288.f * j, 288.f * i), Vector2(288.f, 288.f));
+		}
+	}
+
 	// ============== Charger ==============
 	// -------------- Move --------------
 	GetSceneResource()->CreateAnimationSequence("ChargerMoveRight", "ChargerMoveRight", TEXT("Monster/Enemy/Charger/Charger.bmp"));

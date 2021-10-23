@@ -37,10 +37,12 @@ void CStage::BossSound()
 	// 바닥에 발을 찍을때 충격파음
 	GetSceneResource()->LoadSound("Effect", false, "MotherAttackEnd", "Effect/Mother/AttackEnd.wav");
 
+	// 바닥에 손으로 찍을때 충격파음
+	GetSceneResource()->LoadSound("Effect", false, "MotherHandAttack", "Effect/Mother/HandAttack.wav");
+
 	// 아이작!
 	GetSceneResource()->LoadSound("Effect", false, "MotherCall1", "Effect/Mother/Call1.wav");
 	GetSceneResource()->LoadSound("Effect", false, "MotherCall2", "Effect/Mother/Call2.wav");
-	GetSceneResource()->LoadSound("Effect", false, "MotherCall3", "Effect/Mother/Call3.wav");
 
 	// 피부 패턴
 	GetSceneResource()->LoadSound("Effect", false, "MotherSummon", "Effect/Mother/Summon.wav");

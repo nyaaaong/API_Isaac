@@ -24,6 +24,7 @@ private:
 	class CPlayerBody* m_pPlayerBody;
 	Vector2	m_tMoveDir;
 	bool	m_bDie;	// 중복되서 들어오지 않도록
+	class CMother* m_pMother;
 
 public:
 	bool IsMove()	const
@@ -37,6 +38,11 @@ public:
 	}
 
 public:
+	void SetBoss(class CMother* pMother)
+	{
+		m_pMother = pMother;
+	}
+
 	void UseBomb(bool bUse)
 	{
 		m_bUseBomb = bUse;
@@ -73,6 +79,7 @@ private:
 private:
 	void CheatDie(float fTime);
 	void CheatBossRoom(float fTime);
+	void CheatBossHurt(float fTime);
 
 public:
 	virtual void Move(const Vector2& tDir, bool bUseField);

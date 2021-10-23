@@ -10,10 +10,10 @@ CMotherLeg::CMotherLeg()	:
 	m_pMother(nullptr),
 	m_bAttack(false),
 	m_bAttackEnd(false),
-	m_bAttackRelease(false),
 	m_fAttackDelay(0.f),
 	m_fIdleTime(0.f),
-	m_bAttackPossible(false)
+	m_bAttackPossible(false),
+	m_fMoveDir(1.f)
 {
 }
 
@@ -23,10 +23,10 @@ CMotherLeg::CMotherLeg(const CMotherLeg& obj)	:
 	m_pMother = obj.m_pMother;
 	m_bAttack = false;
 	m_bAttackEnd = false;
-	m_bAttackRelease = false;
 	m_fAttackDelay = 0.f;
 	m_fIdleTime = 0.f;
 	m_bAttackPossible = false;
+	m_fMoveDir = 1.f;
 }
 
 CMotherLeg::~CMotherLeg()
@@ -37,6 +37,9 @@ void CMotherLeg::Start()
 {
 	CObj::Start();
 
+	m_pColliderBox = AddCollider<CColliderBox>("Monster");
+	m_pColliderBox->SetExtent(272.f, 144.f);
+	m_pColliderBox->SetOffset(-57.f, -80.f);
 	m_pColliderBox->SetCollisionProfile("Monster");
 	m_pColliderBox->SetCollisionCollidingFunc<CMotherLeg>(this, &CMotherLeg::CollisionColliding);
 }
@@ -60,12 +63,6 @@ bool CMotherLeg::Init()
 	SetTextureColorKey();
 	SetTexture("MotherLegLongest", TEXT("Monster/Boss/Mother_Leg_Longest.bmp"));
 	SetTextureColorKey();
-
-	m_pColliderBox = AddCollider<CColliderBox>("Monster");
-	m_pColliderBox->SetExtent(272.f, 144.f);
-	m_pColliderBox->SetOffset(-57.f, -80.f);
-	m_pColliderBox->SetCollisionProfile("Monster");
-	m_pColliderBox->SetCollisionCollidingFunc<CMotherLeg>(this, &CMotherLeg::CollisionColliding);
 
 	return true;
 }
@@ -106,7 +103,7 @@ void CMotherLeg::Update(float fTime)
 			m_fAttackDelay = 0.f;
 			m_bAttack = true;
 
-			m_tPlayerPos = tPlayerPos - tPlayerSize * tPlayerPivot + tPlayerOffset;
+			m_tPlayerPos = tPlayerPos - tPlayerSize * tPlayerPivot + tPlayerOffset + 30.f;
 			m_tPos.x = m_tPlayerPos.x + m_tSize.x * m_tPivot.x - (m_tSize.x * m_tPivot.x) * 0.5f;
 			m_tPos.y = 0.f;
 		}
@@ -130,6 +127,7 @@ CMotherLeg* CMotherLeg::Clone()
 
 void CMotherLeg::EnableTask()
 {
+	m_pMother->SetProgress(true);
 }
 
 void CMotherLeg::DisableTask()
@@ -140,6 +138,9 @@ void CMotherLeg::DisableTask()
 	m_fIdleTime = 0.f;
 	m_bAttackPossible = false;
 	m_tPos.y = 0.f;
+	m_fMoveDir = 1.f;
+
+	m_pMother->SetProgress(false);
 }
 
 float CMotherLeg::SetDamage(float fDamage)
@@ -168,59 +169,50 @@ void CMotherLeg::DetectPlayer(float fTime)
 	}
 
 	else
-	{
-		if (!m_bAttackEnd && m_tPos.y >= m_tPlayerPos.y)
-		{
-			if (m_fIdleTime == 0.f)
-			{
-				m_tPos.y = m_tPlayerPos.y;
-				m_pScene->GetSceneResource()->SoundPlay("MotherAttackEnd");
-			}
-
-			m_fIdleTime += fTime;
-
-			if (m_fIdleTime >= 1.5f)
-			{
-				m_bAttackEnd = true;
-			}
-		}
-
-		else
-			Move(m_tPlayerPos, 7.f, false);
-	}
+		Move(m_tPlayerPos, 7.f, false);
 }
 
 void CMotherLeg::Move(const Vector2& tDir, float fSpeed, bool bUseField)
 {
 	float	fCurMove = 0.f;
-	
-	if (!m_bAttackEnd)
+
+	if (m_tPos.y >= m_tPlayerPos.y)
 	{
-		fCurMove = tDir.y * fSpeed * CGameManager::GetInst()->GetDeltaTime() * m_fTimeScale;
+		m_fMoveDir = -1.f;
+		m_bAttackEnd = true;
+
+		if (m_fIdleTime == 0.f)
+		{
+			m_tPos.y = m_tPlayerPos.y;
+			m_pScene->GetSceneResource()->SoundPlay("MotherAttackEnd");
+		}
+	}
+	
+	if (m_fMoveDir == 1.f)
+	{
+		fCurMove = m_fMoveDir * tDir.y * fSpeed * CGameManager::GetInst()->GetDeltaTime() * m_fTimeScale;
 		m_tVelocity.y += fCurMove;
 		m_tPrevPos.y = m_tPos.y;
 		m_tPos.y += fCurMove;
 	}
 
-	else if (m_bAttackEnd)
+	else if (m_fMoveDir == -1.f)
 	{
-		m_bAttackRelease = true;
+		m_fIdleTime += CGameManager::GetInst()->GetDeltaTime();
 
-		fCurMove = -tDir.y * fSpeed * CGameManager::GetInst()->GetDeltaTime() * m_fTimeScale;
-		m_tVelocity.y += fCurMove;
-		m_tPrevPos.y = m_tPos.y;
-		m_tPos.y += fCurMove;
+		if (m_fIdleTime >= 1.f)
+		{
+			fCurMove = m_fMoveDir * tDir.y * fSpeed * CGameManager::GetInst()->GetDeltaTime() * m_fTimeScale;
+			m_tVelocity.y += fCurMove;
+			m_tPrevPos.y = m_tPos.y;
+			m_tPos.y += fCurMove;
+
+			m_bAttackEnd = false;
+		}
 	}
 
 	if (m_tPos.y <= 0.f)
-	{
-		m_bAttack = false;
-		m_bAttackEnd = false;
-		m_bAttackRelease = false;
-		m_fAttackDelay = 0.f;
-
 		Disable();
-	}
 }
 
 void CMotherLeg::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
@@ -228,6 +220,9 @@ void CMotherLeg::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTi
 	std::string	strName = pDest->GetName();
 	CObj* pPlayer = pDest->GetOwner();
 
-	if (m_bAttackEnd && !m_bAttackRelease && (strName == "PlayerHead" || strName == "PlayerBody"))
-		pPlayer->SetDamage(m_pMother->GetAttack());
+	if (m_bAttackEnd)
+	{
+		if (m_bAttackEnd && strName == "PlayerHead" || strName == "PlayerBody")
+			pPlayer->SetDamage(m_pMother->GetAttack());
+	}
 }

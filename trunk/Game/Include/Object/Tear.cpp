@@ -79,7 +79,10 @@ void CTear::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 
 	if (pDest->GetName() == "Monster")
 	{
-		if (m_bHit)
+		if (m_eTearType == ETearType::Monster)
+			return;
+
+		else if (m_bHit)
 			return;
 
 		m_bHit = true;
@@ -95,7 +98,10 @@ void CTear::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
 	else if (pDest->GetName() == "PlayerHead" ||
 		pDest->GetName() == "PlayerBody")
 	{
-		if (m_bHit)
+		if (m_eTearType == ETearType::Player)
+			return;
+
+		else if (m_bHit)
 			return;
 
 		m_bHit = true;

@@ -28,10 +28,10 @@ private:
 	Vector2	m_tPlayerPos;
 	bool	m_bAttack;
 	bool	m_bAttackEnd;
-	bool	m_bAttackRelease; // 다시 공격하기 위해 발을 올리는 중
 	float	m_fAttackDelay;
 	float	m_fIdleTime;
 	bool	m_bAttackPossible;
+	float	m_fMoveDir;
 
 public:
 	void SetMother(class CMother* pMother)

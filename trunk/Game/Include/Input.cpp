@@ -61,6 +61,8 @@ bool CInput::Init(HWND hWnd)
 	SetShiftKey("CheatDie", true);
 	CreateKey("CheatBossRoom", 'E');
 	SetShiftKey("CheatBossRoom", true);
+	CreateKey("CheatBossHurt", 'R');
+	SetShiftKey("CheatBossHurt", true);
 
 	return true;
 }

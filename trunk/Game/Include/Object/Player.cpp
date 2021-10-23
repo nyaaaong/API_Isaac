@@ -17,10 +17,6 @@ bool CPlayer::Init()
 
 	AddPlayerAnimation();
 
-	m_pColliderBox = AddCollider<CColliderBox>("PlayerHead");
-	m_pColliderBox->SetExtent(m_tSize);
-	m_pColliderBox->SetCollisionProfile("PlayerHead");
-
 	CObjManager::GetInst()->PullPlayerInfo(m_tInfo);
 
 	return true;
@@ -36,6 +32,9 @@ void CPlayer::Start()
 	m_pPlayerBody->Start();
 	m_pPlayerBody->SetPos(m_tPos);
 
+	m_pColliderBox = AddCollider<CColliderBox>("PlayerHead");
+	m_pColliderBox->SetExtent(m_tSize);
+	m_pColliderBox->SetCollisionProfile("PlayerHead");
 	m_pColliderBox->SetCollisionBeginFunc<CPlayer>(this, &CPlayer::CollisionBegin);
 }
 
@@ -116,7 +115,8 @@ CPlayer::CPlayer() :
 	m_bHit(false),
 	m_fBlinkTimer(0.f),
 	m_fBlinkSpeed(0.2f),
-	m_bDie(false)
+	m_bDie(false),
+	m_pMother(nullptr)
 {
 	m_tInfo.fAttack = 3.f;
 	m_tInfo.fHP = PLAYER_HP_MAX;
@@ -144,6 +144,7 @@ CPlayer::CPlayer(const CPlayer& obj) :
 	m_bHit = obj.m_bHit;
 	m_fBlinkTimer = obj.m_fBlinkTimer;
 	m_fBlinkSpeed = obj.m_fBlinkSpeed;
+	m_pMother = obj.m_pMother;
 }
 
 CPlayer::~CPlayer()

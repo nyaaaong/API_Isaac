@@ -506,7 +506,7 @@
     <ClCompile Include="Object\EnemyDie.cpp">
       <Filter>02. Object\02. Effect\02. Enemy\00. Die</Filter>
     </ClCompile>
-    <ClCompile Include="Object\EnemySmoke.cpp">
+    <ClCompile Include="Object\EnemySmokeSmall.cpp">
       <Filter>02. Object\02. Effect\02. Enemy\01. Smoke</Filter>
     </ClCompile>
     <ClCompile Include="Object\MotherLeg.cpp">
@@ -514,6 +514,9 @@
     </ClCompile>
     <ClCompile Include="Object\MotherDoor.cpp">
       <Filter>02. Object\00. Character\01. Monster\00. Boss\00. Part</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\EnemySmokeNormal.cpp">
+      <Filter>02. Object\02. Effect\02. Enemy\01. Smoke</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -763,7 +766,7 @@
     <ClInclude Include="Object\EnemyDie.h">
       <Filter>02. Object\02. Effect\02. Enemy\00. Die</Filter>
     </ClInclude>
-    <ClInclude Include="Object\EnemySmoke.h">
+    <ClInclude Include="Object\EnemySmokeSmall.h">
       <Filter>02. Object\02. Effect\02. Enemy\01. Smoke</Filter>
     </ClInclude>
     <ClInclude Include="Object\MotherLeg.h">
@@ -771,6 +774,9 @@
     </ClInclude>
     <ClInclude Include="Object\MotherDoor.h">
       <Filter>02. Object\00. Character\01. Monster\00. Boss\00. Part</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\EnemySmokeNormal.h">
+      <Filter>02. Object\02. Effect\02. Enemy\01. Smoke</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
