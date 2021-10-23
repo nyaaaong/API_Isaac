@@ -1,6 +1,7 @@
 
 #include "Room7.h"
-#include "Room6.h"
+#include "Room5.h"
+#include "Room8.h"
 #include "../Map/MapManager.h"
 #include "../Object/MonsterSpawner.h"
 
@@ -16,7 +17,8 @@ bool CRoom7::Init()
 	CreatePlayer(Vector2::RIGHT);
 	CMonsterSpawner::GetInst()->AddSpawnLocation();
 
-	SetDoor(DD_RIGHT, DT_NORMAL);
+	SetDoor(DD_TOP, DT_NORMAL);
+	SetDoor(DD_LEFT, DT_NORMAL);
 
 	return true;
 }
@@ -32,8 +34,11 @@ void CRoom7::DoorFunc(EDoorDir eDoorDir)
 {
 	switch (eDoorDir)
 	{
-	case DD_RIGHT:
-		MoveRoom<CRoom6>(Vector2::RIGHT);
+	case DD_TOP:
+		MoveRoom<CRoom5>(Vector2::UP);
+		break;
+	case DD_LEFT:
+		MoveRoom<CRoom8>(Vector2::LEFT);
 		break;
 	}
 }

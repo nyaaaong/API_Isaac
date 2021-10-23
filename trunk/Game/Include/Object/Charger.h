@@ -17,6 +17,7 @@ private:
 	float	m_fSpikeDelay;
 	float	m_fPatternTimer;
 	Vector2	m_tPlayerPos;
+	bool	m_bSoundPlayOnce;
 
 public:
 	virtual void Start();

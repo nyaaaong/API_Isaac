@@ -1,6 +1,7 @@
 
 #include "Room9.h"
 #include "Room8.h"
+#include "BossRoom.h"
 #include "../Map/MapManager.h"
 #include "../Object/MonsterSpawner.h"
 
@@ -17,6 +18,7 @@ bool CRoom9::Init()
 	CMonsterSpawner::GetInst()->AddSpawnLocation();
 
 	SetDoor(DD_TOP, DT_NORMAL);
+	SetDoor(DD_LEFT, DT_BOSS);
 
 	return true;
 }
@@ -34,6 +36,9 @@ void CRoom9::DoorFunc(EDoorDir eDoorDir)
 	{
 	case DD_TOP:
 		MoveRoom<CRoom8>(Vector2::UP);
+		break;
+	case DD_LEFT:
+		MoveRoom<CBossRoom>(Vector2::LEFT);
 		break;
 	}
 }

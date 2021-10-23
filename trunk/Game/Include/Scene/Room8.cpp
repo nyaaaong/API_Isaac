@@ -1,5 +1,6 @@
 
 #include "Room8.h"
+#include "Room7.h"
 #include "Room9.h"
 #include "StartRoom.h"
 #include "../Map/MapManager.h"
@@ -35,7 +36,7 @@ void CRoom8::DoorFunc(EDoorDir eDoorDir)
 	switch (eDoorDir)
 	{
 	case DD_RIGHT:
-		MoveRoom<CStartRoom>(Vector2::RIGHT);
+		MoveRoom<CRoom7>(Vector2::RIGHT);
 		break;
 	case DD_BOTTOM:
 		MoveRoom<CRoom9>(Vector2::DOWN);

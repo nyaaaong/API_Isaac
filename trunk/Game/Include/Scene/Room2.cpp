@@ -1,5 +1,6 @@
 
 #include "Room2.h"
+#include "Room1.h"
 #include "Room3.h"
 #include "StartRoom.h"
 #include "SceneManager.h"
@@ -20,8 +21,9 @@ bool CRoom2::Init()
 	CreatePlayer(Vector2::DOWN);
 	CMonsterSpawner::GetInst()->AddSpawnLocation();
 
+	SetDoor(DD_TOP, DT_NORMAL);
 	SetDoor(DD_LEFT, DT_NORMAL);
-	SetDoor(DD_BOTTOM, DT_NORMAL);
+	SetDoor(DD_RIGHT, DT_NORMAL);
 
 	return true;
 }
@@ -37,11 +39,14 @@ void CRoom2::DoorFunc(EDoorDir eDoorDir)
 {
 	switch (eDoorDir)
 	{
-	case DD_LEFT:
-		MoveRoom<CStartRoom>(Vector2::LEFT);
+	case DD_TOP:
+		MoveRoom<CStartRoom>(Vector2::UP);
 		break;
-	case DD_BOTTOM:
-		MoveRoom<CRoom3>(Vector2::DOWN);
+	case DD_LEFT:
+		MoveRoom<CRoom1>(Vector2::LEFT);
+		break;
+	case DD_RIGHT:
+		MoveRoom<CRoom3>(Vector2::RIGHT);
 		break;
 	}
 }

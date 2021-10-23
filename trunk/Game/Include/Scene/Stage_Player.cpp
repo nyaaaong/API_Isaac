@@ -36,25 +36,8 @@ void CStage::CreatePlayer(const Vector2& tStartPos)
 			tPos = tDirT;
 	}
 
-	else // 디버그 및 테스트를 위해서 이전 방에서 들어오지 않은 경우 인자 값의 방향으로 정해준다.
-	{
-		tPos = tStartPos;
-
-		if (tPos == Vector2())
-			tPos = tCenterPos;
-
-		else if (tPos == Vector2::LEFT)
-			tPos = tDirL;
-
-		else if (tPos == Vector2::RIGHT)
-			tPos = tDirR;
-
-		else if (tPos == Vector2::UP)
-			tPos = tDirT;
-
-		else if (tPos == Vector2::DOWN)
-			tPos = tDirB;
-	}
+	else // 디버그 및 테스트를 위해서 이전 방에서 들어오지 않은 경우 가운데로 정해준다.
+		tPos = tCenterPos;
 
 	CPlayer* pPlayer = CreateObject<CPlayer>("Player", tPos, Vector2(84.f, 75.f));
 

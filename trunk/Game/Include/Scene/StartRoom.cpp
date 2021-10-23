@@ -1,8 +1,6 @@
 
 #include "StartRoom.h"
-#include "Room1.h"
 #include "Room2.h"
-#include "Room8.h"
 #include "SceneManager.h"
 #include "SceneResource.h"
 #include "../Input.h"
@@ -22,11 +20,9 @@ bool CStartRoom::Init()
 	SetCurMapType(ESpecial_RoomType::Start);
 	CMapManager::GetInst()->SetSpecialClearMap(GetCurMapType());
 
-	SetDoor(DD_RIGHT, DT_NORMAL);
-	SetDoor(DD_TOP, DT_NORMAL);
-	SetDoor(DD_LEFT, DT_NORMAL);
+	SetDoor(DD_BOTTOM, DT_NORMAL);
 
-	CreatePlayer(Vector2::LEFT);
+	CreatePlayer(Vector2());
 
 	return true;
 }
@@ -42,14 +38,8 @@ void CStartRoom::DoorFunc(EDoorDir eDoorDir)
 {
 	switch (eDoorDir)
 	{
-	case DD_TOP:
-		MoveRoom<CRoom1>(Vector2::UP);
-		break;
-	case DD_LEFT:
-		MoveRoom<CRoom8>(Vector2::LEFT);
-		break;
-	case DD_RIGHT:
-		MoveRoom<CRoom2>(Vector2::RIGHT);
+	case DD_BOTTOM:
+		MoveRoom<CRoom2>(Vector2::DOWN);
 		break;
 	}
 }

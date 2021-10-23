@@ -1,6 +1,6 @@
 
 #include "ItemRoom.h"
-#include "Room1.h"
+#include "Room4.h"
 #include "SceneResource.h"
 #include "../Object/ItemRock.h"
 #include "../Object/ItemGlasses.h"
@@ -53,7 +53,7 @@ void CItemRoom::DoorFunc(EDoorDir eDoorDir)
 	switch (eDoorDir)
 	{
 	case DD_RIGHT:
-		MoveRoom<CRoom1>(Vector2::RIGHT);
+		MoveRoom<CRoom4>(Vector2::RIGHT);
 		break;
 	}
 }
