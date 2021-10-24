@@ -12,17 +12,19 @@ void CSceneManager::MusicStart()
 	if (m_pResource->IsPlaying("Stage1BGM"))
 		return;
 
-	m_pResource->SetVolume("BGM", 10);
-	m_pResource->SetVolume("Effect", 30);
+	m_pResource->SetVolume("BGM", 5);
+	m_pResource->SetVolume("Effect", 20);
 
 	m_pResource->SoundStop("BossBGM");
 	m_pResource->SoundStop("BossClearBGM");
+	m_pResource->SoundStop("EndingBGM");
 
 	m_pResource->LoadSound("BGM", true, "Stage1BGM", "Music/Stage1.ogg");
 	m_pResource->SoundPlay("Stage1BGM");
 
 	m_pResource->LoadSound("BGM", true, "BossBGM", "Music/Boss.ogg");
 	m_pResource->LoadSound("BGM", false, "BossClearBGM", "Music/BossClear.ogg");
+	m_pResource->LoadSound("BGM", true, "EndingBGM", "Music/Ending.mp3");
 }
 
 void CSceneManager::ChangeMusic(EMusic_Type eType)
@@ -36,6 +38,12 @@ void CSceneManager::ChangeMusic(EMusic_Type eType)
 	case EMusic_Type::BossClear:
 		m_pResource->SoundStop("BossBGM");
 		m_pResource->SoundPlay("BossClearBGM");
+		break;
+	case EMusic_Type::Ending:
+		m_pResource->SoundStop("BossClearBGM");
+		m_pResource->SoundStop("Stage1BGM");
+		m_pResource->SoundStop("BossBGM");
+		m_pResource->SoundPlay("EndingBGM");
 		break;
 	}
 }

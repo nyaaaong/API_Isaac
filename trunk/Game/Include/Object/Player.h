@@ -92,11 +92,6 @@ private:
 	void IsaacDeathEnd();
 	void IsaacAddItemUpdater(float fTime);
 
-private:
-	void CheatDie(float fTime);
-	void CheatBossRoom(float fTime);
-	void CheatBossHurt(float fTime);
-
 public:
 	virtual void Move(const Vector2& tDir, bool bUseField);
 	virtual void Move(const Vector2& tDir, float fSpeed, bool bUseField);

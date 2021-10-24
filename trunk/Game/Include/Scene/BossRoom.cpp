@@ -1,6 +1,7 @@
 
 #include "BossRoom.h"
 #include "SceneManager.h"
+#include "Ending.h"
 #include "../Map/MapManager.h"
 #include "../Object/MonsterSpawner.h"
 
@@ -50,7 +51,7 @@ void CBossRoom::DoorFunc(EDoorDir eDoorDir)
 	case DD_TOP:
 	case DD_RIGHT:
 	case DD_BOTTOM:
-		//MoveRoom<CEnding>(Vector2::RIGHT);
+		MoveRoom<CEnding>(Vector2());
 		break;
 	}
 }

@@ -12,7 +12,7 @@ CMotherDoor::CMotherDoor() :
 	m_eDoorDir(DD_MAX),
 	m_eDoorType(EMotherDoor_Type::Max),
 	m_fM4PDist(1000.f),
-	m_fM4PMaxDist(200.f),
+	m_fM4PMaxDist(170.f),
 	m_bAttackEnd(false),
 	m_fAttackEndDelay(0.f),
 	m_fStartFuncDelay(0.f)
@@ -26,7 +26,7 @@ CMotherDoor::CMotherDoor(const CMotherDoor& obj)	:
 	m_eDoorDir = obj.m_eDoorDir;
 	m_eDoorType = obj.m_eDoorType;
 	m_fM4PDist = 1000.f;
-	m_fM4PMaxDist = 200.f;
+	m_fM4PMaxDist = 170.f;
 	m_bAttackEnd = false;
 	m_fAttackEndDelay = 0.f;
 	m_fStartFuncDelay = 0.f;
@@ -111,10 +111,10 @@ void CMotherDoor::AddDoorAnimation()
 	AddAnimation("MotherEyeLeft", false);
 	AddAnimation("MotherEyeRight", false);
 
-	AddAnimation("MotherHandTop", false, 0.1f);
-	AddAnimation("MotherHandBottom", false, 0.1f);
-	AddAnimation("MotherHandLeft", false, 0.1f);
-	AddAnimation("MotherHandRight", false, 0.1f);
+	AddAnimation("MotherHandTop", false, 0.2f);
+	AddAnimation("MotherHandBottom", false, 0.2f);
+	AddAnimation("MotherHandLeft", false, 0.2f);
+	AddAnimation("MotherHandRight", false, 0.2f);
 }
 
 void CMotherDoor::DetectPlayer(float fTime)
@@ -202,7 +202,7 @@ void CMotherDoor::StartFunc(float fTime)
 	{
 	case EMotherDoor_Type::Eye:
 	{
-		if (m_fStartFuncDelay >= 0.5f)
+		if (m_fStartFuncDelay >= 0.6f)
 		{
 			m_fStartFuncDelay = 0.f;
 
@@ -308,7 +308,7 @@ void CMotherDoor::EnableTask()
 	{
 	case DD_LEFT:
 		m_tPos.x -= 20.f;
-		m_tBulletStartPos.x = tFieldLT.x + 20.f;
+		m_tBulletStartPos.x = tFieldLT.x + 50.f;
 		switch (m_eDoorType)
 		{
 		case EMotherDoor_Type::Eye:
@@ -321,7 +321,7 @@ void CMotherDoor::EnableTask()
 		break;
 	case DD_RIGHT:
 		m_tPos.x += 20.f;
-		m_tBulletStartPos.x = tFieldRB.x - 20.f;
+		m_tBulletStartPos.x = tFieldRB.x - 50.f;
 		switch (m_eDoorType)
 		{
 		case EMotherDoor_Type::Eye:
@@ -334,7 +334,7 @@ void CMotherDoor::EnableTask()
 		break;
 	case DD_TOP:
 		m_tPos.y -= 20.f;
-		m_tBulletStartPos.y = tFieldLT.y + 30.f;
+		m_tBulletStartPos.y = tFieldLT.y + 50.f;
 		switch (m_eDoorType)
 		{
 		case EMotherDoor_Type::Eye:
@@ -347,7 +347,7 @@ void CMotherDoor::EnableTask()
 		break;
 	case DD_BOTTOM:
 		m_tPos.y += 20.f;
-		m_tBulletStartPos.y = tFieldRB.y - 30.f;
+		m_tBulletStartPos.y = tFieldRB.y - 50.f;
 		switch (m_eDoorType)
 		{
 		case EMotherDoor_Type::Eye:

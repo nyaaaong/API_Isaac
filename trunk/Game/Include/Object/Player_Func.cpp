@@ -86,7 +86,7 @@ void CPlayer::IsaacDeathEnd()
 
 	CObjManager::GetInst()->ResetPlayerHP();
 
-	dynamic_cast<CStage*>(m_pScene)->MoveRoom<CStartRoom>(Vector2::RIGHT);
+	dynamic_cast<CStage*>(m_pScene)->MoveRoom<CStartRoom>(Vector2());
 }
 
 void CPlayer::IsaacAddItemUpdater(float fTime)

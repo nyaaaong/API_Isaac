@@ -43,32 +43,6 @@ bool CMenu::Init()
 
 	return true;
 }
-
-void CMenu::Update(float fTime)
-{
-	CObj::Update(fTime);
-}
-
-void CMenu::PostUpdate(float fTime)
-{
-	CObj::PostUpdate(fTime);
-}
-
-void CMenu::Collision(float fTime)
-{
-	CObj::Collision(fTime);
-}
-
-void CMenu::Render(HDC hDC)
-{
-	CObj::Render(hDC);
-}
-
-CMenu* CMenu::Clone()
-{
-	return nullptr;
-}
-
 CMenu::CMenu()
 {
 }

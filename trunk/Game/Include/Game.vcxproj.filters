@@ -222,6 +222,12 @@
     <Filter Include="06. UI\00. Widget\01. Map">
       <UniqueIdentifier>{d43d1d45-e0f5-4d89-aa82-05810e22654b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Scene\00. Scene\04. Ending">
+      <UniqueIdentifier>{e3919d2d-8a6d-44a0-818d-eb9e8b2aa53a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\08. Ending">
+      <UniqueIdentifier>{5b7dc70f-2711-4fcf-bd11-1195a5cfdf20}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -536,6 +542,12 @@
     <ClCompile Include="UI\Minimap.cpp">
       <Filter>06. UI\00. Widget\01. Map</Filter>
     </ClCompile>
+    <ClCompile Include="Scene\Ending.cpp">
+      <Filter>01. Scene\00. Scene\04. Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\EndingScreen.cpp">
+      <Filter>02. Object\08. Ending</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameInfo.h">
@@ -807,6 +819,12 @@
     </ClInclude>
     <ClInclude Include="UI\MinimapRoom.h">
       <Filter>06. UI\00. Widget\01. Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Ending.h">
+      <Filter>01. Scene\00. Scene\04. Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\EndingScreen.h">
+      <Filter>02. Object\08. Ending</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

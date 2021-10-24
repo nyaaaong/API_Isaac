@@ -20,7 +20,7 @@ CMother::CMother()	:
 	m_bProgress(false),
 	m_fFirstDelay(0.f),
 	m_fPatternDelay(0.f),
-	m_fPatternTimerMax(1.f)
+	m_fPatternTimerMax(0.6f)
 {
 	m_tInfo.fAttack = 1.f;
 	m_tInfo.fHP = 200.f;
@@ -68,7 +68,7 @@ void CMother::Start()
 	m_vecPatternFunc.push_back(std::bind(&CMother::SpawnEye, this));
 	m_vecPatternFunc.push_back(std::bind(&CMother::SpawnSkin, this));
 	m_vecPatternFunc.push_back(std::bind(&CMother::Call1, this));
-	m_vecPatternFunc.push_back(std::bind(&CMother::Call2, this));
+	//m_vecPatternFunc.push_back(std::bind(&CMother::Call2, this));
 }
 
 bool CMother::Init()
@@ -145,31 +145,27 @@ void CMother::MotherPattern(float fTime)
 
 		if (m_fPatternTimer >= m_fPatternTimerMax)
 		{
-			if (m_fPatternTimerMax != 1.f)
-				m_fPatternTimerMax = 1.f;
+			/*if (m_fPatternTimerMax != 0.6f)
+				m_fPatternTimerMax = 0.6f;*/
 
 			m_fPatternTimer = 0.f;
 
-			size_t iSize = m_vecPatternFunc.size();
+			float	fPercent = rand() % 10000 / 100.f;
 
-			int iRand = rand() % iSize;
-
-			if (iRand == 3 || iRand == 4) // CallÀÌ °É·È´Ù¸é ÇÑ¹ø ´õ ·£´ýÀ» »Ì°Ô ÇØ¼­ È®·üÀ» ³·Ãá´Ù.
+			if (fPercent > 5.f)
 			{
-				iRand = rand() % iSize;
+				if (fPercent < 60.f)
+					m_vecPatternFunc[MP_SKIN]();
 
-				if (iRand == 3 || iRand == 4)
-				{
-					iRand = rand() % iSize;
+				else if (fPercent < 20.f)
+					m_vecPatternFunc[MP_EYE]();
 
-					if (iRand == 3 || iRand == 4)
-					{
-						iRand = rand() % iSize;
-					}
-				}
+				else
+					m_vecPatternFunc[MP_LEG]();
 			}
 
-			m_vecPatternFunc[iRand]();
+			else
+				m_vecPatternFunc[MP_CALL1]();
 		}
 	}
 }
@@ -195,13 +191,13 @@ void CMother::EnableRandomDoor(EMotherDoor_Type eType)
 
 void CMother::AddPatternTimer(float fValue)
 {
-	m_fPatternTimerMax = 1.f;
+	m_fPatternTimerMax = 0.6f;
 	m_fPatternTimerMax += fValue;
 }
 
 void CMother::SpawnLeg()
 {
-	if (m_fPatternDelay >= 0.2f)
+	if (m_fPatternDelay >= 0.1f)
 	{
 		m_fPatternDelay = 0.f;
 
@@ -221,7 +217,7 @@ void CMother::SpawnLeg()
 
 void CMother::SpawnEye()
 {
-	if (m_fPatternDelay >= 0.6f)
+	if (m_fPatternDelay >= 0.1f)
 	{
 		m_fPatternDelay = 0.f;
 		EnableRandomDoor(EMotherDoor_Type::Eye);
@@ -233,7 +229,7 @@ void CMother::SpawnEye()
 
 void CMother::SpawnSkin()
 {
-	if (m_fPatternDelay >= 0.2f)
+	if (m_fPatternDelay >= 0.1f)
 	{
 		m_fPatternDelay = 0.f;
 		EnableRandomDoor(EMotherDoor_Type::Skin);
@@ -245,9 +241,9 @@ void CMother::SpawnSkin()
 
 void CMother::Call1()
 {
-	if (m_fPatternDelay >= 0.2f)
+	if (m_fPatternDelay >= 0.1f)
 	{
-		AddPatternTimer(1.f);
+		//AddPatternTimer(0.5f);
 		m_fPatternDelay = 0.f;
 		m_pScene->GetSceneResource()->SoundPlay("MotherCall1");
 		m_bProgress = false;
@@ -259,9 +255,9 @@ void CMother::Call1()
 
 void CMother::Call2()
 {
-	if (m_fPatternDelay >= 0.2f)
+	if (m_fPatternDelay >= 0.1f)
 	{
-		AddPatternTimer(1.f);
+		//AddPatternTimer(0.5f);
 		m_fPatternDelay = 0.f;
 		m_pScene->GetSceneResource()->SoundPlay("MotherCall2");
 		m_bProgress = false;

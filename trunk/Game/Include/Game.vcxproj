@@ -182,6 +182,7 @@
     <ClCompile Include="Object\Character.cpp" />
     <ClCompile Include="Object\Charger.cpp" />
     <ClCompile Include="Object\Door.cpp" />
+    <ClCompile Include="Object\EndingScreen.cpp" />
     <ClCompile Include="Object\EnemyDie.cpp" />
     <ClCompile Include="Object\EnemySmokeNormal.cpp" />
     <ClCompile Include="Object\EnemySmokeSmall.cpp" />
@@ -231,6 +232,7 @@
     <ClCompile Include="Scene\EditorScene_Init.cpp" />
     <ClCompile Include="Scene\EditorScene_Obj.cpp" />
     <ClCompile Include="Scene\EditorScene_Room.cpp" />
+    <ClCompile Include="Scene\Ending.cpp" />
     <ClCompile Include="Scene\ItemRoom.cpp" />
     <ClCompile Include="Scene\MainMenu.cpp" />
     <ClCompile Include="Scene\Room1.cpp" />
@@ -298,6 +300,7 @@
     <ClInclude Include="Object\Character.h" />
     <ClInclude Include="Object\Charger.h" />
     <ClInclude Include="Object\Door.h" />
+    <ClInclude Include="Object\EndingScreen.h" />
     <ClInclude Include="Object\EnemyDie.h" />
     <ClInclude Include="Object\EnemySmokeNormal.h" />
     <ClInclude Include="Object\EnemySmokeSmall.h" />
@@ -336,6 +339,7 @@
     <ClInclude Include="Scene\BossRoom.h" />
     <ClInclude Include="Scene\Camera.h" />
     <ClInclude Include="Scene\EditorScene.h" />
+    <ClInclude Include="Scene\Ending.h" />
     <ClInclude Include="Scene\ItemRoom.h" />
     <ClInclude Include="Scene\MainMenu.h" />
     <ClInclude Include="Scene\Room1.h" />

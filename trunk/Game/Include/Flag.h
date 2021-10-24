@@ -121,7 +121,8 @@ enum class EEnemy_Type
 enum class EMusic_Type
 {
 	Boss,
-	BossClear
+	BossClear,
+	Ending
 };
 
 enum class EMotherDoor_Type
@@ -143,4 +144,13 @@ enum class EMinimapRoom_Type
 {
 	Normal,
 	Item
+};
+
+enum Mother_Pattern
+{
+	MP_LEG,
+	MP_EYE,
+	MP_SKIN,
+	MP_CALL1,
+	MP_CALL2
 };

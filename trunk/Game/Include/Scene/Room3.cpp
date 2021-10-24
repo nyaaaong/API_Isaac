@@ -44,7 +44,7 @@ void CRoom3::DoorFunc(EDoorDir eDoorDir)
 		MoveRoom<CRoom2>(Vector2::LEFT);
 		break;
 	case DD_BOTTOM:
-		MoveRoom<CRoom5>(Vector2::UP);
+		MoveRoom<CRoom5>(Vector2::DOWN);
 		break;
 	}
 }
