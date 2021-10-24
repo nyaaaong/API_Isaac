@@ -200,42 +200,6 @@ bool CScene::Collision(float fTime)
 		}
 	}
 
-	{
-		if (m_iUICount >= 2)
-			qsort(m_pArrUI, static_cast<size_t>(m_iUICount), sizeof(CUIWindow*), CScene::SortUIZOrder);
-
-		for (int i = 0; i < m_iUICount;)
-		{
-			if (!m_pArrUI[i]->IsActive())
-			{
-				--m_iUICount;
-
-				for (int j = i; j < m_iUICount; ++j)
-				{
-					m_pArrUI[j] = m_pArrUI[j + 1];
-				}
-
-				continue;
-			}
-
-			else if (!m_pArrUI[i]->GetVisibility())
-			{
-				++i;
-				continue;
-			}
-
-			else if (!m_pArrUI[i]->IsEnable())
-			{
-				++i;
-				continue;
-			}
-
-			m_pArrUI[i]->Collision(fTime);
-			m_pCollision->AddUIWindow(m_pArrUI[i]);
-			++i;
-		}
-	}
-
 	m_pCollision->Collision(fTime);
 
 	return true;}

@@ -41,6 +41,60 @@ bool CPlayerHUD::Init()
 	m_pBossHPBar->SetPos(tRS.iW * 0.3f + 101.f, 53.f);
 	m_pBossHPBar->SetVisibility(false);
 
+	m_pMinimap = CreateWidget<CMinimap>("Minimap");
+
+	Vector2	tMinimapSize = m_pMinimap->GetSize();
+	m_pMinimap->SetPos((float)tRS.iW - tMinimapSize.x, 0.f);
+
+	char cName[32] = {};
+	char cNum[4] = {};
+	Vector2	tMinimapPos = m_pMinimap->GetPos();
+
+	for (int i = 1; i <= 9; ++i) // 1~9번째 인덱스는 Room1~9
+	{
+		memset(cName, 0, sizeof(char) * 32);
+		memset(cNum, 0, sizeof(char) * 4);
+
+		sprintf_s(cNum, "%d", i + 1);
+		strcpy_s(cName, "ActiveRoom");
+		strcat_s(cName, cNum);
+
+		m_pMinimapRoom[i] = CreateWidget<CMinimapRoom>(cName);
+		m_pMinimapRoom[i]->SetPos(tMinimapPos);
+		m_pMinimapRoom[i]->SetRoomType(EMinimapRoom_Type::Normal);
+		m_pMinimapRoom[i]->Disable();
+	}
+
+	// 0번째 인덱스는 StartRoom
+	m_pMinimapRoom[0] = CreateWidget<CMinimapRoom>("ActiveStartRoom");
+	m_pMinimapRoom[0]->SetPos(tMinimapPos.x + 62.f, tMinimapPos.y + 10.f);
+	m_pMinimapRoom[0]->SetRoomType(EMinimapRoom_Type::Normal);
+	m_pMinimapRoom[0]->Disable();
+
+	m_pMinimapRoom[1]->SetPos(tMinimapPos.x + 38.f, tMinimapPos.y + 31.f);
+
+	m_pMinimapRoom[2]->SetPos(tMinimapPos.x + 62.f, tMinimapPos.y + 31.f);
+
+	m_pMinimapRoom[3]->SetPos(tMinimapPos.x + 86.f, tMinimapPos.y + 31.f);
+
+	m_pMinimapRoom[4]->SetPos(tMinimapPos.x + 38.f, tMinimapPos.y + 52.f);
+
+	m_pMinimapRoom[5]->SetPos(tMinimapPos.x + 86.f, tMinimapPos.y + 52.f);
+
+	m_pMinimapRoom[6]->SetPos(tMinimapPos.x + 110.f, tMinimapPos.y + 52.f);
+
+	m_pMinimapRoom[7]->SetPos(tMinimapPos.x + 86.f, tMinimapPos.y + 73.f);
+
+	m_pMinimapRoom[8]->SetPos(tMinimapPos.x + 62.f, tMinimapPos.y + 73.f);
+
+	m_pMinimapRoom[9]->SetPos(tMinimapPos.x + 62.f, tMinimapPos.y + 94.f);
+
+	// 10번째 인덱스는 ItemRoom
+	m_pMinimapRoom[10] = CreateWidget<CMinimapRoom>("ActiveItemRoom");
+	m_pMinimapRoom[10]->SetPos(tMinimapPos.x + 14.f, tMinimapPos.y + 52.f);
+	m_pMinimapRoom[10]->SetRoomType(EMinimapRoom_Type::Item);
+	m_pMinimapRoom[10]->Disable();
+
 	return true;
 }
 

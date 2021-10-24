@@ -82,14 +82,6 @@ void CUIImage::Update(float fTime)
 	}
 }
 
-void CUIImage::PostUpdate(float fTime)
-{
-}
-
-void CUIImage::Collision(float fTime)
-{
-}
-
 void CUIImage::Render(HDC hDC)
 {
 	if (m_pTexture)

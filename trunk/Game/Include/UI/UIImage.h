@@ -41,13 +41,11 @@ public:
 	void SetTexture(const std::string& strName, const TCHAR* cFileName, const std::string& strPathName = TEXTURE_PATH);
 	void SetTexture(const std::string& strName, const std::vector<std::wstring>& vecFileName, const std::string& strPathName = TEXTURE_PATH);
 	void SetTextureFullPath(const std::string& strName, const TCHAR* cFullPath);
-	void SetTextureColorKey(unsigned char r, unsigned char g, unsigned char b, int iIdx);
+	void SetTextureColorKey(unsigned char r = 255, unsigned char g = 0, unsigned char b = 255, int iIdx = 0);
 
 public:
 	virtual bool Init();
 	virtual void Update(float fTime);
-	virtual void PostUpdate(float fTime);
-	virtual void Collision(float fTime);
 	virtual void Render(HDC hDC);
 	virtual void Render(const Vector2& tPos, HDC hDC);
 	virtual CUIImage* Clone();

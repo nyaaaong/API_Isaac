@@ -7,6 +7,7 @@
 #include "../Map/RoomMap.h"
 #include "../Map/MapManager.h"
 #include "../Object/MonsterSpawner.h"
+#include "../UI/PlayerHUD.h"
 
 bool CRoom3::Init()
 {
@@ -30,6 +31,8 @@ void CRoom3::Start()
 {
 	CRoomBase::Start();
 
+	m_pPlayerHUD->ActiveMinimapRoom(3);
+
 	CMonsterSpawner::GetInst()->CreateMonster();
 }
 
@@ -40,7 +43,7 @@ void CRoom3::DoorFunc(EDoorDir eDoorDir)
 	case DD_LEFT:
 		MoveRoom<CRoom2>(Vector2::LEFT);
 		break;
-	case DD_TOP:
+	case DD_BOTTOM:
 		MoveRoom<CRoom5>(Vector2::UP);
 		break;
 	}

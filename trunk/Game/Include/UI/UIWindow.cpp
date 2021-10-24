@@ -92,10 +92,6 @@ void CUIWindow::PostUpdate(float fTime)
 	}
 }
 
-void CUIWindow::Collision(float fTime)
-{
-}
-
 void CUIWindow::Render(HDC hDC)
 {
 	if (m_iWidgetCount >= 2)
@@ -116,6 +112,12 @@ void CUIWindow::Render(HDC hDC)
 			continue;
 		}
 
+		else if (!m_pArrWidget[i]->IsEnable())
+		{
+			++i;
+			continue;
+		}
+
 		++i;
 	}
 
@@ -123,6 +125,11 @@ void CUIWindow::Render(HDC hDC)
 	{
 		if (!m_pArrWidget[i]->GetVisibility())
 			continue;
+
+		else if (!m_pArrWidget[i]->IsEnable())
+		{
+			continue;
+		}
 
 		m_pArrWidget[i]->Render(hDC);
 	}

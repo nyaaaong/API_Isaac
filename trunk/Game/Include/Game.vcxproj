@@ -261,6 +261,8 @@
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="UI\BossHPBar.cpp" />
     <ClCompile Include="UI\HPBar.cpp" />
+    <ClCompile Include="UI\Minimap.cpp" />
+    <ClCompile Include="UI\MinimapRoom.cpp" />
     <ClCompile Include="UI\PlayerHUD.cpp" />
     <ClCompile Include="UI\UIImage.cpp" />
     <ClCompile Include="UI\UIWidget.cpp" />
@@ -356,6 +358,8 @@
     <ClInclude Include="Timer.h" />
     <ClInclude Include="UI\BossHPBar.h" />
     <ClInclude Include="UI\HPBar.h" />
+    <ClInclude Include="UI\Minimap.h" />
+    <ClInclude Include="UI\MinimapRoom.h" />
     <ClInclude Include="UI\PlayerHUD.h" />
     <ClInclude Include="UI\UIImage.h" />
     <ClInclude Include="UI\UIWidget.h" />

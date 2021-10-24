@@ -6,6 +6,7 @@
 #include "../Input.h"
 #include "../Map/RoomMap.h"
 #include "../Map/MapManager.h"
+#include "../UI/PlayerHUD.h"
 
 bool CStartRoom::Init()
 {
@@ -30,6 +31,8 @@ bool CStartRoom::Init()
 void CStartRoom::Start()
 {
 	CRoomBase::Start();
+
+	m_pPlayerHUD->ActiveMinimapRoom(0);
 
 	CSceneManager::GetInst()->MusicStart();
 }

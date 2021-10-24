@@ -46,8 +46,8 @@ enum class ECollision_State
 
 enum class EZOrder
 {
-	FadeEffect = -10000,
 	UI = -1000,
+	UIBackGround = -950,
 	BackGroundBar = -900,
 	Effect = -900,
 	Item = -100,
@@ -137,4 +137,10 @@ enum class EHeart_Type
 	Half,
 	Normal,
 	Double
+};
+
+enum class EMinimapRoom_Type
+{
+	Normal,
+	Item
 };

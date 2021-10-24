@@ -219,6 +219,9 @@
     <Filter Include="02. Object\02. Effect\03. Item">
       <UniqueIdentifier>{623592cb-8933-48c8-acbb-760afa603338}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06. UI\00. Widget\01. Map">
+      <UniqueIdentifier>{d43d1d45-e0f5-4d89-aa82-05810e22654b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -527,6 +530,12 @@
     <ClCompile Include="Object\ItemAddEffect.cpp">
       <Filter>02. Object\02. Effect\03. Item</Filter>
     </ClCompile>
+    <ClCompile Include="UI\MinimapRoom.cpp">
+      <Filter>06. UI\00. Widget\01. Map</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Minimap.cpp">
+      <Filter>06. UI\00. Widget\01. Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameInfo.h">
@@ -792,6 +801,12 @@
     </ClInclude>
     <ClInclude Include="Object\ItemAddEffect.h">
       <Filter>02. Object\02. Effect\03. Item</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Minimap.h">
+      <Filter>06. UI\00. Widget\01. Map</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\MinimapRoom.h">
+      <Filter>06. UI\00. Widget\01. Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

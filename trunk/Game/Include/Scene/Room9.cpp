@@ -4,6 +4,7 @@
 #include "BossRoom.h"
 #include "../Map/MapManager.h"
 #include "../Object/MonsterSpawner.h"
+#include "../UI/PlayerHUD.h"
 
 bool CRoom9::Init()
 {
@@ -26,6 +27,8 @@ bool CRoom9::Init()
 void CRoom9::Start()
 {
 	CRoomBase::Start();
+
+	m_pPlayerHUD->ActiveMinimapRoom(9);
 
 	CMonsterSpawner::GetInst()->CreateMonster();
 }

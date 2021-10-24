@@ -91,7 +91,6 @@ public:
 	virtual bool Init();
 	virtual void Update(float fTime);
 	virtual void PostUpdate(float fTime);
-	virtual void Collision(float fTime);
 	virtual void Render(HDC hDC);
 
 protected:
@@ -134,7 +133,7 @@ public:
 
 			memcpy(pArr, m_pArrWidget, sizeof(CUIWidget*) * m_iWidgetCount);
 
-			SAFE_DELETE_ARRAY(pArr);
+			SAFE_DELETE_ARRAY(m_pArrWidget);
 
 			m_pArrWidget = pArr;
 		}

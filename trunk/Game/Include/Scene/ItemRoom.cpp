@@ -5,6 +5,7 @@
 #include "../Object/ItemRock.h"
 #include "../Object/ItemGlasses.h"
 #include "../Map/MapManager.h"
+#include "../UI/PlayerHUD.h"
 
 CItemRoom::CItemRoom()
 {
@@ -46,6 +47,8 @@ bool CItemRoom::Init()
 void CItemRoom::Start()
 {
 	CRoomBase::Start();
+
+	m_pPlayerHUD->ActiveMinimapRoom(10);
 }
 
 void CItemRoom::DoorFunc(EDoorDir eDoorDir)
