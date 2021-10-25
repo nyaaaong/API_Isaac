@@ -19,6 +19,8 @@ bool CObjManager::Init()
 {
 	return true;
 }
+
+// Scene에서 플레이어 정보를 Manager에게 넘겨줄 때
 void CObjManager::PushPlayerInfo(CPlayer* pPlayer)
 {
 	m_tPlayerInfo = pPlayer->m_tInfo;
@@ -27,6 +29,7 @@ void CObjManager::PushPlayerInfo(CPlayer* pPlayer)
 	m_bChangedInfo = true;
 }
 
+// Manager에 저장되어 있던 플레이어 정보를 새로운 Scene의 플레이어에게 넘겨줄 때
 void CObjManager::PullPlayerInfo(CPlayer* pPlayer)
 {
 	if (!m_bChangedInfo)

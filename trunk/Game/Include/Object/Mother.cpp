@@ -20,7 +20,7 @@ CMother::CMother()	:
 	m_bProgress(false),
 	m_fFirstDelay(0.f),
 	m_fPatternDelay(0.f),
-	m_fPatternTimerMax(0.6f)
+	m_fPatternTimerMax(0.4f)
 {
 	m_tInfo.fAttack = 1.f;
 	m_tInfo.fHP = 200.f;
@@ -145,27 +145,21 @@ void CMother::MotherPattern(float fTime)
 
 		if (m_fPatternTimer >= m_fPatternTimerMax)
 		{
-			/*if (m_fPatternTimerMax != 0.6f)
-				m_fPatternTimerMax = 0.6f;*/
-
 			m_fPatternTimer = 0.f;
 
 			float	fPercent = rand() % 10000 / 100.f;
 
-			if (fPercent > 5.f)
-			{
-				if (fPercent < 60.f)
-					m_vecPatternFunc[MP_SKIN]();
+			if (fPercent < 5.f)
+				m_vecPatternFunc[MP_CALL1]();
 
-				else if (fPercent < 20.f)
-					m_vecPatternFunc[MP_EYE]();
+			else if (fPercent < 35.f)
+				m_vecPatternFunc[MP_LEG]();
 
-				else
-					m_vecPatternFunc[MP_LEG]();
-			}
+			else if (fPercent < 65.f)
+				m_vecPatternFunc[MP_EYE]();
 
 			else
-				m_vecPatternFunc[MP_CALL1]();
+				m_vecPatternFunc[MP_SKIN]();
 		}
 	}
 }
@@ -191,78 +185,57 @@ void CMother::EnableRandomDoor(EMotherDoor_Type eType)
 
 void CMother::AddPatternTimer(float fValue)
 {
-	m_fPatternTimerMax = 0.6f;
+	m_fPatternTimerMax = 0.4f;
 	m_fPatternTimerMax += fValue;
 }
 
 void CMother::SpawnLeg()
 {
-	if (m_fPatternDelay >= 0.1f)
+	if (!m_bFirstPattern)
 	{
-		m_fPatternDelay = 0.f;
+		if (!m_pScene->GetSceneResource()->IsPlaying("MotherCall1"))
+			m_pScene->GetSceneResource()->SoundPlay("MotherCall1");
 
-		if (!m_bFirstPattern)
+		if (m_fPatternDelay >= 0.2f)
 		{
-			m_fFirstDelay = 0.f;
-			m_bFirstPattern = true;
+			m_fPatternDelay = 0.f;
+
+			if (!m_bFirstPattern)
+			{
+				m_fFirstDelay = 0.f;
+				m_bFirstPattern = true;
+			}
+
+			m_pLeg->Enable();
+
+			return;
 		}
-
-		m_pLeg->Enable();
-
-		return;
 	}
+
+	else
+		m_pLeg->Enable();
 
 	m_bProgress = true;
 }
 
 void CMother::SpawnEye()
 {
-	if (m_fPatternDelay >= 0.1f)
-	{
-		m_fPatternDelay = 0.f;
-		EnableRandomDoor(EMotherDoor_Type::Eye);
-		return;
-	}
-
-	m_bProgress = true;
+	EnableRandomDoor(EMotherDoor_Type::Eye);
 }
 
 void CMother::SpawnSkin()
 {
-	if (m_fPatternDelay >= 0.1f)
-	{
-		m_fPatternDelay = 0.f;
-		EnableRandomDoor(EMotherDoor_Type::Skin);
-		return;
-	}
-
-	m_bProgress = true;
+	EnableRandomDoor(EMotherDoor_Type::Skin);
 }
 
 void CMother::Call1()
 {
-	if (m_fPatternDelay >= 0.1f)
-	{
-		//AddPatternTimer(0.5f);
-		m_fPatternDelay = 0.f;
-		m_pScene->GetSceneResource()->SoundPlay("MotherCall1");
-		m_bProgress = false;
-		return;
-	}
-
-	m_bProgress = true;
+	m_pScene->GetSceneResource()->SoundPlay("MotherCall1");
+	m_bProgress = false;
 }
 
 void CMother::Call2()
 {
-	if (m_fPatternDelay >= 0.1f)
-	{
-		//AddPatternTimer(0.5f);
-		m_fPatternDelay = 0.f;
-		m_pScene->GetSceneResource()->SoundPlay("MotherCall2");
-		m_bProgress = false;
-		return;
-	}
-
-	m_bProgress = true;
+	m_pScene->GetSceneResource()->SoundPlay("MotherCall2");
+	m_bProgress = false;
 }

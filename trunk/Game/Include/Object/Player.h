@@ -68,6 +68,9 @@ public:
 	void AddItem();
 
 private:
+	void CheatBossRoom(float fTime);
+
+private:
 	void AddPlayerAnimation();
 	void AddNotify();
 	void AddCallback();
