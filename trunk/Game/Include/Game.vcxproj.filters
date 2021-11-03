@@ -213,9 +213,6 @@
     <Filter Include="02. Object\02. Effect\02. Enemy\01. Smoke">
       <UniqueIdentifier>{00157927-ef76-4fa4-b141-8ab215b84717}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. Object\00. Character\01. Monster\00. Boss\00. Part">
-      <UniqueIdentifier>{78a8b2b0-42d8-4419-9d78-8c3955a49c9f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. Object\02. Effect\03. Item">
       <UniqueIdentifier>{623592cb-8933-48c8-acbb-760afa603338}</UniqueIdentifier>
     </Filter>
@@ -227,6 +224,18 @@
     </Filter>
     <Filter Include="02. Object\08. Ending">
       <UniqueIdentifier>{5b7dc70f-2711-4fcf-bd11-1195a5cfdf20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\00. Character\01. Monster\00. Boss\00. Mother">
+      <UniqueIdentifier>{e9ea0988-6b91-45c0-9472-5a60b2d4e665}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\00. Character\01. Monster\00. Boss\00. Mother\00. Part">
+      <UniqueIdentifier>{78a8b2b0-42d8-4419-9d78-8c3955a49c9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\00. Character\01. Monster\00. Boss\01. Isaac">
+      <UniqueIdentifier>{38b3f332-a83a-4157-abcb-638266be1fe9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\00. Character\01. Monster\01. Enemy\04. AngelBaby">
+      <UniqueIdentifier>{262aab9a-93cd-4742-96e9-89521db3f83e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -512,9 +521,6 @@
     <ClCompile Include="Scene\Room4.cpp">
       <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Mother.cpp">
-      <Filter>02. Object\00. Character\01. Monster\00. Boss</Filter>
-    </ClCompile>
     <ClCompile Include="Object\EnemyDie.cpp">
       <Filter>02. Object\02. Effect\02. Enemy\00. Die</Filter>
     </ClCompile>
@@ -522,10 +528,10 @@
       <Filter>02. Object\02. Effect\02. Enemy\01. Smoke</Filter>
     </ClCompile>
     <ClCompile Include="Object\MotherLeg.cpp">
-      <Filter>02. Object\00. Character\01. Monster\00. Boss\00. Part</Filter>
+      <Filter>02. Object\00. Character\01. Monster\00. Boss\00. Mother\00. Part</Filter>
     </ClCompile>
     <ClCompile Include="Object\MotherDoor.cpp">
-      <Filter>02. Object\00. Character\01. Monster\00. Boss\00. Part</Filter>
+      <Filter>02. Object\00. Character\01. Monster\00. Boss\00. Mother\00. Part</Filter>
     </ClCompile>
     <ClCompile Include="Object\EnemySmokeNormal.cpp">
       <Filter>02. Object\02. Effect\02. Enemy\01. Smoke</Filter>
@@ -547,6 +553,15 @@
     </ClCompile>
     <ClCompile Include="Object\EndingScreen.cpp">
       <Filter>02. Object\08. Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Mother.cpp">
+      <Filter>02. Object\00. Character\01. Monster\00. Boss\00. Mother</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Isaac.cpp">
+      <Filter>02. Object\00. Character\01. Monster\00. Boss\01. Isaac</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\AngelBaby.cpp">
+      <Filter>02. Object\00. Character\01. Monster\01. Enemy\04. AngelBaby</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -790,9 +805,6 @@
     <ClInclude Include="Scene\Room8.h">
       <Filter>01. Scene\00. Scene\01. Stage\00. Room\01. Normal</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Mother.h">
-      <Filter>02. Object\00. Character\01. Monster\00. Boss</Filter>
-    </ClInclude>
     <ClInclude Include="Object\EnemyDie.h">
       <Filter>02. Object\02. Effect\02. Enemy\00. Die</Filter>
     </ClInclude>
@@ -800,10 +812,10 @@
       <Filter>02. Object\02. Effect\02. Enemy\01. Smoke</Filter>
     </ClInclude>
     <ClInclude Include="Object\MotherLeg.h">
-      <Filter>02. Object\00. Character\01. Monster\00. Boss\00. Part</Filter>
+      <Filter>02. Object\00. Character\01. Monster\00. Boss\00. Mother\00. Part</Filter>
     </ClInclude>
     <ClInclude Include="Object\MotherDoor.h">
-      <Filter>02. Object\00. Character\01. Monster\00. Boss\00. Part</Filter>
+      <Filter>02. Object\00. Character\01. Monster\00. Boss\00. Mother\00. Part</Filter>
     </ClInclude>
     <ClInclude Include="Object\EnemySmokeNormal.h">
       <Filter>02. Object\02. Effect\02. Enemy\01. Smoke</Filter>
@@ -825,6 +837,15 @@
     </ClInclude>
     <ClInclude Include="Object\EndingScreen.h">
       <Filter>02. Object\08. Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Mother.h">
+      <Filter>02. Object\00. Character\01. Monster\00. Boss\00. Mother</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Isaac.h">
+      <Filter>02. Object\00. Character\01. Monster\00. Boss\01. Isaac</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\AngelBaby.h">
+      <Filter>02. Object\00. Character\01. Monster\01. Enemy\04. AngelBaby</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

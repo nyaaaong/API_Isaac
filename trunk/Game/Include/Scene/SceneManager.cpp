@@ -7,63 +7,7 @@
 
 CSceneManager* CSceneManager::m_pInst = nullptr;
 
-void CSceneManager::MusicStart()
-{
-	if (m_pResource->IsPlaying("Stage1BGM"))
-		return;
 
-	m_pResource->SetVolume("BGM", 5);
-	m_pResource->SetVolume("Effect", 20);
-
-	m_pResource->SoundStop("BossBGM");
-	m_pResource->SoundStop("BossClearBGM");
-	m_pResource->SoundStop("EndingBGM");
-
-	m_pResource->LoadSound("BGM", true, "Stage1BGM", "Music/Stage1.ogg");
-	m_pResource->SoundPlay("Stage1BGM");
-
-	m_pResource->LoadSound("BGM", true, "BossBGM", "Music/Boss.ogg");
-	m_pResource->LoadSound("BGM", false, "BossClearBGM", "Music/BossClear.ogg");
-	m_pResource->LoadSound("BGM", true, "EndingBGM", "Music/Ending.mp3");
-}
-
-void CSceneManager::ChangeMusic(EMusic_Type eType)
-{
-	switch (eType)
-	{
-	case EMusic_Type::Boss:
-		m_pResource->SoundStop("Stage1BGM");
-		m_pResource->SoundPlay("BossBGM");
-		break;
-	case EMusic_Type::BossClear:
-		m_pResource->SoundStop("BossBGM");
-		m_pResource->SoundPlay("BossClearBGM");
-		break;
-	case EMusic_Type::Ending:
-		m_pResource->SoundStop("BossClearBGM");
-		m_pResource->SoundStop("Stage1BGM");
-		m_pResource->SoundStop("BossBGM");
-		m_pResource->SoundPlay("EndingBGM");
-		break;
-	}
-}
-
-bool CSceneManager::ChangeScene()
-{
-	if (m_pNextScene)
-	{
-		SAFE_DELETE(m_pScene);
-
-		CInput::GetInst()->ClearCallback();
-
-		m_pScene = m_pNextScene;
-		m_pNextScene = nullptr;
-
-		return true;
-	}
-
-	return false;
-}
 
 bool CSceneManager::Init()
 {
@@ -119,4 +63,87 @@ CSceneManager::~CSceneManager()
 	SAFE_DELETE(m_pResource);
 	SAFE_DELETE(m_pNextScene);
 	SAFE_DELETE(m_pScene);
+}
+
+bool CSceneManager::IsPlaying(EMusic_Type eType) const
+{
+	if (!m_pResource)
+		return false;
+
+	std::string	strName;
+
+	switch (eType)
+	{
+	case EMusic_Type::Boss:
+		strName = "BossBGM";
+		break;
+	case EMusic_Type::BossClear:
+		strName = "BossClearBGM";
+		break;
+	case EMusic_Type::LastBoss:
+		strName = "LastBossBGM";
+		break;
+	case EMusic_Type::Ending:
+		strName = "EndingBGM";
+		break;
+	}
+
+	return m_pResource->IsPlaying(strName);
+}
+
+void CSceneManager::MusicStart()
+{
+	if (m_pResource->IsPlaying("Stage1BGM"))
+		return;
+
+	m_pResource->SetVolume("BGM", 5);
+	m_pResource->SetVolume("Effect", 10);
+
+	m_pResource->SoundGroupStop("BGM");
+
+	m_pResource->LoadSound("BGM", true, "Stage1BGM", "Music/Stage1.ogg");
+	m_pResource->SoundPlay("Stage1BGM");
+
+	m_pResource->LoadSound("BGM", true, "BossBGM", "Music/Boss.ogg");
+	m_pResource->LoadSound("BGM", true, "LastBossBGM", "Music/LastBoss.ogg");
+	m_pResource->LoadSound("BGM", false, "BossClearBGM", "Music/BossClear.ogg");
+	m_pResource->LoadSound("BGM", true, "EndingBGM", "Music/Ending.mp3");
+}
+
+void CSceneManager::ChangeMusic(EMusic_Type eType)
+{
+	m_pResource->SoundGroupStop("BGM");
+
+	switch (eType)
+	{
+	case EMusic_Type::Boss:		
+		m_pResource->SoundPlay("BossBGM");
+		break;
+	case EMusic_Type::LastBoss:
+		m_pResource->SoundPlay("LastBossBGM");
+		break;
+	case EMusic_Type::BossClear:
+		m_pResource->SoundPlay("BossClearBGM");
+		break;
+	case EMusic_Type::Ending:
+		m_pResource->SoundPlay("EndingBGM");
+		break;
+	}
+}
+
+bool CSceneManager::ChangeScene()
+{
+	if (m_pNextScene)
+	{
+		SAFE_DELETE(m_pScene);
+
+		CInput::GetInst()->ClearCallback();
+
+		m_pScene = m_pNextScene;
+		m_pNextScene = nullptr;
+
+		return true;
+	}
+
+	return false;
 }

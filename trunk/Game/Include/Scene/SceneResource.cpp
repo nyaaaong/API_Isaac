@@ -243,6 +243,11 @@ bool CSceneResource::SoundStop(const std::string& strName)
 	return CResourceManager::GetInst()->SoundStop(strName);
 }
 
+bool CSceneResource::SoundGroupStop(const std::string& strGroupName)
+{
+    return CResourceManager::GetInst()->SoundGroupStop(strGroupName);
+}
+
 bool CSceneResource::SoundPause(const std::string& strName)
 {
 	return CResourceManager::GetInst()->SoundPause(strName);

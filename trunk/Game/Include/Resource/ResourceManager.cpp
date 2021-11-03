@@ -90,6 +90,18 @@ bool CResourceManager::SoundStop(const std::string& strName)
 	return true;
 }
 
+bool CResourceManager::SoundGroupStop(const std::string& strGroupName)
+{
+	std::unordered_map<std::string, FMOD::ChannelGroup*>::iterator iter = m_mapChannelGroup.find(strGroupName);
+
+	if (iter == m_mapChannelGroup.end())
+		return false;
+
+	iter->second->stop();
+
+	return true;
+}
+
 bool CResourceManager::SoundPause(const std::string& strName)
 {
 	CSound* pSound = FindSound(strName);

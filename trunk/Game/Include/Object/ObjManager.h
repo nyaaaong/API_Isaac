@@ -32,13 +32,8 @@ private:
 	CharacterInfo	m_tPlayerInfo;
 	bool	m_bIsItem;
 	bool	m_bChangedInfo;
-
-public:
-	void SetPlayerInfo(const CharacterInfo& pInfo, bool bIsItem)
-	{
-		m_tPlayerInfo = pInfo;
-		m_bIsItem = bIsItem;
-	}
+	bool	m_bEnableDamage;
+	bool	m_bCheatNoDamage;
 
 public:
 	bool IsChangedInfo()	const

@@ -40,7 +40,6 @@ void CPooter::Start()
 	m_pColliderBox = AddCollider<CColliderBox>("Monster");
 	m_pColliderBox->SetExtent(m_tSize * 0.6f);
 	m_pColliderBox->SetCollisionProfile("Monster");
-	m_pColliderBox->SetCollisionBeginFunc<CPooter>(this, &CPooter::CollisionBegin);
 	m_pColliderBox->SetCollisionCollidingFunc<CPooter>(this, &CPooter::CollisionColliding);
 
 	AddAnimationNotify<CPooter>("PooterFireRight", 2, this, &CPooter::Fire);

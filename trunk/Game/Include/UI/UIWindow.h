@@ -133,7 +133,7 @@ public:
 
 			memcpy(pArr, m_pArrWidget, sizeof(CUIWidget*) * m_iWidgetCount);
 
-			SAFE_DELETE_ARRAY(m_pArrWidget);
+			delete[]	m_pArrWidget;
 
 			m_pArrWidget = pArr;
 		}

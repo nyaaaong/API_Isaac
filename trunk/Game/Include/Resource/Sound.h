@@ -28,12 +28,12 @@ public:
 	}
 
 public:
+	void Update();
 	bool LoadSound(FMOD::System* pSystem, FMOD::ChannelGroup* pGroup, bool bLoop, const std::string& strName, const char* cFileName, const std::string& strPathName = SOUND_PATH);
 	void Play();
 	void Stop();
 	void Pause();
 	void Resume();
-	void Update();
 
 private:
 	CSound();

@@ -17,6 +17,16 @@ bool CCollisionManager::Init()
 	CreateProfile("Effect", Channel_Effect, true);
 	CreateProfile("Item", Channel_Item, true);
 
+	SetCollisionState("Item", Channel_Door, ECollision_State::Ignore);
+	SetCollisionState("Item", Channel_PlayerHead, ECollision_State::Ignore);
+	SetCollisionState("Item", Channel_Monster, ECollision_State::Ignore);
+	SetCollisionState("Item", Channel_PlayerAttack, ECollision_State::Ignore);
+	SetCollisionState("Item", Channel_MonsterAttack, ECollision_State::Ignore);
+	SetCollisionState("Item", Channel_Bomb, ECollision_State::Ignore);
+	SetCollisionState("Item", Channel_BombExplosion, ECollision_State::Ignore);
+	SetCollisionState("Item", Channel_Effect, ECollision_State::Ignore);
+	SetCollisionState("Item", Channel_Item, ECollision_State::Ignore);
+
 	SetCollisionState("Door", Channel_Object, ECollision_State::Ignore);
 	SetCollisionState("Door", Channel_Door, ECollision_State::Ignore);
 	SetCollisionState("Door", Channel_PlayerHead, ECollision_State::Ignore);

@@ -24,11 +24,11 @@ private:
 	class CPlayerBody* m_pPlayerBody;
 	Vector2	m_tMoveDir;
 	bool	m_bDie;	// 중복되서 들어오지 않도록
-	class CMother* m_pMother;
 	float	m_fAnimDelay;
 	bool	m_bIsItem;
 	CObj* m_ItemAddEffect;
 	bool	m_bIsItemAnim;
+	bool	m_bCheatNoDamage; // NoDamage를 구별하기 위함
 
 public:
 	bool IsItem()	const
@@ -47,11 +47,6 @@ public:
 	}
 
 public:
-	void SetBoss(class CMother* pMother)
-	{
-		m_pMother = pMother;
-	}
-
 	void UseBomb(bool bUse)
 	{
 		m_bUseBomb = bUse;
@@ -69,6 +64,8 @@ public:
 
 private:
 	void CheatBossRoom(float fTime);
+	void CheatNoDamage(float fTime);
+	void CheatDamageUp(float fTime);
 
 private:
 	void AddPlayerAnimation();
@@ -99,7 +96,6 @@ public:
 	virtual void Move(const Vector2& tDir, bool bUseField);
 	virtual void Move(const Vector2& tDir, float fSpeed, bool bUseField);
 	virtual float SetDamage(float fDamage);
-	virtual void CollisionBegin(class CCollider* pSrc, class CCollider* pDest, float fTime);
 
 public:
 	virtual void Start();

@@ -10,18 +10,13 @@ void CMonsterBase::GetM2PDir()
 {
 	CObj* pPlayer = m_pScene->GetPlayer();
 
-	float	fAngle = 0.f;
-
 	if (pPlayer)
-		fAngle = GetAngle(m_tPos, pPlayer->GetPos());
+		m_fM2PAngle = GetAngle(m_tPos, pPlayer->GetPos());
 
-	if (isnan<float>(fAngle))
+	if (isnan<float>(m_fM2PAngle))
 		return;
 
-	float	fDegree = DegreeToRadian(fAngle);
-
-	if (!fDegree)
-		return;
+	float	fDegree = DegreeToRadian(m_fM2PAngle);
 
 	m_tM2PDir.x = cosf(fDegree);
 	m_tM2PDir.y = sinf(fDegree);
@@ -87,10 +82,9 @@ void CMonsterBase::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime
 void CMonsterBase::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
 {
 	std::string	strName = pDest->GetName();
-	CObj* pPlayer = pDest->GetOwner();
 
 	if (strName == "PlayerHead" || strName == "PlayerBody")
-		pPlayer->SetDamage(1.f);
+		pDest->GetOwner()->SetDamage(1.f);
 }
 
 CMonsterBase::CMonsterBase() :
@@ -101,7 +95,8 @@ CMonsterBase::CMonsterBase() :
 	m_fMaxDist(-1.f),
 	m_bUseKnockBack(true),
 	m_bBlockCollision(false),
-	m_bSmokeEnd(false)
+	m_bSmokeEnd(false),
+	m_fM2PAngle(0.f)
 {
 	m_arrDir[0] = Vector2::LEFT;
 	m_arrDir[1] = Vector2::UP;
@@ -124,6 +119,7 @@ CMonsterBase::CMonsterBase(const CMonsterBase& obj)	:
 	m_bBlockCollision = false;
 	m_strCurAnim = obj.m_strCurAnim;
 	m_bSmokeEnd = false;
+	m_fM2PAngle = obj.m_fM2PAngle;
 
 	memcpy_s(m_arrDir, sizeof(Vector2) * 4, obj.m_arrDir, sizeof(Vector2) * 4);
 }

@@ -10,22 +10,22 @@ class CRoomBase :
 protected:
 	std::vector<std::vector<class CDoor*>>	m_vecDoor;
 	int		m_iMonsterCount;
-	int		m_iBossMonsterCount;
+	bool	m_bIsBossRoom;
 
 public:
-	int GetBossMonsterCount()	const
-	{
-		return m_iBossMonsterCount;
-	}
-
 	int GetMonsterCount()	const
 	{
 		return m_iMonsterCount;
 	}
 
 public:
+	void AddMonsterCount(int iCount)
+	{
+		m_iMonsterCount += iCount;
+	}
+
+public:
 	void SubMonsterCount();
-	void SubBossMonsterCount();
 
 public:
 	virtual bool Init();

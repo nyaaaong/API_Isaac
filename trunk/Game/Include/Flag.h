@@ -122,6 +122,7 @@ enum class EMusic_Type
 {
 	Boss,
 	BossClear,
+	LastBoss,
 	Ending
 };
 
@@ -146,11 +147,39 @@ enum class EMinimapRoom_Type
 	Item
 };
 
-enum Mother_Pattern
+enum EMother_Pattern
 {
 	MP_LEG,
 	MP_EYE,
 	MP_SKIN,
 	MP_CALL1,
 	MP_CALL2
+};
+
+enum class EIsaac_Status
+{
+	Lying,
+	StandUp,
+	Wing
+};
+
+enum class EDie_State
+{
+	None,
+	Progress,
+	Complete
+};
+
+enum class EFire_State
+{
+	None,
+	Progress,
+	Complete
+};
+
+enum class ESpecial_Tear
+{
+	None,
+	Special,
+	Reverse
 };

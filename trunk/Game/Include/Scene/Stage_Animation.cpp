@@ -420,6 +420,93 @@ void CStage::BossAnimation()
 	GetSceneResource()->CreateAnimationSequence("MotherEyeRight", "MotherEyeRight", TEXT("Monster/Boss/Mother_Eye_Right.bmp"));
 	GetSceneResource()->SetTextureColorKey("MotherEyeRight");
 	GetSceneResource()->AddAnimationFrameData("MotherEyeRight", Vector2(0.f, 0.f), Vector2(132.f, 126.f));
+
+	// ============== Isaac ==============
+	// -------------- Create --------------
+	GetSceneResource()->CreateAnimationSequence("IsaacCreate", "IsaacCreate", TEXT("Monster/Boss/Isaac/Create.bmp"));
+	GetSceneResource()->SetTextureColorKey("IsaacCreate");
+
+	for (int i = 0; i < 3; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("IsaacCreate", Vector2(240.f * i, 0.f), Vector2(240.f, 240.f));
+	}
+
+	// -------------- Lying --------------
+	GetSceneResource()->CreateAnimationSequence("IsaacLying", "IsaacLying", TEXT("Monster/Boss/Isaac/Lying.bmp"));
+	GetSceneResource()->SetTextureColorKey("IsaacLying");
+
+	for (int i = 0; i < 2; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("IsaacLying", Vector2(240.f * i, 0.f), Vector2(240.f, 240.f));
+	}
+
+	// -------------- StandUp --------------
+	GetSceneResource()->CreateAnimationSequence("IsaacStandUp", "IsaacStandUp", TEXT("Monster/Boss/Isaac/StandUp.bmp"));
+	GetSceneResource()->SetTextureColorKey("IsaacStandUp");
+
+	for (int i = 0; i < 4; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("IsaacStandUp", Vector2(240.f * i, 0.f), Vector2(240.f, 240.f));
+	}
+
+	// -------------- Stand --------------
+	GetSceneResource()->CreateAnimationSequence("IsaacStand", "IsaacStand", TEXT("Monster/Boss/Isaac/Stand.bmp"));
+	GetSceneResource()->SetTextureColorKey("IsaacStand");
+	GetSceneResource()->AddAnimationFrameData("IsaacStand", Vector2(0.f, 0.f), Vector2(240.f, 240.f));
+
+	// -------------- Jump --------------
+	GetSceneResource()->CreateAnimationSequence("IsaacJump", "IsaacJump", TEXT("Monster/Boss/Isaac/Jump.bmp"));
+	GetSceneResource()->SetTextureColorKey("IsaacJump");
+
+	for (int i = 0; i < 4; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("IsaacJump", Vector2(240.f * i, 0.f), Vector2(240.f, 240.f));
+	}
+
+	// -------------- Transform --------------
+	GetSceneResource()->CreateAnimationSequence("IsaacTransform", "IsaacTransform", TEXT("Monster/Boss/Isaac/Transform.bmp"));
+	GetSceneResource()->SetTextureColorKey("IsaacTransform");
+
+	for (int i = 0; i < 3; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("IsaacTransform", Vector2(240.f * i, 0.f), Vector2(240.f, 240.f));
+	}
+
+	// -------------- Idle --------------
+	GetSceneResource()->CreateAnimationSequence("IsaacIdle", "IsaacIdle", TEXT("Monster/Boss/Isaac/Idle.bmp"));
+	GetSceneResource()->SetTextureColorKey("IsaacIdle");
+
+	for (int i = 0; i < 6; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("IsaacIdle", Vector2(240.f * i, 0.f), Vector2(240.f, 240.f));
+	}
+
+	// -------------- Flying --------------
+	GetSceneResource()->CreateAnimationSequence("IsaacFlying", "IsaacFlying", TEXT("Monster/Boss/Isaac/Flying.bmp"));
+	GetSceneResource()->SetTextureColorKey("IsaacFlying");
+
+	for (int i = 0; i < 2; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("IsaacFlying", Vector2(240.f * i, 0.f), Vector2(240.f, 240.f));
+	}
+
+	// -------------- Land --------------
+	GetSceneResource()->CreateAnimationSequence("IsaacLand", "IsaacLand", TEXT("Monster/Boss/Isaac/Land.bmp"));
+	GetSceneResource()->SetTextureColorKey("IsaacLand");
+
+	for (int i = 0; i < 4; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("IsaacLand", Vector2(240.f * i, 0.f), Vector2(240.f, 240.f));
+	}
+
+	// -------------- Charge --------------
+	GetSceneResource()->CreateAnimationSequence("IsaacCharge", "IsaacCharge", TEXT("Monster/Boss/Isaac/Charge.bmp"));
+	GetSceneResource()->SetTextureColorKey("IsaacCharge");
+
+	for (int i = 0; i < 2; ++i)
+	{
+		GetSceneResource()->AddAnimationFrameData("IsaacCharge", Vector2(240.f * i, 0.f), Vector2(240.f, 240.f));
+	}
 }
 
 void CStage::TearAnimation()

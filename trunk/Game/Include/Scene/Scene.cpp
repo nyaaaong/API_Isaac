@@ -246,7 +246,7 @@ bool CScene::Render(HDC hDC)
 
 					memcpy(pArr, m_pArrRender, sizeof(CObj*) * m_iRenderCount);
 
-					SAFE_DELETE_ARRAY(m_pArrRender);
+					delete[]	m_pArrRender;
 
 					m_pArrRender = pArr;
 				}
@@ -267,7 +267,7 @@ bool CScene::Render(HDC hDC)
 
 		memcpy(pArr, m_pArrRender, sizeof(CObj*) * m_iRenderCount);
 
-		SAFE_DELETE_ARRAY(m_pArrRender);
+		delete[]	m_pArrRender;
 
 		m_pArrRender = pArr;
 	}

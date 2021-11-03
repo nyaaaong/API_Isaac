@@ -17,45 +17,6 @@ private:
 	bool	m_bDebug;
 
 public:
-	bool IsDebug()	const
-	{
-		return m_bDebug;
-	}
-
-	bool IsInputAnimFrameData()	const
-	{
-		return m_bInputAnimFrameData;
-	}
-	
-	CScene* GetScene()	const
-	{
-		return m_pScene;
-	}
-
-	CScene* GetNextScene()	const
-	{
-		return m_pNextScene;
-	}
-
-public:
-	void SetDebug()
-	{
-		m_bDebug = !m_bDebug;
-	}
-
-	void InputAnimFrameData()
-	{
-		m_bInputAnimFrameData = true;
-	}
-
-public:
-	void MusicStart();
-	void ChangeMusic(EMusic_Type eType);
-
-private:
-	bool ChangeScene();
-
-public:
 	bool Init();
 	bool Update(float fTime);
 	bool PostUpdate(float fTime);
@@ -84,16 +45,54 @@ private:
 	~CSceneManager();
 
 public:
+	bool IsDebug()	const
+	{
+		return m_bDebug;
+	}
+
+	bool IsInputAnimFrameData()	const
+	{
+		return m_bInputAnimFrameData;
+	}
+
+	CScene* GetScene()	const
+	{
+		return m_pScene;
+	}
+
+	CScene* GetNextScene()	const
+	{
+		return m_pNextScene;
+	}
+
 	const Vector2& GetPrevScenePlayerPos()	const
 	{
 		return m_tPrevScenePlayerPos;
 	}
 
 public:
+	void SetDebug()
+	{
+		m_bDebug = !m_bDebug;
+	}
+
+	void InputAnimFrameData()
+	{
+		m_bInputAnimFrameData = true;
+	}
+
 	void SetPrevScenePlayerPos(const Vector2& tPos)
 	{
 		m_tPrevScenePlayerPos = tPos;
 	}
+
+public:
+	void MusicStart();
+	void ChangeMusic(EMusic_Type eType);
+	bool IsPlaying(EMusic_Type eType)	const;
+
+private:
+	bool ChangeScene();
 
 public:
 	template <typename T>

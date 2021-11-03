@@ -5,9 +5,11 @@
 #include "Pooter.h"
 #include "Fly.h"
 #include "RedFly.h"
+#include "AngelBaby.h"
 #include "Mother.h"
 #include "MotherLeg.h"
 #include "MotherDoor.h"
+#include "Isaac.h"
 #include "EnemyDie.h"
 #include "EnemySmokeSmall.h"
 #include "EnemySmokeNormal.h"
@@ -24,7 +26,9 @@
 CMonsterSpawner* CMonsterSpawner::m_pInst = nullptr;
 
 CMonsterSpawner::CMonsterSpawner()	:
-	m_pScene(nullptr)
+	m_pScene(nullptr),
+	m_pIsaac(nullptr),
+	m_iBossMonster(2)
 {
 }
 
@@ -91,6 +95,13 @@ void CMonsterSpawner::CreateMonsterPrototype()
 	m_vecPivot.push_back(pRedFly->GetPivot());
 	m_vecOffset.push_back(pRedFly->GetOffset());
 	m_vecName.push_back(pRedFly->GetName());
+
+	CAngelBaby* pAngelBaby = m_pScene->CreatePrototype<CAngelBaby>("AngelBaby");
+
+	m_vecSize.push_back(pAngelBaby->GetSize());
+	m_vecPivot.push_back(pAngelBaby->GetPivot());
+	m_vecOffset.push_back(pAngelBaby->GetOffset());
+	m_vecName.push_back(pAngelBaby->GetName());
 }
 
 void CMonsterSpawner::CreateBossMonsterPrototype()
@@ -107,6 +118,9 @@ void CMonsterSpawner::CreateBossMonsterPrototype()
 
 		m_pScene->CreatePrototype<CMotherLeg>("MotherLeg");
 		m_pScene->CreatePrototype<CMotherDoor>("MotherDoor");
+
+		CIsaac* pIsaac = m_pScene->CreatePrototype<CIsaac>("Isaac");
+		m_vecBossName.push_back(pIsaac->GetName());
 	}
 }
 
@@ -158,12 +172,17 @@ void CMonsterSpawner::CreateMonster(const Vector2& tPos)
 	CreateMonster(m_vecName[iIdx]);
 }
 
+void CMonsterSpawner::CreateMonster(const std::string& strName, const Vector2& tPos)
+{
+	m_tSpawnPos = tPos;
+	CreateMonster(strName);
+}
+
 void CMonsterSpawner::CreateBossMonster()
 {
 	CRoomBase* pRoom = dynamic_cast<CRoomBase*>(m_pScene);
-	int iBossMonsterCount = pRoom->GetBossMonsterCount();
 
-	if (!iBossMonsterCount)
+	if (!m_iBossMonster)
 		return;
 
 	int iNum = m_pScene->GetCurMapNumber();
@@ -181,18 +200,14 @@ void CMonsterSpawner::CreateBossMonster()
 			return;
 	}
 
-	size_t iSize = m_vecBossName.size();
-	int iIdx = 0;
-
-	for (; iIdx < iSize; ++iIdx)
+	if (m_iBossMonster == 2)
 	{
-		if (m_vecBossName[iIdx] == "Mother")
-			break;
+		FindBossMonster("Mother");
+		m_pScene->GetSceneResource()->SoundPlay("DoorClose");
 	}
 
-	CreateBossMonster(m_vecBossName[iIdx]);
-
-	m_pScene->GetSceneResource()->SoundPlay("DoorClose");
+	else if (m_iBossMonster == 1)
+		FindBossMonster("Isaac");
 }
 
 void CMonsterSpawner::EnemyDieNormal(const Vector2& tPos)
@@ -298,6 +313,9 @@ void CMonsterSpawner::CreateMonster(const std::string& strName)
 	else if (strName == "RedFly")
 		m_pScene->CreateObject<CRedFly>(strName, strName, m_tSpawnPos);
 
+	else if (strName == "AngelBaby")
+		m_pScene->CreateObject<CAngelBaby>(strName, strName, m_tSpawnPos);
+
 	m_pScene->CreateObject<CEnemySmokeSmall>("Smoke1", "Smoke1", m_tSpawnPos, Vector2(144.f, 144.f));
 }
 
@@ -338,9 +356,17 @@ void CMonsterSpawner::CreateBossMonster(const std::string& strName)
 		pDoor[DD_BOTTOM]->SetDoorDir(DD_BOTTOM);
 	}
 
-	CPlayerHUD* pHUD = dynamic_cast<CStage*>(m_pScene)->GetPlayerHUD();
-	pHUD->SetBossMonster(pMother);
-	dynamic_cast<CPlayer*>(m_pScene->GetPlayer())->SetBoss(pMother);
+	else if (strName == "Isaac")
+	{
+		Resolution	tRS = CGameManager::GetInst()->GetResolution();
+
+		m_tSpawnPos = Vector2(tRS.iW * 0.5f, tRS.iH * 0.5f);
+
+		CreateSmoke(m_tSpawnPos);
+		m_pScene->GetSceneResource()->SoundPlay("MotherSummon");
+
+		m_pIsaac = m_pScene->CreateObject<CIsaac>(strName, strName, m_tSpawnPos);
+	}
 }
 
 void CMonsterSpawner::AddSpawnLocation()
@@ -392,6 +418,22 @@ void CMonsterSpawner::CreateSmoke(const Vector2& tPos)
 	m_pScene->CreateObject<CEnemySmokeNormal>("Smoke2", "Smoke2", tPos, Vector2(288.f, 288.f));
 }
 
+void CMonsterSpawner::KillBossMonster()
+{
+	--m_iBossMonster;
+
+	if (m_iBossMonster <= 0)
+	{
+		m_iBossMonster = 0;
+		m_pScene->GetSceneResource()->SoundPlay("DoorOpen");
+	}
+}
+
+int CMonsterSpawner::GetBossMonsterCount()
+{
+	return m_iBossMonster;
+}
+
 bool CMonsterSpawner::CheckSpawnPossible(const Vector2& tSize, const Vector2& tPivot, const Vector2& tOffset)
 {
 	if (m_tSpawnPos == Vector2())
@@ -415,7 +457,7 @@ void CMonsterSpawner::CreateHeart(const Vector2& tPos)
 {
 	float	fPercent = rand() % 10000 / 100.f;
 
-	if (fPercent > 30.f)
+	if (fPercent > 10.f)
 		return;
 
 	m_pScene->GetSceneResource()->SoundPlay("HeartDrop");
@@ -430,4 +472,19 @@ void CMonsterSpawner::CreateHeart(const Vector2& tPos)
 
 	else if (fPercent < 40.f)
 		pHeart->SetHeartType(EHeart_Type::Normal);
+}
+
+void CMonsterSpawner::FindBossMonster(const std::string& strName)
+{
+	size_t iSize = m_vecBossName.size();
+	int iIdx = 0;
+
+	for (; iIdx < iSize; ++iIdx)
+	{
+		if (m_vecBossName[iIdx] == strName)
+		{
+			CreateBossMonster(m_vecBossName[iIdx]);
+			return;
+		}
+	}
 }

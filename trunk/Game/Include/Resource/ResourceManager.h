@@ -27,6 +27,7 @@ public:
 	bool SetVolume(const std::string& strGroupName, int iVolume);
 	bool SoundPlay(const std::string& strName);
 	bool SoundStop(const std::string& strName);
+	bool SoundGroupStop(const std::string& strGroupName);
 	bool SoundPause(const std::string& strName);
 	bool SoundResume(const std::string& strName);
 	bool IsPlaying(const std::string& strName);

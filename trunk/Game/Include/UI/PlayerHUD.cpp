@@ -110,14 +110,14 @@ void CPlayerHUD::Update(float fTime)
 
 	if (m_pBossMonster)
 	{
-		if (!m_pBossMonster->IsDead())
+		if (!m_pBossHPBar->GetVisibility() && !m_pBossMonster->IsDead())
 		{
 			m_pBossHPEmptyBar->SetVisibility(true);
 			m_pBossHPBar->SetVisibility(true);
 			return;
 		}
 
-		else
+		else if (m_pBossMonster->IsDead())
 		{
 			m_fBossHPTimer += fTime;
 

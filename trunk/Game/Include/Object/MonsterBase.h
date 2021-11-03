@@ -10,6 +10,7 @@ class CMonsterBase :
 protected:
 	Vector2	m_tDir;
 	Vector2	m_tM2PDir;
+	float	m_fM2PAngle;
 	float	m_fFireTime;
 	float	m_fFireTimeMax;
 	int		m_iCount;

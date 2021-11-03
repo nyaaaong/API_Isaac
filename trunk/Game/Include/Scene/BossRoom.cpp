@@ -4,9 +4,12 @@
 #include "Ending.h"
 #include "../Map/MapManager.h"
 #include "../Object/MonsterSpawner.h"
+#include "../UI/PlayerHUD.h"
 
 bool CBossRoom::Init()
 {
+	m_bIsBossRoom = true;
+
 	if (!CRoomBase::Init())
 		return false;
 
@@ -22,6 +25,9 @@ bool CBossRoom::Init()
 
 	CreatePlayer(Vector2());
 	CMonsterSpawner::GetInst()->AddBossSpawnLocation();
+
+	m_iMonsterCount;
+	int a = 0;
 
 	return true;
 }
@@ -40,6 +46,13 @@ bool CBossRoom::Update(float fTime)
 	if (!CRoomBase::Update(fTime))
 		return false;
 
+	if (!m_bIsBossChange && CMonsterSpawner::GetInst()->GetBossMonsterCount() == 1 && !CSceneManager::GetInst()->IsPlaying(EMusic_Type::BossClear))
+	{
+		m_bIsBossChange = true;
+		CMonsterSpawner::GetInst()->CreateBossMonster();
+		CSceneManager::GetInst()->ChangeMusic(EMusic_Type::LastBoss);
+	}
+
 	return true;
 }
 
@@ -56,9 +69,9 @@ void CBossRoom::DoorFunc(EDoorDir eDoorDir)
 	}
 }
 
-CBossRoom::CBossRoom()
+CBossRoom::CBossRoom()	:
+	m_bIsBossChange(false)
 {
-	m_iBossMonsterCount = 1;
 }
 
 CBossRoom::~CBossRoom()

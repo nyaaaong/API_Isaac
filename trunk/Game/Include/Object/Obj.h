@@ -292,14 +292,16 @@ public:
 	bool CheckCurrentAnimation(const std::string& strName);
 	void SetScene(class CScene* pScene);
 	const std::string GetCurrentAnimationName()	const;
+	void ResetAnimation(const std::string& strName);
+	bool IsEndAnimation()	const;
 
 public:
 	virtual void Move(const Vector2& tDir, bool bUseField);	// bUseField = true는 활동 범위 내부에서만 움직이게 할 것인지를 뜻한다.
 	virtual void Move(const Vector2& tDir, float fSpeed, bool bUseField);
 	virtual float SetDamage(float fDamage);
-	virtual void CollisionBegin(class CCollider* pSrc, class CCollider* pDest, float fTime);
-	virtual void CollisionColliding(class CCollider* pSrc, class CCollider* pDest, float fTime);
-	virtual void CollisionEnd(class CCollider* pSrc, class CCollider* pDest, float fTime);
+	virtual void CollisionBegin(class CCollider* pSrc, class CCollider* pDest, float fTime) {}
+	virtual void CollisionColliding(class CCollider* pSrc, class CCollider* pDest, float fTime) {}
+	virtual void CollisionEnd(class CCollider* pSrc, class CCollider* pDest, float fTime) {}
 
 public:
 	void SetTexture(const std::string& strName);

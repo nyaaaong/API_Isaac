@@ -63,9 +63,6 @@ void CBombExplosionEffect::CollisionBegin(CCollider* pSrc, CCollider* pDest, flo
 	if (strDestName == "PlayerHead" || 
 		strDestName == "PlayerBody")
 	{
-		if (!pDestObj->IsEnableDamage())
-			return;
-
 		pDestObj->SetDamage(1.f);
 	}
 

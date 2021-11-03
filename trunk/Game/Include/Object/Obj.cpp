@@ -96,6 +96,28 @@ const std::string CObj::GetCurrentAnimationName() const
 	return "";
 }
 
+void CObj::ResetAnimation(const std::string& strName)
+{
+	AnimationInfo* pFindInfo = m_pAnimation->FindInfo(strName);
+
+	if (!pFindInfo)
+		return;
+
+	pFindInfo->iFrame = 0;
+	pFindInfo->fTime = 0.f;
+}
+
+bool CObj::IsEndAnimation() const
+{
+	if (!m_pAnimation)
+		return false;
+
+	else if (!m_pAnimation->m_pCurrentAnimation)
+		return false;
+
+	return m_pAnimation->m_pCurrentAnimation->iFrame == m_pAnimation->m_pCurrentAnimation->pSequence->GetFrameCount() - 1;
+}
+
 void CObj::Move(const Vector2& tDir, bool bUseField)
 {
 	Move(tDir, m_fMoveSpeed, bUseField);
@@ -118,18 +140,6 @@ float CObj::SetDamage(float fDamage)
 		return 0.f;
 
 	return fDamage;
-}
-
-void CObj::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
-{
-}
-
-void CObj::CollisionColliding(CCollider* pSrc, CCollider* pDest, float fTime)
-{
-}
-
-void CObj::CollisionEnd(CCollider* pSrc, CCollider* pDest, float fTime)
-{
 }
 
 void CObj::Start()

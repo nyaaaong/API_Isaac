@@ -9,6 +9,7 @@
 #include "../Scene/SceneManager.h"
 #include "../Scene/RoomBase.h"
 #include "../Collision/ColliderBox.h"
+#include "../UI/PlayerHUD.h"
 
 CMother::CMother()	:
 	m_fPatternTimer(0.f),
@@ -69,6 +70,9 @@ void CMother::Start()
 	m_vecPatternFunc.push_back(std::bind(&CMother::SpawnSkin, this));
 	m_vecPatternFunc.push_back(std::bind(&CMother::Call1, this));
 	//m_vecPatternFunc.push_back(std::bind(&CMother::Call2, this));
+
+	CPlayerHUD* pHUD = dynamic_cast<CStage*>(m_pScene)->GetPlayerHUD();
+	pHUD->SetBossMonster(this);
 }
 
 bool CMother::Init()
@@ -96,7 +100,7 @@ void CMother::PostUpdate(float fTime)
 	{
 		CSceneManager::GetInst()->ChangeMusic(EMusic_Type::BossClear);
 		m_pScene->GetSceneResource()->SoundPlay("MotherDie");
-		dynamic_cast<CRoomBase*>(m_pScene)->SubBossMonsterCount();
+		CMonsterSpawner::GetInst()->KillBossMonster();
 		Destroy();
 	}
 }

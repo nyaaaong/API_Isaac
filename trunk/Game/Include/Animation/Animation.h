@@ -20,6 +20,7 @@ public:
 	void SetAnimationLoop(const std::string& strName, bool bLoop);
 	void SetCurrentAnimation(const std::string& strName);
 	void ChangeAnimation(const std::string& strName);
+	void ResetAnimation(const std::string& strName);
 	bool CheckCurrentAnimation(const std::string& strName);
 	const std::string GetCurrentAnimationName()	const;
 	

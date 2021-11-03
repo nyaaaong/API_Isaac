@@ -12,7 +12,7 @@
 
 void CPlayer::NoDamageTime(float fTime)
 {
-	if (m_bDie)
+	if (m_bDie || m_bCheatNoDamage)
 		return;
 
 	if (m_bHit || !m_bEnableDamage)	// 피격이 됐거나 무적 시간인 경우
@@ -56,6 +56,9 @@ void CPlayer::NoDamageTime(float fTime)
 
 void CPlayer::IsaacDeath(float fTime)
 {
+	if (m_bCheatNoDamage)
+		return;
+
 	DefaultAnimation();
 
 	m_bDie = true;

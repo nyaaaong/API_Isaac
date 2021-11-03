@@ -233,7 +233,7 @@ public:
 
 			memcpy(pArr, m_pArrUI, sizeof(CUIWindow*) * m_iUICount);
 
-			SAFE_DELETE_ARRAY(m_pArrUI);
+			delete[]	m_pArrUI;
 
 			m_pArrUI = pArr;
 		}

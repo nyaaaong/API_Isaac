@@ -25,6 +25,8 @@ void CObjManager::PushPlayerInfo(CPlayer* pPlayer)
 {
 	m_tPlayerInfo = pPlayer->m_tInfo;
 	m_bIsItem = pPlayer->m_bIsItem;
+	m_bEnableDamage = pPlayer->m_bEnableDamage;
+	m_bCheatNoDamage = pPlayer->m_bCheatNoDamage;
 
 	m_bChangedInfo = true;
 }
@@ -42,6 +44,8 @@ void CObjManager::PullPlayerInfo(CPlayer* pPlayer)
 	pPlayer->m_tInfo.fShotSpeed = m_tPlayerInfo.fShotSpeed;
 	pPlayer->m_tInfo.fTearDistance = m_tPlayerInfo.fTearDistance;
 	pPlayer->m_tInfo.fMoveSpeed = m_tPlayerInfo.fMoveSpeed;
+	pPlayer->m_bEnableDamage = m_bEnableDamage;
+	pPlayer->m_bCheatNoDamage = m_bCheatNoDamage;
 
 	pPlayer->m_bIsItem = m_bIsItem;
 

@@ -116,7 +116,10 @@ void CAnimation::SetCurrentAnimation(const std::string& strName)
 	m_pCurrentAnimation = FindInfo(strName);
 
 	if (!m_pCurrentAnimation)
+	{
+		assert(!"if (!m_pCurrentAnimation)");
 		return;
+	}
 
 	m_pCurrentAnimation->iFrame = 0;
 	m_pCurrentAnimation->fTime = 0.f;
@@ -148,6 +151,17 @@ void CAnimation::ChangeAnimation(const std::string& strName)
 	}
 
 	SetCurrentAnimation(strName);
+}
+
+void CAnimation::ResetAnimation(const std::string& strName)
+{
+	AnimationInfo* pAnimInfo = FindInfo(strName);
+
+	if (!pAnimInfo)
+		return;
+
+	pAnimInfo->iFrame = 0;
+	pAnimInfo->fTime = 0.f;
 }
 
 bool CAnimation::CheckCurrentAnimation(const std::string& strName)

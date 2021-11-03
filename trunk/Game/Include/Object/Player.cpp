@@ -32,11 +32,11 @@ void CPlayer::Start()
 	m_pPlayerBody = dynamic_cast<CPlayerBody*>(m_pScene->GetPlayerBody());
 	m_pPlayerBody->Start();
 	m_pPlayerBody->SetPos(m_tPos);
+	m_pPlayerBody->EnableDamage(m_bEnableDamage);
 
 	m_pColliderBox = AddCollider<CColliderBox>("PlayerHead");
 	m_pColliderBox->SetExtent(m_tSize);
 	m_pColliderBox->SetCollisionProfile("PlayerHead");
-	m_pColliderBox->SetCollisionBeginFunc<CPlayer>(this, &CPlayer::CollisionBegin);
 }
 
 void CPlayer::Update(float fTime)
@@ -99,11 +99,6 @@ float CPlayer::SetDamage(float fDamage)
 	return fDamage;
 }
 
-void CPlayer::CollisionBegin(CCollider* pSrc, CCollider* pDest, float fTime)
-{
-	//if (pDest->GetProfile()->strName == "Monster")
-}
-
 CPlayer* CPlayer::Clone()
 {
 	return new CPlayer(*this);
@@ -123,18 +118,18 @@ CPlayer::CPlayer() :
 	m_fBlinkTimer(0.f),
 	m_fBlinkSpeed(0.2f),
 	m_bDie(false),
-	m_pMother(nullptr),
 	m_fAnimDelay(0.f),
 	m_bIsItem(false),
 	m_ItemAddEffect(nullptr),
-	m_bIsItemAnim(false)
+	m_bIsItemAnim(false),
+	m_bCheatNoDamage(false)
 {
 	m_tInfo.fAttack = 3.f;
 	m_tInfo.fHP = PLAYER_HP_MAX;
 	m_tInfo.fHPMax = PLAYER_HP_MAX;
 	m_tInfo.fTearSpeed = 0.5f;
 	m_tInfo.fShotSpeed = 400.f;
-	m_tInfo.fTearDistance = 500.f;
+	m_tInfo.fTearDistance = 400.f;
 	m_tInfo.fMoveSpeed = 300.f;
 }
 
@@ -147,7 +142,8 @@ CPlayer::CPlayer(const CPlayer& obj) :
 	m_pPlayerBody(obj.m_pPlayerBody),
 	m_bDie(false),
 	m_ItemAddEffect(nullptr),
-	m_bIsItemAnim(false)
+	m_bIsItemAnim(false),
+	m_bCheatNoDamage(false)
 {
 	m_fSkill1Time = obj.m_fSkill1Time;
 	m_tInfo = obj.m_tInfo;
@@ -157,7 +153,6 @@ CPlayer::CPlayer(const CPlayer& obj) :
 	m_bHit = obj.m_bHit;
 	m_fBlinkTimer = obj.m_fBlinkTimer;
 	m_fBlinkSpeed = obj.m_fBlinkSpeed;
-	m_pMother = obj.m_pMother;
 	m_fAnimDelay = 0.f;
 	m_bIsItem = obj.m_bIsItem;
 }

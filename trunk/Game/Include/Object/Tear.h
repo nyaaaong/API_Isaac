@@ -12,10 +12,23 @@ protected:
 	float		m_fDistance;
 	ETearType	m_eTearType;
 	float		m_fDamage;
+	float		m_fTurnSpeed;
 	class CCharacter* m_pOwner;
 	bool		m_bHit;
+	ESpecial_Tear		m_eSpecialTear; // 보스 전용
+	bool		m_bChildTear;	// 스페셜 눈물에 의해 생성된 또다른 눈물
 
 public:
+	void SetChildTear(bool bChildTear)
+	{
+		m_bChildTear = bChildTear;
+	}
+
+	void SetSpecialTear(ESpecial_Tear eSpecialPattern)
+	{
+		m_eSpecialTear = eSpecialPattern;
+	}
+
 	void SetOwner(class CCharacter* pOwner)
 	{
 		m_pOwner = pOwner;
@@ -35,6 +48,7 @@ public:
 	void SetDir(const Vector2& tDir)
 	{
 		m_tDir = tDir;
+		m_tDir.Normalize();
 	}
 
 	void SetDir(float fAngle)
@@ -56,6 +70,11 @@ public:
 
 public:
 	void TearDestroy();
+
+private:
+	void TearMechanism(float fTime);
+	void MoveTear(float fTime);
+	void PostProgressTear();
 
 public:
 	virtual void CollisionBegin(class CCollider* pSrc, class CCollider* pDest, float fTime);
