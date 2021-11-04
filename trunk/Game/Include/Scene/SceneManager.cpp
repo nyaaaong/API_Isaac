@@ -97,7 +97,7 @@ void CSceneManager::MusicStart()
 		return;
 
 	m_pResource->SetVolume("BGM", 5);
-	m_pResource->SetVolume("Effect", 10);
+	m_pResource->SetVolume("Effect", 20);
 
 	m_pResource->SoundGroupStop("BGM");
 

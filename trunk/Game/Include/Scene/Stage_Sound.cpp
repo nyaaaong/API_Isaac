@@ -4,7 +4,7 @@
 
 void CStage::LoadSound()
 {
-	GetSceneResource()->SetVolume("Effect", 10);
+	GetSceneResource()->SetVolume("Effect", 20);
 
 	PlayerSound();
 	EnemySound();
