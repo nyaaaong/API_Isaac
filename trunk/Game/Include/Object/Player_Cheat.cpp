@@ -59,3 +59,13 @@ void CPlayer::CheatDamageUp(float fTime)
 		m_pScene->GetSceneResource()->SoundPlay("CheatOff");
 	}
 }
+
+void CPlayer::CheatPlayerDie(float fTime)
+{
+	if (m_bDie)
+		return;
+
+	m_tInfo.fHP = 0.f;
+
+	m_pScene->GetSceneResource()->SoundPlay("CheatOn");
+}

@@ -7,9 +7,6 @@ class CBossRoom :
 {
 	friend class CSceneManager;
 
-protected:
-	bool	m_bIsBossChange;
-
 public:
 	virtual bool Init();
 	virtual void Start();

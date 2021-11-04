@@ -13,6 +13,11 @@ protected:
 	bool	m_bIsBossRoom;
 
 public:
+	bool IsBossRoom()	const
+	{
+		return m_bIsBossRoom;
+	}
+
 	int GetMonsterCount()	const
 	{
 		return m_iMonsterCount;

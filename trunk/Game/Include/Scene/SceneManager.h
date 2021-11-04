@@ -45,6 +45,11 @@ private:
 	~CSceneManager();
 
 public:
+	/*ERoom_State	GetBossRoomState()	const
+	{
+		return m_eBossRoomState;
+	}*/
+
 	bool IsDebug()	const
 	{
 		return m_bDebug;
@@ -71,6 +76,11 @@ public:
 	}
 
 public:
+	/*void SetBossRoomState(ERoom_State eState)
+	{
+		m_eBossRoomState = eState;
+	}*/
+
 	void SetDebug()
 	{
 		m_bDebug = !m_bDebug;

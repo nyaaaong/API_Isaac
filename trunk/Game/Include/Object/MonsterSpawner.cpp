@@ -28,8 +28,11 @@ CMonsterSpawner* CMonsterSpawner::m_pInst = nullptr;
 CMonsterSpawner::CMonsterSpawner()	:
 	m_pScene(nullptr),
 	m_pIsaac(nullptr),
-	m_iBossMonster(2)
+	m_iBossMonster(0),
+	m_bIsBossChange(false)
 {
+	m_vecName.reserve(5);
+	m_vecBossName.reserve(2);
 }
 
 CMonsterSpawner::~CMonsterSpawner()
@@ -69,34 +72,33 @@ void CMonsterSpawner::CreateMonsterPrototype()
 	m_pScene->CreatePrototype<CEnemySmokeNormal>("Smoke2");
 
 	CCharger* pCharger = m_pScene->CreatePrototype<CCharger>("Charger");
+	CPooter* pPooter = m_pScene->CreatePrototype<CPooter>("Pooter");
+	CFly* pFly = m_pScene->CreatePrototype<CFly>("Fly");
+	CRedFly* pRedFly = m_pScene->CreatePrototype<CRedFly>("RedFly");
+	CAngelBaby* pAngelBaby = m_pScene->CreatePrototype<CAngelBaby>("AngelBaby");
+
+	if (!m_vecName.empty())
+		return;
 
 	m_vecSize.push_back(pCharger->GetSize());
 	m_vecPivot.push_back(pCharger->GetPivot());
 	m_vecOffset.push_back(pCharger->GetOffset());
 	m_vecName.push_back(pCharger->GetName());
 
-	CPooter* pPooter = m_pScene->CreatePrototype<CPooter>("Pooter");
-
 	m_vecSize.push_back(pPooter->GetSize());
 	m_vecPivot.push_back(pPooter->GetPivot());
 	m_vecOffset.push_back(pPooter->GetOffset());
 	m_vecName.push_back(pPooter->GetName());
-
-	CFly* pFly = m_pScene->CreatePrototype<CFly>("Fly");
 
 	m_vecSize.push_back(pFly->GetSize());
 	m_vecPivot.push_back(pFly->GetPivot());
 	m_vecOffset.push_back(pFly->GetOffset());
 	m_vecName.push_back(pFly->GetName());
 
-	CRedFly* pRedFly = m_pScene->CreatePrototype<CRedFly>("RedFly");
-
 	m_vecSize.push_back(pRedFly->GetSize());
 	m_vecPivot.push_back(pRedFly->GetPivot());
 	m_vecOffset.push_back(pRedFly->GetOffset());
 	m_vecName.push_back(pRedFly->GetName());
-
-	CAngelBaby* pAngelBaby = m_pScene->CreatePrototype<CAngelBaby>("AngelBaby");
 
 	m_vecSize.push_back(pAngelBaby->GetSize());
 	m_vecPivot.push_back(pAngelBaby->GetPivot());
@@ -113,13 +115,16 @@ void CMonsterSpawner::CreateBossMonsterPrototype()
 		if (CMapManager::GetInst()->GetClearSpecialMap(eType))
 			return;
 
-		CMother* pMother = m_pScene->CreatePrototype<CMother>("Mother");
-		m_vecBossName.push_back(pMother->GetName());
-
 		m_pScene->CreatePrototype<CMotherLeg>("MotherLeg");
 		m_pScene->CreatePrototype<CMotherDoor>("MotherDoor");
 
+		CMother* pMother = m_pScene->CreatePrototype<CMother>("Mother");
 		CIsaac* pIsaac = m_pScene->CreatePrototype<CIsaac>("Isaac");
+
+		if (!m_vecBossName.empty())
+			return;
+
+		m_vecBossName.push_back(pMother->GetName());
 		m_vecBossName.push_back(pIsaac->GetName());
 	}
 }
@@ -147,7 +152,7 @@ void CMonsterSpawner::CreateMonster()
 			return;
 	}
 
-	size_t iSize = m_vecName.size();
+	size_t iSize = m_vecName.size() - 1; // AngelBaby는 제외
 
 	for (int i = 0; i < iMonsterCount; ++i)
 	{
@@ -164,7 +169,7 @@ void CMonsterSpawner::CreateMonster(const Vector2& tPos)
 {
 	CRoomBase* pRoom = dynamic_cast<CRoomBase*>(m_pScene);
 
-	size_t iSize = m_vecName.size();
+	size_t iSize = m_vecName.size() - 1; // AngelBaby는 제외
 
 	int iIdx = rand() % iSize;
 
@@ -427,11 +432,6 @@ void CMonsterSpawner::KillBossMonster()
 		m_iBossMonster = 0;
 		m_pScene->GetSceneResource()->SoundPlay("DoorOpen");
 	}
-}
-
-int CMonsterSpawner::GetBossMonsterCount()
-{
-	return m_iBossMonster;
 }
 
 bool CMonsterSpawner::CheckSpawnPossible(const Vector2& tSize, const Vector2& tPivot, const Vector2& tOffset)

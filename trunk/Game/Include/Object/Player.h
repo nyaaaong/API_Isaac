@@ -66,6 +66,7 @@ private:
 	void CheatBossRoom(float fTime);
 	void CheatNoDamage(float fTime);
 	void CheatDamageUp(float fTime);
+	void CheatPlayerDie(float fTime);
 
 private:
 	void AddPlayerAnimation();

@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "SceneManager.h"
 #include "../Object/ObjManager.h"
+#include "../Object/MonsterSpawner.h"
 #include "../GameManager.h"
 #include "../Map/RoomMap.h"
 

@@ -10,6 +10,9 @@ bool CBossRoom::Init()
 {
 	m_bIsBossRoom = true;
 
+	if (CMonsterSpawner::GetInst()->GetBossMonsterCount() == 0)
+		CMonsterSpawner::GetInst()->SetBossMonsterCount(2);
+
 	if (!CRoomBase::Init())
 		return false;
 
@@ -25,9 +28,6 @@ bool CBossRoom::Init()
 
 	CreatePlayer(Vector2());
 	CMonsterSpawner::GetInst()->AddBossSpawnLocation();
-
-	m_iMonsterCount;
-	int a = 0;
 
 	return true;
 }
@@ -46,9 +46,9 @@ bool CBossRoom::Update(float fTime)
 	if (!CRoomBase::Update(fTime))
 		return false;
 
-	if (!m_bIsBossChange && CMonsterSpawner::GetInst()->GetBossMonsterCount() == 1 && !CSceneManager::GetInst()->IsPlaying(EMusic_Type::BossClear))
+	if (!CMonsterSpawner::GetInst()->IsBossChange() && CMonsterSpawner::GetInst()->GetBossMonsterCount() == 1 && !CSceneManager::GetInst()->IsPlaying(EMusic_Type::BossClear))
 	{
-		m_bIsBossChange = true;
+		CMonsterSpawner::GetInst()->SetBossChange(true);
 		CMonsterSpawner::GetInst()->CreateBossMonster();
 		CSceneManager::GetInst()->ChangeMusic(EMusic_Type::LastBoss);
 	}
@@ -69,8 +69,7 @@ void CBossRoom::DoorFunc(EDoorDir eDoorDir)
 	}
 }
 
-CBossRoom::CBossRoom()	:
-	m_bIsBossChange(false)
+CBossRoom::CBossRoom()
 {
 }
 

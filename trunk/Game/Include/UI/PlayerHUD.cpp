@@ -2,6 +2,7 @@
 #include "PlayerHUD.h"
 #include "../GameManager.h"
 #include "../Scene/Stage.h"
+#include "../Scene/RoomBase.h"
 #include "../Scene/SceneManager.h"
 #include "../Object/Player.h"
 
@@ -128,6 +129,12 @@ void CPlayerHUD::Update(float fTime)
 
 				m_pBossMonster = nullptr;
 			}
+		}
+
+		else if (!dynamic_cast<CRoomBase*>(m_pScene)->IsBossRoom())
+		{
+			m_pBossMonster = nullptr;
+			m_pBossHPBar->SetBoss(nullptr);
 		}
 	}
 }

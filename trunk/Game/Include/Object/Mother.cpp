@@ -69,8 +69,7 @@ void CMother::Start()
 	m_vecPatternFunc.push_back(std::bind(&CMother::SpawnEye, this));
 	m_vecPatternFunc.push_back(std::bind(&CMother::SpawnSkin, this));
 	m_vecPatternFunc.push_back(std::bind(&CMother::Call1, this));
-	//m_vecPatternFunc.push_back(std::bind(&CMother::Call2, this));
-
+	
 	CPlayerHUD* pHUD = dynamic_cast<CStage*>(m_pScene)->GetPlayerHUD();
 	pHUD->SetBossMonster(this);
 }

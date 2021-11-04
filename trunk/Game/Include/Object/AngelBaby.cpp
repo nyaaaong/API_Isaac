@@ -20,9 +20,9 @@ CAngelBaby::CAngelBaby()	:
 	m_tInfo.fHP = 15.f;
 	m_tInfo.fHPMax = 15.f;
 	m_tInfo.fTearSpeed = 1.5f;
-	m_tInfo.fShotSpeed = 200.f;
+	m_tInfo.fShotSpeed = 300.f;
 	m_tInfo.fTearDistance = 300.f;
-	m_tInfo.fMoveSpeed = 150.f;
+	m_tInfo.fMoveSpeed = 200.f;
 }
 
 CAngelBaby::CAngelBaby(const CAngelBaby& obj)	:

@@ -19,4 +19,5 @@ void CPlayer::AddCallback()
 	CInput::GetInst()->SetCallback<CPlayer>("CheatBossRoom", KS_DOWN, this, &CPlayer::CheatBossRoom);
 	CInput::GetInst()->SetCallback<CPlayer>("CheatNoDamage", KS_DOWN, this, &CPlayer::CheatNoDamage);
 	CInput::GetInst()->SetCallback<CPlayer>("CheatDamageUp", KS_DOWN, this, &CPlayer::CheatDamageUp);
+	CInput::GetInst()->SetCallback<CPlayer>("CheatPlayerDie", KS_DOWN, this, &CPlayer::CheatPlayerDie);
 }

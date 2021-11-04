@@ -40,6 +40,49 @@ private:
 	class CScene*				m_pScene;
 	class CIsaac*				m_pIsaac;
 	int							m_iBossMonster;
+	bool						m_bIsBossChange;
+
+public:
+	void SetBossChange(bool bChange)
+	{
+		m_bIsBossChange = bChange;
+	}
+
+	void SetBossMonsterCount(int iCount)
+	{
+		m_iBossMonster = iCount;
+	}
+
+public:
+	bool IsBossChange()	const
+	{
+		return m_bIsBossChange;
+	}
+
+	const std::string& GetMonsterName(int iIdx)	const
+	{
+		return m_vecName[iIdx];
+	}
+
+	const std::string& GetBossMonsterName(int iIdx)	const
+	{
+		return m_vecBossName[iIdx];
+	}
+
+	int GetBossMonsterNameCount()	const
+	{
+		return static_cast<int>(m_vecBossName.size());
+	}
+
+	int GetMonsterNameCount()	const
+	{
+		return static_cast<int>(m_vecName.size());
+	}
+
+	int GetBossMonsterCount()	const
+	{
+		return m_iBossMonster;
+	}
 
 public:
 	void SetScene(class CScene* pCurScene);
@@ -55,7 +98,6 @@ public:
 	void AddBossSpawnLocation();
 	void CreateSmoke(const Vector2& tPos);
 	void KillBossMonster();
-	int GetBossMonsterCount();
 	
 private:
 	void CreateSpawnLocation(const Vector2& tSize, const Vector2& tPivot, const Vector2& tOffset); // 지정했던 스폰 위치를 통해 랜덤으로 몬스터를 생성할 좌표를 구한다.

@@ -71,9 +71,6 @@ void CPlayer::PostUpdate(float fTime)
 
 void CPlayer::Collision(float fTime)
 {
-	//if (m_bInvisible)
-	//	return;
-
 	CCharacter::Collision(fTime);
 }
 
@@ -129,7 +126,7 @@ CPlayer::CPlayer() :
 	m_tInfo.fHPMax = PLAYER_HP_MAX;
 	m_tInfo.fTearSpeed = 0.5f;
 	m_tInfo.fShotSpeed = 400.f;
-	m_tInfo.fTearDistance = 400.f;
+	m_tInfo.fTearDistance = 300.f;
 	m_tInfo.fMoveSpeed = 300.f;
 }
 

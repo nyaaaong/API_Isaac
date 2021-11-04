@@ -23,7 +23,6 @@ void CStage::Start()
 {
 	CScene::Start();
 
-	//CMonsterSpawner::GetInst()->SetScene(this);
 	CreatePrototypes();
 }
 

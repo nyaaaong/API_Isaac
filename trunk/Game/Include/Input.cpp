@@ -63,6 +63,8 @@ bool CInput::Init(HWND hWnd)
 	SetShiftKey("CheatNoDamage", true);
 	CreateKey("CheatDamageUp", '2');
 	SetShiftKey("CheatDamageUp", true);
+	CreateKey("CheatPlayerDie", '9');
+	SetShiftKey("CheatPlayerDie", true);
 
 	return true;
 }
