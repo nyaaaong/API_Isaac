@@ -13,7 +13,7 @@ CRedFly::CRedFly() :
 	m_tInfo.fAttack = 1.f;
 	m_tInfo.fHP = 4.f;
 	m_tInfo.fHPMax = 4.f;
-	m_tInfo.fMoveSpeed = 200.f;
+	m_tInfo.fMoveSpeed = 150.f;
 }
 
 CRedFly::CRedFly(const CRedFly& obj) :

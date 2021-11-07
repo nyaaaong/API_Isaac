@@ -21,7 +21,7 @@ CCharger::CCharger()	:
 	m_tInfo.fAttack = 1.f;
 	m_tInfo.fHP = 10.f;
 	m_tInfo.fHPMax = 10.f;
-	m_tInfo.fMoveSpeed = 100.f;
+	m_tInfo.fMoveSpeed = 70.f;
 }
 
 CCharger::CCharger(const CCharger& obj):
