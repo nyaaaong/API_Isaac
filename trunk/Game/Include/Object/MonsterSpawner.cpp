@@ -457,7 +457,7 @@ void CMonsterSpawner::CreateHeart(const Vector2& tPos)
 {
 	float	fPercent = rand() % 10000 / 100.f;
 
-	if (fPercent > 20.f)
+	if (fPercent > 22.f)
 		return;
 
 	m_pScene->GetSceneResource()->SoundPlay("HeartDrop");
