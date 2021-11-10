@@ -39,8 +39,8 @@ void CBombExplosionEffect::Start()
 	SetAnimationEndNotify<CBombExplosionEffect>("BombExplosion", this, &CBombExplosionEffect::AnimationFinish);
 
 	m_pColliderBox = AddCollider<CColliderBox>("BombExplosion");
-	m_pColliderBox->SetExtent(m_tSize);
-	m_pColliderBox->SetOffset(m_tOffset);
+	m_pColliderBox->SetExtent(m_tSize.x, m_tSize.y * 0.5f);
+	m_pColliderBox->SetOffset(m_tOffset.x, m_tOffset.y + (m_tSize.y * 0.5f) * 0.5f);
 	m_pColliderBox->SetCollisionProfile("BombExplosion");
 	m_pColliderBox->SetCollisionBeginFunc<CBombExplosionEffect>(this, &CBombExplosionEffect::CollisionBegin);
 }
